@@ -157,6 +157,19 @@
             fill: #d4d4d8;
         }
 
+        /* Threads SVG Stili */
+        .threads-svg {
+            fill: none !important;
+            stroke: #d4d4d8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: stroke 0.2s ease;
+        }
+
+        .link-card:hover .threads-svg {
+            stroke: #ffffff;
+        }
+
         .link-card:hover .link-info svg {
             fill: #ffffff;
         }
@@ -336,18 +349,20 @@
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
             
-            <!-- Threads (Orijinal Birebir Threads Logosu SVG) -->
+            <!-- Threads (Birebir Görseldeki Orijinal Threads SVG) -->
             <a href="https://threads.net/@saracefe_" target="_blank" class="link-card">
                 <div class="link-info">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.186 24c-3.146 0-5.717-.962-7.643-2.86C2.637 19.23 1.66 16.275 1.66 12.35 1.66 8.356 2.673 5.34 4.67 3.38 6.64 1.442 9.38.45 12.8.45c3.55 0 6.34.99 8.29 2.95 1.83 1.84 2.76 4.47 2.76 7.82v.28h-3.41v-.28c0-2.45-.63-4.34-1.89-5.61-1.35-1.36-3.32-2.04-5.87-2.04-2.52 0-4.48.69-5.83 2.05-1.39 1.4-2.1 3.58-2.1 6.47 0 2.97.68 5.17 2.03 6.54 1.34 1.36 3.25 2.05 5.67 2.05 2.5 0 4.38-.66 5.6-1.96 1.05-1.12 1.62-2.73 1.76-4.93H12.8v-3.05h9.1v1.65c0 3.73-1.07 6.68-3.19 8.78C16.63 23.01 14.28 24 12.186 24zM12.8 11.33h3.04c-.16 2.87-1.42 4.45-3.04 4.45-1.6 0-2.65-1.29-2.65-3.31 0-2.05 1.05-3.34 2.65-3.34.8 0 1.46.35 1.9 1.01l.1.19z"/>
+                    <svg class="threads-svg" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.005 97.58 44.005C68.9616 44.005 46.8047 67.5582 46.8047 101.996C46.8047 135.21 68.0416 158.005 97.58 158.005C118.069 158.005 134.421 146.992 141.282 127.854" stroke-width="12"/>
+                        <path d="M97.58 152.666C71.3789 152.666 52.1438 132.33 52.1438 101.996C52.1438 70.4729 71.9567 49.3441 97.58 49.3441C119.516 49.3441 132.383 63.8559 133.68 88.6146C122.673 83.7441 110.126 82.269 97.8091 84.8193C79.4674 88.6186 66.027 101.921 66.027 116.591C66.027 130.089 77.1009 139.461 92.5152 139.461C108.995 139.461 122.846 128.529 128.318 111.411" stroke-width="12"/>
+                        <path d="M92.5152 134.122C80.609 134.122 71.366 127.062 71.366 116.591C71.366 105.158 82.2536 94.0205 96.6961 91.0298C106.669 88.9645 116.92 89.9629 126.173 93.8193" stroke-width="12"/>
                     </svg>
                     <span class="link-text">Threads</span>
                 </div>
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
 
-            <!-- X / Twitter (Orijinal X Logosu SVG) -->
+            <!-- X / Twitter (SVG) -->
             <a href="https://x.com/efesarac_" target="_blank" class="link-card">
                 <div class="link-info">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
