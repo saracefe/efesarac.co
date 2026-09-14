@@ -1,840 +1,1078 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Efe Saraç | Bağlantılar</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07070a">
+<title>Efe Saraç — Digital Identity</title>
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
-                Roboto, Helvetica, Arial, sans-serif;
-        }
+:root {
+    --bg: #060609;
+    --card: rgba(255,255,255,.055);
+    --card-hover: rgba(255,255,255,.09);
+    --border: rgba(255,255,255,.10);
+    --text: #fff;
+    --muted: #8f909b;
+    --purple: #8b5cf6;
+    --blue: #3b82f6;
+}
 
-        body {
-            background-color: #08090b;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 24px 12px;
-            position: relative;
-            overflow-x: hidden;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Ambient Glow Backgrounds */
-        .glow-1 {
-            position: fixed;
-            top: 10%;
-            left: 20%;
-            width: 300px;
-            height: 300px;
-            background: rgba(99, 102, 241, 0.25);
-            filter: blur(120px);
-            border-radius: 50%;
-            z-index: 0;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .glow-2 {
-            position: fixed;
-            bottom: 10%;
-            right: 20%;
-            width: 350px;
-            height: 350px;
-            background: rgba(168, 85, 247, 0.2);
-            filter: blur(140px);
-            border-radius: 50%;
-            z-index: 0;
-        }
+body {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-        .container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 580px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 28px;
-            padding: 32px 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-        }
+/* ================= BACKGROUND ================= */
 
-        /* Profile Header */
-        .profile {
-            text-align: center;
-            margin-bottom: 32px;
-        }
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+}
 
-        .avatar-container {
-            width: 96px;
-            height: 96px;
-            margin: 0 auto 16px;
-        }
+.grid {
+    position: absolute;
+    inset: 0;
+    opacity: .22;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 45px 45px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
 
-        .avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: .38;
+}
 
-        .profile h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 8px;
-        }
+.orb.one {
+    width: 420px;
+    height: 420px;
+    background: #5424b8;
+    top: -180px;
+    left: -140px;
+}
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.12);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #34d399;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 600;
-        }
+.orb.two {
+    width: 380px;
+    height: 380px;
+    background: #174ea6;
+    right: -170px;
+    top: 35%;
+}
 
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            background-color: #34d399;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #34d399;
-        }
+.orb.three {
+    width: 300px;
+    height: 300px;
+    background: #7c1d70;
+    bottom: -150px;
+    left: 35%;
+}
 
-        /* Links List */
-        .links-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
+/* ================= MAIN ================= */
 
-        .link-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 16px 20px;
-            color: #fff;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
+.page {
+    width: min(100% - 28px, 680px);
+    margin: 0 auto;
+    padding: 55px 0 35px;
+}
 
-        .link-card:hover,
-        .link-card:active {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-        }
+/* ================= PROFILE ================= */
 
-        .link-info {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+.profile {
+    text-align: center;
+    margin-bottom: 42px;
+}
 
-        .link-info i {
-            font-size: 1.2rem;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #d4d4d8;
-        }
+.avatar-wrap {
+    position: relative;
+    width: 112px;
+    height: 112px;
+    margin: 0 auto 20px;
+}
 
-        /* =========================================
-           MARKA LOGOLARI
-           Threads / YouTube Music / Kick
-           ========================================= */
+.avatar-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 180deg,
+        #6366f1,
+        #a855f7,
+        #3b82f6,
+        #6366f1
+    );
+    animation: rotate 8s linear infinite;
+}
 
-        .brand-logo {
-            width: 24px;
-            height: 24px;
-            display: block;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
+.avatar-ring::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: var(--bg);
+    border-radius: 50%;
+}
 
-        .threads-logo {
-            filter: brightness(0) invert(1);
-        }
+.avatar {
+    position: relative;
+    z-index: 2;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 4px;
+    background: var(--bg);
+}
 
-        .youtube-music-logo {
-            width: 25px;
-            height: 25px;
-        }
+@keyframes rotate {
+    to { transform: rotate(360deg); }
+}
 
-        .kick-logo {
-            width: 25px;
-            height: 25px;
-        }
+.name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -.8px;
+}
 
-        /* SVG genel ayar */
-        .link-info svg {
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-            display: block;
-        }
+.verified {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #3b82f6;
+    font-size: 12px;
+    font-weight: 800;
+    box-shadow: 0 0 18px rgba(59,130,246,.35);
+}
 
-        .link-card:hover .brand-logo {
-            transform: scale(1.05);
-        }
+.bio {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 9px;
+    line-height: 1.6;
+}
 
-        /* Link Text */
-        .link-text {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #f4f4f5;
-        }
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 7px 13px;
+    border: 1px solid rgba(52,211,153,.22);
+    border-radius: 999px;
+    background: rgba(52,211,153,.07);
+    color: #6ee7b7;
+    font-size: 12px;
+    font-weight: 600;
+}
 
-        .arrow-icon {
-            font-size: 0.8rem !important;
-            width: auto !important;
-            height: auto !important;
-            color: #71717a !important;
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #34d399;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #34d399;
+}
 
-        .link-card:hover .arrow-icon {
-            color: #fff !important;
-            transform: translateX(3px);
-        }
+/* ================= SECTIONS ================= */
 
-        /* Custom Email Offer Card */
-        .custom-email-card {
-            background: linear-gradient(
-                135deg,
-                rgba(99, 102, 241, 0.15) 0%,
-                rgba(168, 85, 247, 0.15) 100%
-            );
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 18px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 28px;
-        }
+.section {
+    margin-top: 30px;
+}
 
-        .custom-email-card h3 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 5px 11px;
+    color: #777985;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
 
-        .custom-email-card p {
-            font-size: 0.85rem;
-            color: #a1a1aa;
-            margin-bottom: 14px;
-        }
+.section-title::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: rgba(255,255,255,.07);
+}
 
-        .email-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
+/* ================= LINK CARD ================= */
 
-        .email-btn:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-1px);
-        }
+.link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 66px;
+    padding: 13px 17px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--card);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    color: white;
+    text-decoration: none;
+    overflow: hidden;
+    transition:
+        transform .22s ease,
+        background .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+}
 
-        /* Contact Form Section */
-        .contact-section {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 28px;
-        }
+.link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent 20%,
+        rgba(255,255,255,.06),
+        transparent 80%
+    );
+    transform: translateX(-100%);
+    transition: transform .6s ease;
+}
 
-        .contact-section h2 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 18px;
-            text-align: center;
-            color: #f4f4f5;
-        }
+.link:hover {
+    transform: translateY(-3px);
+    background: var(--card-hover);
+    border-color: rgba(255,255,255,.18);
+    box-shadow: 0 14px 35px rgba(0,0,0,.25);
+}
 
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
+.link:hover::before {
+    transform: translateX(100%);
+}
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 14px 16px;
-            color: #ffffff;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.2s ease;
-        }
+.logo-box {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: rgba(255,255,255,.075);
+    border: 1px solid rgba(255,255,255,.07);
+}
 
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: #a1a1aa;
-        }
+.logo {
+    width: 23px;
+    height: 23px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
-        }
+.link-content {
+    min-width: 0;
+    margin-left: 13px;
+}
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+.link-name {
+    font-size: 14px;
+    font-weight: 600;
+}
 
-        .submit-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #ffffff;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 4px;
-        }
+.link-description {
+    margin-top: 3px;
+    color: #777985;
+    font-size: 11px;
+}
 
-        .submit-btn:hover,
-        .submit-btn:active {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-1px);
-        }
+.arrow {
+    margin-left: auto;
+    padding-left: 12px;
+    color: #64656e;
+    font-size: 20px;
+    transition: transform .2s ease, color .2s ease;
+}
 
-        footer {
-            text-align: center;
-            margin-top: 28px;
-            font-size: 0.78rem;
-            color: #71717a;
-        }
-    </style>
+.link:hover .arrow {
+    transform: translateX(4px);
+    color: white;
+}
+
+/* ================= FEATURE CARD ================= */
+
+.feature {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 18px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(139,92,246,.22);
+    background:
+        radial-gradient(circle at 0% 0%, rgba(139,92,246,.18), transparent 55%),
+        rgba(255,255,255,.045);
+}
+
+.feature-info {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.feature-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: rgba(139,92,246,.14);
+    font-size: 20px;
+}
+
+.feature h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.feature-button {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    border-radius: 11px;
+    background: rgba(255,255,255,.11);
+    border: 1px solid rgba(255,255,255,.13);
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.feature-button:hover {
+    background: rgba(255,255,255,.18);
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    margin-top: 34px;
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 22px;
+    background: rgba(255,255,255,.035);
+}
+
+.contact h2 {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 17px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 13px;
+    background: rgba(0,0,0,.18);
+    color: white;
+    padding: 13px 14px;
+    outline: none;
+    font-size: 13px;
+    transition: .2s;
+}
+
+.input:focus,
+.textarea:focus {
+    border-color: rgba(139,92,246,.5);
+    box-shadow: 0 0 0 3px rgba(139,92,246,.08);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #666771;
+}
+
+.textarea {
+    min-height: 105px;
+    resize: vertical;
+}
+
+.submit {
+    border: 0;
+    border-radius: 13px;
+    padding: 13px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(99,102,241,.18);
+    transition: .2s;
+}
+
+.submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(99,102,241,.28);
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #555660;
+    font-size: 11px;
+}
+
+.footer-name {
+    color: #777985;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 520px) {
+
+    .page {
+        width: min(100% - 22px, 680px);
+        padding-top: 38px;
+    }
+
+    .profile {
+        margin-bottom: 34px;
+    }
+
+    .name {
+        font-size: 24px;
+    }
+
+    .link {
+        min-height: 63px;
+        border-radius: 16px;
+    }
+
+    .logo-box {
+        width: 39px;
+        height: 39px;
+        flex-basis: 39px;
+    }
+
+    .link-description {
+        display: none;
+    }
+
+    .feature {
+        align-items: flex-start;
+    }
+
+    .feature-button {
+        margin-top: 2px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="glow-1"></div>
-    <div class="glow-2"></div>
+<div class="background">
+    <div class="grid"></div>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+</div>
 
-    <div class="container">
+<main class="page">
 
-        <!-- Profile -->
-        <div class="profile">
-            <div class="avatar-container">
-                <img
-                    src="https://github.com/saracefe.png"
-                    alt="Efe Saraç"
-                    class="avatar"
-                >
-            </div>
+    <!-- PROFILE -->
+    <header class="profile">
 
-            <h1>Efe Saraç</h1>
+        <div class="avatar-wrap">
+            <div class="avatar-ring"></div>
 
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                <span>Sistem Aktif</span>
-            </div>
+            <img
+                src="https://github.com/saracefe.png"
+                alt="Efe Saraç"
+                class="avatar"
+            >
         </div>
 
-
-        <!-- Links List -->
-        <div class="links-grid">
-
-            <!-- YouTube -->
-            <a
-                href="https://youtube.com/@saracefe"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-youtube"></i>
-                    <span class="link-text">YouTube</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Facebook -->
-            <a
-                href="https://facebook.com/saracefee"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-facebook"></i>
-                    <span class="link-text">Facebook</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Instagram -->
-            <a
-                href="https://instagram.com/saracefe_"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-instagram"></i>
-                    <span class="link-text">Instagram</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Threads - GERÇEK MARKA LOGOSU -->
-            <a
-                href="https://threads.net/@saracefe_"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-
-                    <img
-                        src="https://cdn.simpleicons.org/threads/ffffff"
-                        alt="Threads"
-                        class="brand-logo threads-logo"
-                    >
-
-                    <span class="link-text">Threads</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- X / Twitter -->
-            <a
-                href="https://x.com/efesarac_"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-
-                    <span class="link-text">X (Twitter)</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- TikTok -->
-            <a
-                href="https://tiktok.com/@efesarac_"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-tiktok"></i>
-                    <span class="link-text">TikTok</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Kwai -->
-            <a
-                href="https://kwai.com/@saracefe"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-solid fa-video"></i>
-                    <span class="link-text">Kwai</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- ByNoGame -->
-            <a
-                href="https://donate.bynogame.com/efesarac"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-solid fa-heart"></i>
-                    <span class="link-text">Destek Ol (ByNoGame)</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Bluesky -->
-            <a
-                href="https://bsky.app/profile/saracefe.bsky.social"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-solid fa-cloud"></i>
-                    <span class="link-text">Bluesky</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- GitHub -->
-            <a
-                href="https://github.com/saracefe"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-github"></i>
-                    <span class="link-text">GitHub</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Reddit -->
-            <a
-                href="https://reddit.com/user/efesarac"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-reddit-alien"></i>
-                    <span class="link-text">Reddit</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- LinkedIn -->
-            <a
-                href="https://linkedin.com/in/efe-saraç-bbb35b1b1"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                    <span class="link-text">LinkedIn</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Snapchat -->
-            <a
-                href="https://snapchat.com/add/efesaracx"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-snapchat"></i>
-                    <span class="link-text">Snapchat</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- PayPal -->
-            <a
-                href="https://paypal.me/saracefe"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-paypal"></i>
-                    <span class="link-text">PayPal</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Discord -->
-            <a
-                href="https://discord.gg/p5Y5BxESFD"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-discord"></i>
-                    <span class="link-text">Discord Sunucusu</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- WhatsApp -->
-            <a
-                href="https://wa.me/efesarac"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-whatsapp"></i>
-                    <span class="link-text">WhatsApp</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Telegram -->
-            <a
-                href="https://t.me/efesarac"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-telegram"></i>
-                    <span class="link-text">Telegram</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Spotify -->
-            <a
-                href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-spotify"></i>
-                    <span class="link-text">Spotify</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- YouTube Music - GERÇEK MARKA LOGOSU -->
-            <a
-                href="https://music.youtube.com/@saracefe"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-
-                    <img
-                        src="https://cdn.simpleicons.org/youtubemusic/ffffff"
-                        alt="YouTube Music"
-                        class="brand-logo youtube-music-logo"
-                    >
-
-                    <span class="link-text">YT Music</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Amazon Music -->
-            <a
-                href="https://music.amazon.com/profiles/@efesarac"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-amazon"></i>
-                    <span class="link-text">Amazon Music</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Twitch -->
-            <a
-                href="https://twitch.tv/efesarac_"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-brands fa-twitch"></i>
-                    <span class="link-text">Twitch</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Kick - GERÇEK MARKA LOGOSU -->
-            <a
-                href="https://kick.com/saracefe"
-                target="_blank"
-                class="link-card"
-            >
-                <div class="link-info">
-
-                    <img
-                        src="https://cdn.simpleicons.org/kick/ffffff"
-                        alt="Kick"
-                        class="brand-logo kick-logo"
-                    >
-
-                    <span class="link-text">Kick</span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
-
-            <!-- Direkt Mail -->
-            <a
-                href="mailto:contact@efesarac.co"
-                class="link-card"
-            >
-                <div class="link-info">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span class="link-text">
-                        Direkt Mail (contact@efesarac.co)
-                    </span>
-                </div>
-
-                <i class="fa-solid fa-chevron-right arrow-icon"></i>
-            </a>
-
+        <div class="name">
+            Efe Saraç
+            <span class="verified">✓</span>
         </div>
 
+        <p class="bio">
+            Digital creator · Developer · Internet
+        </p>
 
-        <!-- Custom Email Service Section -->
-        <div class="custom-email-card">
+        <div class="status">
+            <span class="status-dot"></span>
+            Sistem aktif
+        </div>
 
-            <h3>
-                <i class="fa-solid fa-at"></i>
-                Özel E-posta Alın
-            </h3>
+    </header>
 
-            <p>
-                <strong>@efesarac.co</strong>
-                uzantılı özel e-posta adresinizi hemen almak için
-                talep oluşturabilirsiniz.
-            </p>
+
+    <!-- SOCIAL -->
+    <section class="section">
+
+        <div class="section-title">
+            Sosyal
+        </div>
+
+        <a class="link"
+           href="https://instagram.com/saracefe_"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/instagram/ffffff"
+                     alt="Instagram">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Instagram</div>
+                <div class="link-description">@saracefe_</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://threads.net/@saracefe_"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/threads/ffffff"
+                     alt="Threads">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Threads</div>
+                <div class="link-description">@saracefe_</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://x.com/efesarac_"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/x/ffffff"
+                     alt="X">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">X</div>
+                <div class="link-description">@efesarac_</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://facebook.com/saracefee"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/facebook/ffffff"
+                     alt="Facebook">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Facebook</div>
+                <div class="link-description">Efe Saraç</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://tiktok.com/@efesarac_"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/tiktok/ffffff"
+                     alt="TikTok">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">TikTok</div>
+                <div class="link-description">@efesarac_</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+    </section>
+
+
+    <!-- CREATOR -->
+    <section class="section">
+
+        <div class="section-title">
+            Creator
+        </div>
+
+        <a class="link"
+           href="https://youtube.com/@saracefe"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/youtube/ffffff"
+                     alt="YouTube">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">YouTube</div>
+                <div class="link-description">@saracefe</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://twitch.tv/efesarac_"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/twitch/ffffff"
+                     alt="Twitch">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Twitch</div>
+                <div class="link-description">@efesarac_</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://kick.com/saracefe"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/kick/ffffff"
+                     alt="Kick">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Kick</div>
+                <div class="link-description">@saracefe</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://donate.bynogame.com/efesarac"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/bynogame/ffffff"
+                     alt="ByNoGame">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Destek Ol</div>
+                <div class="link-description">ByNoGame</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+    </section>
+
+
+    <!-- MUSIC -->
+    <section class="section">
+
+        <div class="section-title">
+            Music
+        </div>
+
+        <a class="link"
+           href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/spotify/ffffff"
+                     alt="Spotify">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Spotify</div>
+                <div class="link-description">Music & playlists</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://music.youtube.com/@saracefe"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/youtubemusic/ffffff"
+                     alt="YouTube Music">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">YouTube Music</div>
+                <div class="link-description">Music profile</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://music.amazon.com/profiles/@efesarac"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/amazonmusic/ffffff"
+                     alt="Amazon Music">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Amazon Music</div>
+                <div class="link-description">Music profile</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+    </section>
+
+
+    <!-- COMMUNITY -->
+    <section class="section">
+
+        <div class="section-title">
+            Community
+        </div>
+
+        <a class="link"
+           href="https://discord.gg/p5Y5BxESFD"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/discord/ffffff"
+                     alt="Discord">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Discord</div>
+                <div class="link-description">Topluluğa katıl</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://t.me/efesarac"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/telegram/ffffff"
+                     alt="Telegram">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Telegram</div>
+                <div class="link-description">@efesarac</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://reddit.com/user/efesarac"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/reddit/ffffff"
+                     alt="Reddit">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Reddit</div>
+                <div class="link-description">u/efesarac</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://bsky.app/profile/saracefe.bsky.social"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/bluesky/ffffff"
+                     alt="Bluesky">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Bluesky</div>
+                <div class="link-description">saracefe.bsky.social</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+    </section>
+
+
+    <!-- OTHER -->
+    <section class="section">
+
+        <div class="section-title">
+            Diğer
+        </div>
+
+        <a class="link"
+           href="https://github.com/saracefe"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/github/ffffff"
+                     alt="GitHub">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">GitHub</div>
+                <div class="link-description">Projects & code</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://linkedin.com/in/efe-saraç-bbb35b1b1"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/linkedin/ffffff"
+                     alt="LinkedIn">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">LinkedIn</div>
+                <div class="link-description">Professional profile</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://paypal.me/saracefe"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/paypal/ffffff"
+                     alt="PayPal">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">PayPal</div>
+                <div class="link-description">Destek gönder</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://snapchat.com/add/efesaracx"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/snapchat/ffffff"
+                     alt="Snapchat">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Snapchat</div>
+                <div class="link-description">Add me</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link"
+           href="https://kwai.com/@saracefe"
+           target="_blank">
+
+            <div class="logo-box">
+                <img class="logo"
+                     src="https://cdn.simpleicons.org/kuaishou/ffffff"
+                     alt="Kwai">
+            </div>
+
+            <div class="link-content">
+                <div class="link-name">Kwai</div>
+                <div class="link-description">@saracefe</div>
+            </div>
+
+            <div class="arrow">›</div>
+        </a>
+
+    </section>
+
+
+    <!-- EMAIL FEATURE -->
+    <section class="section">
+
+        <div class="feature">
+
+            <div class="feature-info">
+
+                <div class="feature-icon">
+                    @
+                </div>
+
+                <div>
+                    <h3>Özel E-posta</h3>
+                    <p>
+                        @efesarac.co uzantılı adresinizi talep edin.
+                    </p>
+                </div>
+
+            </div>
 
             <a
+                class="feature-button"
                 href="mailto:contact@efesarac.co?subject=Özel%20E-posta%20Talebi"
-                class="email-btn"
             >
-                <i class="fa-solid fa-paper-plane"></i>
-                Özel Mail Talep Et
+                Talep Et
             </a>
 
         </div>
 
+    </section>
 
-        <!-- Contact Form -->
-        <div class="contact-section">
 
-            <h2>İletişime Geç</h2>
+    <!-- CONTACT -->
+    <section class="contact">
 
-            <form
-                action="https://formspree.io/f/YOUR_FORMSPREE_ID"
-                method="POST"
-                class="contact-form"
+        <h2>İletişime Geç</h2>
+
+        <form
+            class="form"
+            action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+            method="POST"
+        >
+
+            <input
+                class="input"
+                type="text"
+                name="name"
+                placeholder="Adınız"
+                required
             >
 
-                <div class="form-group">
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Adınız"
-                        required
-                    >
-                </div>
+            <input
+                class="input"
+                type="email"
+                name="email"
+                placeholder="E-posta adresiniz"
+                required
+            >
 
-                <div class="form-group">
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="E-posta Adresiniz"
-                        required
-                    >
-                </div>
+            <textarea
+                class="textarea"
+                name="message"
+                placeholder="Mesajınız..."
+                required
+            ></textarea>
 
-                <div class="form-group">
-                    <textarea
-                        name="message"
-                        placeholder="Mesajınız..."
-                        required
-                    ></textarea>
-                </div>
+            <button class="submit" type="submit">
+                Mesaj Gönder
+            </button>
 
-                <button
-                    type="submit"
-                    class="submit-btn"
-                >
-                    Gönder
-                </button>
+        </form>
 
-            </form>
-
-        </div>
+    </section>
 
 
-        <!-- Footer -->
-        <footer>
-            &copy; 2026 Efe Saraç. Tüm hakları saklıdır.
-        </footer>
+    <!-- FOOTER -->
+    <footer>
+        © 2026 <span class="footer-name">Efe Saraç</span>
+        · Tüm hakları saklıdır.
+    </footer>
 
-    </div>
+</main>
 
 </body>
 </html>
