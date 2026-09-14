@@ -3,1884 +3,1757 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>efesarac.co — Efe Saraç</title>
+
+<meta name="description"
+      content="Efe Saraç — Dijital içerik üreticisi, geliştirici ve internet kullanıcısı.">
 <meta name="theme-color" content="#060609">
 
-<title>Efe Saraç — Digital Creator & Developer</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-    min-height:100vh;
-    overflow-x:hidden;
-    background:#060609;
-    color:#fff;
-    font-family:"Inter",sans-serif;
+  min-height:100vh;
+  color:#fff;
+  background:#060609;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  overflow-x:hidden;
 }
 
+/* GRID */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-3;
 
-/* =========================
-   BACKGROUND
-========================= */
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
 
-.background{
-    position:fixed;
-    inset:0;
-    z-index:-10;
-    overflow:hidden;
-    pointer-events:none;
+  background-size:45px 45px;
 }
 
-.grid{
-    position:absolute;
-    inset:0;
-
-    background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-
-    background-size:45px 45px;
-
-    mask-image:linear-gradient(to bottom,black,transparent 90%);
+/* BACKGROUND ORBS */
+.bg-orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(100px);
+  pointer-events:none;
+  z-index:-2;
+  opacity:.28;
 }
 
-.orb{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(120px);
-    opacity:.18;
+.orb-blue{
+  width:330px;
+  height:330px;
+  background:#1557ff;
+  top:-100px;
+  left:-100px;
 }
 
-.orb-one{
-    width:420px;
-    height:420px;
-    top:-180px;
-    left:-150px;
-    background:#2563eb;
+.orb-purple{
+  width:360px;
+  height:360px;
+  background:#7a18ff;
+  right:-130px;
+  top:25%;
 }
 
-.orb-two{
-    width:400px;
-    height:400px;
-    top:250px;
-    right:-180px;
-    background:#7c3aed;
+.orb-cyan{
+  width:300px;
+  height:300px;
+  background:#00d9ff;
+  left:15%;
+  bottom:-150px;
+  opacity:.15;
 }
 
-.orb-three{
-    width:350px;
-    height:350px;
-    left:35%;
-    bottom:-200px;
-    background:#0891b2;
+/* PRELOADER */
+#preloader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#060609;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:
+    opacity .5s ease,
+    visibility .5s ease;
 }
 
+#preloader.hide{
+  opacity:0;
+  visibility:hidden;
+}
 
-/* =========================
-   PAGE
-========================= */
+.loader-logo{
+  width:82px;
+  height:82px;
+  object-fit:contain;
+  animation:
+    loaderPulse 1.4s ease-in-out infinite;
+}
 
+@keyframes loaderPulse{
+  0%,100%{
+    transform:scale(.92);
+    opacity:.55;
+  }
+
+  50%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+/* LANGUAGE */
+.language-switch{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:50;
+
+  display:flex;
+  padding:4px;
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:13px;
+
+  background:rgba(16,16,22,.7);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.25);
+}
+
+.lang-btn{
+  border:0;
+  background:transparent;
+  color:#77777f;
+
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.4px;
+
+  padding:7px 9px;
+  border-radius:9px;
+
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+.lang-btn.active{
+  color:#fff;
+  background:rgba(255,255,255,.09);
+}
+
+/* PAGE */
 .page{
-    width:min(680px,calc(100% - 28px));
-    margin:auto;
-    padding:55px 0 45px;
+  width:min(820px,calc(100% - 32px));
+  margin:0 auto;
+  padding:88px 0 40px;
 }
 
-
-/* =========================
-   PROFILE
-========================= */
-
+/* PROFILE */
 .profile{
-    text-align:center;
-    margin-bottom:42px;
+  text-align:center;
 }
 
 .avatar-wrap{
-    position:relative;
+  position:relative;
+  width:138px;
+  height:138px;
+  margin:0 auto 22px;
 
-    width:124px;
-    height:124px;
+  padding:4px;
+  border-radius:50%;
 
-    margin:0 auto 22px;
+  background:
+    conic-gradient(
+      from 0deg,
+      #1677ff,
+      #7c3cff,
+      #00d9ff,
+      #1677ff
+    );
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  animation:avatarRotate 7s linear infinite;
+
+  box-shadow:
+    0 0 45px rgba(65,100,255,.22);
 }
 
-.avatar-ring{
-    position:absolute;
-    inset:0;
-
-    border-radius:50%;
-
-    background:
-        conic-gradient(
-            #2563eb,
-            #7c3aed,
-            #06b6d4,
-            #2563eb
-        );
-
-    animation:rotateRing 8s linear infinite;
-}
-
-.avatar-ring::after{
-    content:"";
-
-    position:absolute;
-    inset:3px;
-
-    background:#060609;
-    border-radius:50%;
+.avatar-wrap::before{
+  content:"";
+  position:absolute;
+  inset:3px;
+  border-radius:50%;
+  background:#060609;
 }
 
 .avatar{
-    position:relative;
-    z-index:2;
+  position:relative;
+  width:100%;
+  height:100%;
 
-    width:110px;
-    height:110px;
+  object-fit:cover;
+  border-radius:50%;
 
-    border-radius:50%;
-    object-fit:cover;
+  display:block;
+  border:4px solid #060609;
 
-    border:3px solid #060609;
-
-    box-shadow:0 0 35px rgba(37,99,235,.25);
+  animation:avatarCounter 7s linear infinite;
 }
 
-@keyframes rotateRing{
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
+@keyframes avatarRotate{
+  to{
+    transform:rotate(360deg);
+  }
 }
 
-.name{
-    display:flex;
-    align-items:center;
-    justify-content:center;
+@keyframes avatarCounter{
+  to{
+    transform:rotate(-360deg);
+  }
+}
 
-    gap:8px;
+.profile-name{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
 
-    font-size:30px;
-    font-weight:800;
-
-    letter-spacing:-.8px;
+  font-size:31px;
+  font-weight:800;
+  letter-spacing:-1px;
 }
 
 .verified{
-    width:21px;
-    height:21px;
+  width:21px;
+  height:21px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
+  border-radius:50%;
+  background:#1d7cff;
 
-    border-radius:50%;
+  font-size:13px;
+  font-weight:900;
 
-    background:#1d9bf0;
-    color:#fff;
-
-    font-size:12px;
-    font-weight:800;
+  box-shadow:
+    0 0 15px rgba(29,124,255,.35);
 }
 
 .bio{
-    margin-top:9px;
-
-    color:#92929d;
-
-    font-size:14px;
+  margin-top:9px;
+  color:#8c8c95;
+  font-size:14px;
 }
 
 .status{
-    display:inline-flex;
-    align-items:center;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
 
-    gap:7px;
+  margin-top:16px;
+  padding:7px 11px;
 
-    margin-top:15px;
-    padding:7px 12px;
+  border:1px solid rgba(42,218,126,.18);
+  border-radius:999px;
 
-    border:1px solid rgba(74,222,128,.16);
+  background:rgba(42,218,126,.07);
 
-    background:rgba(74,222,128,.06);
-
-    border-radius:999px;
-
-    color:#86efac;
-
-    font-size:12px;
-    font-weight:600;
+  color:#69e7a0;
+  font-size:11px;
+  font-weight:700;
 }
 
 .status-dot{
-    width:7px;
-    height:7px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#35dc7b;
 
-    border-radius:50%;
-
-    background:#4ade80;
-
-    box-shadow:0 0 10px #4ade80;
+  box-shadow:
+    0 0 10px rgba(53,220,123,.8);
 }
 
+/* CREATOR BADGE */
+.creator-badge{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
 
-/* =========================
-   SECTIONS
-========================= */
+  margin-top:13px;
+  padding:7px 12px;
+
+  overflow:hidden;
+
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,.025)
+    );
+
+  color:#c7c7ce;
+
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.creator-badge::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-80px;
+  width:60px;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.25),
+      transparent
+    );
+
+  transform:skewX(-20deg);
+  animation:shine 4s infinite;
+}
+
+@keyframes shine{
+  0%,70%{
+    left:-80px;
+  }
+
+  100%{
+    left:140%;
+  }
+}
+
+.creator-check{
+  width:14px;
+  height:14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+  background:#1d7cff;
+
+  color:#fff;
+  font-size:8px;
+}
+
+/* CREATOR LABEL */
+.creator-label{
+  margin-top:9px;
+  color:#686871;
+  font-size:11px;
+  font-weight:600;
+}
+
+/* SECTIONS */
+.sections{
+  margin-top:45px;
+}
 
 .section{
-    margin-top:32px;
+  margin-bottom:33px;
 }
 
 .section-title{
-    margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 
-    color:#74747f;
+  margin-bottom:13px;
 
-    font-size:11px;
-    font-weight:700;
-
-    letter-spacing:1.8px;
-
-    text-transform:uppercase;
+  color:#777780;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
 }
 
+.section-title::before{
+  content:"";
+  width:3px;
+  height:13px;
+
+  border-radius:5px;
+  background:#287cff;
+
+  box-shadow:
+    0 0 12px rgba(40,124,255,.45);
+}
+
+/* LINKS */
 .links{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+  display:grid;
+  gap:10px;
 }
 
+.link-card{
+  position:relative;
+  display:flex;
+  align-items:center;
 
-/* =========================
-   LINK CARDS
-========================= */
+  min-height:70px;
+  padding:11px 16px;
 
-.link{
-    position:relative;
+  overflow:hidden;
 
-    display:flex;
-    align-items:center;
+  text-decoration:none;
+  color:#fff;
 
-    min-height:76px;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:17px;
 
-    padding:11px 14px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.018)
+    );
 
-    overflow:hidden;
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.12);
 
-    color:#fff;
-    text-decoration:none;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.075),
-            rgba(255,255,255,.025)
-        );
-
-    border:1px solid rgba(255,255,255,.075);
-
-    border-radius:18px;
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    transition:
-        transform .25s ease,
-        border-color .25s ease,
-        background .25s ease,
-        box-shadow .25s ease;
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    background .25s ease,
+    box-shadow .25s ease;
 }
 
-.link::before{
-    content:"";
+.link-card::after{
+  content:"";
 
-    position:absolute;
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:70%;
+  height:100%;
 
-    top:0;
-    left:-100%;
+  background:
+    linear-gradient(
+      100deg,
+      transparent,
+      rgba(255,255,255,.055),
+      transparent
+    );
 
-    width:70%;
-    height:100%;
+  transform:skewX(-20deg);
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.08),
-            transparent
-        );
-
-    transform:skewX(-20deg);
-
-    transition:left .6s ease;
+  transition:left .55s ease;
 }
 
-.link:hover::before{
-    left:140%;
+.link-card:hover{
+  transform:translateY(-2px);
+
+  border-color:rgba(255,255,255,.15);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.075),
+      rgba(255,255,255,.025)
+    );
+
+  box-shadow:
+    0 14px 45px rgba(0,0,0,.2);
 }
 
-.link:hover{
-    transform:translateY(-2px);
-
-    border-color:rgba(255,255,255,.15);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.105),
-            rgba(255,255,255,.035)
-        );
-
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
+.link-card:hover::after{
+  left:140%;
 }
-
-
-/* =========================
-   LOGOS
-========================= */
 
 .logo-box{
-    width:46px;
-    height:46px;
+  flex:0 0 46px;
 
-    flex-shrink:0;
+  width:46px;
+  height:46px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    border-radius:14px;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:13px;
 
-    background:rgba(255,255,255,.065);
+  background:rgba(255,255,255,.035);
 
-    border:1px solid rgba(255,255,255,.07);
-
-    overflow:hidden;
+  overflow:hidden;
 }
 
-.logo{
-    width:27px;
-    height:27px;
+.logo-box img{
+  width:27px;
+  height:27px;
 
-    object-fit:contain;
-    display:block;
+  object-fit:contain;
+
+  display:block;
 }
 
-
-/* Special logo sizes */
-
-.logo-bynogame{
-    width:36px;
-    height:36px;
-}
-
-.logo-amazon{
-    width:34px;
-    height:26px;
-}
-
-.logo-linkedin{
-    width:27px;
-    height:27px;
-}
-
-
-/* =========================
-   TEXT
-========================= */
-
-.link-content{
-    flex:1;
-    min-width:0;
-    margin-left:13px;
+.link-info{
+  min-width:0;
+  flex:1;
+  margin-left:13px;
 }
 
 .link-name{
-    font-size:14px;
-    font-weight:700;
+  font-size:14px;
+  font-weight:750;
+  letter-spacing:-.15px;
 }
 
 .link-description{
-    margin-top:3px;
+  margin-top:4px;
 
-    color:#777781;
-
-    font-size:11px;
-    line-height:1.4;
+  color:#707079;
+  font-size:11px;
+  line-height:1.35;
 }
 
 .arrow{
-    margin-left:12px;
+  flex:0 0 auto;
 
-    color:#666670;
+  margin-left:12px;
 
-    font-size:24px;
-    font-weight:300;
+  color:#5f5f68;
+  font-size:25px;
+  font-weight:300;
 
-    transition:
-        transform .25s ease,
-        color .25s ease;
+  transition:
+    transform .25s ease,
+    color .25s ease;
 }
 
-.link:hover .arrow{
-    transform:translateX(3px);
-    color:#fff;
+.link-card:hover .arrow{
+  color:#fff;
+  transform:translateX(3px);
 }
 
+/* SPECIAL EMAIL */
+.email-card{
+  border-color:rgba(40,124,255,.16);
 
-/* =========================
-   EMAIL FEATURE
-========================= */
-
-.feature{
-    display:flex;
-    align-items:center;
-
-    gap:15px;
-
-    margin-top:32px;
-    padding:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(37,99,235,.11),
-            rgba(124,58,237,.07)
-        );
-
-    border:1px solid rgba(99,102,241,.18);
-
-    border-radius:20px;
-
-    backdrop-filter:blur(18px);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(40,124,255,.075),
+      rgba(255,255,255,.018)
+    );
 }
 
-.feature-icon{
-    width:48px;
-    height:48px;
-
-    flex-shrink:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:14px;
-
-    background:rgba(37,99,235,.14);
+.email-card .logo-box{
+  border-color:rgba(40,124,255,.2);
+  background:rgba(40,124,255,.08);
 }
 
-.feature-icon svg{
-    width:23px;
-    height:23px;
-}
+/* CONTACT */
+.contact-box{
+  padding:20px;
 
-.feature-info{
-    flex:1;
-}
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:18px;
 
-.feature h3{
-    margin-bottom:4px;
-    font-size:14px;
-}
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.015)
+    );
 
-.feature p{
-    color:#777781;
-    font-size:11px;
-}
-
-.feature-button{
-    padding:10px 14px;
-
-    color:#fff;
-    text-decoration:none;
-
-    background:rgba(255,255,255,.08);
-
-    border:1px solid rgba(255,255,255,.09);
-
-    border-radius:11px;
-
-    font-size:11px;
-    font-weight:700;
-
-    transition:.2s ease;
-}
-
-.feature-button:hover{
-    background:rgba(255,255,255,.14);
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact{
-    margin-top:38px;
-    padding:22px;
-
-    background:rgba(255,255,255,.025);
-
-    border:1px solid rgba(255,255,255,.07);
-
-    border-radius:20px;
-
-    backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 }
 
 .contact-title{
-    font-size:16px;
-    font-weight:700;
+  font-size:15px;
+  font-weight:800;
 }
 
-.contact-subtitle{
-    margin-top:5px;
-
-    color:#777781;
-
-    font-size:11px;
+.contact-description{
+  margin-top:6px;
+  color:#707079;
+  font-size:11px;
+  line-height:1.5;
 }
 
-.form{
-    display:flex;
-    flex-direction:column;
-
-    gap:10px;
-    margin-top:17px;
+.contact-form{
+  display:grid;
+  gap:10px;
+  margin-top:16px;
 }
 
 .input,
 .textarea{
-    width:100%;
+  width:100%;
 
-    outline:none;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
 
-    padding:13px 14px;
+  outline:none;
 
-    color:#fff;
+  background:rgba(0,0,0,.22);
+  color:#fff;
 
-    font-family:inherit;
-    font-size:12px;
+  font:inherit;
+  font-size:12px;
 
-    background:rgba(255,255,255,.035);
+  padding:12px 13px;
 
-    border:1px solid rgba(255,255,255,.07);
-
-    border-radius:12px;
-
-    transition:.2s ease;
-}
-
-.input:focus,
-.textarea:focus{
-    border-color:rgba(37,99,235,.5);
-    background:rgba(255,255,255,.05);
+  transition:
+    border-color .2s ease,
+    background .2s ease;
 }
 
 .input::placeholder,
 .textarea::placeholder{
-    color:#5e5e67;
+  color:#55555d;
+}
+
+.input:focus,
+.textarea:focus{
+  border-color:rgba(40,124,255,.45);
+  background:rgba(0,0,0,.3);
 }
 
 .textarea{
-    min-height:110px;
-    resize:vertical;
+  min-height:105px;
+  resize:vertical;
 }
 
-.submit{
-    border:none;
+.submit-btn{
+  border:0;
+  border-radius:12px;
 
-    padding:13px;
+  padding:12px 15px;
 
-    border-radius:12px;
+  background:#fff;
+  color:#08080b;
 
-    color:#fff;
+  font-size:12px;
+  font-weight:800;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #4f46e5
-        );
+  cursor:pointer;
 
-    font-family:inherit;
-
-    font-size:12px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.2s ease;
+  transition:
+    transform .2s ease,
+    opacity .2s ease;
 }
 
-.submit:hover{
-    transform:translateY(-1px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(37,99,235,.25);
+.submit-btn:hover{
+  transform:translateY(-1px);
+  opacity:.9;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
-
+/* FOOTER */
 .site-footer{
-    margin-top:48px;
-    text-align:center;
+  margin-top:65px;
+  padding-top:28px;
+  padding-bottom:8px;
+
+  text-align:center;
 }
 
 .footer-logo-area{
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:16px;
-
-    margin-bottom:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:15px;
 }
 
 .footer-logo{
-    width:72px;
-    height:72px;
+  width:43px;
+  height:43px;
 
-    object-fit:contain;
-
-    filter:
-        drop-shadow(
-            0 0 18px
-            rgba(255,255,255,.08)
-        );
+  object-fit:contain;
+  display:block;
 }
 
 .footer-flag{
-    width:58px;
-    height:auto;
+  width:32px;
+  height:22px;
 
-    object-fit:contain;
+  object-fit:cover;
 
-    border-radius:7px;
+  border-radius:4px;
 
-    box-shadow:
-        0 5px 20px
-        rgba(0,0,0,.3);
+  opacity:.9;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,.25);
 }
 
 .footer-divider{
-    width:100%;
-    height:1px;
+  width:100%;
+  height:1px;
 
-    margin-bottom:17px;
+  margin:21px auto 15px;
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.1),
-            transparent
-        );
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.08),
+      transparent
+    );
 }
 
 .copyright{
-    color:#55555f;
+  color:#383840;
 
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.2px;
+}
+
+.version{
+  color:#383840;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+  .page{
+    width:min(100% - 22px,820px);
+    padding-top:82px;
+  }
+
+  .language-switch{
+    top:14px;
+    right:14px;
+  }
+
+  .avatar-wrap{
+    width:120px;
+    height:120px;
+  }
+
+  .profile-name{
+    font-size:27px;
+  }
+
+  .sections{
+    margin-top:39px;
+  }
+
+  .section{
+    margin-bottom:28px;
+  }
+
+  .link-card{
+    min-height:66px;
+    padding:10px 12px;
+    border-radius:15px;
+  }
+
+  .logo-box{
+    width:43px;
+    height:43px;
+    flex-basis:43px;
+    border-radius:12px;
+  }
+
+  .logo-box img{
+    width:25px;
+    height:25px;
+  }
+
+  .link-info{
+    margin-left:11px;
+  }
+
+  .link-name{
+    font-size:13px;
+  }
+
+  .link-description{
     font-size:10px;
-    letter-spacing:.2px;
+  }
+
+  .arrow{
+    font-size:23px;
+  }
+
+  .contact-box{
+    padding:16px;
+  }
 }
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:520px){
-
-    .page{
-        width:min(100% - 20px,680px);
-        padding-top:38px;
-    }
-
-    .name{
-        font-size:26px;
-    }
-
-    .avatar-wrap{
-        width:112px;
-        height:112px;
-    }
-
-    .avatar{
-        width:99px;
-        height:99px;
-    }
-
-    .link{
-        min-height:72px;
-        border-radius:16px;
-    }
-
-    .logo-box{
-        width:43px;
-        height:43px;
-    }
-
-    .link-description{
-        font-size:10px;
-    }
-
-    .feature{
-        align-items:flex-start;
-    }
-
-    .feature-button{
-        margin-left:auto;
-    }
-}
-
 </style>
 </head>
 
-
 <body>
 
-<div class="background">
-
-    <div class="grid"></div>
-
-    <div class="orb orb-one"></div>
-    <div class="orb orb-two"></div>
-    <div class="orb orb-three"></div>
-
+<!-- PRELOADER -->
+<div id="preloader">
+  <img
+    class="loader-logo"
+    src="efesarac-footer-logo.png"
+    alt="efesarac.co">
 </div>
 
+<!-- BACKGROUND -->
+<div class="bg-orb orb-blue"></div>
+<div class="bg-orb orb-purple"></div>
+<div class="bg-orb orb-cyan"></div>
+
+<!-- LANGUAGE -->
+<div class="language-switch">
+  <button class="lang-btn active" data-lang="tr">TR</button>
+  <button class="lang-btn" data-lang="en">EN</button>
+</div>
 
 <main class="page">
 
-
-<!-- =========================
-     PROFILE
-========================= -->
-
-<section class="profile">
+  <!-- PROFILE -->
+  <header class="profile">
 
     <div class="avatar-wrap">
-
-        <div class="avatar-ring"></div>
-
-        <img
-            class="avatar"
-            src="https://github.com/saracefe.png"
-            alt="Efe Saraç"
-        >
-
+      <img
+        class="avatar"
+        src="https://github.com/saracefe.png"
+        alt="Efe Saraç">
     </div>
 
-
-    <div class="name">
-
-        Efe Saraç
-
-        <span class="verified">✓</span>
-
+    <div class="profile-name">
+      <span>Efe Saraç</span>
+      <span class="verified">✓</span>
     </div>
 
-
-    <div class="bio">
-        Digital creator · Developer · Internet
+    <div
+      class="bio"
+      data-tr="Dijital içerik üreticisi · Geliştirici · İnternet"
+      data-en="Digital creator · Developer · Internet">
+      Dijital içerik üreticisi · Geliştirici · İnternet
     </div>
-
 
     <div class="status">
-
-        <span class="status-dot"></span>
-
+      <span class="status-dot"></span>
+      <span
+        data-tr="Sistem aktif"
+        data-en="System active">
         Sistem aktif
-
+      </span>
     </div>
 
-</section>
+    <div class="creator-badge">
+      <span class="creator-check">✓</span>
+      <span
+        data-tr="DOĞRULANMIŞ CREATOR"
+        data-en="VERIFIED CREATOR">
+        DOĞRULANMIŞ CREATOR
+      </span>
+    </div>
+
+    <div
+      class="creator-label"
+      data-tr="İçerik üreticisi"
+      data-en="Content creator">
+      İçerik üreticisi
+    </div>
+
+  </header>
 
 
+  <div class="sections">
 
-<!-- =========================
-     SOSYAL
-========================= -->
+    <!-- SOCIAL -->
+    <section class="section">
 
-<section class="section">
-
-    <div class="section-title">
+      <div
+        class="section-title"
+        data-tr="Sosyal"
+        data-en="Social">
         Sosyal
-    </div>
+      </div>
 
+      <div class="links">
 
-    <div class="links">
+        <a class="link-card"
+           href="https://youtube.com/@saracefe"
+           target="_blank"
+           rel="noopener">
 
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/youtube" alt="YouTube">
+          </div>
 
-        <!-- INSTAGRAM -->
-
-        <a
-            class="link"
-            href="https://instagram.com/saracefe_"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/instagram"
-                    alt="Instagram"
-                >
-
+          <div class="link-info">
+            <div class="link-name">YouTube</div>
+            <div class="link-description"
+                 data-tr="Videolar ve içerikler"
+                 data-en="Videos and content">
+              Videolar ve içerikler
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Instagram
-                </div>
-
-                <div class="link-description">
-                    Fotoğraflar, hikâyeler ve günlük içerikler
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://instagram.com/saracefe_"
+           target="_blank"
+           rel="noopener">
 
-        <!-- THREADS -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/instagram" alt="Instagram">
+          </div>
 
-        <a
-            class="link"
-            href="https://threads.net/@saracefe_"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/threads"
-                    alt="Threads"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Instagram</div>
+            <div class="link-description"
+                 data-tr="Günlük paylaşımlar"
+                 data-en="Daily posts">
+              Günlük paylaşımlar
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Threads
-                </div>
-
-                <div class="link-description">
-                    Kısa düşünceler ve gündem
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://facebook.com/saracefee"
+           target="_blank"
+           rel="noopener">
 
-        <!-- X -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/facebook" alt="Facebook">
+          </div>
 
-        <a
-            class="link"
-            href="https://x.com/efesarac_"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/x"
-                    alt="X"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Facebook</div>
+            <div class="link-description"
+                 data-tr="Sosyal profil"
+                 data-en="Social profile">
+              Sosyal profil
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    X
-                </div>
-
-                <div class="link-description">
-                    Gündem, teknoloji ve düşünceler
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://threads.net/@saracefe_"
+           target="_blank"
+           rel="noopener">
 
-        <!-- FACEBOOK -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/threads" alt="Threads">
+          </div>
 
-        <a
-            class="link"
-            href="https://facebook.com/saracefee"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/facebook"
-                    alt="Facebook"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Threads</div>
+            <div class="link-description"
+                 data-tr="Kısa paylaşımlar"
+                 data-en="Short-form posts">
+              Kısa paylaşımlar
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Facebook
-                </div>
-
-                <div class="link-description">
-                    Facebook profilim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://x.com/efesarac_"
+           target="_blank"
+           rel="noopener">
 
-        <!-- TIKTOK -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/x" alt="X">
+          </div>
 
-        <a
-            class="link"
-            href="https://tiktok.com/@efesarac_"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/tiktok"
-                    alt="TikTok"
-                >
-
+          <div class="link-info">
+            <div class="link-name">X</div>
+            <div class="link-description"
+                 data-tr="Gündem ve düşünceler"
+                 data-en="Updates and thoughts">
+              Gündem ve düşünceler
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    TikTok
-                </div>
-
-                <div class="link-description">
-                    Kısa videolar ve eğlenceli içerikler
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
-    </div>
 
-</section>
+        <a class="link-card"
+           href="https://tiktok.com/@efesarac_"
+           target="_blank"
+           rel="noopener">
+
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/tiktok" alt="TikTok">
+          </div>
+
+          <div class="link-info">
+            <div class="link-name">TikTok</div>
+            <div class="link-description"
+                 data-tr="Kısa videolar"
+                 data-en="Short videos">
+              Kısa videolar
+            </div>
+          </div>
+
+          <div class="arrow">›</div>
+        </a>
 
 
+        <a class="link-card"
+           href="https://kwai.com/@saracefe"
+           target="_blank"
+           rel="noopener">
 
-<!-- =========================
-     CREATOR
-========================= -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/kuaishou" alt="Kwai">
+          </div>
 
-<section class="section">
+          <div class="link-info">
+            <div class="link-name">Kwai</div>
+            <div class="link-description"
+                 data-tr="Kısa video içerikleri"
+                 data-en="Short video content">
+              Kısa video içerikleri
+            </div>
+          </div>
 
-    <div class="section-title">
+          <div class="arrow">›</div>
+        </a>
+
+      </div>
+    </section>
+
+
+    <!-- CREATOR -->
+    <section class="section">
+
+      <div
+        class="section-title"
+        data-tr="Creator"
+        data-en="Creator">
         Creator
-    </div>
+      </div>
 
+      <div class="links">
 
-    <div class="links">
+        <a class="link-card"
+           href="https://github.com/saracefe"
+           target="_blank"
+           rel="noopener">
 
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/github" alt="GitHub">
+          </div>
 
-        <!-- YOUTUBE -->
-
-        <a
-            class="link"
-            href="https://youtube.com/@saracefe"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/youtube"
-                    alt="YouTube"
-                >
-
+          <div class="link-info">
+            <div class="link-name">GitHub</div>
+            <div class="link-description"
+                 data-tr="Projeler ve geliştirmeler"
+                 data-en="Projects and development">
+              Projeler ve geliştirmeler
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    YouTube
-                </div>
-
-                <div class="link-description">
-                    Videolar ve içerikler
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://linkedin.com/in/efe-saraç-bbb35b1b1"
+           target="_blank"
+           rel="noopener">
 
-        <!-- TWITCH -->
+          <div class="logo-box">
+            <img
+              src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg"
+              alt="LinkedIn">
+          </div>
 
-        <a
-            class="link"
-            href="https://twitch.tv/efesarac_"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/twitch"
-                    alt="Twitch"
-                >
-
+          <div class="link-info">
+            <div class="link-name">LinkedIn</div>
+            <div class="link-description"
+                 data-tr="Profesyonel profil"
+                 data-en="Professional profile">
+              Profesyonel profil
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Twitch
-                </div>
-
-                <div class="link-description">
-                    Canlı yayınlar
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://donate.bynogame.com/efesarac"
+           target="_blank"
+           rel="noopener">
 
-        <!-- KICK -->
+          <div class="logo-box">
+            <img
+              src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png"
+              alt="ByNoGame">
+          </div>
 
-        <a
-            class="link"
-            href="https://kick.com/saracefe"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/kick"
-                    alt="Kick"
-                >
-
+          <div class="link-info">
+            <div class="link-name">ByNoGame</div>
+            <div class="link-description"
+                 data-tr="Destek ve bağış"
+                 data-en="Support and donations">
+              Destek ve bağış
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Kick
-                </div>
-
-                <div class="link-description">
-                    Canlı yayın platformu
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://paypal.me/saracefe"
+           target="_blank"
+           rel="noopener">
 
-        <!-- BYNOGAME -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/paypal" alt="PayPal">
+          </div>
 
-        <a
-            class="link"
-            href="https://donate.bynogame.com/efesarac"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo logo-bynogame"
-                    src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png"
-                    alt="ByNoGame"
-                >
-
+          <div class="link-info">
+            <div class="link-name">PayPal</div>
+            <div class="link-description"
+                 data-tr="Destek gönder"
+                 data-en="Send support">
+              Destek gönder
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    ByNoGame
-                </div>
-
-                <div class="link-description">
-                    Destek ve bağış sayfam
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
-    </div>
-
-</section>
-
+      </div>
+    </section>
 
 
-<!-- =========================
-     MUSIC
-========================= -->
+    <!-- LIVE -->
+    <section class="section">
 
-<section class="section">
+      <div
+        class="section-title"
+        data-tr="Live"
+        data-en="Live">
+        Live
+      </div>
 
-    <div class="section-title">
+      <div class="links">
+
+        <a class="link-card"
+           href="https://twitch.tv/efesarac_"
+           target="_blank"
+           rel="noopener">
+
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/twitch" alt="Twitch">
+          </div>
+
+          <div class="link-info">
+            <div class="link-name">Twitch</div>
+            <div class="link-description"
+                 data-tr="Canlı yayınlar"
+                 data-en="Live streams">
+              Canlı yayınlar
+            </div>
+          </div>
+
+          <div class="arrow">›</div>
+        </a>
+
+
+        <a class="link-card"
+           href="https://kick.com/saracefe"
+           target="_blank"
+           rel="noopener">
+
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/kick" alt="Kick">
+          </div>
+
+          <div class="link-info">
+            <div class="link-name">Kick</div>
+            <div class="link-description"
+                 data-tr="Canlı yayınlar"
+                 data-en="Live streams">
+              Canlı yayınlar
+            </div>
+          </div>
+
+          <div class="arrow">›</div>
+        </a>
+
+      </div>
+    </section>
+
+
+    <!-- MUSIC -->
+    <section class="section">
+
+      <div
+        class="section-title"
+        data-tr="Music"
+        data-en="Music">
         Music
-    </div>
+      </div>
 
+      <div class="links">
 
-    <div class="links">
+        <a class="link-card"
+           href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6"
+           target="_blank"
+           rel="noopener">
 
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/spotify" alt="Spotify">
+          </div>
 
-        <!-- SPOTIFY -->
-
-        <a
-            class="link"
-            href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/spotify"
-                    alt="Spotify"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Spotify</div>
+            <div class="link-description"
+                 data-tr="Müzik profilim"
+                 data-en="My music profile">
+              Müzik profilim
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Spotify
-                </div>
-
-                <div class="link-description">
-                    Müzik ve çalma listelerim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://music.youtube.com/@saracefe"
+           target="_blank"
+           rel="noopener">
 
-        <!-- YOUTUBE MUSIC -->
+          <div class="logo-box">
+            <img
+              src="https://cdn.simpleicons.org/youtubemusic"
+              alt="YouTube Music">
+          </div>
 
-        <a
-            class="link"
-            href="https://music.youtube.com/@saracefe"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/youtubemusic"
-                    alt="YouTube Music"
-                >
-
+          <div class="link-info">
+            <div class="link-name">YouTube Music</div>
+            <div class="link-description"
+                 data-tr="Müzik ve listeler"
+                 data-en="Music and playlists">
+              Müzik ve listeler
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    YouTube Music
-                </div>
-
-                <div class="link-description">
-                    YouTube Music profilim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://music.amazon.com/profiles/@efesarac"
+           target="_blank"
+           rel="noopener">
 
-        <!-- AMAZON MUSIC -->
+          <div class="logo-box">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg"
+              alt="Amazon Music">
+          </div>
 
-        <a
-            class="link"
-            href="https://music.amazon.com/profiles/@efesarac"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo logo-amazon"
-                    src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg"
-                    alt="Amazon Music"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Amazon Music</div>
+            <div class="link-description"
+                 data-tr="Müzik profilim"
+                 data-en="My music profile">
+              Müzik profilim
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Amazon Music
-                </div>
-
-                <div class="link-description">
-                    Amazon Music profilim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
-    </div>
-
-</section>
-
+      </div>
+    </section>
 
 
-<!-- =========================
-     COMMUNITY
-========================= -->
+    <!-- COMMUNITY -->
+    <section class="section">
 
-<section class="section">
-
-    <div class="section-title">
+      <div
+        class="section-title"
+        data-tr="Community"
+        data-en="Community">
         Community
-    </div>
+      </div>
 
+      <div class="links">
 
-    <div class="links">
+        <a class="link-card"
+           href="https://discord.gg/p5Y5BxESFD"
+           target="_blank"
+           rel="noopener">
 
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/discord" alt="Discord">
+          </div>
 
-        <!-- DISCORD -->
-
-        <a
-            class="link"
-            href="https://discord.gg/p5Y5BxESFD"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/discord"
-                    alt="Discord"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Discord</div>
+            <div class="link-description"
+                 data-tr="Topluluğa katıl"
+                 data-en="Join the community">
+              Topluluğa katıl
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Discord
-                </div>
-
-                <div class="link-description">
-                    Topluluğuma katıl
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://t.me/efesarac"
+           target="_blank"
+           rel="noopener">
 
-        <!-- TELEGRAM -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/telegram" alt="Telegram">
+          </div>
 
-        <a
-            class="link"
-            href="https://t.me/efesarac"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/telegram"
-                    alt="Telegram"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Telegram</div>
+            <div class="link-description"
+                 data-tr="Topluluk ve duyurular"
+                 data-en="Community and announcements">
+              Topluluk ve duyurular
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Telegram
-                </div>
-
-                <div class="link-description">
-                    Telegram profilim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://reddit.com/user/efesarac"
+           target="_blank"
+           rel="noopener">
 
-        <!-- REDDIT -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/reddit" alt="Reddit">
+          </div>
 
-        <a
-            class="link"
-            href="https://reddit.com/user/efesarac"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/reddit"
-                    alt="Reddit"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Reddit</div>
+            <div class="link-description"
+                 data-tr="Topluluk paylaşımları"
+                 data-en="Community posts">
+              Topluluk paylaşımları
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Reddit
-                </div>
-
-                <div class="link-description">
-                    Reddit profilim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://bsky.app/profile/saracefe.bsky.social"
+           target="_blank"
+           rel="noopener">
 
-        <!-- BLUESKY -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/bluesky" alt="Bluesky">
+          </div>
 
-        <a
-            class="link"
-            href="https://bsky.app/profile/saracefe.bsky.social"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/bluesky"
-                    alt="Bluesky"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Bluesky</div>
+            <div class="link-description"
+                 data-tr="Sosyal ağ"
+                 data-en="Social network">
+              Sosyal ağ
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    Bluesky
-                </div>
-
-                <div class="link-description">
-                    Bluesky profilim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
-    </div>
-
-</section>
-
+      </div>
+    </section>
 
 
-<!-- =========================
-     DİĞER
-========================= -->
+    <!-- OTHER -->
+    <section class="section">
 
-<section class="section">
-
-    <div class="section-title">
+      <div
+        class="section-title"
+        data-tr="Diğer"
+        data-en="Other">
         Diğer
-    </div>
+      </div>
 
+      <div class="links">
 
-    <div class="links">
+        <a class="link-card"
+           href="https://snapchat.com/add/efesaracx"
+           target="_blank"
+           rel="noopener">
 
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/snapchat" alt="Snapchat">
+          </div>
 
-        <!-- GITHUB -->
-
-        <a
-            class="link"
-            href="https://github.com/saracefe"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/github"
-                    alt="GitHub"
-                >
-
+          <div class="link-info">
+            <div class="link-name">Snapchat</div>
+            <div class="link-description"
+                 data-tr="Snapchat profilim"
+                 data-en="My Snapchat profile">
+              Snapchat profilim
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    GitHub
-                </div>
-
-                <div class="link-description">
-                    Projelerim ve kodlarım
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="https://wa.me/efesarac"
+           target="_blank"
+           rel="noopener">
 
-        <!-- LINKEDIN -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp">
+          </div>
 
-        <a
-            class="link"
-            href="https://linkedin.com/in/efe-saraç-bbb35b1b1"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo logo-linkedin"
-                    src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg"
-                    alt="LinkedIn"
-                >
-
+          <div class="link-info">
+            <div class="link-name">WhatsApp</div>
+            <div class="link-description"
+                 data-tr="WhatsApp üzerinden iletişim"
+                 data-en="Contact me on WhatsApp">
+              WhatsApp üzerinden iletişim
             </div>
+          </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    LinkedIn
-                </div>
-
-                <div class="link-description">
-                    Profesyonel profilim
-                </div>
-
-            </div>
-
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
 
+        <a class="link-card"
+           href="mailto:contact@efesarac.co?subject=Özel%20E-posta%20Talebi">
 
-        <!-- PAYPAL -->
+          <div class="logo-box">
+            <img src="https://cdn.simpleicons.org/maildotru" alt="Email">
+          </div>
 
-        <a
-            class="link"
-            href="https://paypal.me/saracefe"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/paypal"
-                    alt="PayPal"
-                >
-
+          <div class="link-info">
+            <div class="link-name"
+                 data-tr="Özel e-posta"
+                 data-en="Private email">
+              Özel e-posta
             </div>
 
-
-            <div class="link-content">
-
-                <div class="link-name">
-                    PayPal
-                </div>
-
-                <div class="link-description">
-                    Destek göndermek için
-                </div>
-
+            <div class="link-description"
+                 data-tr="Özel iletişim talebi gönder"
+                 data-en="Send a private contact request">
+              Özel iletişim talebi gönder
             </div>
+          </div>
 
-
-            <div class="arrow">›</div>
-
+          <div class="arrow">›</div>
         </a>
 
+      </div>
+    </section>
 
 
-        <!-- SNAPCHAT -->
+    <!-- EMAIL -->
+    <section class="section">
 
-        <a
-            class="link"
-            href="https://snapchat.com/add/efesaracx"
-            target="_blank"
-            rel="noopener"
-        >
+      <div
+        class="section-title"
+        data-tr="İletişim"
+        data-en="Contact">
+        İletişim
+      </div>
 
-            <div class="logo-box">
+      <a class="link-card email-card"
+         href="mailto:contact@efesarac.co">
 
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/snapchat"
-                    alt="Snapchat"
-                >
+        <div class="logo-box">
+          <img src="https://cdn.simpleicons.org/gmail" alt="Email">
+        </div>
 
-            </div>
+        <div class="link-info">
 
+          <div
+            class="link-name"
+            data-tr="E-posta"
+            data-en="Email">
+            E-posta
+          </div>
 
-            <div class="link-content">
+          <div class="link-description">
+            contact@efesarac.co
+          </div>
 
-                <div class="link-name">
-                    Snapchat
-                </div>
+        </div>
 
-                <div class="link-description">
-                    Snapchat profilim
-                </div>
+        <div class="arrow">›</div>
 
-            </div>
-
-
-            <div class="arrow">›</div>
-
-        </a>
-
-
-
-        <!-- KWAI -->
-
-        <a
-            class="link"
-            href="https://kwai.com/@saracefe"
-            target="_blank"
-            rel="noopener"
-        >
-
-            <div class="logo-box">
-
-                <img
-                    class="logo"
-                    src="https://cdn.simpleicons.org/kuaishou"
-                    alt="Kwai"
-                >
-
-            </div>
+      </a>
+    </section>
 
 
-            <div class="link-content">
+    <!-- CONTACT FORM -->
+    <section class="section">
 
-                <div class="link-name">
-                    Kwai
-                </div>
+      <div
+        class="section-title"
+        data-tr="Mesaj gönder"
+        data-en="Send a message">
+        Mesaj gönder
+      </div>
 
-                <div class="link-description">
-                    Kwai profilim
-                </div>
+      <div class="contact-box">
 
-            </div>
+        <div
+          class="contact-title"
+          data-tr="Benimle iletişime geç"
+          data-en="Get in touch">
+          Benimle iletişime geç
+        </div>
 
+        <div
+          class="contact-description"
+          data-tr="Aşağıdaki form üzerinden bana mesaj gönderebilirsin."
+          data-en="You can send me a message using the form below.">
+          Aşağıdaki form üzerinden bana mesaj gönderebilirsin.
+        </div>
 
-            <div class="arrow">›</div>
+        <form
+          class="contact-form"
+          action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+          method="POST">
 
-        </a>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================
-     EMAIL
-========================= -->
-
-<div class="feature">
-
-    <div class="feature-icon">
-
-        <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-        >
-
-            <rect
-                x="3"
-                y="5"
-                width="18"
-                height="14"
-                rx="2"
-            />
-
-            <path d="m3 7 9 6 9-6"/>
-
-        </svg>
-
-    </div>
-
-
-    <div class="feature-info">
-
-        <h3>
-            Özel E-posta
-        </h3>
-
-        <p>
-            Bana doğrudan e-posta göndermek için
-        </p>
-
-    </div>
-
-
-    <a
-        class="feature-button"
-        href="mailto:contact@efesarac.co?subject=Özel%20E-posta%20Talebi"
-    >
-        E-posta
-    </a>
-
-</div>
-
-
-
-<!-- =========================
-     CONTACT FORM
-========================= -->
-
-<section class="contact">
-
-    <div class="contact-title">
-        Bana ulaş
-    </div>
-
-    <div class="contact-subtitle">
-        Mesajını doğrudan iletişim formundan gönderebilirsin.
-    </div>
-
-
-    <form
-        class="form"
-        action="https://formspree.io/f/YOUR_FORMSPREE_ID"
-        method="POST"
-    >
-
-        <input
+          <input
             class="input"
             type="text"
             name="name"
-            placeholder="Adın"
             required
-        >
+            placeholder="Ad Soyad"
+            data-placeholder-tr="Ad Soyad"
+            data-placeholder-en="Full name">
 
-        <input
+          <input
             class="input"
             type="email"
             name="email"
-            placeholder="E-posta adresin"
             required
-        >
+            placeholder="E-posta"
+            data-placeholder-tr="E-posta"
+            data-placeholder-en="Email">
 
-        <textarea
+          <textarea
             class="textarea"
             name="message"
-            placeholder="Mesajın..."
             required
-        ></textarea>
+            placeholder="Mesajınız"
+            data-placeholder-tr="Mesajınız"
+            data-placeholder-en="Your message"></textarea>
 
-        <button
-            class="submit"
+          <button
+            class="submit-btn"
             type="submit"
-        >
-            Mesaj Gönder
-        </button>
+            data-tr="Mesajı gönder"
+            data-en="Send message">
+            Mesajı gönder
+          </button>
 
-    </form>
+        </form>
 
-</section>
+      </div>
+    </section>
+
+  </div>
 
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer class="site-footer">
+  <!-- FOOTER -->
+  <footer class="site-footer">
 
     <div class="footer-logo-area">
 
-        <img
-            class="footer-logo"
-            src="efesarac-footer-logo.png"
-            alt="efesarac.co"
-        >
+      <img
+        class="footer-logo"
+        src="efesarac-footer-logo.png"
+        alt="efesarac.co">
 
-        <img
-            class="footer-flag"
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg"
-            alt="Türkiye Bayrağı"
-        >
+      <img
+        class="footer-flag"
+        src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg"
+        alt="Türkiye Bayrağı">
 
     </div>
-
 
     <div class="footer-divider"></div>
 
-
     <div class="copyright">
+
+      <span
+        data-tr="© 2008–2026 efesarac.co Her Hakkı Saklıdır."
+        data-en="© 2008–2026 efesarac.co All Rights Reserved.">
         © 2008–2026 efesarac.co Her Hakkı Saklıdır.
+      </span>
+
+      <span class="version"> · v4.0.0</span>
+
     </div>
 
-</footer>
-
+  </footer>
 
 </main>
+
+
+<script>
+
+/* PRELOADER */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document
+      .getElementById("preloader")
+      .classList.add("hide");
+  }, 450);
+});
+
+
+/* LANGUAGE */
+const langButtons =
+  document.querySelectorAll(".lang-btn");
+
+const translatable =
+  document.querySelectorAll("[data-tr][data-en]");
+
+const inputs =
+  document.querySelectorAll(
+    "[data-placeholder-tr][data-placeholder-en]"
+  );
+
+function setLanguage(lang){
+
+  document.documentElement.lang = lang;
+
+  /* TEXT */
+  translatable.forEach(element => {
+
+    const value =
+      element.getAttribute(
+        lang === "tr"
+          ? "data-tr"
+          : "data-en"
+      );
+
+    if(value !== null){
+      element.textContent = value;
+    }
+
+  });
+
+
+  /* PLACEHOLDERS */
+  inputs.forEach(input => {
+
+    input.placeholder =
+      input.getAttribute(
+        lang === "tr"
+          ? "data-placeholder-tr"
+          : "data-placeholder-en"
+      );
+
+  });
+
+
+  /* TITLE */
+  document.title =
+    lang === "tr"
+      ? "efesarac.co — Efe Saraç"
+      : "efesarac.co — Efe Saraç";
+
+
+  /* BUTTON */
+  langButtons.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.lang === lang
+    );
+  });
+
+
+  localStorage.setItem(
+    "efesarac-language",
+    lang
+  );
+}
+
+
+langButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    setLanguage(button.dataset.lang);
+
+  });
+
+});
+
+
+/* REMEMBER LANGUAGE */
+const savedLanguage =
+  localStorage.getItem(
+    "efesarac-language"
+  );
+
+setLanguage(
+  savedLanguage === "en"
+    ? "en"
+    : "tr"
+);
+
+</script>
 
 </body>
 </html>
