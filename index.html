@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Efe Saraç | Bağlantılar</title>
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -148,11 +148,17 @@
             gap: 16px;
         }
 
-        .link-info i {
+        .link-info i, .link-info svg {
             font-size: 1.2rem;
             width: 24px;
+            height: 24px;
             text-align: center;
             color: #d4d4d8;
+            fill: #d4d4d8;
+        }
+
+        .link-card:hover .link-info svg {
+            fill: #ffffff;
         }
 
         .link-text {
@@ -329,14 +335,29 @@
                 <div class="link-info"><i class="fa-brands fa-instagram"></i><span class="link-text">Instagram</span></div>
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
+            
+            <!-- Threads (Custom SVG) -->
             <a href="https://threads.net/@saracefe_" target="_blank" class="link-card">
-                <div class="link-info"><i class="fa-brands fa-threads"></i><span class="link-text">Threads</span></div>
+                <div class="link-info">
+                    <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.005 97.58 44.005C68.9616 44.005 46.8047 67.5582 46.8047 101.996C46.8047 135.21 68.0416 158.005 97.58 158.005C118.069 158.005 134.421 146.992 141.282 127.854C141.761 126.518 141.071 125.044 139.739 124.563C138.406 124.082 136.936 124.774 136.457 126.11C130.418 142.946 115.908 152.666 97.58 152.666C71.3789 152.666 52.1438 132.33 52.1438 101.996C52.1438 70.4729 71.9567 49.3441 97.58 49.3441C119.516 49.3441 132.383 63.8559 133.68 88.6146C122.673 83.7441 110.126 82.269 97.8091 84.8193C79.4674 88.6186 66.027 101.921 66.027 116.591C66.027 130.089 77.1009 139.461 92.5152 139.461C108.995 139.461 122.846 128.529 128.318 111.411C132.302 113.844 135.597 117.026 137.985 120.735C142.532 127.799 143.903 136.215 141.854 144.498C138.741 157.086 126.758 167.334 112.592 169.512C107.576 170.283 102.508 170.477 97.58 170.088C83.313 168.96 70.3642 162.774 61.1215 152.698C51.8788 142.622 46.8047 129.213 46.8047 114.996C46.8047 113.52 47.9984 112.326 49.4747 112.326C50.951 112.326 52.1447 113.52 52.1447 114.996C52.1447 127.76 56.6853 139.73 64.9388 148.726C73.1923 157.722 84.7538 163.246 97.58 164.252C101.98 164.599 106.505 164.426 110.983 163.737C122.788 161.922 132.774 153.382 135.368 142.909C137.076 135.996 135.932 128.981 132.143 123.1C129.849 119.539 126.68 116.486 122.843 114.103C127.508 97.8812 123.36 84.4447 114.072 84.9935C114.072 84.9935 114.072 84.9935 114.072 84.9935ZM92.5152 134.122C80.609 134.122 71.366 127.062 71.366 116.591C71.366 105.158 82.2536 94.0205 96.6961 91.0298C106.669 88.9645 116.92 89.9629 126.173 93.8193C121.238 120.402 108.528 134.122 92.5152 134.122Z"/>
+                    </svg>
+                    <span class="link-text">Threads</span>
+                </div>
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
+
+            <!-- X / Twitter (Custom SVG) -->
             <a href="https://x.com/efesarac_" target="_blank" class="link-card">
-                <div class="link-info"><i class="fa-brands fa-x-twitter"></i><span class="link-text">X (Twitter)</span></div>
+                <div class="link-info">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    <span class="link-text">X (Twitter)</span>
+                </div>
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
             </a>
+
             <a href="https://tiktok.com/@efesarac_" target="_blank" class="link-card">
                 <div class="link-info"><i class="fa-brands fa-tiktok"></i><span class="link-text">TikTok</span></div>
                 <i class="fa-solid fa-chevron-right arrow-icon"></i>
