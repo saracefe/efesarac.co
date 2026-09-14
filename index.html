@@ -22,9 +22,9 @@
 
 <style>
 
-/* =========================
+/* ==================================================
    RESET
-========================= */
+================================================== */
 
 *{
   margin:0;
@@ -40,6 +40,8 @@ body{
   min-height:100vh;
   overflow-x:hidden;
 
+  background:#060609;
+
   color:#fff;
 
   font-family:
@@ -51,14 +53,12 @@ body{
     Helvetica,
     Arial,
     sans-serif;
-
-  background:#060609;
 }
 
 
-/* =========================
-   GRID
-========================= */
+/* ==================================================
+   BACKGROUND GRID
+================================================== */
 
 body::before{
   content:"";
@@ -66,8 +66,9 @@ body::before{
   position:fixed;
   inset:0;
 
-  pointer-events:none;
   z-index:-3;
+
+  pointer-events:none;
 
   background-image:
     linear-gradient(
@@ -84,9 +85,9 @@ body::before{
 }
 
 
-/* =========================
-   BACKGROUND ORBS
-========================= */
+/* ==================================================
+   BACKGROUND LIGHTS
+================================================== */
 
 .bg-orb{
   position:fixed;
@@ -96,6 +97,7 @@ body::before{
   filter:blur(100px);
 
   pointer-events:none;
+
   z-index:-2;
 
   opacity:.27;
@@ -134,19 +136,19 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    PRELOADER
-========================= */
+================================================== */
 
 #preloader{
   position:fixed;
   inset:0;
 
+  z-index:9999;
+
   display:flex;
   align-items:center;
   justify-content:center;
-
-  z-index:9999;
 
   background:#060609;
 
@@ -186,9 +188,9 @@ body::before{
 }
 
 
-/* =========================
-   LANGUAGE
-========================= */
+/* ==================================================
+   LANGUAGE SWITCH
+================================================== */
 
 .language-switch{
   position:fixed;
@@ -252,9 +254,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    PAGE
-========================= */
+================================================== */
 
 .page{
   width:min(
@@ -269,9 +271,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    PROFILE
-========================= */
+================================================== */
 
 .profile{
   text-align:center;
@@ -355,9 +357,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    NAME
-========================= */
+================================================== */
 
 .profile-name{
   display:flex;
@@ -387,6 +389,8 @@ body::before{
 
   background:#1d7cff;
 
+  color:#fff;
+
   font-size:13px;
   font-weight:900;
 
@@ -396,9 +400,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    BIO
-========================= */
+================================================== */
 
 .bio{
   margin-top:9px;
@@ -409,9 +413,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    STATUS
-========================= */
+================================================== */
 
 .status{
   display:inline-flex;
@@ -454,9 +458,9 @@ body::before{
 }
 
 
-/* =========================
-   CREATOR BADGE
-========================= */
+/* ==================================================
+   VERIFIED CREATOR BADGE
+================================================== */
 
 .creator-badge{
   position:relative;
@@ -490,6 +494,7 @@ body::before{
   color:#c7c7ce;
 
   font-size:9px;
+
   font-weight:900;
 
   letter-spacing:1px;
@@ -552,9 +557,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    CREATOR LABEL
-========================= */
+================================================== */
 
 .creator-label{
   margin-top:9px;
@@ -562,13 +567,14 @@ body::before{
   color:#686871;
 
   font-size:11px;
+
   font-weight:600;
 }
 
 
-/* =========================
+/* ==================================================
    SECTIONS
-========================= */
+================================================== */
 
 .sections{
   margin-top:45px;
@@ -614,9 +620,9 @@ body::before{
 }
 
 
-/* =========================
-   LINKS
-========================= */
+/* ==================================================
+   LINK LIST
+================================================== */
 
 .links{
   display:grid;
@@ -625,9 +631,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    LINK CARD
-========================= */
+================================================== */
 
 .link-card{
   position:relative;
@@ -721,9 +727,9 @@ body::before{
 }
 
 
-/* =========================
-   LOGO
-========================= */
+/* ==================================================
+   LOGO BOX
+================================================== */
 
 .logo-box{
   flex:
@@ -759,9 +765,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    LINK TEXT
-========================= */
+================================================== */
 
 .link-info{
   min-width:0;
@@ -790,9 +796,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    ARROW
-========================= */
+================================================== */
 
 .arrow{
   flex:
@@ -819,9 +825,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    EMAIL
-========================= */
+================================================== */
 
 .email-card{
   border-color:
@@ -844,9 +850,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    FOOTER
-========================= */
+================================================== */
 
 .site-footer{
   margin-top:75px;
@@ -928,9 +934,9 @@ body::before{
 }
 
 
-/* =========================
+/* ==================================================
    MOBILE
-========================= */
+================================================== */
 
 @media(max-width:600px){
 
@@ -1019,9 +1025,9 @@ body::before{
 }
 
 
-/* =========================
-   VERY SMALL
-========================= */
+/* ==================================================
+   VERY SMALL MOBILE
+================================================== */
 
 @media(max-width:360px){
 
@@ -1048,9 +1054,9 @@ body::before{
 <body>
 
 
-<!-- =========================
+<!-- ==================================================
      PRELOADER
-========================= -->
+================================================== -->
 
 <div id="preloader">
 
@@ -1069,7 +1075,9 @@ body::before{
 <div class="bg-orb orb-cyan"></div>
 
 
-<!-- LANGUAGE -->
+<!-- ==================================================
+     LANGUAGE
+================================================== -->
 
 <div class="language-switch">
 
@@ -1080,7 +1088,6 @@ body::before{
     TR
 
   </button>
-
 
   <button
     class="lang-btn"
@@ -1093,12 +1100,13 @@ body::before{
 </div>
 
 
+
 <main class="page">
 
 
-<!-- =========================
+<!-- ==================================================
      PROFILE
-========================= -->
+================================================== -->
 
 <header class="profile">
 
@@ -1185,9 +1193,9 @@ body::before{
 <div class="sections">
 
 
-<!-- =========================
-     SOSYAL / SOCIAL
-========================= -->
+<!-- ==================================================
+     SOSYAL
+================================================== -->
 
 <section class="section">
 
@@ -1204,6 +1212,8 @@ body::before{
 
   <div class="links">
 
+
+    <!-- YOUTUBE -->
 
     <a
       class="link-card"
@@ -1243,6 +1253,7 @@ body::before{
     </a>
 
 
+    <!-- FACEBOOK -->
 
     <a
       class="link-card"
@@ -1282,6 +1293,7 @@ body::before{
     </a>
 
 
+    <!-- INSTAGRAM -->
 
     <a
       class="link-card"
@@ -1321,6 +1333,7 @@ body::before{
     </a>
 
 
+    <!-- THREADS -->
 
     <a
       class="link-card"
@@ -1360,6 +1373,7 @@ body::before{
     </a>
 
 
+    <!-- X -->
 
     <a
       class="link-card"
@@ -1399,6 +1413,7 @@ body::before{
     </a>
 
 
+    <!-- TIKTOK -->
 
     <a
       class="link-card"
@@ -1438,6 +1453,7 @@ body::before{
     </a>
 
 
+    <!-- KWAI -->
 
     <a
       class="link-card"
@@ -1483,9 +1499,9 @@ body::before{
 
 
 
-<!-- =========================
-     İÇERİK ÜRETİCİSİ / CREATOR
-========================= -->
+<!-- ==================================================
+     İÇERİK ÜRETİCİSİ
+================================================== -->
 
 <section class="section">
 
@@ -1502,6 +1518,8 @@ body::before{
 
   <div class="links">
 
+
+    <!-- GITHUB -->
 
     <a
       class="link-card"
@@ -1541,6 +1559,7 @@ body::before{
     </a>
 
 
+    <!-- LINKEDIN -->
 
     <a
       class="link-card"
@@ -1580,6 +1599,7 @@ body::before{
     </a>
 
 
+    <!-- BYNOGAME -->
 
     <a
       class="link-card"
@@ -1619,6 +1639,7 @@ body::before{
     </a>
 
 
+    <!-- PAYPAL -->
 
     <a
       class="link-card"
@@ -1664,9 +1685,9 @@ body::before{
 
 
 
-<!-- =========================
-     CANLI YAYIN / LIVE
-========================= -->
+<!-- ==================================================
+     CANLI YAYIN
+================================================== -->
 
 <section class="section">
 
@@ -1683,6 +1704,8 @@ body::before{
 
   <div class="links">
 
+
+    <!-- TWITCH -->
 
     <a
       class="link-card"
@@ -1722,6 +1745,7 @@ body::before{
     </a>
 
 
+    <!-- KICK -->
 
     <a
       class="link-card"
@@ -1767,9 +1791,9 @@ body::before{
 
 
 
-<!-- =========================
-     MÜZİK / MUSIC
-========================= -->
+<!-- ==================================================
+     MÜZİK
+================================================== -->
 
 <section class="section">
 
@@ -1786,6 +1810,8 @@ body::before{
 
   <div class="links">
 
+
+    <!-- SPOTIFY -->
 
     <a
       class="link-card"
@@ -1825,6 +1851,7 @@ body::before{
     </a>
 
 
+    <!-- YOUTUBE MUSIC -->
 
     <a
       class="link-card"
@@ -1864,6 +1891,7 @@ body::before{
     </a>
 
 
+    <!-- AMAZON MUSIC -->
 
     <a
       class="link-card"
@@ -1909,9 +1937,9 @@ body::before{
 
 
 
-<!-- =========================
-     TOPLULUK / COMMUNITY
-========================= -->
+<!-- ==================================================
+     TOPLULUK
+================================================== -->
 
 <section class="section">
 
@@ -1928,6 +1956,8 @@ body::before{
 
   <div class="links">
 
+
+    <!-- DISCORD -->
 
     <a
       class="link-card"
@@ -1967,6 +1997,7 @@ body::before{
     </a>
 
 
+    <!-- TELEGRAM -->
 
     <a
       class="link-card"
@@ -2006,6 +2037,7 @@ body::before{
     </a>
 
 
+    <!-- REDDIT -->
 
     <a
       class="link-card"
@@ -2045,6 +2077,7 @@ body::before{
     </a>
 
 
+    <!-- BLUESKY -->
 
     <a
       class="link-card"
@@ -2090,9 +2123,9 @@ body::before{
 
 
 
-<!-- =========================
-     DİĞER / OTHER
-========================= -->
+<!-- ==================================================
+     DİĞER
+================================================== -->
 
 <section class="section">
 
@@ -2109,6 +2142,8 @@ body::before{
 
   <div class="links">
 
+
+    <!-- SNAPCHAT -->
 
     <a
       class="link-card"
@@ -2148,6 +2183,7 @@ body::before{
     </a>
 
 
+    <!-- WHATSAPP -->
 
     <a
       class="link-card"
@@ -2193,9 +2229,9 @@ body::before{
 
 
 
-<!-- =========================
-     İLETİŞİM / CONTACT
-========================= -->
+<!-- ==================================================
+     İLETİŞİM
+================================================== -->
 
 <section class="section">
 
@@ -2216,7 +2252,6 @@ body::before{
     <a
       class="link-card email-card"
       href="mailto:contact@efesarac.co">
-
 
       <div class="logo-box">
 
@@ -2252,7 +2287,6 @@ body::before{
         ›
       </div>
 
-
     </a>
 
 
@@ -2261,13 +2295,13 @@ body::before{
 </section>
 
 
+
 </div>
 
 
-
-<!-- =========================
+<!-- ==================================================
      FOOTER
-========================= -->
+================================================== -->
 
 <footer class="site-footer">
 
@@ -2281,9 +2315,15 @@ body::before{
       alt="efesarac.co">
 
 
+    <!--
+      Türkiye başlangıç/fallback bayrağı.
+      JavaScript bunu ziyaretçinin ülkesine göre değiştirir.
+    -->
+
     <img
+      id="countryFlag"
       class="footer-flag"
-      src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg"
+      src="https://flagcdn.com/w160/tr.png"
       alt="Türkiye Bayrağı">
 
 
@@ -2307,7 +2347,7 @@ body::before{
 
     <span class="version">
 
-      · v4.2.0
+      · v4.3.0
 
     </span>
 
@@ -2324,9 +2364,9 @@ body::before{
 
 <script>
 
-/* =========================
+/* ==================================================
    PRELOADER
-========================= */
+================================================== */
 
 window.addEventListener(
   "load",
@@ -2357,9 +2397,9 @@ window.addEventListener(
 
 
 
-/* =========================
+/* ==================================================
    LANGUAGE SYSTEM
-========================= */
+================================================== */
 
 const langButtons =
   document.querySelectorAll(
@@ -2376,18 +2416,18 @@ const translatable =
 function setLanguage(lang){
 
 
-  /* HTML LANG */
+  /* HTML LANGUAGE */
 
   document.documentElement.lang =
     lang;
 
 
-  /* TRANSLATE */
+  /* TRANSLATE ALL TEXT */
 
   translatable.forEach(
     element => {
 
-      const text =
+      const translation =
         lang === "tr"
           ? element.getAttribute(
               "data-tr"
@@ -2397,10 +2437,10 @@ function setLanguage(lang){
             );
 
 
-      if(text !== null){
+      if(translation !== null){
 
         element.textContent =
-          text;
+          translation;
 
       }
 
@@ -2408,7 +2448,7 @@ function setLanguage(lang){
   );
 
 
-  /* BUTTON STATE */
+  /* LANGUAGE BUTTON */
 
   langButtons.forEach(
     button => {
@@ -2432,9 +2472,9 @@ function setLanguage(lang){
 }
 
 
-/* =========================
-   BUTTON EVENTS
-========================= */
+/* ==================================================
+   LANGUAGE BUTTON EVENTS
+================================================== */
 
 langButtons.forEach(
   button => {
@@ -2454,9 +2494,9 @@ langButtons.forEach(
 );
 
 
-/* =========================
-   LOAD LANGUAGE
-========================= */
+/* ==================================================
+   LOAD SAVED LANGUAGE
+================================================== */
 
 const savedLanguage =
   localStorage.getItem(
@@ -2469,6 +2509,174 @@ setLanguage(
     ? "en"
     : "tr"
 );
+
+
+
+/* ==================================================
+   AUTOMATIC COUNTRY FLAG
+   V4.3.0
+================================================== */
+
+async function detectCountryFlag(){
+
+  const flag =
+    document.getElementById(
+      "countryFlag"
+    );
+
+
+  if(!flag){
+
+    return;
+
+  }
+
+
+  /*
+    Türkiye default.
+    If anything fails, this remains.
+  */
+
+  const turkeyFlag =
+    "https://flagcdn.com/w160/tr.png";
+
+
+  try{
+
+    /*
+      IP address -> country
+    */
+
+    const response =
+      await fetch(
+        "https://ipapi.co/json/",
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Country detection failed"
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    /*
+      Example:
+      TR
+      ES
+      SY
+      DE
+      US
+      FR
+      etc.
+    */
+
+    const countryCode =
+      String(
+        data.country_code || "TR"
+      )
+      .trim()
+      .toLowerCase();
+
+
+    /*
+      Only accept proper
+      two-letter country codes.
+    */
+
+    if(
+      !/^[a-z]{2}$/.test(
+        countryCode
+      )
+    ){
+
+      throw new Error(
+        "Invalid country code"
+      );
+
+    }
+
+
+    /*
+      Flag image.
+    */
+
+    const newFlagUrl =
+      `https://flagcdn.com/w160/${countryCode}.png`;
+
+
+    /*
+      Test before replacing
+      the visible Turkey fallback.
+    */
+
+    const testImage =
+      new Image();
+
+
+    testImage.onload =
+      () => {
+
+        flag.src =
+          newFlagUrl;
+
+
+        flag.alt =
+          `${data.country_name || countryCode} flag`;
+
+      };
+
+
+    testImage.onerror =
+      () => {
+
+        flag.src =
+          turkeyFlag;
+
+
+        flag.alt =
+          "Türkiye Bayrağı";
+
+      };
+
+
+    testImage.src =
+      newFlagUrl;
+
+
+  }catch(error){
+
+    /*
+      Country detection fails:
+      keep Turkey.
+    */
+
+    flag.src =
+      turkeyFlag;
+
+
+    flag.alt =
+      "Türkiye Bayrağı";
+
+  }
+
+}
+
+
+/* ==================================================
+   START COUNTRY DETECTION
+================================================== */
+
+detectCountryFlag();
 
 </script>
 
