@@ -1,911 +1,1250 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#060609">
-
-    <title>Efe Saraç | Bağlantılar</title>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-        :root {
-            --bg: #060609;
-            --text: #ffffff;
-            --muted: #858692;
-            --border: rgba(255,255,255,0.09);
-            --card: rgba(255,255,255,0.045);
-            --card-hover: rgba(255,255,255,0.085);
-            --purple: #8b5cf6;
-            --blue: #3b82f6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            background: var(--bg);
-            color: var(--text);
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* ========================================
-           BACKGROUND
-        ======================================== */
-
-        .background {
-            position: fixed;
-            inset: 0;
-            z-index: -10;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .grid {
-            position: absolute;
-            inset: 0;
-
-            background-image:
-                linear-gradient(
-                    rgba(255,255,255,0.018) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.018) 1px,
-                    transparent 1px
-                );
-
-            background-size: 45px 45px;
-
-            mask-image: linear-gradient(
-                to bottom,
-                black 0%,
-                transparent 90%
-            );
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.30;
-        }
-
-        .orb-one {
-            width: 430px;
-            height: 430px;
-            left: -180px;
-            top: -180px;
-            background: #5424b8;
-        }
-
-        .orb-two {
-            width: 380px;
-            height: 380px;
-            right: -180px;
-            top: 35%;
-            background: #174ea6;
-        }
-
-        .orb-three {
-            width: 320px;
-            height: 320px;
-            left: 35%;
-            bottom: -180px;
-            background: #7c1d70;
-        }
-
-        /* ========================================
-           PAGE
-        ======================================== */
-
-        .page {
-            width: min(100% - 28px, 680px);
-            margin: auto;
-            padding: 55px 0 35px;
-        }
-
-        /* ========================================
-           PROFILE
-        ======================================== */
-
-        .profile {
-            text-align: center;
-            margin-bottom: 42px;
-        }
-
-        .avatar-wrap {
-            position: relative;
-            width: 112px;
-            height: 112px;
-            margin: 0 auto 20px;
-        }
-
-        .avatar-ring {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-
-            background:
-                conic-gradient(
-                    from 180deg,
-                    #6366f1,
-                    #a855f7,
-                    #3b82f6,
-                    #6366f1
-                );
-
-            animation: avatarRotate 8s linear infinite;
-        }
-
-        .avatar-ring::after {
-            content: "";
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            background: var(--bg);
-        }
-
-        @keyframes avatarRotate {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .avatar {
-            position: relative;
-            z-index: 2;
-
-            width: 112px;
-            height: 112px;
-
-            padding: 4px;
-
-            border-radius: 50%;
-            object-fit: cover;
-
-            background: var(--bg);
-        }
-
-        .name {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-
-            font-size: 27px;
-            font-weight: 800;
-            letter-spacing: -0.8px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#060609">
+
+<title>Efe Saraç — Digital Creator & Developer</title>
+<meta name="description" content="Efe Saraç — Digital creator, developer and internet.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #060609;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -5;
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+
+    background-size: 45px 45px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+    );
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: .18;
+}
+
+.orb-one {
+    width: 420px;
+    height: 420px;
+    background: #2563eb;
+    top: -180px;
+    left: -150px;
+}
+
+.orb-two {
+    width: 400px;
+    height: 400px;
+    background: #7c3aed;
+    right: -180px;
+    top: 250px;
+}
+
+.orb-three {
+    width: 350px;
+    height: 350px;
+    background: #0891b2;
+    left: 35%;
+    bottom: -200px;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+    width: min(680px, calc(100% - 28px));
+    margin: auto;
+    padding: 55px 0 45px;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile {
+    text-align: center;
+    margin-bottom: 42px;
+}
+
+.avatar-wrap {
+    width: 124px;
+    height: 124px;
+    margin: 0 auto 22px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #2563eb,
+            #7c3aed,
+            #06b6d4,
+            #2563eb
+        );
+
+    animation: rotateRing 8s linear infinite;
+}
+
+.avatar-ring::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: #060609;
+    border-radius: 50%;
+}
+
+.avatar {
+    position: relative;
+    z-index: 2;
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 3px solid #060609;
+
+    box-shadow:
+        0 0 35px rgba(37,99,235,.25);
+}
+
+@keyframes rotateRing {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
-        /* Mavi doğrulama tiki */
-
-        .verified {
-            width: 21px;
-            height: 21px;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -.8px;
+}
+
+.verified {
+    width: 21px;
+    height: 21px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    background: #1d9bf0;
+    color: white;
 
-            border-radius: 50%;
+    border-radius: 50%;
 
-            background: #3b82f6;
+    font-size: 12px;
+    font-weight: 800;
+}
 
-            color: white;
-            font-size: 12px;
-            font-weight: 800;
+.bio {
+    margin-top: 9px;
 
-            box-shadow:
-                0 0 16px rgba(59,130,246,0.35);
-        }
+    color: #92929d;
+    font-size: 14px;
+}
 
-        .bio {
-            margin-top: 9px;
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.6;
-        }
+    margin-top: 15px;
+    padding: 7px 12px;
 
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+    border: 1px solid rgba(74,222,128,.16);
+    background: rgba(74,222,128,.06);
 
-            margin-top: 16px;
-            padding: 7px 13px;
+    border-radius: 999px;
 
-            border: 1px solid rgba(52,211,153,0.22);
-            border-radius: 999px;
+    color: #86efac;
+    font-size: 12px;
+    font-weight: 600;
+}
 
-            background: rgba(52,211,153,0.07);
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
 
-            color: #6ee7b7;
+    background: #4ade80;
 
-            font-size: 12px;
-            font-weight: 600;
-        }
+    box-shadow: 0 0 10px #4ade80;
+}
 
-        .status-dot {
-            width: 7px;
-            height: 7px;
+/* =========================
+   SECTIONS
+========================= */
 
-            border-radius: 50%;
-            background: #34d399;
+.section {
+    margin-top: 32px;
+}
 
-            box-shadow: 0 0 12px #34d399;
-        }
+.section-title {
+    margin-bottom: 12px;
 
-        /* ========================================
-           SECTIONS
-        ======================================== */
+    color: #74747f;
 
-        .section {
-            margin-top: 30px;
-        }
+    font-size: 11px;
+    font-weight: 700;
 
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
 
-            margin: 0 5px 11px;
+/* =========================
+   LINKS
+========================= */
 
-            color: #777985;
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-            font-size: 11px;
-            font-weight: 700;
+.link {
+    position: relative;
 
-            letter-spacing: 1.3px;
-            text-transform: uppercase;
-        }
+    display: flex;
+    align-items: center;
 
-        .section-title::after {
-            content: "";
+    min-height: 76px;
 
-            flex: 1;
-            height: 1px;
+    padding: 11px 14px;
 
-            background: rgba(255,255,255,0.07);
-        }
+    text-decoration: none;
+    color: white;
 
-        /* ========================================
-           LINK CARDS
-        ======================================== */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
 
-        .link {
-            position: relative;
+    border: 1px solid rgba(255,255,255,.075);
 
-            display: flex;
-            align-items: center;
+    border-radius: 18px;
 
-            min-height: 66px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-            padding: 13px 17px;
-            margin-bottom: 10px;
+    overflow: hidden;
 
-            border: 1px solid var(--border);
-            border-radius: 18px;
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
 
-            background: var(--card);
+.link::before {
+    content: "";
 
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+    position: absolute;
 
-            color: white;
-            text-decoration: none;
+    top: 0;
+    left: -100%;
 
-            overflow: hidden;
+    width: 70%;
+    height: 100%;
 
-            transition:
-                transform 0.22s ease,
-                background 0.22s ease,
-                border-color 0.22s ease,
-                box-shadow 0.22s ease;
-        }
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
 
-        .link::before {
-            content: "";
+    transform: skewX(-20deg);
 
-            position: absolute;
-            inset: 0;
+    transition: left .6s ease;
+}
 
-            background:
-                linear-gradient(
-                    110deg,
-                    transparent 20%,
-                    rgba(255,255,255,0.06),
-                    transparent 80%
-                );
+.link:hover::before {
+    left: 140%;
+}
 
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
+.link:hover {
+    transform: translateY(-2px);
 
-        .link:hover {
-            transform: translateY(-3px);
+    border-color: rgba(255,255,255,.15);
 
-            background: var(--card-hover);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.035)
+        );
 
-            border-color:
-                rgba(255,255,255,0.17);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.25);
+}
 
-            box-shadow:
-                0 14px 35px rgba(0,0,0,0.25);
-        }
+.logo-box {
+    width: 46px;
+    height: 46px;
 
-        .link:hover::before {
-            transform: translateX(100%);
-        }
+    flex-shrink: 0;
 
-        .logo-box {
-            width: 42px;
-            height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            flex: 0 0 42px;
+    border-radius: 14px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    background: rgba(255,255,255,.065);
+    border: 1px solid rgba(255,255,255,.07);
+}
 
-            border-radius: 13px;
+.logo {
+    width: 23px;
+    height: 23px;
 
-            background:
-                rgba(255,255,255,0.075);
+    object-fit: contain;
+}
 
-            border:
-                1px solid rgba(255,255,255,0.07);
-        }
+.link-content {
+    flex: 1;
+    min-width: 0;
 
-        .logo {
-            width: 23px;
-            height: 23px;
+    margin-left: 13px;
+}
 
-            object-fit: contain;
+.link-name {
+    font-size: 14px;
+    font-weight: 700;
+}
 
-            filter:
-                brightness(0)
-                invert(1);
+.link-description {
+    margin-top: 3px;
 
-            transition:
-                transform 0.2s ease;
-        }
+    color: #777781;
 
-        .link:hover .logo {
-            transform: scale(1.08);
-        }
+    font-size: 11px;
+    line-height: 1.4;
+}
 
-        .link-content {
-            min-width: 0;
-            margin-left: 13px;
-        }
+.arrow {
+    margin-left: 12px;
 
-        .link-name {
-            font-size: 14px;
-            font-weight: 600;
-        }
+    color: #666670;
 
-        .link-description {
-            margin-top: 3px;
+    font-size: 24px;
+    font-weight: 300;
 
-            color: #777985;
-            font-size: 11px;
-        }
+    transition:
+        transform .25s ease,
+        color .25s ease;
+}
 
-        .arrow {
-            margin-left: auto;
-            padding-left: 12px;
+.link:hover .arrow {
+    transform: translateX(3px);
+    color: #fff;
+}
 
-            color: #64656e;
-            font-size: 21px;
+/* =========================
+   EMAIL FEATURE
+========================= */
 
-            transition:
-                transform 0.2s ease,
-                color 0.2s ease;
-        }
+.feature {
+    margin-top: 32px;
 
-        .link:hover .arrow {
-            color: white;
-            transform: translateX(4px);
-        }
+    padding: 18px;
 
-        /* ========================================
-           EMAIL FEATURE
-        ======================================== */
+    display: flex;
+    align-items: center;
+    gap: 15px;
 
-        .feature {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.11),
+            rgba(124,58,237,.07)
+        );
 
-            gap: 15px;
+    border: 1px solid rgba(99,102,241,.18);
 
-            padding: 18px;
-            margin-bottom: 10px;
+    border-radius: 20px;
 
-            border:
-                1px solid rgba(139,92,246,0.22);
+    backdrop-filter: blur(18px);
+}
 
-            border-radius: 20px;
+.feature-icon {
+    width: 48px;
+    height: 48px;
 
-            background:
-                radial-gradient(
-                    circle at 0% 0%,
-                    rgba(139,92,246,0.18),
-                    transparent 55%
-                ),
-                rgba(255,255,255,0.045);
-        }
+    flex-shrink: 0;
 
-        .feature-info {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .feature-icon {
-            width: 43px;
-            height: 43px;
+    border-radius: 14px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    background: rgba(37,99,235,.14);
+}
 
-            border-radius: 13px;
+.feature-icon svg {
+    width: 23px;
+    height: 23px;
+}
 
-            background:
-                rgba(139,92,246,0.14);
+.feature-info {
+    flex: 1;
+}
 
-            font-size: 20px;
-        }
+.feature h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
 
-        .feature h3 {
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
+.feature p {
+    color: #777781;
+    font-size: 11px;
+}
 
-        .feature p {
-            color: var(--muted);
-            font-size: 11px;
-            line-height: 1.5;
-        }
+.feature-button {
+    padding: 10px 14px;
 
-        .feature-button {
-            flex-shrink: 0;
+    border-radius: 11px;
 
-            padding: 10px 14px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.09);
 
-            border-radius: 11px;
+    color: white;
 
-            background:
-                rgba(255,255,255,0.11);
+    font-size: 11px;
+    font-weight: 700;
 
-            border:
-                1px solid rgba(255,255,255,0.13);
+    text-decoration: none;
 
-            color: white;
+    transition: .2s ease;
+}
 
-            text-decoration: none;
+.feature-button:hover {
+    background: rgba(255,255,255,.14);
+}
 
-            font-size: 11px;
-            font-weight: 600;
+/* =========================
+   CONTACT
+========================= */
 
-            transition: 0.2s ease;
-        }
+.contact {
+    margin-top: 38px;
 
-        .feature-button:hover {
-            background:
-                rgba(255,255,255,0.18);
+    padding: 22px;
 
-            transform: translateY(-1px);
-        }
+    background: rgba(255,255,255,.025);
 
-        /* ========================================
-           CONTACT
-        ======================================== */
+    border: 1px solid rgba(255,255,255,.07);
 
-        .contact {
-            margin-top: 34px;
+    border-radius: 20px;
 
-            padding: 22px;
+    backdrop-filter: blur(18px);
+}
 
-            border:
-                1px solid rgba(255,255,255,0.09);
+.contact-title {
+    font-size: 16px;
+    font-weight: 700;
+}
 
-            border-radius: 22px;
+.contact-subtitle {
+    margin-top: 5px;
 
-            background:
-                rgba(255,255,255,0.035);
-        }
+    color: #777781;
+    font-size: 11px;
+}
 
-        .contact h2 {
-            text-align: center;
+.form {
+    margin-top: 17px;
 
-            font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-            margin-bottom: 17px;
-        }
+.input,
+.textarea {
+    width: 100%;
 
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+    border: 1px solid rgba(255,255,255,.07);
 
-        .input,
-        .textarea {
-            width: 100%;
+    background: rgba(255,255,255,.035);
 
-            border:
-                1px solid rgba(255,255,255,0.09);
+    color: white;
 
-            border-radius: 13px;
+    border-radius: 12px;
 
-            background:
-                rgba(0,0,0,0.18);
+    padding: 13px 14px;
 
-            color: white;
+    font-family: inherit;
+    font-size: 12px;
 
-            padding: 13px 14px;
+    outline: none;
 
-            outline: none;
+    transition: .2s ease;
+}
 
-            font-size: 13px;
+.input:focus,
+.textarea:focus {
+    border-color: rgba(37,99,235,.5);
+    background: rgba(255,255,255,.05);
+}
 
-            transition: 0.2s ease;
-        }
+.textarea {
+    min-height: 110px;
+    resize: vertical;
+}
 
-        .input::placeholder,
-        .textarea::placeholder {
-            color: #666771;
-        }
+.input::placeholder,
+.textarea::placeholder {
+    color: #5e5e67;
+}
 
-        .input:focus,
-        .textarea:focus {
-            border-color:
-                rgba(139,92,246,0.5);
+.submit {
+    border: none;
 
-            box-shadow:
-                0 0 0 3px
-                rgba(139,92,246,0.08);
-        }
+    padding: 13px;
 
-        .textarea {
-            min-height: 105px;
-            resize: vertical;
-        }
+    border-radius: 12px;
 
-        .submit {
-            border: 0;
-            border-radius: 13px;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
 
-            padding: 13px;
+    color: white;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #6366f1,
-                    #8b5cf6
-                );
+    font-family: inherit;
 
-            color: white;
+    font-size: 12px;
+    font-weight: 700;
 
-            font-size: 13px;
-            font-weight: 700;
+    cursor: pointer;
 
-            cursor: pointer;
+    transition: .2s ease;
+}
 
-            box-shadow:
-                0 10px 25px
-                rgba(99,102,241,0.18);
+.submit:hover {
+    transform: translateY(-1px);
 
-            transition: 0.2s ease;
-        }
+    box-shadow:
+        0 10px 25px rgba(37,99,235,.25);
+}
 
-        .submit:hover {
-            transform: translateY(-2px);
+/* =========================
+   FOOTER
+========================= */
 
-            box-shadow:
-                0 14px 30px
-                rgba(99,102,241,0.28);
-        }
+.site-footer {
+    margin-top: 48px;
 
-        /* ========================================
-           PREMIUM FOOTER
-        ======================================== */
+    text-align: center;
+}
 
-        .site-footer {
-            margin-top: 48px;
-            padding-top: 32px;
+.footer-logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
 
-            border-top:
-                1px solid
-                rgba(255,255,255,0.10);
-        }
+    margin-bottom: 22px;
+}
 
-        .footer-brand {
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
+.footer-logo {
+    width: 72px;
+    height: 72px;
 
-            min-height: 145px;
-        }
+    object-fit: contain;
 
-        .footer-logo {
-            display: block;
+    filter:
+        drop-shadow(0 0 18px rgba(255,255,255,.08));
+}
 
-            width: 150px;
-            height: auto;
+.footer-flag {
+    width: 58px;
+    height: auto;
 
-            max-height: 125px;
+    border-radius: 7px;
 
-            object-fit: contain;
-            object-position: left top;
+    object-fit: cover;
 
-            filter:
-                drop-shadow(
-                    0 8px 24px
-                    rgba(255,255,255,0.04)
-                );
-        }
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.3);
+}
 
-        .footer-country {
-            display: inline-flex;
+.footer-divider {
+    width: 100%;
+    height: 1px;
 
-            align-items: center;
-            justify-content: center;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.1),
+            transparent
+        );
 
-            width: 42px;
-            height: 28px;
+    margin-bottom: 17px;
+}
 
-            margin-top: 20px;
+.copyright {
+    color: #55555f;
 
-            border-radius: 7px;
+    font-size: 10px;
+    letter-spacing: .2px;
+}
 
-            background: #e30a17;
+/* =========================
+   MOBILE
+========================= */
 
-            color: white;
+@media (max-width: 520px) {
 
-            font-size: 16px;
+    .page {
+        width: min(100% - 20px, 680px);
+        padding-top: 38px;
+    }
 
-            box-shadow:
-                0 5px 18px
-                rgba(227,10,23,0.12);
-        }
+    .name {
+        font-size: 26px;
+    }
 
-        .footer-divider {
-            width: 100%;
-            height: 1px;
+    .avatar-wrap {
+        width: 112px;
+        height: 112px;
+    }
 
-            margin: 18px 0 22px;
+    .avatar {
+        width: 99px;
+        height: 99px;
+    }
 
-            background:
-                rgba(255,255,255,0.10);
-        }
+    .link {
+        min-height: 72px;
+        border-radius: 16px;
+    }
 
-        .copyright {
-            color: #777985;
+    .logo-box {
+        width: 43px;
+        height: 43px;
+    }
 
-            font-size: 13px;
-            line-height: 1.6;
+    .link-description {
+        font-size: 10px;
+    }
 
-            letter-spacing: -0.1px;
-        }
+    .feature {
+        align-items: flex-start;
+    }
 
-        .copyright strong {
-            color: #a1a2ad;
-            font-weight: 500;
-        }
+    .feature-button {
+        margin-left: auto;
+    }
 
-        /* ========================================
-           MOBILE
-        ======================================== */
+}
 
-        @media (max-width: 520px) {
-
-            .page {
-                width: min(100% - 22px, 680px);
-                padding-top: 38px;
-            }
-
-            .profile {
-                margin-bottom: 34px;
-            }
-
-            .name {
-                font-size: 24px;
-            }
-
-            .link {
-                min-height: 63px;
-                border-radius: 16px;
-            }
-
-            .logo-box {
-                width: 39px;
-                height: 39px;
-                flex-basis: 39px;
-            }
-
-            .link-description {
-                display: none;
-            }
-
-            .feature {
-                align-items: flex-start;
-            }
-
-            .feature-button {
-                margin-top: 2px;
-            }
-
-            .footer-logo {
-                width: 125px;
-                max-height: 110px;
-            }
-
-            .footer-brand {
-                min-height: 130px;
-            }
-
-            .copyright {
-                font-size: 12px;
-            }
-        }
-    </style>
+</style>
 </head>
 
 <body>
 
-    <!-- BACKGROUND -->
-    <div class="background">
-        <div class="grid"></div>
-        <div class="orb orb-one"></div>
-        <div class="orb orb-two"></div>
-        <div class="orb orb-three"></div>
-    </div>
+<div class="background">
+    <div class="grid"></div>
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+</div>
 
+<main class="page">
 
-    <main class="page">
+    <!-- PROFILE -->
 
-        <!-- ========================================
-             PROFILE
-        ======================================== -->
+    <section class="profile">
 
-        <header class="profile">
+        <div class="avatar-wrap">
+            <div class="avatar-ring"></div>
 
-            <div class="avatar-wrap">
-                <div class="avatar-ring"></div>
-
-                <img
-                    src="https://github.com/saracefe.png"
-                    alt="Efe Saraç"
-                    class="avatar"
-                >
-            </div>
-
-            <div class="name">
-                Efe Saraç
-                <span class="verified">✓</span>
-            </div>
-
-            <p class="bio">
-                Digital creator · Developer · Internet
-            </p>
-
-            <div class="status">
-                <span class="status-dot"></span>
-                Sistem aktif
-            </div>
-
-        </header>
-
-
-        <!-- ========================================
-             SOSYAL
-        ======================================== -->
-
-        <section class="section">
-
-            <div class="section-title">
-                Sosyal
-            </div>
-
-
-            <a
-                class="link"
-                href="https://instagram.com/saracefe_"
-                target="_blank"
-                rel="noopener noreferrer"
+            <img
+                class="avatar"
+                src="https://github.com/saracefe.png"
+                alt="Efe Saraç"
             >
+        </div>
+
+        <div class="name">
+            Efe Saraç
+            <span class="verified">✓</span>
+        </div>
+
+        <div class="bio">
+            Digital creator · Developer · Internet
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            Sistem aktif
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SOSYAL
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Sosyal
+        </div>
+
+        <div class="links">
+
+            <a class="link" href="https://instagram.com/saracefe_" target="_blank">
                 <div class="logo-box">
-                    <img
-                        class="logo"
-                        src="https://cdn.simpleicons.org/instagram/ffffff"
-                        alt="Instagram"
-                    >
+                    <img class="logo" src="https://cdn.simpleicons.org/instagram/ffffff" alt="">
                 </div>
 
                 <div class="link-content">
                     <div class="link-name">Instagram</div>
-                    <div class="link-description">@saracefe_</div>
+                    <div class="link-description">Fotoğraflar, hikâyeler ve günlük içerikler</div>
                 </div>
 
                 <div class="arrow">›</div>
             </a>
 
 
-            <a
-                class="link"
-                href="https://threads.net/@saracefe_"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <a class="link" href="https://threads.net/@saracefe_" target="_blank">
                 <div class="logo-box">
-                    <img
-                        class="logo"
-                        src="https://cdn.simpleicons.org/threads/ffffff"
-                        alt="Threads"
-                    >
+                    <img class="logo" src="https://cdn.simpleicons.org/threads/ffffff" alt="">
                 </div>
 
                 <div class="link-content">
                     <div class="link-name">Threads</div>
-                    <div class="link-description">@saracefe_</div>
+                    <div class="link-description">Kısa düşünceler ve gündem</div>
                 </div>
 
                 <div class="arrow">›</div>
             </a>
 
 
-            <a
-                class="link"
-                href="https://x.com/efesarac_"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <a class="link" href="https://x.com/efesarac_" target="_blank">
                 <div class="logo-box">
-                    <img
-                        class="logo"
-                        src="https://cdn.simpleicons.org/x/ffffff"
-                        alt="X"
-                    >
+                    <img class="logo" src="https://cdn.simpleicons.org/x/ffffff" alt="">
                 </div>
 
                 <div class="link-content">
                     <div class="link-name">X</div>
-                    <div class="link-description">@efesarac_</div>
+                    <div class="link-description">Gündem, teknoloji ve düşünceler</div>
                 </div>
 
                 <div class="arrow">›</div>
             </a>
 
 
-            <a
-                class="link"
-                href="https://facebook.com/saracefee"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
+            <a class="link" href="https://facebook.com/saracefee" target="_blank">
                 <div class="logo-box">
-             
+                    <img class="logo" src="https://cdn.simpleicons.org/facebook/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Facebook</div>
+                    <div class="link-description">Facebook profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://tiktok.com/@efesarac_" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/tiktok/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">TikTok</div>
+                    <div class="link-description">Kısa videolar ve eğlenceli içerikler</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         CREATOR
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Creator
+        </div>
+
+        <div class="links">
+
+            <a class="link" href="https://youtube.com/@saracefe" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/youtube/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">YouTube</div>
+                    <div class="link-description">Videolar ve içerikler</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://twitch.tv/efesarac_" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/twitch/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Twitch</div>
+                    <div class="link-description">Canlı yayınlar</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://kick.com/saracefe" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/kick/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Kick</div>
+                    <div class="link-description">Canlı yayın platformu</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://donate.bynogame.com/efesarac" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/bynogame/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">ByNoGame</div>
+                    <div class="link-description">Destek ve bağış sayfam</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         MUSIC
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Music
+        </div>
+
+        <div class="links">
+
+            <a class="link" href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/spotify/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Spotify</div>
+                    <div class="link-description">Müzik ve çalma listelerim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://music.youtube.com/@saracefe" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/youtubemusic/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">YouTube Music</div>
+                    <div class="link-description">YouTube Music profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://music.amazon.com/profiles/@efesarac" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/amazonmusic/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Amazon Music</div>
+                    <div class="link-description">Amazon Music profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         COMMUNITY
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Community
+        </div>
+
+        <div class="links">
+
+            <a class="link" href="https://discord.gg/p5Y5BxESFD" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/discord/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Discord</div>
+                    <div class="link-description">Topluluğuma katıl</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://t.me/efesarac" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/telegram/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Telegram</div>
+                    <div class="link-description">Telegram profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://reddit.com/user/efesarac" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/reddit/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Reddit</div>
+                    <div class="link-description">Reddit profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://bsky.app/profile/saracefe.bsky.social" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/bluesky/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Bluesky</div>
+                    <div class="link-description">Bluesky profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         DİĞER
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Diğer
+        </div>
+
+        <div class="links">
+
+            <a class="link" href="https://github.com/saracefe" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/github/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">GitHub</div>
+                    <div class="link-description">Projelerim ve kodlarım</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://linkedin.com/in/efe-saraç-bbb35b1b1" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/linkedin/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">LinkedIn</div>
+                    <div class="link-description">Profesyonel profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://paypal.me/saracefe" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/paypal/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">PayPal</div>
+                    <div class="link-description">Destek göndermek için</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://snapchat.com/add/efesaracx" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/snapchat/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Snapchat</div>
+                    <div class="link-description">Snapchat profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+
+            <a class="link" href="https://kwai.com/@saracefe" target="_blank">
+                <div class="logo-box">
+                    <img class="logo" src="https://cdn.simpleicons.org/kuaishou/ffffff" alt="">
+                </div>
+
+                <div class="link-content">
+                    <div class="link-name">Kwai</div>
+                    <div class="link-description">Kwai profilim</div>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         EMAIL
+    ========================= -->
+
+    <div class="feature">
+
+        <div class="feature-icon">
+
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8">
+
+                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                <path d="m3 7 9 6 9-6"></path>
+
+            </svg>
+
+        </div>
+
+        <div class="feature-info">
+
+            <h3>Özel E-posta</h3>
+
+            <p>
+                Bana doğrudan e-posta göndermek için
+            </p>
+
+        </div>
+
+        <a
+            class="feature-button"
+            href="mailto:contact@efesarac.co?subject=Özel%20E-posta%20Talebi"
+        >
+            E-posta
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         CONTACT FORM
+    ========================= -->
+
+    <section class="contact">
+
+        <div class="contact-title">
+            Bana ulaş
+        </div>
+
+        <div class="contact-subtitle">
+            Mesajını doğrudan iletişim formundan gönderebilirsin.
+        </div>
+
+        <form
+            class="form"
+            action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+            method="POST"
+        >
+
+            <input
+                class="input"
+                type="text"
+                name="name"
+                placeholder="Adın"
+                required
+            >
+
+            <input
+                class="input"
+                type="email"
+                name="email"
+                placeholder="E-posta adresin"
+                required
+            >
+
+            <textarea
+                class="textarea"
+                name="message"
+                placeholder="Mesajın..."
+                required
+            ></textarea>
+
+            <button class="submit" type="submit">
+                Mesaj Gönder
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="site-footer">
+
+        <div class="footer-logo-area">
+
+            <!-- Kendi logon -->
+            <img
+                class="footer-logo"
+                src="efesarac-footer-logo.png"
+                alt="efesarac.co"
+            >
+
+            <!-- GERÇEK TÜRK BAYRAĞI -->
+            <img
+                class="footer-flag"
+                src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg"
+                alt="Türkiye Bayrağı"
+            >
+
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="copyright">
+            © 2008–2026 efesarac.co Her Hakkı Saklıdır.
+        </div>
+
+    </footer>
+
+</main>
+
+</body>
+</html>
