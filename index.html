@@ -2,1244 +2,2405 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#060609">
-<title>Efe Saraç — Dijital İçerik Üreticisi</title>
-<meta name="description" content="Efe Saraç — Dijital içerik üreticisi, geliştirici ve internet.">
+<meta name="description" content="Efe Saraç — Dijital içerik üreticisi · Geliştirici · İnternet">
+<title>Efe Saraç — efesarac.co</title>
 
 <style>
 :root{
   --bg:#060609;
+  --text:#f5f7fb;
+  --muted:#9ca3af;
   --card:rgba(255,255,255,.055);
-  --card-hover:rgba(255,255,255,.085);
   --border:rgba(255,255,255,.10);
-  --border-hover:rgba(255,255,255,.17);
-  --text:#fff;
-  --muted:#a9a9b5;
-  --muted2:#777783;
-  --grid:rgba(255,255,255,.035);
-  --header-bg:rgba(10,10,14,.78);
-  --blue:#3b82f6;
-  --shadow:rgba(0,0,0,.25);
+  --card-hover:rgba(255,255,255,.09);
+  --accent:#6ea8ff;
+  --green:#39d98a;
+  --shadow:0 18px 60px rgba(0,0,0,.35);
 }
+
 html[data-theme="light"]{
-  --bg:#f4f5f8;
+  --bg:#f4f6fa;
+  --text:#111318;
+  --muted:#68707d;
   --card:rgba(255,255,255,.72);
-  --card-hover:rgba(255,255,255,.92);
-  --border:rgba(20,25,40,.10);
-  --border-hover:rgba(20,25,40,.18);
-  --text:#15161b;
-  --muted:#646773;
-  --muted2:#858894;
-  --grid:rgba(20,25,40,.045);
-  --header-bg:rgba(255,255,255,.82);
-  --shadow:rgba(20,25,40,.12);
+  --border:rgba(0,0,0,.09);
+  --card-hover:rgba(255,255,255,.95);
+  --shadow:0 18px 50px rgba(20,30,50,.12);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  min-height:100vh;color:var(--text);
-  background:radial-gradient(circle at 50% -20%,rgba(59,130,246,.07),transparent 35%),var(--bg);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  overflow-x:hidden;transition:background .3s ease,color .3s ease;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+    var(--bg);
+  background-size:45px 45px;
+  overflow-x:hidden;
+  transition:background .3s,color .3s;
 }
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  pointer-events:none;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.20;
+  z-index:-2;
+}
+
 body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;opacity:.9;
-  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-  background-size:45px 45px;z-index:-3;
+  width:420px;
+  height:420px;
+  background:#245cff;
+  top:-140px;
+  left:-120px;
 }
-.orb{position:fixed;width:420px;height:420px;border-radius:50%;filter:blur(110px);opacity:.16;pointer-events:none;z-index:-2}
-.orb.one{top:-180px;left:-130px;background:#2563eb}
-.orb.two{top:35%;right:-220px;background:#7c3aed}
-.orb.three{bottom:-240px;left:25%;background:#06b6d4}
-html[data-theme="light"] .orb{opacity:.09}
 
-/* TOP */
-.top-controls{
-  position:fixed;top:18px;right:18px;z-index:100;
-  display:flex;align-items:center;gap:5px;padding:5px;
-  border:1px solid var(--border);border-radius:15px;
-  background:var(--header-bg);backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);box-shadow:0 12px 35px var(--shadow);
+body::after{
+  width:420px;
+  height:420px;
+  background:#8c32ff;
+  right:-140px;
+  top:35%;
 }
-.language-button{
-  height:34px;display:flex;align-items:center;gap:7px;padding:0 11px;
-  border:0;border-radius:10px;color:var(--muted);background:transparent;
-  font-size:11px;font-weight:800;cursor:pointer;transition:.2s;
+
+.bg-orb{
+  position:fixed;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  background:#00cfff;
+  filter:blur(120px);
+  opacity:.10;
+  left:35%;
+  bottom:-180px;
+  pointer-events:none;
+  z-index:-2;
 }
-.language-button:hover{color:var(--text);background:var(--card-hover)}
-.language-button .globe{font-size:16px}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+}
+
+.container{
+  width:min(820px,calc(100% - 32px));
+  margin:0 auto;
+  padding:28px 0 30px;
+}
+
+/* TOP BAR */
+
+.topbar{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+  margin-bottom:24px;
+}
+
+.top-btn{
+  width:42px;
+  height:42px;
+  border:1px solid var(--border);
+  background:var(--card);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  color:var(--text);
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.top-btn:hover{
+  transform:translateY(-2px);
+  background:var(--card-hover);
+  border-color:rgba(110,168,255,.35);
+}
+
+.top-btn svg{
+  width:19px;
+  height:19px;
+}
+
+/* LANGUAGE */
+
+.language-wrap{
+  position:relative;
+}
+
 .language-menu{
-  position:absolute;top:49px;right:43px;width:265px;max-height:390px;
-  padding:7px;overflow-y:auto;border:1px solid var(--border);border-radius:16px;
-  background:var(--header-bg);backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);box-shadow:0 18px 45px var(--shadow);
-  opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transition:.2s ease;
+  position:absolute;
+  right:0;
+  top:50px;
+  width:190px;
+  max-height:430px;
+  overflow-y:auto;
+  padding:7px;
+  border:1px solid var(--border);
+  background:rgba(14,15,21,.94);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  z-index:50;
+  display:none;
 }
-.language-menu.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
-.language-menu-title{padding:9px 10px 7px;color:var(--muted2);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
-.language-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
-.language-option{
-  display:flex;align-items:center;gap:8px;width:100%;padding:9px;
-  border:0;border-radius:9px;color:var(--muted);background:transparent;
-  text-align:left;font-size:11px;font-weight:700;cursor:pointer;transition:.18s;
-}
-.language-option:hover,.language-option.active{color:var(--text);background:var(--card-hover)}
-.language-flag{font-size:16px;width:20px;text-align:center}
 
-/* THEME */
-.theme-button{
-  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
-  border:0;border-radius:10px;color:var(--muted);background:transparent;
-  cursor:pointer;transition:.2s;
+html[data-theme="light"] .language-menu{
+  background:rgba(255,255,255,.95);
 }
-.theme-button:hover{color:var(--text);background:var(--card-hover)}
-.theme-button svg{width:17px;height:17px}
-.theme-menu{
-  position:absolute;top:49px;right:0;width:155px;padding:6px;
-  border:1px solid var(--border);border-radius:14px;background:var(--header-bg);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  box-shadow:0 15px 40px var(--shadow);opacity:0;visibility:hidden;
-  transform:translateY(-5px);transition:.2s;
-}
-.theme-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
-.theme-option{
-  width:100%;display:flex;align-items:center;gap:10px;padding:10px 11px;
-  border:0;border-radius:10px;color:var(--muted);background:transparent;
-  font-size:12px;font-weight:700;text-align:left;cursor:pointer;transition:.18s;
-}
-.theme-option:hover,.theme-option.active{color:var(--text);background:var(--card-hover)}
-.theme-option-icon{width:21px;height:21px;display:flex;align-items:center;justify-content:center}
-.theme-option-icon svg{width:16px;height:16px}
 
-/* PRELOADER */
-.preloader{
-  position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;
-  background:var(--bg);transition:opacity .55s ease,visibility .55s ease;
+.language-menu.open{
+  display:block;
 }
-.preloader.hide{opacity:0;visibility:hidden}
-.preloader img{width:90px;height:90px;object-fit:contain;animation:pulseLogo 1.4s ease-in-out infinite}
-.logo-dark{display:none}
-html[data-theme="light"] .logo-light{display:none}
-html[data-theme="light"] .logo-dark{display:block}
 
-/* MAIN */
-.container{width:min(820px,calc(100% - 32px));margin:0 auto;padding:90px 0 40px}
+.lang-option{
+  width:100%;
+  padding:9px 11px;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  text-align:left;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.lang-option:hover,
+.lang-option.active{
+  background:rgba(110,168,255,.13);
+}
 
 /* PROFILE */
-.profile{text-align:center;animation:fadeUp .75s ease both}
-.avatar-wrap{
-  position:relative;width:138px;height:138px;padding:5px;margin:0 auto 22px;
-  border-radius:50%;background:var(--bg);
-  box-shadow:0 0 50px rgba(59,130,246,.18);
+
+.profile{
+  text-align:center;
+  margin-top:10px;
 }
-.avatar-wrap::before{
-  content:"";position:absolute;inset:0;border-radius:50%;
-  background:conic-gradient(from 0deg,#2563eb,#8b5cf6,#06b6d4,#2563eb);
-  animation:spinRing 8s linear infinite;z-index:0;
+
+.avatar-ring{
+  width:148px;
+  height:148px;
+  margin:0 auto 20px;
+  padding:5px;
+  border-radius:50%;
+  background:conic-gradient(
+    from 0deg,
+    #287cff,
+    #8c42ff,
+    #00d9ff,
+    #287cff
+  );
+  animation:ringRotate 7s linear infinite;
+  box-shadow:
+    0 0 35px rgba(75,125,255,.18),
+    0 0 70px rgba(125,50,255,.10);
 }
-.avatar-wrap::after{
-  content:"";position:absolute;inset:5px;border-radius:50%;
-  background:var(--bg);z-index:1;
+
+@keyframes ringRotate{
+  to{transform:rotate(360deg)}
 }
+
+/*
+  ÖNEMLİ:
+  Fotoğraf kendi başına dönmüyor.
+  Sadece dıştaki .avatar-ring dönüyor.
+*/
 .avatar{
-  position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;
-  display:block;z-index:2;animation:none;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid var(--bg);
+  background:#111;
+  transform:none !important;
+  animation:none !important;
 }
-.profile h1{display:flex;justify-content:center;align-items:center;gap:8px;font-size:32px;line-height:1.15;letter-spacing:-.8px}
+
+.name-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.name{
+  font-size:31px;
+  font-weight:750;
+  letter-spacing:-1px;
+}
+
 .verified{
-  width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;
-  border-radius:50%;background:#1d9bf0;color:#fff;font-size:14px;font-weight:900;
-  box-shadow:0 4px 18px rgba(29,155,240,.35);
+  width:21px;
+  height:21px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#2388ff;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  box-shadow:0 4px 15px rgba(35,136,255,.35);
 }
-.bio{margin-top:10px;color:var(--muted);font-size:15px}
+
+.bio{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:15px;
+}
+
 .status{
-  display:inline-flex;align-items:center;gap:7px;margin-top:15px;padding:7px 12px;
-  border:1px solid rgba(34,197,94,.22);border-radius:999px;background:rgba(34,197,94,.07);
-  color:#22a951;font-size:12px;font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-top:14px;
+  padding:7px 12px;
+  border:1px solid rgba(57,217,138,.18);
+  background:rgba(57,217,138,.07);
+  border-radius:999px;
+  color:#5ce5a1;
+  font-size:12px;
+  font-weight:650;
 }
-html:not([data-theme="light"]) .status{color:#76e39a}
-.status-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px #22c55e}
+
+.status-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#39d98a;
+  box-shadow:0 0 10px #39d98a;
+}
+
+/* CREATOR */
+
+.creator{
+  margin:20px auto 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.creator-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 11px;
+  border:1px solid rgba(110,168,255,.22);
+  background:rgba(110,168,255,.07);
+  color:#91bcff;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.7px;
+}
+
+.creator-badge svg{
+  width:14px;
+  height:14px;
+}
+
+.creator-label{
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* ACTIONS */
+
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  margin:25px 0 30px;
+}
+
+.action-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  height:40px;
+  padding:0 14px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--card);
+  color:var(--text);
+  cursor:pointer;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  transition:.25s;
+  font-size:13px;
+}
+
+.action-btn:hover{
+  transform:translateY(-2px);
+  background:var(--card-hover);
+  border-color:rgba(110,168,255,.30);
+}
+
+.action-btn svg{
+  width:16px;
+  height:16px;
+}
 
 /* SEARCH */
-.search-wrap{margin:35px 0 10px;animation:fadeUp .75s .12s ease both}
-.search-box{position:relative}
-.search-icon{position:absolute;left:17px;top:50%;transform:translateY(-50%);color:var(--muted2);font-size:18px;pointer-events:none}
-#searchInput{
-  width:100%;height:50px;border:1px solid var(--border);outline:none;border-radius:15px;
-  padding:0 18px 0 48px;color:var(--text);background:var(--card);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);font-size:14px;transition:.2s;
+
+.search-box{
+  position:relative;
+  margin-bottom:30px;
 }
-#searchInput::placeholder{color:var(--muted2)}
-#searchInput:focus{border-color:rgba(59,130,246,.55);box-shadow:0 0 0 4px rgba(59,130,246,.08)}
-.no-results{
-  display:none;padding:28px;text-align:center;color:var(--muted2);
-  border:1px dashed var(--border);border-radius:16px;font-size:13px;
+
+.search-box svg{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  width:18px;
+  color:var(--muted);
+}
+
+.search-box input{
+  width:100%;
+  height:48px;
+  border:1px solid var(--border);
+  outline:none;
+  border-radius:15px;
+  background:var(--card);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  color:var(--text);
+  padding:0 17px 0 46px;
+  font-size:14px;
+}
+
+.search-box input::placeholder{
+  color:var(--muted);
 }
 
 /* SECTIONS */
-.section{margin-top:34px}
-.section-title{
-  display:flex;align-items:center;gap:10px;margin:0 4px 12px;color:var(--text);
-  font-size:13px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;
-}
-.section-title::before{
-  content:"";width:4px;height:15px;border-radius:10px;
-  background:linear-gradient(180deg,#3b82f6,#8b5cf6);
+
+.section{
+  margin-bottom:30px;
 }
 
-/* LINKS */
-.links{display:flex;flex-direction:column;gap:10px}
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 5px 12px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+
+.section-title::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:var(--border);
+}
+
+/* LINK CARD */
+
 .link-card{
-  position:relative;display:flex;align-items:center;min-height:76px;padding:13px 14px;
-  border:1px solid var(--border);border-radius:17px;color:var(--text);text-decoration:none;
-  background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  overflow:hidden;transition:transform .22s ease,background .22s ease,border-color .22s ease,box-shadow .22s ease;
-  animation:cardIn .6s ease both;
+  position:relative;
+  display:flex;
+  align-items:center;
+  min-height:72px;
+  padding:11px 15px 11px 11px;
+  margin-bottom:10px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:var(--card);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 8px 28px rgba(0,0,0,.10);
+  transition:
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
 }
-.link-card:hover{transform:translateY(-2px);background:var(--card-hover);border-color:var(--border-hover);box-shadow:0 14px 40px var(--shadow)}
-.link-card:active{transform:scale(.985)}
-.link-card::after{
-  content:"";position:absolute;top:0;left:-120%;width:80%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
-  transform:skewX(-20deg);transition:left .7s ease;
+
+.link-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:-120%;
+  width:80%;
+  transform:skewX(-20deg);
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.08),
+    transparent
+  );
+  transition:left .6s ease;
+  pointer-events:none;
 }
-.link-card:hover::after{left:140%}
-.icon-box{
-  flex:0 0 48px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;
-  border-radius:13px;background:rgba(127,127,127,.08);border:1px solid var(--border);margin-right:14px;
+
+.link-card:hover::before{
+  left:130%;
 }
-.icon-box img{width:27px;height:27px;object-fit:contain;display:block}
-.link-content{min-width:0;flex:1}
-.link-title{font-size:15px;font-weight:750}
-.link-description{margin-top:4px;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.link-arrow{margin-left:10px;color:var(--muted2);font-size:28px;font-weight:300;line-height:1;transition:.2s}
-.link-card:hover .link-arrow{color:var(--text);transform:translateX(3px)}
-.featured{border-color:rgba(59,130,246,.28);background:linear-gradient(110deg,rgba(59,130,246,.10),var(--card))}
-.featured-badge{
-  position:absolute;top:9px;right:11px;padding:4px 7px;border-radius:7px;
-  background:rgba(59,130,246,.13);border:1px solid rgba(59,130,246,.20);
-  color:#4f91ff;font-size:9px;font-weight:800;letter-spacing:.4px;
+
+.link-card:hover{
+  transform:translateY(-3px);
+  background:var(--card-hover);
+  border-color:rgba(110,168,255,.22);
+  box-shadow:0 14px 40px rgba(0,0,0,.20);
 }
-.copy-btn{
-  width:34px;height:34px;flex:0 0 34px;margin-left:8px;border:1px solid var(--border);
-  border-radius:10px;background:rgba(127,127,127,.06);color:var(--muted);
-  cursor:pointer;font-size:15px;transition:.2s;z-index:2;
+
+.logo-box{
+  width:48px;
+  height:48px;
+  min-width:48px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.08);
+  margin-right:13px;
 }
-.copy-btn:hover{color:var(--text);background:var(--card-hover)}
+
+html[data-theme="light"] .logo-box{
+  background:rgba(0,0,0,.045);
+  border-color:rgba(0,0,0,.06);
+}
+
+.logo-box img{
+  width:29px;
+  height:29px;
+  object-fit:contain;
+  display:block;
+}
+
+.link-info{
+  min-width:0;
+  flex:1;
+}
+
+.link-name{
+  font-size:14px;
+  font-weight:700;
+  line-height:1.3;
+}
+
+.link-description{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.arrow{
+  width:28px;
+  color:var(--muted);
+  font-size:26px;
+  line-height:1;
+  text-align:right;
+  transition:.25s;
+}
+
+.link-card:hover .arrow{
+  color:var(--text);
+  transform:translateX(3px);
+}
+
+.link-card.hidden{
+  display:none;
+}
+
+/* EMPTY SEARCH */
+
+.no-results{
+  display:none;
+  text-align:center;
+  color:var(--muted);
+  padding:25px;
+  font-size:13px;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:100;
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-box{
+  width:min(380px,100%);
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:#101116;
+  color:#fff;
+  box-shadow:0 30px 100px rgba(0,0,0,.5);
+  text-align:center;
+}
+
+html[data-theme="light"] .modal-box{
+  background:#fff;
+  color:#111318;
+}
+
+.modal-title{
+  font-size:18px;
+  font-weight:750;
+  margin-bottom:6px;
+}
+
+.modal-text{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.qr{
+  width:210px;
+  height:210px;
+  padding:10px;
+  margin:0 auto 20px;
+  border-radius:18px;
+  background:#fff;
+}
+
+.qr img{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.close-modal{
+  width:100%;
+  height:43px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  padding:11px 16px;
+  border:1px solid var(--border);
+  background:rgba(15,16,21,.94);
+  color:#fff;
+  border-radius:12px;
+  font-size:13px;
+  z-index:200;
+  transition:.3s;
+  box-shadow:var(--shadow);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
 
 /* FOOTER */
-.site-footer{margin-top:55px;padding:30px 0 15px;text-align:center;animation:fadeUp .8s .3s ease both}
-.footer-logo-area{display:flex;justify-content:center;align-items:center;gap:20px}
-.footer-logo{width:82px;height:82px;object-fit:contain}
-.footer-flag{width:62px;height:42px;object-fit:cover;border-radius:7px;opacity:1;box-shadow:0 7px 25px var(--shadow)}
-.footer-divider{width:100%;height:1px;margin:23px 0 17px;background:var(--border)}
-.copyright{color:var(--muted2);font-size:11px}
-.version{color:var(--muted2)}
 
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spinRing{to{transform:rotate(360deg)}}
-@keyframes pulseLogo{0%,100%{transform:scale(.94);opacity:.65}50%{transform:scale(1);opacity:1}}
+.footer{
+  margin-top:48px;
+  padding:28px 0 8px;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+
+.footer-logo{
+  width:96px;
+  height:auto;
+  max-height:62px;
+  object-fit:contain;
+  margin:0 auto 18px;
+  display:block;
+}
+
+.logo-dark{
+  display:none !important;
+}
+
+html[data-theme="light"] .logo-light{
+  display:none !important;
+}
+
+html[data-theme="light"] .logo-dark{
+  display:block !important;
+}
+
+.footer-country{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:18px;
+}
+
+.footer-country img{
+  width:25px;
+  height:17px;
+  object-fit:cover;
+  border-radius:3px;
+}
+
+.footer-line{
+  width:100%;
+  height:1px;
+  background:var(--border);
+  margin-bottom:16px;
+}
+
+.copyright{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+}
+
+/* PRELOADER */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  transition:opacity .5s,visibility .5s;
+}
+
+.preloader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.preloader img{
+  width:120px;
+  max-height:80px;
+  object-fit:contain;
+}
 
 /* MOBILE */
+
 @media(max-width:600px){
-  .top-controls{top:12px;right:12px}
-  .language-button{padding:0 8px}
-  .language-button .language-label{display:none}
-  .language-menu{right:0;width:270px}
-  .container{width:min(100% - 22px,820px);padding-top:76px}
-  .avatar-wrap{width:120px;height:120px;margin-bottom:19px}
-  .profile h1{font-size:27px}
-  .bio{font-size:14px}
-  .section{margin-top:29px}
-  .link-card{min-height:72px;padding:11px;border-radius:15px}
-  .icon-box{width:44px;height:44px;flex-basis:44px;margin-right:12px}
-  .icon-box img{width:25px;height:25px}
-  .link-title{font-size:14px}
-  .link-description{font-size:11px}
-  .copy-btn{display:none}
-  .footer-logo{width:74px;height:74px}
-  .footer-flag{width:58px;height:39px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .container{
+    width:min(100% - 22px,820px);
+    padding-top:18px;
+  }
+
+  .avatar-ring{
+    width:130px;
+    height:130px;
+  }
+
+  .name{
+    font-size:27px;
+  }
+
+  .bio{
+    font-size:14px;
+  }
+
+  .actions{
+    flex-wrap:wrap;
+  }
+
+  .action-btn{
+    flex:1;
+    justify-content:center;
+    min-width:100px;
+  }
+
+  .link-card{
+    min-height:68px;
+    border-radius:16px;
+  }
+
+  .logo-box{
+    width:45px;
+    height:45px;
+    min-width:45px;
+  }
+
+  .logo-box img{
+    width:27px;
+    height:27px;
+  }
+
+  .footer-logo{
+    width:105px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="orb one"></div>
-<div class="orb two"></div>
-<div class="orb three"></div>
+<div class="bg-orb"></div>
 
+<!-- PRELOADER -->
 <div class="preloader" id="preloader">
   <img class="logo-light" src="efesarac-footer-logo.png" alt="efesarac.co">
   <img class="logo-dark" src="efesarac-footer-logo-dark.png" alt="efesarac.co">
 </div>
 
-<div class="top-controls">
+<div class="container">
 
-  <button class="language-button" id="languageButton" type="button">
-    <span class="globe">🌐</span>
-    <span class="language-label" id="languageLabel">DİL</span>
-    <span>⌄</span>
-  </button>
+  <!-- TOP -->
+  <div class="topbar">
 
-  <div class="language-menu" id="languageMenu">
-    <div class="language-menu-title" id="languageMenuTitle">DİL</div>
+    <div class="language-wrap">
+      <button class="top-btn" id="languageBtn" aria-label="Language">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18M12 3c2.3 2.5 3.5 5.5 3.5 9s-1.2 6.5-3.5 9c-2.3-2.5-3.5-6.5-3.5-9S9.7 5.5 12 3Z"/>
+        </svg>
+      </button>
 
-    <div class="language-grid">
-
-      <button class="language-option active" data-lang="tr" type="button"><span class="language-flag">🇹🇷</span>Türkçe</button>
-      <button class="language-option" data-lang="en" type="button"><span class="language-flag">🇬🇧</span>English</button>
-      <button class="language-option" data-lang="de" type="button"><span class="language-flag">🇩🇪</span>Deutsch</button>
-      <button class="language-option" data-lang="fr" type="button"><span class="language-flag">🇫🇷</span>Français</button>
-      <button class="language-option" data-lang="es" type="button"><span class="language-flag">🇪🇸</span>Español</button>
-      <button class="language-option" data-lang="it" type="button"><span class="language-flag">🇮🇹</span>Italiano</button>
-      <button class="language-option" data-lang="pt" type="button"><span class="language-flag">🇵🇹</span>Português</button>
-      <button class="language-option" data-lang="nl" type="button"><span class="language-flag">🇳🇱</span>Nederlands</button>
-      <button class="language-option" data-lang="ru" type="button"><span class="language-flag">🇷🇺</span>Русский</button>
-      <button class="language-option" data-lang="uk" type="button"><span class="language-flag">🇺🇦</span>Українська</button>
-      <button class="language-option" data-lang="pl" type="button"><span class="language-flag">🇵🇱</span>Polski</button>
-      <button class="language-option" data-lang="cs" type="button"><span class="language-flag">🇨🇿</span>Čeština</button>
-      <button class="language-option" data-lang="sk" type="button"><span class="language-flag">🇸🇰</span>Slovenčina</button>
-      <button class="language-option" data-lang="hu" type="button"><span class="language-flag">🇭🇺</span>Magyar</button>
-      <button class="language-option" data-lang="ro" type="button"><span class="language-flag">🇷🇴</span>Română</button>
-      <button class="language-option" data-lang="el" type="button"><span class="language-flag">🇬🇷</span>Ελληνικά</button>
-      <button class="language-option" data-lang="sv" type="button"><span class="language-flag">🇸🇪</span>Svenska</button>
-      <button class="language-option" data-lang="no" type="button"><span class="language-flag">🇳🇴</span>Norsk</button>
-      <button class="language-option" data-lang="da" type="button"><span class="language-flag">🇩🇰</span>Dansk</button>
-      <button class="language-option" data-lang="fi" type="button"><span class="language-flag">🇫🇮</span>Suomi</button>
-      <button class="language-option" data-lang="he" type="button"><span class="language-flag">🇮🇱</span>עברית</button>
-      <button class="language-option" data-lang="ar" type="button"><span class="language-flag">🇸🇦</span>العربية</button>
-      <button class="language-option" data-lang="fa" type="button"><span class="language-flag">🇮🇷</span>فارسی</button>
-      <button class="language-option" data-lang="hi" type="button"><span class="language-flag">🇮🇳</span>हिन्दी</button>
-      <button class="language-option" data-lang="bn" type="button"><span class="language-flag">🇧🇩</span>বাংলা</button>
-      <button class="language-option" data-lang="ur" type="button"><span class="language-flag">🇵🇰</span>اردو</button>
-      <button class="language-option" data-lang="zh-CN" type="button"><span class="language-flag">🇨🇳</span>简体中文</button>
-      <button class="language-option" data-lang="zh-TW" type="button"><span class="language-flag">🇹🇼</span>繁體中文</button>
-      <button class="language-option" data-lang="ja" type="button"><span class="language-flag">🇯🇵</span>日本語</button>
-      <button class="language-option" data-lang="ko" type="button"><span class="language-flag">🇰🇷</span>한국어</button>
-      <button class="language-option" data-lang="vi" type="button"><span class="language-flag">🇻🇳</span>Tiếng Việt</button>
-      <button class="language-option" data-lang="th" type="button"><span class="language-flag">🇹🇭</span>ไทย</button>
-      <button class="language-option" data-lang="id" type="button"><span class="language-flag">🇮🇩</span>Bahasa Indonesia</button>
-      <button class="language-option" data-lang="ms" type="button"><span class="language-flag">🇲🇾</span>Bahasa Melayu</button>
-
+      <div class="language-menu" id="languageMenu"></div>
     </div>
-  </div>
 
-  <button class="theme-button" id="themeButton" type="button" aria-label="Theme">
-    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
-  </button>
-
-  <div class="theme-menu" id="themeMenu">
-
-    <button class="theme-option" data-theme-choice="dark" type="button">
-      <span class="theme-option-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8z"/>
-        </svg>
-      </span>
-      <span class="theme-dark-text">Koyu</span>
-    </button>
-
-    <button class="theme-option" data-theme-choice="light" type="button">
-      <span class="theme-option-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-        </svg>
-      </span>
-      <span class="theme-light-text">Açık</span>
-    </button>
-
-    <button class="theme-option" data-theme-choice="system" type="button">
-      <span class="theme-option-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="4" width="18" height="14" rx="2"/>
-          <path d="M8 22h8M12 18v4"/>
-        </svg>
-      </span>
-      <span class="theme-system-text">Sistem</span>
+    <button class="top-btn" id="themeBtn" aria-label="Theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.8 6.8 0 0 0 21 12.8Z"/>
+      </svg>
     </button>
 
   </div>
-</div>
 
-<main class="container">
+  <!-- PROFILE -->
+  <header class="profile">
 
-<header class="profile">
+    <div class="avatar-ring">
+      <img class="avatar" src="https://github.com/saracefe.png" alt="Efe Saraç">
+    </div>
 
-  <div class="avatar-wrap">
-    <img class="avatar" src="https://github.com/saracefe.png" alt="Efe Saraç">
+    <div class="name-row">
+      <h1 class="name">Efe Saraç</h1>
+      <span class="verified">✓</span>
+    </div>
+
+    <p class="bio" id="bio">Dijital içerik üreticisi · Geliştirici · İnternet</p>
+
+    <div class="status">
+      <span class="status-dot"></span>
+      <span id="statusText">Sistem aktif</span>
+    </div>
+
+    <div class="creator">
+      <div class="creator-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m12 3 2.2 2.1 3-.2.9 2.9 2.5 1.7-1.2 2.8 1.2 2.8-2.5 1.7-.9 2.9-3-.2L12 21l-2.2-2.1-3 .2-.9-2.9-2.5-1.7 1.2-2.8-1.2-2.8 2.5-1.7.9-2.9 3 .2L12 3Z"/>
+          <path d="m8.5 12 2.2 2.2 4.8-5"/>
+        </svg>
+        <span id="creatorBadge">DOĞRULANMIŞ İÇERİK ÜRETİCİSİ</span>
+      </div>
+      <span class="creator-label" id="creatorLabel">İçerik üreticisi</span>
+    </div>
+
+  </header>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+
+    <button class="action-btn" id="shareBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="18" cy="5" r="2.5"/>
+        <circle cx="6" cy="12" r="2.5"/>
+        <circle cx="18" cy="19" r="2.5"/>
+        <path d="m8.3 10.8 7.4-4.2M8.3 13.2l7.4 4.2"/>
+      </svg>
+      <span id="shareText">Paylaş</span>
+    </button>
+
+    <button class="action-btn" id="qrBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="3" y="3" width="7" height="7"/>
+        <rect x="14" y="3" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/>
+        <path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 19v2M21 14h-2"/>
+      </svg>
+      <span id="qrText">QR Kod</span>
+    </button>
+
   </div>
 
-  <h1>Efe Saraç <span class="verified">✓</span></h1>
-
-  <p class="bio" id="bio">Dijital içerik üreticisi · Geliştirici · İnternet</p>
-
-  <div class="status">
-    <span class="status-dot"></span>
-    <span id="statusText">Sistem aktif</span>
-  </div>
-
-</header>
-
-<div class="search-wrap">
+  <!-- SEARCH -->
   <div class="search-box">
-    <span class="search-icon">⌕</span>
-    <input id="searchInput" type="search" autocomplete="off" placeholder="Bağlantılarda ara...">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="7"/>
+      <path d="m20 20-4-4"/>
+    </svg>
+    <input id="searchInput" type="search" placeholder="Bağlantılarda ara..." autocomplete="off">
+  </div>
+
+  <main id="linksContainer">
+
+    <!-- SOCIAL -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="social">Sosyal</h2>
+
+      <a class="link-card" href="https://youtube.com/@saracefe" target="_blank" rel="noopener" data-search="youtube sosyal video">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/youtube" alt="YouTube"></div>
+        <div class="link-info">
+          <div class="link-name">YouTube</div>
+          <div class="link-description" data-tr="Videolar ve içerikler" data-en="Videos and content">Videolar ve içerikler</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://facebook.com/saracefee" target="_blank" rel="noopener" data-search="facebook sosyal">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/facebook" alt="Facebook"></div>
+        <div class="link-info">
+          <div class="link-name">Facebook</div>
+          <div class="link-description" data-tr="Facebook profilim" data-en="My Facebook profile">Facebook profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://instagram.com/saracefe_" target="_blank" rel="noopener" data-search="instagram sosyal">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/instagram" alt="Instagram"></div>
+        <div class="link-info">
+          <div class="link-name">Instagram</div>
+          <div class="link-description" data-tr="Fotoğraflar ve günlük içerikler" data-en="Photos and daily content">Fotoğraflar ve günlük içerikler</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://threads.net/@saracefe_" target="_blank" rel="noopener" data-search="threads sosyal">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/threads" alt="Threads"></div>
+        <div class="link-info">
+          <div class="link-name">Threads</div>
+          <div class="link-description" data-tr="Kısa düşünceler ve paylaşımlar" data-en="Short thoughts and posts">Kısa düşünceler ve paylaşımlar</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://x.com/efesarac_" target="_blank" rel="noopener" data-search="x twitter sosyal">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/x" alt="X"></div>
+        <div class="link-info">
+          <div class="link-name">X</div>
+          <div class="link-description" data-tr="Gündem ve düşünceler" data-en="News and thoughts">Gündem ve düşünceler</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://tiktok.com/@efesarac_" target="_blank" rel="noopener" data-search="tiktok sosyal video">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/tiktok" alt="TikTok"></div>
+        <div class="link-info">
+          <div class="link-name">TikTok</div>
+          <div class="link-description" data-tr="Kısa videolar" data-en="Short videos">Kısa videolar</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://kwai.com/@saracefe" target="_blank" rel="noopener" data-search="kwai sosyal video">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/kuaishou" alt="Kwai"></div>
+        <div class="link-info">
+          <div class="link-name">Kwai</div>
+          <div class="link-description" data-tr="Kısa video içerikleri" data-en="Short video content">Kısa video içerikleri</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://bsky.app/profile/saracefe.bsky.social" target="_blank" rel="noopener" data-search="bluesky sosyal">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/bluesky" alt="Bluesky"></div>
+        <div class="link-info">
+          <div class="link-name">Bluesky</div>
+          <div class="link-description" data-tr="Bluesky profilim" data-en="My Bluesky profile">Bluesky profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://reddit.com/user/efesarac" target="_blank" rel="noopener" data-search="reddit sosyal topluluk">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/reddit" alt="Reddit"></div>
+        <div class="link-info">
+          <div class="link-name">Reddit</div>
+          <div class="link-description" data-tr="Reddit profilim" data-en="My Reddit profile">Reddit profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://linkedin.com/in/efe-saraç-bbb35b1b1" target="_blank" rel="noopener" data-search="linkedin kariyer">
+        <div class="logo-box"><img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg" alt="LinkedIn"></div>
+        <div class="link-info">
+          <div class="link-name">LinkedIn</div>
+          <div class="link-description" data-tr="Profesyonel profilim" data-en="My professional profile">Profesyonel profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://snapchat.com/add/efesaracx" target="_blank" rel="noopener" data-search="snapchat sosyal">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/snapchat" alt="Snapchat"></div>
+        <div class="link-info">
+          <div class="link-name">Snapchat</div>
+          <div class="link-description" data-tr="Snapchat profilim" data-en="My Snapchat profile">Snapchat profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </section>
+
+    <!-- CREATOR -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="creator">İçerik Üreticisi</h2>
+
+      <a class="link-card" href="https://donate.bynogame.com/efesarac" target="_blank" rel="noopener" data-search="bynogame bağış destek creator">
+        <div class="logo-box"><img src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png" alt="ByNoGame"></div>
+        <div class="link-info">
+          <div class="link-name">ByNoGame</div>
+          <div class="link-description" data-tr="Destek ve bağış" data-en="Support and donations">Destek ve bağış</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://github.com/saracefe" target="_blank" rel="noopener" data-search="github kod geliştirici developer">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/github" alt="GitHub"></div>
+        <div class="link-info">
+          <div class="link-name">GitHub</div>
+          <div class="link-description" data-tr="Projeler ve kodlar" data-en="Projects and code">Projeler ve kodlar</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://paypal.me/saracefe" target="_blank" rel="noopener" data-search="paypal destek ödeme">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/paypal" alt="PayPal"></div>
+        <div class="link-info">
+          <div class="link-name">PayPal</div>
+          <div class="link-description" data-tr="Destek gönder" data-en="Send support">Destek gönder</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </section>
+
+    <!-- LIVE -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="live">Canlı Yayın</h2>
+
+      <a class="link-card" href="https://twitch.tv/efesarac_" target="_blank" rel="noopener" data-search="twitch canlı yayın live">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/twitch" alt="Twitch"></div>
+        <div class="link-info">
+          <div class="link-name">Twitch</div>
+          <div class="link-description" data-tr="Canlı yayınlar" data-en="Live streams">Canlı yayınlar</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://kick.com/saracefe" target="_blank" rel="noopener" data-search="kick canlı yayın live">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/kick" alt="Kick"></div>
+        <div class="link-info">
+          <div class="link-name">Kick</div>
+          <div class="link-description" data-tr="Canlı yayınlar" data-en="Live streams">Canlı yayınlar</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </section>
+
+    <!-- MUSIC -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="music">Müzik</h2>
+
+      <a class="link-card" href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6" target="_blank" rel="noopener" data-search="spotify müzik music">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/spotify" alt="Spotify"></div>
+        <div class="link-info">
+          <div class="link-name">Spotify</div>
+          <div class="link-description" data-tr="Spotify profilim" data-en="My Spotify profile">Spotify profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://music.youtube.com/@saracefe" target="_blank" rel="noopener" data-search="youtube music müzik">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/youtubemusic" alt="YouTube Music"></div>
+        <div class="link-info">
+          <div class="link-name">YouTube Music</div>
+          <div class="link-description" data-tr="Müzik profilim" data-en="My music profile">Müzik profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://music.amazon.com/profiles/@efesarac" target="_blank" rel="noopener" data-search="amazon music müzik">
+        <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg" alt="Amazon Music"></div>
+        <div class="link-info">
+          <div class="link-name">Amazon Music</div>
+          <div class="link-description" data-tr="Amazon Music profilim" data-en="My Amazon Music profile">Amazon Music profilim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="community">Topluluk</h2>
+
+      <a class="link-card" href="https://discord.gg/p5Y5BxESFD" target="_blank" rel="noopener" data-search="discord topluluk community">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/discord" alt="Discord"></div>
+        <div class="link-info">
+          <div class="link-name">Discord</div>
+          <div class="link-description" data-tr="Topluluğa katıl" data-en="Join the community">Topluluğa katıl</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://wa.me/efesarac" target="_blank" rel="noopener" data-search="whatsapp iletişim community">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"></div>
+        <div class="link-info">
+          <div class="link-name">WhatsApp</div>
+          <div class="link-description" data-tr="WhatsApp üzerinden iletişim" data-en="Contact via WhatsApp">WhatsApp üzerinden iletişim</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+
+      <a class="link-card" href="https://t.me/efesarac" target="_blank" rel="noopener" data-search="telegram topluluk community">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/telegram" alt="Telegram"></div>
+        <div class="link-info">
+          <div class="link-name">Telegram</div>
+          <div class="link-description" data-tr="Telegram kanalım" data-en="My Telegram channel">Telegram kanalım</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </section>
+
+    <!-- OTHER -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="other">Diğer</h2>
+
+      <a class="link-card" href="https://donate.bynogame.com/efesarac" target="_blank" rel="noopener" data-search="bynogame diğer">
+        <div class="logo-box"><img src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png" alt="ByNoGame"></div>
+        <div class="link-info">
+          <div class="link-name">ByNoGame</div>
+          <div class="link-description" data-tr="Destek sayfası" data-en="Support page">Destek sayfası</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section">
+      <h2 class="section-title" data-i18n="contact">İletişim</h2>
+
+      <a class="link-card" href="mailto:contact@efesarac.co" data-search="email mail iletişim contact">
+        <div class="logo-box"><img src="https://cdn.simpleicons.org/gmail" alt="Email"></div>
+        <div class="link-info">
+          <div class="link-name">E-posta</div>
+          <div class="link-description" data-tr="contact@efesarac.co" data-en="contact@efesarac.co">contact@efesarac.co</div>
+        </div>
+        <div class="arrow">›</div>
+      </a>
+    </section>
+
+    <div class="no-results" id="noResults">
+      <span id="noResultsText">Sonuç bulunamadı.</span>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+    <img class="footer-logo logo-light" src="efesarac-footer-logo.png" alt="efesarac.co">
+    <img class="footer-logo logo-dark" src="efesarac-footer-logo-dark.png" alt="efesarac.co">
+
+    <div class="footer-country">
+      <img id="countryFlag" src="https://flagcdn.com/w160/tr.png" alt="Türkiye Bayrağı">
+      <span id="countryName">Türkiye</span>
+    </div>
+
+    <div class="footer-line"></div>
+
+    <div class="copyright" id="copyright">
+      © 2008–2026 efesarac.co Her Hakkı Saklıdır. · v4.8.0
+    </div>
+
+  </footer>
+
+</div>
+
+<!-- QR MODAL -->
+<div class="modal" id="qrModal">
+  <div class="modal-box">
+    <div class="modal-title" id="qrTitle">QR Kod</div>
+    <div class="modal-text" id="qrDescription">efesarac.co adresini telefonundan aç.</div>
+
+    <div class="qr">
+      <img
+        id="qrImage"
+        alt="efesarac.co QR Code"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https%3A%2F%2Fefesarac.co"
+      >
+    </div>
+
+    <button class="close-modal" id="closeQr">Kapat</button>
   </div>
 </div>
 
-<div class="no-results" id="noResults">
-  <span id="noResultsText">Sonuç bulunamadı.</span>
-</div>
-
-<section class="section">
-<h2 class="section-title" id="socialTitle">Sosyal</h2>
-<div class="links">
-
-<a class="link-card featured" href="https://youtube.com/@saracefe" target="_blank" rel="noopener noreferrer" data-search="youtube video içerik creator">
-<span class="featured-badge" id="featuredText">ÖNE ÇIKAN</span>
-<div class="icon-box"><img src="https://cdn.simpleicons.org/youtube" alt=""></div>
-<div class="link-content"><div class="link-title">YouTube</div><div class="link-description">@saracefe</div></div>
-<button class="copy-btn" type="button" data-copy="https://youtube.com/@saracefe">⧉</button>
-<span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://instagram.com/saracefe_" target="_blank" rel="noopener noreferrer" data-search="instagram sosyal fotoğraf">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/instagram" alt=""></div>
-<div class="link-content"><div class="link-title">Instagram</div><div class="link-description">@saracefe_</div></div>
-<button class="copy-btn" type="button" data-copy="https://instagram.com/saracefe_">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://facebook.com/saracefee" target="_blank" rel="noopener noreferrer" data-search="facebook sosyal">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/facebook" alt=""></div>
-<div class="link-content"><div class="link-title">Facebook</div><div class="link-description">@saracefee</div></div>
-<button class="copy-btn" type="button" data-copy="https://facebook.com/saracefee">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://threads.net/@saracefe_" target="_blank" rel="noopener noreferrer" data-search="threads sosyal meta">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/threads" alt=""></div>
-<div class="link-content"><div class="link-title">Threads</div><div class="link-description">@saracefe_</div></div>
-<button class="copy-btn" type="button" data-copy="https://threads.net/@saracefe_">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://x.com/efesarac_" target="_blank" rel="noopener noreferrer" data-search="x twitter sosyal">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/x" alt=""></div>
-<div class="link-content"><div class="link-title">X</div><div class="link-description">@efesarac_</div></div>
-<button class="copy-btn" type="button" data-copy="https://x.com/efesarac_">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://tiktok.com/@efesarac_" target="_blank" rel="noopener noreferrer" data-search="tiktok video sosyal">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/tiktok" alt=""></div>
-<div class="link-content"><div class="link-title">TikTok</div><div class="link-description">@efesarac_</div></div>
-<button class="copy-btn" type="button" data-copy="https://tiktok.com/@efesarac_">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://kwai.com/@saracefe" target="_blank" rel="noopener noreferrer" data-search="kwai video sosyal">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/kuaishou" alt=""></div>
-<div class="link-content"><div class="link-title">Kwai</div><div class="link-description">@saracefe</div></div>
-<button class="copy-btn" type="button" data-copy="https://kwai.com/@saracefe">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://bsky.app/profile/saracefe.bsky.social" target="_blank" rel="noopener noreferrer" data-search="bluesky sosyal">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/bluesky" alt=""></div>
-<div class="link-content"><div class="link-title">Bluesky</div><div class="link-description">@saracefe.bsky.social</div></div>
-<button class="copy-btn" type="button" data-copy="https://bsky.app/profile/saracefe.bsky.social">⧉</button><span class="link-arrow">›</span>
-</a>
-
-</div>
-</section>
-
-<section class="section">
-<h2 class="section-title" id="creatorTitle">İçerik Üreticisi</h2>
-<div class="links">
-
-<a class="link-card" href="https://donate.bynogame.com/efesarac" target="_blank" rel="noopener noreferrer" data-search="bynogame bağış donate destek">
-<div class="icon-box"><img src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png" alt=""></div>
-<div class="link-content"><div class="link-title">ByNoGame</div><div class="link-description" data-desc="support">Destek ve bağış</div></div>
-<button class="copy-btn" type="button" data-copy="https://donate.bynogame.com/efesarac">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://github.com/saracefe" target="_blank" rel="noopener noreferrer" data-search="github kod geliştirici developer">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/github" alt=""></div>
-<div class="link-content"><div class="link-title">GitHub</div><div class="link-description" data-desc="projects">Projeler ve kod</div></div>
-<button class="copy-btn" type="button" data-copy="https://github.com/saracefe">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://reddit.com/user/efesarac" target="_blank" rel="noopener noreferrer" data-search="reddit topluluk forum">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/reddit" alt=""></div>
-<div class="link-content"><div class="link-title">Reddit</div><div class="link-description">u/efesarac</div></div>
-<button class="copy-btn" type="button" data-copy="https://reddit.com/user/efesarac">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://linkedin.com/in/efe-saraç-bbb35b1b1" target="_blank" rel="noopener noreferrer" data-search="linkedin kariyer iş profesyonel">
-<div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg" alt=""></div>
-<div class="link-content"><div class="link-title">LinkedIn</div><div class="link-description" data-desc="professional">Profesyonel profil</div></div>
-<button class="copy-btn" type="button" data-copy="https://linkedin.com/in/efe-saraç-bbb35b1b1">⧉</button><span class="link-arrow">›</span>
-</a>
-
-</div>
-</section>
-
-<section class="section">
-<h2 class="section-title" id="liveTitle">Canlı Yayın</h2>
-<div class="links">
-
-<a class="link-card" href="https://twitch.tv/efesarac_" target="_blank" rel="noopener noreferrer" data-search="twitch canlı yayın">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/twitch" alt=""></div>
-<div class="link-content"><div class="link-title">Twitch</div><div class="link-description">@efesarac_</div></div>
-<button class="copy-btn" type="button" data-copy="https://twitch.tv/efesarac_">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://kick.com/saracefe" target="_blank" rel="noopener noreferrer" data-search="kick canlı yayın">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/kick" alt=""></div>
-<div class="link-content"><div class="link-title">Kick</div><div class="link-description">@saracefe</div></div>
-<button class="copy-btn" type="button" data-copy="https://kick.com/saracefe">⧉</button><span class="link-arrow">›</span>
-</a>
-
-</div>
-</section>
-
-<section class="section">
-<h2 class="section-title" id="musicTitle">Müzik</h2>
-<div class="links">
-
-<a class="link-card" href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6" target="_blank" rel="noopener noreferrer" data-search="spotify müzik">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/spotify" alt=""></div>
-<div class="link-content"><div class="link-title">Spotify</div><div class="link-description" data-desc="music">Müzik ve listeler</div></div>
-<button class="copy-btn" type="button" data-copy="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://music.youtube.com/@saracefe" target="_blank" rel="noopener noreferrer" data-search="youtube music müzik">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/youtubemusic" alt=""></div>
-<div class="link-content"><div class="link-title">YouTube Music</div><div class="link-description">@saracefe</div></div>
-<button class="copy-btn" type="button" data-copy="https://music.youtube.com/@saracefe">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://music.amazon.com/profiles/@efesarac" target="_blank" rel="noopener noreferrer" data-search="amazon music müzik">
-<div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg" alt=""></div>
-<div class="link-content"><div class="link-title">Amazon Music</div><div class="link-description">@efesarac</div></div>
-<button class="copy-btn" type="button" data-copy="https://music.amazon.com/profiles/@efesarac">⧉</button><span class="link-arrow">›</span>
-</a>
-
-</div>
-</section>
-
-<section class="section">
-<h2 class="section-title" id="communityTitle">Topluluk</h2>
-<div class="links">
-
-<a class="link-card" href="https://discord.gg/p5Y5BxESFD" target="_blank" rel="noopener noreferrer" data-search="discord topluluk sunucu">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/discord" alt=""></div>
-<div class="link-content"><div class="link-title">Discord</div><div class="link-description" data-desc="join">Topluluğa katıl</div></div>
-<button class="copy-btn" type="button" data-copy="https://discord.gg/p5Y5BxESFD">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://wa.me/efesarac" target="_blank" rel="noopener noreferrer" data-search="whatsapp mesaj iletişim">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/whatsapp" alt=""></div>
-<div class="link-content"><div class="link-title">WhatsApp</div><div class="link-description" data-desc="message">Mesaj gönder</div></div>
-<button class="copy-btn" type="button" data-copy="https://wa.me/efesarac">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://t.me/efesarac" target="_blank" rel="noopener noreferrer" data-search="telegram mesaj topluluk">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/telegram" alt=""></div>
-<div class="link-content"><div class="link-title">Telegram</div><div class="link-description">@efesarac</div></div>
-<button class="copy-btn" type="button" data-copy="https://t.me/efesarac">⧉</button><span class="link-arrow">›</span>
-</a>
-
-</div>
-</section>
-
-<section class="section">
-<h2 class="section-title" id="otherTitle">Diğer</h2>
-<div class="links">
-
-<a class="link-card" href="https://paypal.me/saracefe" target="_blank" rel="noopener noreferrer" data-search="paypal ödeme destek">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/paypal" alt=""></div>
-<div class="link-content"><div class="link-title">PayPal</div><div class="link-description" data-desc="supportMe">Destek ol</div></div>
-<button class="copy-btn" type="button" data-copy="https://paypal.me/saracefe">⧉</button><span class="link-arrow">›</span>
-</a>
-
-<a class="link-card" href="https://snapchat.com/add/efesaracx" target="_blank" rel="noopener noreferrer" data-search="snapchat sosyal">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/snapchat" alt=""></div>
-<div class="link-content"><div class="link-title">Snapchat</div><div class="link-description">@efesaracx</div></div>
-<button class="copy-btn" type="button" data-copy="https://snapchat.com/add/efesaracx">⧉</button><span class="link-arrow">›</span>
-</a>
-
-</div>
-</section>
-
-<section class="section">
-<h2 class="section-title" id="contactTitle">İletişim</h2>
-<div class="links">
-
-<a class="link-card" href="mailto:contact@efesarac.co" data-search="email mail iletişim">
-<div class="icon-box"><img src="https://cdn.simpleicons.org/gmail" alt=""></div>
-<div class="link-content"><div class="link-title" id="emailTitle">E-posta</div><div class="link-description">contact@efesarac.co</div></div>
-<button class="copy-btn" type="button" data-copy="contact@efesarac.co">⧉</button><span class="link-arrow">›</span>
-</a>
-
-</div>
-</section>
-
-<footer class="site-footer">
-
-<div class="footer-logo-area">
-
-<img class="footer-logo logo-light" src="efesarac-footer-logo.png" alt="efesarac.co">
-<img class="footer-logo logo-dark" src="efesarac-footer-logo-dark.png" alt="efesarac.co">
-
-<img id="countryFlag" class="footer-flag" src="https://flagcdn.com/w160/tr.png" alt="Türkiye Bayrağı">
-
-</div>
-
-<div class="footer-divider"></div>
-
-<div class="copyright">
-<span id="copyrightText">© 2008–2026 efesarac.co Her Hakkı Saklıdır.</span>
-<span class="version"> · v4.7.0</span>
-</div>
-
-</footer>
-
-</main>
+<div class="toast" id="toast"></div>
 
 <script>
-
-/* PRELOADER */
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document.getElementById("preloader")?.classList.add("hide");
-  },350);
-});
-
-
-/* =========================================================
+/* =========================
    TRANSLATIONS
-========================================================= */
+========================= */
 
-const T={
+const translations = {
 
 tr:{
-  lang:"DİL",menu:"DİL",
+  language:"DİL",
   bio:"Dijital içerik üreticisi · Geliştirici · İnternet",
-  status:"Sistem aktif",search:"Bağlantılarda ara...",
-  no:"Sonuç bulunamadı.",featured:"ÖNE ÇIKAN",
-  sections:["Sosyal","İçerik Üreticisi","Canlı Yayın","Müzik","Topluluk","Diğer","İletişim"],
-  desc:["Destek ve bağış","Projeler ve kod","Profesyonel profil","Müzik ve listeler","Topluluğa katıl","Mesaj gönder","Destek ol"],
-  email:"E-posta",dark:"Koyu",light:"Açık",system:"Sistem",rights:"Her Hakkı Saklıdır."
+  status:"Sistem aktif",
+  creatorBadge:"DOĞRULANMIŞ İÇERİK ÜRETİCİSİ",
+  creatorLabel:"İçerik üreticisi",
+  share:"Paylaş",
+  qr:"QR Kod",
+  search:"Bağlantılarda ara...",
+  social:"Sosyal",
+  creator:"İçerik Üreticisi",
+  live:"Canlı Yayın",
+  music:"Müzik",
+  community:"Topluluk",
+  other:"Diğer",
+  contact:"İletişim",
+  noResults:"Sonuç bulunamadı.",
+  qrDescription:"efesarac.co adresini telefonundan aç.",
+  close:"Kapat",
+  country:"Türkiye",
+  copied:"Bağlantı kopyalandı!"
 },
 
 en:{
-  lang:"LANGUAGE",menu:"LANGUAGE",
+  language:"LANGUAGE",
   bio:"Digital creator · Developer · Internet",
-  status:"System active",search:"Search links...",
-  no:"No results found.",featured:"FEATURED",
-  sections:["Social","Creator","Live","Music","Community","Other","Contact"],
-  desc:["Support and donations","Projects and code","Professional profile","Music and playlists","Join the community","Send a message","Support me"],
-  email:"Email",dark:"Dark",light:"Light",system:"System",rights:"All Rights Reserved."
+  status:"System active",
+  creatorBadge:"VERIFIED CREATOR",
+  creatorLabel:"Content creator",
+  share:"Share",
+  qr:"QR Code",
+  search:"Search links...",
+  social:"Social",
+  creator:"Creator",
+  live:"Live",
+  music:"Music",
+  community:"Community",
+  other:"Other",
+  contact:"Contact",
+  noResults:"No results found.",
+  qrDescription:"Open efesarac.co on your phone.",
+  close:"Close",
+  country:"Türkiye",
+  copied:"Link copied!"
 },
 
 de:{
-  lang:"SPRACHE",menu:"SPRACHE",
-  bio:"Digitaler Content Creator · Entwickler · Internet",
-  status:"System aktiv",search:"Links durchsuchen...",
-  no:"Keine Ergebnisse gefunden.",featured:"HIGHLIGHT",
-  sections:["Sozial","Creator","Live","Musik","Community","Andere","Kontakt"],
-  desc:["Unterstützung und Spenden","Projekte und Code","Professionelles Profil","Musik und Playlists","Community beitreten","Nachricht senden","Unterstütze mich"],
-  email:"E-Mail",dark:"Dunkel",light:"Hell",system:"System",rights:"Alle Rechte vorbehalten."
+  language:"SPRACHE",
+  bio:"Digitaler Creator · Entwickler · Internet",
+  status:"System aktiv",
+  creatorBadge:"VERIFIZIERTER CREATOR",
+  creatorLabel:"Content Creator",
+  share:"Teilen",
+  qr:"QR-Code",
+  search:"Links suchen...",
+  social:"Soziales",
+  creator:"Creator",
+  live:"Live",
+  music:"Musik",
+  community:"Community",
+  other:"Andere",
+  contact:"Kontakt",
+  noResults:"Keine Ergebnisse.",
+  qrDescription:"efesarac.co auf deinem Handy öffnen.",
+  close:"Schließen",
+  country:"Türkiye",
+  copied:"Link kopiert!"
 },
 
 fr:{
-  lang:"LANGUE",menu:"LANGUE",
-  bio:"Créateur de contenu numérique · Développeur · Internet",
-  status:"Système actif",search:"Rechercher des liens...",
-  no:"Aucun résultat trouvé.",featured:"À LA UNE",
-  sections:["Social","Créateur","En direct","Musique","Communauté","Autre","Contact"],
-  desc:["Soutien et dons","Projets et code","Profil professionnel","Musique et playlists","Rejoindre la communauté","Envoyer un message","Me soutenir"],
-  email:"E-mail",dark:"Sombre",light:"Clair",system:"Système",rights:"Tous droits réservés."
+  language:"LANGUE",
+  bio:"Créateur numérique · Développeur · Internet",
+  status:"Système actif",
+  creatorBadge:"CRÉATEUR VÉRIFIÉ",
+  creatorLabel:"Créateur de contenu",
+  share:"Partager",
+  qr:"Code QR",
+  search:"Rechercher des liens...",
+  social:"Social",
+  creator:"Créateur",
+  live:"En direct",
+  music:"Musique",
+  community:"Communauté",
+  other:"Autre",
+  contact:"Contact",
+  noResults:"Aucun résultat.",
+  qrDescription:"Ouvrir efesarac.co sur votre téléphone.",
+  close:"Fermer",
+  country:"Türkiye",
+  copied:"Lien copié !"
 },
 
 es:{
-  lang:"IDIOMA",menu:"IDIOMA",
-  bio:"Creador de contenido digital · Desarrollador · Internet",
-  status:"Sistema activo",search:"Buscar enlaces...",
-  no:"No se encontraron resultados.",featured:"DESTACADO",
-  sections:["Social","Creador","En directo","Música","Comunidad","Otros","Contacto"],
-  desc:["Apoyo y donaciones","Proyectos y código","Perfil profesional","Música y listas","Únete a la comunidad","Enviar un mensaje","Apóyame"],
-  email:"Correo electrónico",dark:"Oscuro",light:"Claro",system:"Sistema",rights:"Todos los derechos reservados."
+  language:"IDIOMA",
+  bio:"Creador digital · Desarrollador · Internet",
+  status:"Sistema activo",
+  creatorBadge:"CREADOR VERIFICADO",
+  creatorLabel:"Creador de contenido",
+  share:"Compartir",
+  qr:"Código QR",
+  search:"Buscar enlaces...",
+  social:"Social",
+  creator:"Creador",
+  live:"En directo",
+  music:"Música",
+  community:"Comunidad",
+  other:"Otros",
+  contact:"Contacto",
+  noResults:"No se encontraron resultados.",
+  qrDescription:"Abre efesarac.co en tu teléfono.",
+  close:"Cerrar",
+  country:"Türkiye",
+  copied:"¡Enlace copiado!"
 },
 
 it:{
-  lang:"LINGUA",menu:"LINGUA",
+  language:"LINGUA",
   bio:"Creator digitale · Sviluppatore · Internet",
-  status:"Sistema attivo",search:"Cerca nei link...",
-  no:"Nessun risultato trovato.",featured:"IN EVIDENZA",
-  sections:["Social","Creator","Live","Musica","Community","Altro","Contatti"],
-  desc:["Supporto e donazioni","Progetti e codice","Profilo professionale","Musica e playlist","Unisciti alla community","Invia un messaggio","Supportami"],
-  email:"E-mail",dark:"Scuro",light:"Chiaro",system:"Sistema",rights:"Tutti i diritti riservati."
+  status:"Sistema attivo",
+  creatorBadge:"CREATOR VERIFICATO",
+  creatorLabel:"Content creator",
+  share:"Condividi",
+  qr:"Codice QR",
+  search:"Cerca link...",
+  social:"Social",
+  creator:"Creator",
+  live:"Live",
+  music:"Musica",
+  community:"Community",
+  other:"Altro",
+  contact:"Contatti",
+  noResults:"Nessun risultato.",
+  qrDescription:"Apri efesarac.co sul telefono.",
+  close:"Chiudi",
+  country:"Türkiye",
+  copied:"Link copiato!"
 },
 
 pt:{
-  lang:"IDIOMA",menu:"IDIOMA",
-  bio:"Criador de conteúdo digital · Desenvolvedor · Internet",
-  status:"Sistema ativo",search:"Pesquisar links...",
-  no:"Nenhum resultado encontrado.",featured:"DESTAQUE",
-  sections:["Social","Criador","Ao vivo","Música","Comunidade","Outro","Contato"],
-  desc:["Suporte e doações","Projetos e código","Perfil profissional","Música e playlists","Junte-se à comunidade","Enviar mensagem","Apoie-me"],
-  email:"E-mail",dark:"Escuro",light:"Claro",system:"Sistema",rights:"Todos os direitos reservados."
+  language:"IDIOMA",
+  bio:"Criador digital · Desenvolvedor · Internet",
+  status:"Sistema ativo",
+  creatorBadge:"CRIADOR VERIFICADO",
+  creatorLabel:"Criador de conteúdo",
+  share:"Compartilhar",
+  qr:"Código QR",
+  search:"Pesquisar links...",
+  social:"Social",
+  creator:"Criador",
+  live:"Ao vivo",
+  music:"Música",
+  community:"Comunidade",
+  other:"Outro",
+  contact:"Contato",
+  noResults:"Nenhum resultado.",
+  qrDescription:"Abra efesarac.co no seu telefone.",
+  close:"Fechar",
+  country:"Türkiye",
+  copied:"Link copiado!"
 },
 
 nl:{
-  lang:"TAAL",menu:"TAAL",
-  bio:"Digitale contentmaker · Ontwikkelaar · Internet",
-  status:"Systeem actief",search:"Links zoeken...",
-  no:"Geen resultaten gevonden.",featured:"UITGELICHT",
-  sections:["Sociaal","Creator","Live","Muziek","Community","Overig","Contact"],
-  desc:["Ondersteuning en donaties","Projecten en code","Professioneel profiel","Muziek en playlists","Word lid van de community","Een bericht sturen","Steun mij"],
-  email:"E-mail",dark:"Donker",light:"Licht",system:"Systeem",rights:"Alle rechten voorbehouden."
-},
-
-ru:{
-  lang:"ЯЗЫК",menu:"ЯЗЫК",
-  bio:"Цифровой создатель контента · Разработчик · Интернет",
-  status:"Система активна",search:"Поиск по ссылкам...",
-  no:"Ничего не найдено.",featured:"РЕКОМЕНДУЕМОЕ",
-  sections:["Соцсети","Креатор","Прямой эфир","Музыка","Сообщество","Другое","Контакты"],
-  desc:["Поддержка и пожертвования","Проекты и код","Профессиональный профиль","Музыка и плейлисты","Присоединиться к сообществу","Отправить сообщение","Поддержать меня"],
-  email:"Электронная почта",dark:"Тёмная",light:"Светлая",system:"Система",rights:"Все права защищены."
-},
-
-uk:{
-  lang:"МОВА",menu:"МОВА",
-  bio:"Цифровий творець · Розробник · Інтернет",
-  status:"Система активна",search:"Пошук посилань...",
-  no:"Результатів не знайдено.",featured:"РЕКОМЕНДОВАНЕ",
-  sections:["Соціальні мережі","Творець","Прямий ефір","Музика","Спільнота","Інше","Контакти"],
-  desc:["Підтримка та донати","Проєкти та код","Професійний профіль","Музика та плейлисти","Приєднатися до спільноти","Надіслати повідомлення","Підтримати мене"],
-  email:"Електронна пошта",dark:"Темна",light:"Світла",system:"Система",rights:"Усі права захищені."
+  language:"TAAL",
+  bio:"Digitale maker · Ontwikkelaar · Internet",
+  status:"Systeem actief",
+  creatorBadge:"GEVERIFIEERDE CREATOR",
+  creatorLabel:"Contentmaker",
+  share:"Delen",
+  qr:"QR-code",
+  search:"Links zoeken...",
+  social:"Sociaal",
+  creator:"Creator",
+  live:"Live",
+  music:"Muziek",
+  community:"Community",
+  other:"Overig",
+  contact:"Contact",
+  noResults:"Geen resultaten.",
+  qrDescription:"Open efesarac.co op je telefoon.",
+  close:"Sluiten",
+  country:"Türkiye",
+  copied:"Link gekopieerd!"
 },
 
 pl:{
-  lang:"JĘZYK",menu:"JĘZYK",
+  language:"JĘZYK",
   bio:"Twórca cyfrowy · Programista · Internet",
-  status:"System aktywny",search:"Szukaj linków...",
-  no:"Nie znaleziono wyników.",featured:"WYRÓŻNIONE",
-  sections:["Społecznościowe","Twórca","Na żywo","Muzyka","Społeczność","Inne","Kontakt"],
-  desc:["Wsparcie i darowizny","Projekty i kod","Profil zawodowy","Muzyka i playlisty","Dołącz do społeczności","Wyślij wiadomość","Wesprzyj mnie"],
-  email:"E-mail",dark:"Ciemny",light:"Jasny",system:"System",rights:"Wszelkie prawa zastrzeżone."
+  status:"System aktywny",
+  creatorBadge:"ZWERYFIKOWANY TWÓRCA",
+  creatorLabel:"Twórca treści",
+  share:"Udostępnij",
+  qr:"Kod QR",
+  search:"Szukaj linków...",
+  social:"Społeczność",
+  creator:"Twórca",
+  live:"Na żywo",
+  music:"Muzyka",
+  community:"Społeczność",
+  other:"Inne",
+  contact:"Kontakt",
+  noResults:"Brak wyników.",
+  qrDescription:"Otwórz efesarac.co na telefonie.",
+  close:"Zamknij",
+  country:"Türkiye",
+  copied:"Link skopiowany!"
 },
 
-cs:{
-  lang:"JAZYK",menu:"JAZYK",
-  bio:"Digitální tvůrce · Vývojář · Internet",
-  status:"Systém aktivní",search:"Hledat odkazy...",
-  no:"Nebyly nalezeny žádné výsledky.",featured:"DOPORUČENÉ",
-  sections:["Sociální","Tvůrce","Živě","Hudba","Komunita","Ostatní","Kontakt"],
-  desc:["Podpora a dary","Projekty a kód","Profesionální profil","Hudba a playlisty","Připojit se ke komunitě","Poslat zprávu","Podpořit mě"],
-  email:"E-mail",dark:"Tmavý",light:"Světlý",system:"Systém",rights:"Všechna práva vyhrazena."
+ru:{
+  language:"ЯЗЫК",
+  bio:"Цифровой автор · Разработчик · Интернет",
+  status:"Система активна",
+  creatorBadge:"ПОДТВЕРЖДЁННЫЙ АВТОР",
+  creatorLabel:"Создатель контента",
+  share:"Поделиться",
+  qr:"QR-код",
+  search:"Поиск ссылок...",
+  social:"Соцсети",
+  creator:"Автор",
+  live:"Прямой эфир",
+  music:"Музыка",
+  community:"Сообщество",
+  other:"Другое",
+  contact:"Контакты",
+  noResults:"Ничего не найдено.",
+  qrDescription:"Откройте efesarac.co на телефоне.",
+  close:"Закрыть",
+  country:"Türkiye",
+  copied:"Ссылка скопирована!"
 },
 
-sk:{
-  lang:"JAZYK",menu:"JAZYK",
-  bio:"Digitálny tvorca · Vývojár · Internet",
-  status:"Systém aktívny",search:"Hľadať odkazy...",
-  no:"Nenašli sa žiadne výsledky.",featured:"ODPORÚČANÉ",
-  sections:["Sociálne","Tvorca","Naživo","Hudba","Komunita","Ostatné","Kontakt"],
-  desc:["Podpora a dary","Projekty a kód","Profesionálny profil","Hudba a zoznamy","Pripojiť sa ku komunite","Poslať správu","Podporiť ma"],
-  email:"E-mail",dark:"Tmavý",light:"Svetlý",system:"Systém",rights:"Všetky práva vyhradené."
-},
-
-hu:{
-  lang:"NYELV",menu:"NYELV",
-  bio:"Digitális tartalomkészítő · Fejlesztő · Internet",
-  status:"A rendszer aktív",search:"Linkek keresése...",
-  no:"Nincs találat.",featured:"KIEMELT",
-  sections:["Közösségi","Készítő","Élő","Zene","Közösség","Egyéb","Kapcsolat"],
-  desc:["Támogatás és adományok","Projektek és kód","Szakmai profil","Zene és lejátszási listák","Csatlakozz a közösséghez","Üzenet küldése","Támogass engem"],
-  email:"E-mail",dark:"Sötét",light:"Világos",system:"Rendszer",rights:"Minden jog fenntartva."
-},
-
-ro:{
-  lang:"LIMBĂ",menu:"LIMBĂ",
-  bio:"Creator digital · Dezvoltator · Internet",
-  status:"Sistem activ",search:"Caută linkuri...",
-  no:"Nu au fost găsite rezultate.",featured:"RECOMANDAT",
-  sections:["Social","Creator","Live","Muzică","Comunitate","Altele","Contact"],
-  desc:["Suport și donații","Proiecte și cod","Profil profesional","Muzică și playlisturi","Alătură-te comunității","Trimite un mesaj","Susține-mă"],
-  email:"E-mail",dark:"Întunecat",light:"Luminos",system:"Sistem",rights:"Toate drepturile rezervate."
-},
-
-el:{
-  lang:"ΓΛΩΣΣΑ",menu:"ΓΛΩΣΣΑ",
-  bio:"Δημιουργός ψηφιακού περιεχομένου · Προγραμματιστής · Διαδίκτυο",
-  status:"Το σύστημα είναι ενεργό",search:"Αναζήτηση συνδέσμων...",
-  no:"Δεν βρέθηκαν αποτελέσματα.",featured:"ΠΡΟΤΕΙΝΟΜΕΝΟ",
-  sections:["Κοινωνικά","Δημιουργός","Ζωντανά","Μουσική","Κοινότητα","Άλλα","Επικοινωνία"],
-  desc:["Υποστήριξη και δωρεές","Έργα και κώδικας","Επαγγελματικό προφίλ","Μουσική και λίστες","Συμμετοχή στην κοινότητα","Αποστολή μηνύματος","Υποστήριξέ με"],
-  email:"E-mail",dark:"Σκούρο",light:"Ανοιχτό",system:"Σύστημα",rights:"Με επιφύλαξη παντός δικαιώματος."
-},
-
-sv:{
-  lang:"SPRÅK",menu:"SPRÅK",
-  bio:"Digital innehållsskapare · Utvecklare · Internet",
-  status:"Systemet är aktivt",search:"Sök länkar...",
-  no:"Inga resultat hittades.",featured:"UTVALT",
-  sections:["Socialt","Skapare","Live","Musik","Gemenskap","Övrigt","Kontakt"],
-  desc:["Stöd och donationer","Projekt och kod","Professionell profil","Musik och spellistor","Gå med i gemenskapen","Skicka ett meddelande","Stöd mig"],
-  email:"E-post",dark:"Mörk",light:"Ljus",system:"System",rights:"Alla rättigheter förbehållna."
-},
-
-no:{
-  lang:"SPRÅK",menu:"SPRÅK",
-  bio:"Digital innholdsskaper · Utvikler · Internett",
-  status:"Systemet er aktivt",search:"Søk i lenker...",
-  no:"Ingen resultater funnet.",featured:"UTVALGT",
-  sections:["Sosialt","Skaper","Direkte","Musikk","Fellesskap","Annet","Kontakt"],
-  desc:["Støtte og donasjoner","Prosjekter og kode","Profesjonell profil","Musikk og spillelister","Bli med i fellesskapet","Send en melding","Støtt meg"],
-  email:"E-post",dark:"Mørk",light:"Lys",system:"System",rights:"Alle rettigheter forbeholdt."
-},
-
-da:{
-  lang:"SPROG",menu:"SPROG",
-  bio:"Digital indholdsskaber · Udvikler · Internet",
-  status:"System aktivt",search:"Søg i links...",
-  no:"Ingen resultater fundet.",featured:"FREMHÆVET",
-  sections:["Social","Skaber","Live","Musik","Fællesskab","Andet","Kontakt"],
-  desc:["Support og donationer","Projekter og kode","Professionel profil","Musik og playlister","Deltag i fællesskabet","Send en besked","Støt mig"],
-  email:"E-mail",dark:"Mørk",light:"Lys",system:"System",rights:"Alle rettigheder forbeholdes."
-},
-
-fi:{
-  lang:"KIELI",menu:"KIELI",
-  bio:"Digitaalinen sisällöntuottaja · Kehittäjä · Internet",
-  status:"Järjestelmä aktiivinen",search:"Hae linkkejä...",
-  no:"Tuloksia ei löytynyt.",featured:"NOSTO",
-  sections:["Sosiaalinen","Sisällöntuottaja","Live","Musiikki","Yhteisö","Muu","Yhteystiedot"],
-  desc:["Tuki ja lahjoitukset","Projektit ja koodi","Ammatillinen profiili","Musiikki ja soittolistat","Liity yhteisöön","Lähetä viesti","Tue minua"],
-  email:"Sähköposti",dark:"Tumma",light:"Vaalea",system:"Järjestelmä",rights:"Kaikki oikeudet pidätetään."
-},
-
-he:{
-  lang:"שפה",menu:"שפה",
-  bio:"יוצר תוכן דיגיטלי · מפתח · אינטרנט",
-  status:"המערכת פעילה",search:"חיפוש בקישורים...",
-  no:"לא נמצאו תוצאות.",featured:"מומלץ",
-  sections:["חברתי","יוצר","שידור חי","מוזיקה","קהילה","אחר","יצירת קשר"],
-  desc:["תמיכה ותרומות","פרויקטים וקוד","פרופיל מקצועי","מוזיקה ופלייליסטים","הצטרפות לקהילה","שליחת הודעה","תמיכה בי"],
-  email:"דוא״ל",dark:"כהה",light:"בהיר",system:"מערכת",rights:"כל הזכויות שמורות."
+uk:{
+  language:"МОВА",
+  bio:"Цифровий автор · Розробник · Інтернет",
+  status:"Система активна",
+  creatorBadge:"ПІДТВЕРДЖЕНИЙ АВТОР",
+  creatorLabel:"Автор контенту",
+  share:"Поділитися",
+  qr:"QR-код",
+  search:"Пошук посилань...",
+  social:"Соцмережі",
+  creator:"Автор",
+  live:"Наживо",
+  music:"Музика",
+  community:"Спільнота",
+  other:"Інше",
+  contact:"Контакти",
+  noResults:"Нічого не знайдено.",
+  qrDescription:"Відкрийте efesarac.co на телефоні.",
+  close:"Закрити",
+  country:"Türkiye",
+  copied:"Посилання скопійовано!"
 },
 
 ar:{
-  lang:"اللغة",menu:"اللغة",
-  bio:"منشئ محتوى رقمي · مطور · الإنترنت",
-  status:"النظام نشط",search:"البحث في الروابط...",
-  no:"لم يتم العثور على نتائج.",featured:"مميز",
-  sections:["اجتماعي","منشئ المحتوى","بث مباشر","الموسيقى","المجتمع","أخرى","التواصل"],
-  desc:["الدعم والتبرعات","المشاريع والبرمجة","الملف المهني","الموسيقى وقوائم التشغيل","انضم إلى المجتمع","إرسال رسالة","ادعمني"],
-  email:"البريد الإلكتروني",dark:"داكن",light:"فاتح",system:"النظام",rights:"جميع الحقوق محفوظة."
+  language:"اللغة",
+  bio:"منشئ رقمي · مطور · إنترنت",
+  status:"النظام نشط",
+  creatorBadge:"منشئ موثّق",
+  creatorLabel:"منشئ محتوى",
+  share:"مشاركة",
+  qr:"رمز QR",
+  search:"البحث في الروابط...",
+  social:"اجتماعي",
+  creator:"منشئ",
+  live:"مباشر",
+  music:"موسيقى",
+  community:"المجتمع",
+  other:"أخرى",
+  contact:"اتصال",
+  noResults:"لا توجد نتائج.",
+  qrDescription:"افتح efesarac.co على هاتفك.",
+  close:"إغلاق",
+  country:"Türkiye",
+  copied:"تم نسخ الرابط!"
 },
 
 fa:{
-  lang:"زبان",menu:"زبان",
-  bio:"تولیدکننده محتوای دیجیتال · توسعه‌دهنده · اینترنت",
-  status:"سیستم فعال است",search:"جستجوی لینک‌ها...",
-  no:"نتیجه‌ای پیدا نشد.",featured:"ویژه",
-  sections:["اجتماعی","تولیدکننده","زنده","موسیقی","انجمن","سایر","تماس"],
-  desc:["پشتیبانی و کمک مالی","پروژه‌ها و کد","پروفایل حرفه‌ای","موسیقی و فهرست‌ها","پیوستن به انجمن","ارسال پیام","از من حمایت کنید"],
-  email:"ایمیل",dark:"تیره",light:"روشن",system:"سیستم",rights:"تمامی حقوق محفوظ است."
+  language:"زبان",
+  bio:"سازنده دیجیتال · توسعه‌دهنده · اینترنت",
+  status:"سیستم فعال است",
+  creatorBadge:"سازنده تأییدشده",
+  creatorLabel:"سازنده محتوا",
+  share:"اشتراک‌گذاری",
+  qr:"کد QR",
+  search:"جستجوی لینک‌ها...",
+  social:"اجتماعی",
+  creator:"سازنده",
+  live:"زنده",
+  music:"موسیقی",
+  community:"انجمن",
+  other:"سایر",
+  contact:"تماس",
+  noResults:"نتیجه‌ای پیدا نشد.",
+  qrDescription:"efesarac.co را در گوشی باز کنید.",
+  close:"بستن",
+  country:"Türkiye",
+  copied:"لینک کپی شد!"
 },
 
-hi:{
-  lang:"भाषा",menu:"भाषा",
-  bio:"डिजिटल क्रिएटर · डेवलपर · इंटरनेट",
-  status:"सिस्टम सक्रिय",search:"लिंक खोजें...",
-  no:"कोई परिणाम नहीं मिला।",featured:"विशेष",
-  sections:["सोशल","क्रिएटर","लाइव","संगीत","समुदाय","अन्य","संपर्क"],
-  desc:["समर्थन और दान","प्रोजेक्ट और कोड","पेशेवर प्रोफ़ाइल","संगीत और प्लेलिस्ट","समुदाय से जुड़ें","संदेश भेजें","मेरा समर्थन करें"],
-  email:"ईमेल",dark:"डार्क",light:"लाइट",system:"सिस्टम",rights:"सर्वाधिकार सुरक्षित।"
+he:{
+  language:"שפה",
+  bio:"יוצר דיגיטלי · מפתח · אינטרנט",
+  status:"המערכת פעילה",
+  creatorBadge:"יוצר מאומת",
+  creatorLabel:"יוצר תוכן",
+  share:"שיתוף",
+  qr:"קוד QR",
+  search:"חיפוש קישורים...",
+  social:"חברתי",
+  creator:"יוצר",
+  live:"שידור חי",
+  music:"מוזיקה",
+  community:"קהילה",
+  other:"אחר",
+  contact:"צור קשר",
+  noResults:"לא נמצאו תוצאות.",
+  qrDescription:"פתחו את efesarac.co בטלפון.",
+  close:"סגור",
+  country:"Türkiye",
+  copied:"הקישור הועתק!"
 },
 
-bn:{
-  lang:"ভাষা",menu:"ভাষা",
-  bio:"ডিজিটাল কনটেন্ট ক্রিয়েটর · ডেভেলপার · ইন্টারনেট",
-  status:"সিস্টেম সক্রিয়",search:"লিংক খুঁজুন...",
-  no:"কোনো ফলাফল পাওয়া যায়নি।",featured:"নির্বাচিত",
-  sections:["সামাজিক","ক্রিয়েটর","লাইভ","সঙ্গীত","কমিউনিটি","অন্যান্য","যোগাযোগ"],
-  desc:["সহায়তা ও অনুদান","প্রজেক্ট ও কোড","পেশাদার প্রোফাইল","সঙ্গীত ও প্লেলিস্ট","কমিউনিটিতে যোগ দিন","বার্তা পাঠান","আমাকে সমর্থন করুন"],
-  email:"ইমেল",dark:"ডার্ক",light:"লাইট",system:"সিস্টেম",rights:"সর্বস্বত্ব সংরক্ষিত।"
-},
-
-ur:{
-  lang:"زبان",menu:"زبان",
-  bio:"ڈیجیٹل مواد تخلیق کار · ڈویلپر · انٹرنیٹ",
-  status:"سسٹم فعال ہے",search:"لنکس تلاش کریں...",
-  no:"کوئی نتیجہ نہیں ملا۔",featured:"نمایاں",
-  sections:["سوشل","تخلیق کار","براہ راست","موسیقی","کمیونٹی","دیگر","رابطہ"],
-  desc:["مدد اور عطیات","پروجیکٹس اور کوڈ","پیشہ ورانہ پروفائل","موسیقی اور پلے لسٹس","کمیونٹی میں شامل ہوں","پیغام بھیجیں","میری مدد کریں"],
-  email:"ای میل",dark:"ڈارک",light:"لائٹ",system:"سسٹم",rights:"جملہ حقوق محفوظ ہیں۔"
-},
-
-"zh-CN":{
-  lang:"语言",menu:"语言",
-  bio:"数字内容创作者 · 开发者 · 互联网",
-  status:"系统运行中",search:"搜索链接...",
-  no:"未找到结果。",featured:"精选",
-  sections:["社交","创作者","直播","音乐","社区","其他","联系"],
-  desc:["支持和捐赠","项目和代码","专业资料","音乐和播放列表","加入社区","发送消息","支持我"],
-  email:"电子邮件",dark:"深色",light:"浅色",system:"系统",rights:"版权所有。"
-},
-
-"zh-TW":{
-  lang:"語言",menu:"語言",
-  bio:"數位內容創作者 · 開發者 · 網際網路",
-  status:"系統運作中",search:"搜尋連結...",
-  no:"找不到結果。",featured:"精選",
-  sections:["社群","創作者","直播","音樂","社群","其他","聯絡"],
-  desc:["支持與捐贈","專案與程式碼","專業檔案","音樂與播放清單","加入社群","傳送訊息","支持我"],
-  email:"電子郵件",dark:"深色",light:"淺色",system:"系統",rights:"版權所有。"
+el:{
+  language:"ΓΛΩΣΣΑ",
+  bio:"Ψηφιακός δημιουργός · Προγραμματιστής · Διαδίκτυο",
+  status:"Το σύστημα είναι ενεργό",
+  creatorBadge:"ΕΠΑΛΗΘΕΥΜΕΝΟΣ ΔΗΜΙΟΥΡΓΟΣ",
+  creatorLabel:"Δημιουργός περιεχομένου",
+  share:"Κοινοποίηση",
+  qr:"Κωδικός QR",
+  search:"Αναζήτηση συνδέσμων...",
+  social:"Κοινωνικά",
+  creator:"Δημιουργός",
+  live:"Ζωντανά",
+  music:"Μουσική",
+  community:"Κοινότητα",
+  other:"Άλλα",
+  contact:"Επικοινωνία",
+  noResults:"Δεν βρέθηκαν αποτελέσματα.",
+  qrDescription:"Άνοιξε το efesarac.co στο κινητό σου.",
+  close:"Κλείσιμο",
+  country:"Türkiye",
+  copied:"Ο σύνδεσμος αντιγράφηκε!"
 },
 
 ja:{
-  lang:"言語",menu:"言語",
+  language:"言語",
   bio:"デジタルクリエイター · 開発者 · インターネット",
-  status:"システム稼働中",search:"リンクを検索...",
-  no:"結果が見つかりません。",featured:"注目",
-  sections:["ソーシャル","クリエイター","ライブ","音楽","コミュニティ","その他","お問い合わせ"],
-  desc:["サポートと寄付","プロジェクトとコード","プロフィール","音楽とプレイリスト","コミュニティに参加","メッセージを送る","応援する"],
-  email:"メール",dark:"ダーク",light:"ライト",system:"システム",rights:"All Rights Reserved."
+  status:"システム稼働中",
+  creatorBadge:"認証済みクリエイター",
+  creatorLabel:"コンテンツクリエイター",
+  share:"共有",
+  qr:"QRコード",
+  search:"リンクを検索...",
+  social:"ソーシャル",
+  creator:"クリエイター",
+  live:"ライブ",
+  music:"音楽",
+  community:"コミュニティ",
+  other:"その他",
+  contact:"連絡先",
+  noResults:"結果がありません。",
+  qrDescription:"スマートフォンでefesarac.coを開く。",
+  close:"閉じる",
+  country:"Türkiye",
+  copied:"リンクをコピーしました！"
 },
 
 ko:{
-  lang:"언어",menu:"언어",
+  language:"언어",
   bio:"디지털 크리에이터 · 개발자 · 인터넷",
-  status:"시스템 활성",search:"링크 검색...",
-  no:"결과가 없습니다.",featured:"추천",
-  sections:["소셜","크리에이터","라이브","음악","커뮤니티","기타","연락처"],
-  desc:["후원 및 기부","프로젝트 및 코드","전문 프로필","음악 및 플레이리스트","커뮤니티 참여","메시지 보내기","후원하기"],
-  email:"이메일",dark:"다크",light:"라이트",system:"시스템",rights:"All Rights Reserved."
+  status:"시스템 활성",
+  creatorBadge:"인증된 크리에이터",
+  creatorLabel:"콘텐츠 크리에이터",
+  share:"공유",
+  qr:"QR 코드",
+  search:"링크 검색...",
+  social:"소셜",
+  creator:"크리에이터",
+  live:"라이브",
+  music:"음악",
+  community:"커뮤니티",
+  other:"기타",
+  contact:"연락처",
+  noResults:"결과가 없습니다.",
+  qrDescription:"휴대폰에서 efesarac.co를 열어보세요.",
+  close:"닫기",
+  country:"Türkiye",
+  copied:"링크가 복사되었습니다!"
 },
 
-vi:{
-  lang:"NGÔN NGỮ",menu:"NGÔN NGỮ",
-  bio:"Nhà sáng tạo nội dung số · Lập trình viên · Internet",
-  status:"Hệ thống đang hoạt động",search:"Tìm kiếm liên kết...",
-  no:"Không tìm thấy kết quả.",featured:"NỔI BẬT",
-  sections:["Xã hội","Nhà sáng tạo","Trực tiếp","Âm nhạc","Cộng đồng","Khác","Liên hệ"],
-  desc:["Hỗ trợ và quyên góp","Dự án và mã nguồn","Hồ sơ chuyên nghiệp","Âm nhạc và danh sách phát","Tham gia cộng đồng","Gửi tin nhắn","Ủng hộ tôi"],
-  email:"Email",dark:"Tối",light:"Sáng",system:"Hệ thống",rights:"Đã đăng ký bản quyền."
+zh:{
+  language:"语言",
+  bio:"数字创作者 · 开发者 · 互联网",
+  status:"系统正常",
+  creatorBadge:"认证创作者",
+  creatorLabel:"内容创作者",
+  share:"分享",
+  qr:"二维码",
+  search:"搜索链接...",
+  social:"社交",
+  creator:"创作者",
+  live:"直播",
+  music:"音乐",
+  community:"社区",
+  other:"其他",
+  contact:"联系",
+  noResults:"没有找到结果。",
+  qrDescription:"在手机上打开 efesarac.co。",
+  close:"关闭",
+  country:"Türkiye",
+  copied:"链接已复制！"
 },
 
-th:{
-  lang:"ภาษา",menu:"ภาษา",
-  bio:"ครีเอเตอร์ดิจิทัล · นักพัฒนา · อินเทอร์เน็ต",
-  status:"ระบบทำงานอยู่",search:"ค้นหาลิงก์...",
-  no:"ไม่พบผลลัพธ์",featured:"แนะนำ",
-  sections:["โซเชียล","ครีเอเตอร์","ไลฟ์","เพลง","ชุมชน","อื่นๆ","ติดต่อ"],
-  desc:["สนับสนุนและบริจาค","โปรเจกต์และโค้ด","โปรไฟล์มืออาชีพ","เพลงและเพลย์ลิสต์","เข้าร่วมชุมชน","ส่งข้อความ","สนับสนุนฉัน"],
-  email:"อีเมล",dark:"มืด",light:"สว่าง",system:"ระบบ",rights:"สงวนลิขสิทธิ์"
+hi:{
+  language:"भाषा",
+  bio:"डिजिटल क्रिएटर · डेवलपर · इंटरनेट",
+  status:"सिस्टम सक्रिय",
+  creatorBadge:"सत्यापित क्रिएटर",
+  creatorLabel:"कंटेंट क्रिएटर",
+  share:"शेयर",
+  qr:"QR कोड",
+  search:"लिंक खोजें...",
+  social:"सोशल",
+  creator:"क्रिएटर",
+  live:"लाइव",
+  music:"संगीत",
+  community:"समुदाय",
+  other:"अन्य",
+  contact:"संपर्क",
+  noResults:"कोई परिणाम नहीं मिला।",
+  qrDescription:"अपने फोन पर efesarac.co खोलें।",
+  close:"बंद करें",
+  country:"Türkiye",
+  copied:"लिंक कॉपी हो गया!"
 },
 
 id:{
-  lang:"BAHASA",menu:"BAHASA",
+  language:"BAHASA",
   bio:"Kreator digital · Pengembang · Internet",
-  status:"Sistem aktif",search:"Cari tautan...",
-  no:"Tidak ada hasil.",featured:"UNGGULAN",
-  sections:["Sosial","Kreator","Live","Musik","Komunitas","Lainnya","Kontak"],
-  desc:["Dukungan dan donasi","Proyek dan kode","Profil profesional","Musik dan daftar putar","Bergabung dengan komunitas","Kirim pesan","Dukung saya"],
-  email:"Email",dark:"Gelap",light:"Terang",system:"Sistem",rights:"Hak Cipta Dilindungi."
+  status:"Sistem aktif",
+  creatorBadge:"KREATOR TERVERIFIKASI",
+  creatorLabel:"Kreator konten",
+  share:"Bagikan",
+  qr:"Kode QR",
+  search:"Cari tautan...",
+  social:"Sosial",
+  creator:"Kreator",
+  live:"Live",
+  music:"Musik",
+  community:"Komunitas",
+  other:"Lainnya",
+  contact:"Kontak",
+  noResults:"Tidak ada hasil.",
+  qrDescription:"Buka efesarac.co di ponsel Anda.",
+  close:"Tutup",
+  country:"Türkiye",
+  copied:"Tautan disalin!"
 },
 
 ms:{
-  lang:"BAHASA",menu:"BAHASA",
-  bio:"Pencipta kandungan digital · Pembangun · Internet",
-  status:"Sistem aktif",search:"Cari pautan...",
-  no:"Tiada hasil ditemui.",featured:"DITAMPILKAN",
-  sections:["Sosial","Pencipta","Langsung","Muzik","Komuniti","Lain-lain","Hubungi"],
-  desc:["Sokongan dan sumbangan","Projek dan kod","Profil profesional","Muzik dan senarai main","Sertai komuniti","Hantar mesej","Sokong saya"],
-  email:"E-mel",dark:"Gelap",light:"Cerah",system:"Sistem",rights:"Hak Cipta Terpelihara."
+  language:"BAHASA",
+  bio:"Pencipta digital · Pembangun · Internet",
+  status:"Sistem aktif",
+  creatorBadge:"PENCIPTA DISAHKAN",
+  creatorLabel:"Pencipta kandungan",
+  share:"Kongsi",
+  qr:"Kod QR",
+  search:"Cari pautan...",
+  social:"Sosial",
+  creator:"Pencipta",
+  live:"Langsung",
+  music:"Muzik",
+  community:"Komuniti",
+  other:"Lain-lain",
+  contact:"Hubungi",
+  noResults:"Tiada hasil.",
+  qrDescription:"Buka efesarac.co pada telefon anda.",
+  close:"Tutup",
+  country:"Türkiye",
+  copied:"Pautan disalin!"
+},
+
+vi:{
+  language:"NGÔN NGỮ",
+  bio:"Nhà sáng tạo số · Nhà phát triển · Internet",
+  status:"Hệ thống đang hoạt động",
+  creatorBadge:"NHÀ SÁNG TẠO ĐÃ XÁC MINH",
+  creatorLabel:"Nhà sáng tạo nội dung",
+  share:"Chia sẻ",
+  qr:"Mã QR",
+  search:"Tìm kiếm liên kết...",
+  social:"Mạng xã hội",
+  creator:"Nhà sáng tạo",
+  live:"Trực tiếp",
+  music:"Âm nhạc",
+  community:"Cộng đồng",
+  other:"Khác",
+  contact:"Liên hệ",
+  noResults:"Không tìm thấy kết quả.",
+  qrDescription:"Mở efesarac.co trên điện thoại.",
+  close:"Đóng",
+  country:"Türkiye",
+  copied:"Đã sao chép liên kết!"
+},
+
+th:{
+  language:"ภาษา",
+  bio:"ครีเอเตอร์ดิจิทัล · นักพัฒนา · อินเทอร์เน็ต",
+  status:"ระบบทำงานอยู่",
+  creatorBadge:"ครีเอเตอร์ที่ได้รับการยืนยัน",
+  creatorLabel:"ครีเอเตอร์เนื้อหา",
+  share:"แชร์",
+  qr:"คิวอาร์โค้ด",
+  search:"ค้นหาลิงก์...",
+  social:"โซเชียล",
+  creator:"ครีเอเตอร์",
+  live:"ไลฟ์",
+  music:"เพลง",
+  community:"ชุมชน",
+  other:"อื่นๆ",
+  contact:"ติดต่อ",
+  noResults:"ไม่พบผลลัพธ์",
+  qrDescription:"เปิด efesarac.co บนโทรศัพท์ของคุณ",
+  close:"ปิด",
+  country:"Türkiye",
+  copied:"คัดลอกลิงก์แล้ว!"
+},
+
+ro:{
+  language:"LIMBĂ",
+  bio:"Creator digital · Dezvoltator · Internet",
+  status:"Sistem activ",
+  creatorBadge:"CREATOR VERIFICAT",
+  creatorLabel:"Creator de conținut",
+  share:"Distribuie",
+  qr:"Cod QR",
+  search:"Caută linkuri...",
+  social:"Social",
+  creator:"Creator",
+  live:"Live",
+  music:"Muzică",
+  community:"Comunitate",
+  other:"Altele",
+  contact:"Contact",
+  noResults:"Niciun rezultat.",
+  qrDescription:"Deschide efesarac.co pe telefon.",
+  close:"Închide",
+  country:"Türkiye",
+  copied:"Link copiat!"
+},
+
+cs:{
+  language:"JAZYK",
+  bio:"Digitální tvůrce · Vývojář · Internet",
+  status:"Systém aktivní",
+  creatorBadge:"OVĚŘENÝ TVŮRCE",
+  creatorLabel:"Tvůrce obsahu",
+  share:"Sdílet",
+  qr:"QR kód",
+  search:"Hledat odkazy...",
+  social:"Sociální",
+  creator:"Tvůrce",
+  live:"Živě",
+  music:"Hudba",
+  community:"Komunita",
+  other:"Další",
+  contact:"Kontakt",
+  noResults:"Žádné výsledky.",
+  qrDescription:"Otevřete efesarac.co v telefonu.",
+  close:"Zavřít",
+  country:"Türkiye",
+  copied:"Odkaz zkopírován!"
+},
+
+hu:{
+  language:"NYELV",
+  bio:"Digitális alkotó · Fejlesztő · Internet",
+  status:"A rendszer aktív",
+  creatorBadge:"ELLENŐRZÖTT ALKOTÓ",
+  creatorLabel:"Tartalomkészítő",
+  share:"Megosztás",
+  qr:"QR-kód",
+  search:"Linkek keresése...",
+  social:"Közösségi",
+  creator:"Alkotó",
+  live:"Élő",
+  music:"Zene",
+  community:"Közösség",
+  other:"Egyéb",
+  contact:"Kapcsolat",
+  noResults:"Nincs találat.",
+  qrDescription:"Nyisd meg az efesarac.co oldalt a telefonodon.",
+  close:"Bezárás",
+  country:"Türkiye",
+  copied:"Link másolva!"
+},
+
+sv:{
+  language:"SPRÅK",
+  bio:"Digital skapare · Utvecklare · Internet",
+  status:"System aktivt",
+  creatorBadge:"VERIFIERAD SKAPARE",
+  creatorLabel:"Innehållsskapare",
+  share:"Dela",
+  qr:"QR-kod",
+  search:"Sök länkar...",
+  social:"Socialt",
+  creator:"Skapare",
+  live:"Live",
+  music:"Musik",
+  community:"Gemenskap",
+  other:"Övrigt",
+  contact:"Kontakt",
+  noResults:"Inga resultat.",
+  qrDescription:"Öppna efesarac.co på din telefon.",
+  close:"Stäng",
+  country:"Türkiye",
+  copied:"Länk kopierad!"
+},
+
+no:{
+  language:"SPRÅK",
+  bio:"Digital skaper · Utvikler · Internett",
+  status:"System aktivt",
+  creatorBadge:"VERIFISERT SKAPER",
+  creatorLabel:"Innholdsskaper",
+  share:"Del",
+  qr:"QR-kode",
+  search:"Søk etter lenker...",
+  social:"Sosialt",
+  creator:"Skaper",
+  live:"Direkte",
+  music:"Musikk",
+  community:"Fellesskap",
+  other:"Annet",
+  contact:"Kontakt",
+  noResults:"Ingen resultater.",
+  qrDescription:"Åpne efesarac.co på telefonen.",
+  close:"Lukk",
+  country:"Türkiye",
+  copied:"Lenke kopiert!"
+},
+
+da:{
+  language:"SPROG",
+  bio:"Digital skaber · Udvikler · Internet",
+  status:"System aktivt",
+  creatorBadge:"VERIFICERET SKABER",
+  creatorLabel:"Indholdsskaber",
+  share:"Del",
+  qr:"QR-kode",
+  search:"Søg efter links...",
+  social:"Social",
+  creator:"Skaber",
+  live:"Live",
+  music:"Musik",
+  community:"Fællesskab",
+  other:"Andet",
+  contact:"Kontakt",
+  noResults:"Ingen resultater.",
+  qrDescription:"Åbn efesarac.co på din telefon.",
+  close:"Luk",
+  country:"Türkiye",
+  copied:"Link kopieret!"
+},
+
+fi:{
+  language:"KIELI",
+  bio:"Digitaalinen sisällöntuottaja · Kehittäjä · Internet",
+  status:"Järjestelmä aktiivinen",
+  creatorBadge:"VAHVISTETTU SISÄLLÖNTUOTTAJA",
+  creatorLabel:"Sisällöntuottaja",
+  share:"Jaa",
+  qr:"QR-koodi",
+  search:"Hae linkkejä...",
+  social:"Sosiaalinen",
+  creator:"Luoja",
+  live:"Live",
+  music:"Musiikki",
+  community:"Yhteisö",
+  other:"Muu",
+  contact:"Yhteystiedot",
+  noResults:"Ei tuloksia.",
+  qrDescription:"Avaa efesarac.co puhelimellasi.",
+  close:"Sulje",
+  country:"Türkiye",
+  copied:"Linkki kopioitu!"
+},
+
+sk:{
+  language:"JAZYK",
+  bio:"Digitálny tvorca · Vývojár · Internet",
+  status:"Systém aktívny",
+  creatorBadge:"OVERENÝ TVORCA",
+  creatorLabel:"Tvorca obsahu",
+  share:"Zdieľať",
+  qr:"QR kód",
+  search:"Hľadať odkazy...",
+  social:"Sociálne",
+  creator:"Tvorca",
+  live:"Naživo",
+  music:"Hudba",
+  community:"Komunita",
+  other:"Ďalšie",
+  contact:"Kontakt",
+  noResults:"Žiadne výsledky.",
+  qrDescription:"Otvorte efesarac.co v telefóne.",
+  close:"Zavrieť",
+  country:"Türkiye",
+  copied:"Odkaz skopírovaný!"
+},
+
+bg:{
+  language:"ЕЗИК",
+  bio:"Дигитален създател · Разработчик · Интернет",
+  status:"Системата е активна",
+  creatorBadge:"ПРОВЕРЕН СЪЗДАТЕЛ",
+  creatorLabel:"Създател на съдържание",
+  share:"Споделяне",
+  qr:"QR код",
+  search:"Търсене на връзки...",
+  social:"Социални",
+  creator:"Създател",
+  live:"На живо",
+  music:"Музика",
+  community:"Общност",
+  other:"Други",
+  contact:"Контакт",
+  noResults:"Няма резултати.",
+  qrDescription:"Отворете efesarac.co на телефона си.",
+  close:"Затвори",
+  country:"Türkiye",
+  copied:"Връзката е копирана!"
+},
+
+sr:{
+  language:"JEZIK",
+  bio:"Digitalni kreator · Programer · Internet",
+  status:"Sistem aktivan",
+  creatorBadge:"VERIFIKOVANI KREATOR",
+  creatorLabel:"Kreator sadržaja",
+  share:"Podeli",
+  qr:"QR kod",
+  search:"Pretraži linkove...",
+  social:"Društvene mreže",
+  creator:"Kreator",
+  live:"Uživo",
+  music:"Muzika",
+  community:"Zajednica",
+  other:"Ostalo",
+  contact:"Kontakt",
+  noResults:"Nema rezultata.",
+  qrDescription:"Otvorite efesarac.co na telefonu.",
+  close:"Zatvori",
+  country:"Türkiye",
+  copied:"Link je kopiran!"
+},
+
+hr:{
+  language:"JEZIK",
+  bio:"Digitalni kreator · Programer · Internet",
+  status:"Sustav aktivan",
+  creatorBadge:"POTVRĐENI KREATOR",
+  creatorLabel:"Kreator sadržaja",
+  share:"Podijeli",
+  qr:"QR kod",
+  search:"Pretraži poveznice...",
+  social:"Društveno",
+  creator:"Kreator",
+  live:"Uživo",
+  music:"Glazba",
+  community:"Zajednica",
+  other:"Ostalo",
+  contact:"Kontakt",
+  noResults:"Nema rezultata.",
+  qrDescription:"Otvorite efesarac.co na telefonu.",
+  close:"Zatvori",
+  country:"Türkiye",
+  copied:"Poveznica kopirana!"
+},
+
+ca:{
+  language:"IDIOMA",
+  bio:"Creador digital · Desenvolupador · Internet",
+  status:"Sistema actiu",
+  creatorBadge:"CREADOR VERIFICAT",
+  creatorLabel:"Creador de contingut",
+  share:"Compartir",
+  qr:"Codi QR",
+  search:"Cerca enllaços...",
+  social:"Social",
+  creator:"Creador",
+  live:"En directe",
+  music:"Música",
+  community:"Comunitat",
+  other:"Altres",
+  contact:"Contacte",
+  noResults:"No s'han trobat resultats.",
+  qrDescription:"Obre efesarac.co al teu telèfon.",
+  close:"Tancar",
+  country:"Türkiye",
+  copied:"Enllaç copiat!"
+},
+
+et:{
+  language:"KEEL",
+  bio:"Digilooja · Arendaja · Internet",
+  status:"Süsteem aktiivne",
+  creatorBadge:"KINNITATUD SISULOOJA",
+  creatorLabel:"Sisulooja",
+  share:"Jaga",
+  qr:"QR-kood",
+  search:"Otsi linke...",
+  social:"Sotsiaal",
+  creator:"Looja",
+  live:"Otse",
+  music:"Muusika",
+  community:"Kogukond",
+  other:"Muu",
+  contact:"Kontakt",
+  noResults:"Tulemusi ei leitud.",
+  qrDescription:"Ava efesarac.co telefonis.",
+  close:"Sulge",
+  country:"Türkiye",
+  copied:"Link kopeeritud!"
+},
+
+lv:{
+  language:"VALODA",
+  bio:"Digitālais satura veidotājs · Izstrādātājs · Internets",
+  status:"Sistēma aktīva",
+  creatorBadge:"VERIFICĒTS RADĪTĀJS",
+  creatorLabel:"Satura veidotājs",
+  share:"Kopīgot",
+  qr:"QR kods",
+  search:"Meklēt saites...",
+  social:"Sociālie",
+  creator:"Radītājs",
+  live:"Tiešraide",
+  music:"Mūzika",
+  community:"Kopiena",
+  other:"Cits",
+  contact:"Kontakti",
+  noResults:"Rezultātu nav.",
+  qrDescription:"Atveriet efesarac.co tālrunī.",
+  close:"Aizvērt",
+  country:"Türkiye",
+  copied:"Saite nokopēta!"
+},
+
+lt:{
+  language:"KALBA",
+  bio:"Skaitmeninis kūrėjas · Programuotojas · Internetas",
+  status:"Sistema aktyvi",
+  creatorBadge:"PATVIRTINTAS KŪRĖJAS",
+  creatorLabel:"Turinio kūrėjas",
+  share:"Bendrinti",
+  qr:"QR kodas",
+  search:"Ieškoti nuorodų...",
+  social:"Socialiniai",
+  creator:"Kūrėjas",
+  live:"Tiesiogiai",
+  music:"Muzika",
+  community:"Bendruomenė",
+  other:"Kita",
+  contact:"Kontaktai",
+  noResults:"Rezultatų nėra.",
+  qrDescription:"Atidarykite efesarac.co telefone.",
+  close:"Uždaryti",
+  country:"Türkiye",
+  copied:"Nuoroda nukopijuota!"
+},
+
+sl:{
+  language:"JEZIK",
+  bio:"Digitalni ustvarjalec · Razvijalec · Internet",
+  status:"Sistem aktiven",
+  creatorBadge:"PREVERJEN USTVARJALEC",
+  creatorLabel:"Ustvarjalec vsebin",
+  share:"Deli",
+  qr:"QR koda",
+  search:"Išči povezave...",
+  social:"Družabno",
+  creator:"Ustvarjalec",
+  live:"V živo",
+  music:"Glasba",
+  community:"Skupnost",
+  other:"Drugo",
+  contact:"Stik",
+  noResults:"Ni rezultatov.",
+  qrDescription:"Odprite efesarac.co v telefonu.",
+  close:"Zapri",
+  country:"Türkiye",
+  copied:"Povezava kopirana!"
 }
 
 };
 
+/* =========================
+   LANGUAGE NAMES
+========================= */
 
-/* =========================================================
+const languageNames={
+  tr:"Türkçe",
+  en:"English",
+  de:"Deutsch",
+  fr:"Français",
+  es:"Español",
+  it:"Italiano",
+  pt:"Português",
+  nl:"Nederlands",
+  pl:"Polski",
+  ru:"Русский",
+  uk:"Українська",
+  ar:"العربية",
+  fa:"فارسی",
+  he:"עברית",
+  el:"Ελληνικά",
+  ja:"日本語",
+  ko:"한국어",
+  zh:"中文",
+  hi:"हिन्दी",
+  id:"Bahasa Indonesia",
+  ms:"Bahasa Melayu",
+  vi:"Tiếng Việt",
+  th:"ไทย",
+  ro:"Română",
+  cs:"Čeština",
+  hu:"Magyar",
+  sv:"Svenska",
+  no:"Norsk",
+  da:"Dansk",
+  fi:"Suomi",
+  sk:"Slovenčina",
+  bg:"Български",
+  sr:"Srpski",
+  hr:"Hrvatski",
+  ca:"Català",
+  et:"Eesti",
+  lv:"Latviešu",
+  lt:"Lietuvių",
+  sl:"Slovenščina"
+};
+
+let currentLang=localStorage.getItem("siteLanguage") || "tr";
+
+/* =========================
    LANGUAGE
-========================================================= */
+========================= */
 
-const languageButton=document.getElementById("languageButton");
-const languageMenu=document.getElementById("languageMenu");
-const languageOptions=document.querySelectorAll(".language-option");
+function applyLanguage(lang){
 
-function setLanguage(lang){
+  if(!translations[lang]) lang="en";
 
-  if(!T[lang]) lang="tr";
+  currentLang=lang;
+  localStorage.setItem("siteLanguage",lang);
 
-  const t=T[lang];
+  const t=translations[lang];
 
   document.documentElement.lang=lang;
 
-  document.getElementById("languageLabel").textContent=t.lang;
-  document.getElementById("languageMenuTitle").textContent=t.menu;
+  if(["ar","fa","he"].includes(lang)){
+    document.documentElement.dir="rtl";
+  }else{
+    document.documentElement.dir="ltr";
+  }
+
+  document.getElementById("languageBtn").setAttribute("aria-label",t.language);
 
   document.getElementById("bio").textContent=t.bio;
   document.getElementById("statusText").textContent=t.status;
+  document.getElementById("creatorBadge").textContent=t.creatorBadge;
+  document.getElementById("creatorLabel").textContent=t.creatorLabel;
+  document.getElementById("shareText").textContent=t.share;
+  document.getElementById("qrText").textContent=t.qr;
   document.getElementById("searchInput").placeholder=t.search;
-  document.getElementById("noResultsText").textContent=t.no;
-  document.getElementById("featuredText").textContent=t.featured;
+  document.getElementById("noResultsText").textContent=t.noResults;
+  document.getElementById("qrTitle").textContent=t.qr;
+  document.getElementById("qrDescription").textContent=t.qrDescription;
+  document.getElementById("closeQr").textContent=t.close;
 
-  const titles=[
-    "socialTitle",
-    "creatorTitle",
-    "liveTitle",
-    "musicTitle",
-    "communityTitle",
-    "otherTitle",
-    "contactTitle"
-  ];
-
-  titles.forEach((id,i)=>{
-    document.getElementById(id).textContent=t.sections[i];
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key=el.dataset.i18n;
+    if(t[key]) el.textContent=t[key];
   });
 
-  const descriptions=document.querySelectorAll("[data-desc]");
-  descriptions.forEach(el=>{
-    const key=el.dataset.desc;
-    const map={
-      support:0,
-      projects:1,
-      professional:2,
-      music:3,
-      join:4,
-      message:5,
-      supportMe:6
-    };
-    if(map[key]!==undefined) el.textContent=t.desc[map[key]];
+  document.querySelectorAll(".link-description[data-tr]").forEach(el=>{
+    if(lang==="tr"){
+      el.textContent=el.dataset.tr;
+    }else if(lang==="en"){
+      el.textContent=el.dataset.en;
+    }
   });
 
-  document.getElementById("emailTitle").textContent=t.email;
-  document.getElementById("noResultsText").textContent=t.no;
-  document.getElementById("copyrightText").textContent=
-    `© 2008–2026 efesarac.co ${t.rights}`;
+  document.getElementById("countryName").textContent=t.country;
 
-  document.querySelector(".theme-dark-text").textContent=t.dark;
-  document.querySelector(".theme-light-text").textContent=t.light;
-  document.querySelector(".theme-system-text").textContent=t.system;
-
-  languageOptions.forEach(option=>{
-    option.classList.toggle("active",option.dataset.lang===lang);
+  document.querySelectorAll(".lang-option").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.lang===lang);
   });
 
-  localStorage.setItem("efesarac-language",lang);
-  languageMenu.classList.remove("open");
-
+  filterLinks();
 }
 
+function buildLanguageMenu(){
 
-/* LANGUAGE BUTTON */
+  const menu=document.getElementById("languageMenu");
 
-languageButton.addEventListener("click",e=>{
+  Object.entries(languageNames).forEach(([code,name])=>{
+
+    const btn=document.createElement("button");
+
+    btn.className="lang-option";
+    btn.dataset.lang=code;
+    btn.textContent=name;
+
+    btn.addEventListener("click",()=>{
+      applyLanguage(code);
+      menu.classList.remove("open");
+    });
+
+    menu.appendChild(btn);
+  });
+}
+
+buildLanguageMenu();
+applyLanguage(currentLang);
+
+/* =========================
+   LANGUAGE MENU
+========================= */
+
+document.getElementById("languageBtn").addEventListener("click",e=>{
   e.stopPropagation();
-  languageMenu.classList.toggle("open");
-  themeMenu.classList.remove("open");
+  document.getElementById("languageMenu").classList.toggle("open");
 });
-
-languageOptions.forEach(option=>{
-  option.addEventListener("click",()=>{
-    setLanguage(option.dataset.lang);
-  });
-});
-
-
-/* =========================================================
-   THEME
-========================================================= */
-
-const themeButton=document.getElementById("themeButton");
-const themeMenu=document.getElementById("themeMenu");
-const themeOptions=document.querySelectorAll(".theme-option");
-const themeIcon=document.getElementById("themeIcon");
-
-function getSystemTheme(){
-  return window.matchMedia("(prefers-color-scheme:light)").matches
-    ?"light":"dark";
-}
-
-function updateThemeIcon(actualTheme){
-
-  themeIcon.innerHTML=actualTheme==="light"
-    ?`
-      <circle cx="12" cy="12" r="4"/>
-      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-     `
-    :`
-      <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8z"/>
-     `;
-}
-
-function applyTheme(choice){
-
-  const actualTheme=choice==="system"?getSystemTheme():choice;
-
-  document.documentElement.setAttribute("data-theme",actualTheme);
-
-  updateThemeIcon(actualTheme);
-
-  themeOptions.forEach(option=>{
-    option.classList.toggle(
-      "active",
-      option.dataset.themeChoice===choice
-    );
-  });
-
-  localStorage.setItem("efesarac-theme",choice);
-
-  const meta=document.querySelector('meta[name="theme-color"]');
-
-  if(meta){
-    meta.content=actualTheme==="light"?"#f4f5f8":"#060609";
-  }
-}
-
-function setTheme(choice){
-  applyTheme(choice);
-  themeMenu.classList.remove("open");
-}
-
-themeButton.addEventListener("click",e=>{
-  e.stopPropagation();
-  themeMenu.classList.toggle("open");
-  languageMenu.classList.remove("open");
-});
-
-themeOptions.forEach(option=>{
-  option.addEventListener("click",()=>{
-    setTheme(option.dataset.themeChoice);
-  });
-});
-
-const mediaQuery=window.matchMedia("(prefers-color-scheme:light)");
-
-mediaQuery.addEventListener("change",()=>{
-  const saved=localStorage.getItem("efesarac-theme")||"dark";
-  if(saved==="system") applyTheme("system");
-});
-
-
-/* CLOSE MENUS */
 
 document.addEventListener("click",e=>{
-
-  if(!languageMenu.contains(e.target)&&e.target!==languageButton){
-    languageMenu.classList.remove("open");
+  if(!e.target.closest(".language-wrap")){
+    document.getElementById("languageMenu").classList.remove("open");
   }
-
-  if(!themeMenu.contains(e.target)&&e.target!==themeButton){
-    themeMenu.classList.remove("open");
-  }
-
 });
 
+/* =========================
+   THEME
+========================= */
 
-/* =========================================================
+const savedTheme=localStorage.getItem("siteTheme");
+
+if(savedTheme){
+  document.documentElement.dataset.theme=savedTheme;
+}else{
+  document.documentElement.dataset.theme="dark";
+}
+
+function updateThemeIcon(){
+
+  const icon=document.getElementById("themeIcon");
+
+  if(document.documentElement.dataset.theme==="light"){
+
+    icon.innerHTML=`
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    `;
+
+  }else{
+
+    icon.innerHTML=`
+      <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.8 6.8 0 0 0 21 12.8Z"/>
+    `;
+  }
+}
+
+updateThemeIcon();
+
+document.getElementById("themeBtn").addEventListener("click",()=>{
+
+  const next=
+    document.documentElement.dataset.theme==="dark"
+      ?"light"
+      :"dark";
+
+  document.documentElement.dataset.theme=next;
+  localStorage.setItem("siteTheme",next);
+  updateThemeIcon();
+});
+
+/* =========================
    SEARCH
-========================================================= */
+========================= */
 
 const searchInput=document.getElementById("searchInput");
-const noResults=document.getElementById("noResults");
 
-function searchLinks(){
+function filterLinks(){
 
-  const query=searchInput.value.toLowerCase().trim();
-
-  const cards=document.querySelectorAll(".link-card");
-
+  const query=searchInput.value.trim().toLowerCase();
   let visible=0;
 
-  cards.forEach(card=>{
+  document.querySelectorAll(".link-card").forEach(card=>{
 
     const text=(
-      card.dataset.search||
-      card.innerText
+      card.innerText+" "+
+      (card.dataset.search||"")
     ).toLowerCase();
 
-    const match=!query||text.includes(query);
+    const match=!query || text.includes(query);
 
-    card.style.display=match?"flex":"none";
+    card.classList.toggle("hidden",!match);
 
     if(match) visible++;
-
   });
 
   document.querySelectorAll(".section").forEach(section=>{
 
-    const hasVisible=[...section.querySelectorAll(".link-card")]
-      .some(card=>card.style.display!=="none");
+    const cards=section.querySelectorAll(".link-card");
+    let any=false;
 
-    section.style.display=hasVisible?"":"none";
+    cards.forEach(card=>{
+      if(!card.classList.contains("hidden")) any=true;
+    });
 
+    section.style.display=any?"block":"none";
   });
 
-  noResults.style.display=visible?"none":"block";
+  document.getElementById("noResults").style.display=
+    visible===0?"block":"none";
 }
 
-searchInput.addEventListener("input",searchLinks);
+searchInput.addEventListener("input",filterLinks);
 
+/* =========================
+   SHARE
+========================= */
 
-/* =========================================================
-   COPY
-========================================================= */
+const toast=document.getElementById("toast");
 
-document.querySelectorAll(".copy-btn").forEach(button=>{
+function showToast(text){
 
-  button.addEventListener("click",async e=>{
+  toast.textContent=text;
+  toast.classList.add("show");
 
-    e.preventDefault();
-    e.stopPropagation();
+  clearTimeout(window.toastTimer);
 
-    const text=button.dataset.copy;
+  window.toastTimer=setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
+}
 
-    try{
-      await navigator.clipboard.writeText(text);
-    }catch(error){
+document.getElementById("shareBtn").addEventListener("click",async()=>{
 
-      const temp=document.createElement("input");
-      temp.value=text;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand("copy");
-      temp.remove();
+  const shareData={
+    title:"Efe Saraç",
+    text:"Efe Saraç — efesarac.co",
+    url:"https://efesarac.co"
+  };
 
+  try{
+
+    if(navigator.share){
+      await navigator.share(shareData);
+    }else{
+
+      await navigator.clipboard.writeText("https://efesarac.co");
+
+      showToast(
+        translations[currentLang].copied
+      );
     }
 
-    const old=button.textContent;
-
-    button.textContent="✓";
-
-    setTimeout(()=>{
-      button.textContent=old;
-    },1200);
-
-  });
-
+  }catch(error){
+    /* Kullanıcı paylaşım penceresini kapattıysa hiçbir şey yapma. */
+  }
 });
 
+/* =========================
+   QR
+========================= */
 
-/* =========================================================
+const qrModal=document.getElementById("qrModal");
+
+document.getElementById("qrBtn").addEventListener("click",()=>{
+  qrModal.classList.add("open");
+});
+
+document.getElementById("closeQr").addEventListener("click",()=>{
+  qrModal.classList.remove("open");
+});
+
+qrModal.addEventListener("click",e=>{
+  if(e.target===qrModal){
+    qrModal.classList.remove("open");
+  }
+});
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    qrModal.classList.remove("open");
+  }
+});
+
+/* =========================
    COUNTRY FLAG
-========================================================= */
+========================= */
 
 async function detectCountryFlag(){
 
   const flag=document.getElementById("countryFlag");
-
-  if(!flag)return;
+  const name=document.getElementById("countryName");
 
   const turkeyFlag="https://flagcdn.com/w160/tr.png";
 
@@ -1250,76 +2411,67 @@ async function detectCountryFlag(){
       {cache:"no-store"}
     );
 
-    if(!response.ok)throw new Error();
+    if(!response.ok) throw new Error();
 
     const data=await response.json();
 
     const code=String(
-      data.country_code||"TR"
+      data.country_code || "TR"
     ).trim().toLowerCase();
 
-    if(!/^[a-z]{2}$/.test(code))throw new Error();
+    if(!/^[a-z]{2}$/.test(code)){
+      throw new Error();
+    }
 
-    const url=`https://flagcdn.com/w160/${code}.png`;
+    /*
+      Türkiye için isim kesin olarak Türkiye.
+      Turkey yazmayacak.
+    */
+    const countryName=
+      code==="tr"
+        ?"Türkiye"
+        :(data.country_name || code);
 
-    const image=new Image();
+    const newFlag=
+      `https://flagcdn.com/w160/${code}.png`;
 
-    image.onload=()=>{
+    const testImage=new Image();
 
-      flag.src=url;
-
-      /*
-       * TÜRKİYE ÖZEL OLARAK "Türkiye".
-       * "Turkey" gösterilmiyor.
-       */
-
-      flag.alt=
-        code==="tr"
-          ?"Türkiye Bayrağı"
-          :`${data.country_name||code.toUpperCase()} Bayrağı`;
-
+    testImage.onload=()=>{
+      flag.src=newFlag;
+      flag.alt=`${countryName} bayrağı`;
+      name.textContent=countryName;
     };
 
-    image.onerror=()=>{
+    testImage.onerror=()=>{
       flag.src=turkeyFlag;
       flag.alt="Türkiye Bayrağı";
+      name.textContent="Türkiye";
     };
 
-    image.src=url;
+    testImage.src=newFlag;
 
   }catch(error){
 
     flag.src=turkeyFlag;
     flag.alt="Türkiye Bayrağı";
-
+    name.textContent="Türkiye";
   }
-
 }
-
-
-/* =========================================================
-   INITIAL SETTINGS
-========================================================= */
-
-const savedLanguage=
-  localStorage.getItem("efesarac-language")||"tr";
-
-const savedTheme=
-  localStorage.getItem("efesarac-theme")||"dark";
-
-setLanguage(savedLanguage);
-applyTheme(savedTheme);
 
 detectCountryFlag();
 
+/* =========================
+   PRELOADER
+========================= */
 
-/* =========================================================
-   CARD ANIMATION
-========================================================= */
+window.addEventListener("load",()=>{
 
-document.querySelectorAll(".link-card").forEach((card,index)=>{
-  card.style.animationDelay=
-    `${Math.min(index*.035,.5)}s`;
+  setTimeout(()=>{
+    document.getElementById("preloader")
+      .classList.add("hide");
+  },450);
+
 });
 
 </script>
