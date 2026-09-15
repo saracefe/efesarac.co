@@ -2,31 +2,40 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#060609">
-<title>Efe Saraç — efesarac.co</title>
+
+<title>Efe Saraç — Dijital İçerik Üreticisi</title>
+<meta name="description" content="Efe Saraç — Dijital içerik üreticisi · Geliştirici · İnternet">
 
 <style>
 :root{
   --bg:#060609;
   --card:rgba(255,255,255,.055);
-  --card2:rgba(255,255,255,.085);
+  --card-hover:rgba(255,255,255,.085);
   --border:rgba(255,255,255,.10);
+  --border-hover:rgba(255,255,255,.20);
   --text:#fff;
-  --muted:#a4a5b0;
-  --muted2:#70717c;
-  --shadow:rgba(0,0,0,.35);
+  --muted:#a7a7b3;
+  --muted2:#777783;
+  --grid:rgba(255,255,255,.035);
+  --header-bg:rgba(10,10,14,.82);
+  --blue:#3b82f6;
+  --shadow:rgba(0,0,0,.30);
 }
 
 html[data-theme="light"]{
   --bg:#f4f5f8;
   --card:rgba(255,255,255,.72);
-  --card2:rgba(255,255,255,.94);
-  --border:rgba(20,25,40,.11);
+  --card-hover:rgba(255,255,255,.94);
+  --border:rgba(20,25,40,.10);
+  --border-hover:rgba(20,25,40,.20);
   --text:#15161b;
   --muted:#646773;
   --muted2:#858894;
-  --shadow:rgba(20,25,40,.14);
+  --grid:rgba(20,25,40,.045);
+  --header-bg:rgba(255,255,255,.84);
+  --shadow:rgba(20,25,40,.13);
 }
 
 *{
@@ -35,23 +44,32 @@ html[data-theme="light"]{
   padding:0;
 }
 
-body{
-  min-height:100vh;
-  overflow-x:hidden;
-  color:var(--text);
-  background:var(--bg);
-  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+html{
+  scroll-behavior:smooth;
 }
 
-body:before{
+body{
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% -20%,rgba(59,130,246,.08),transparent 35%),
+    var(--bg);
+  font-family:
+    Inter,-apple-system,BlinkMacSystemFont,
+    "Segoe UI",Roboto,Arial,sans-serif;
+  overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+
+body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
   z-index:-5;
   background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
   background-size:45px 45px;
 }
 
@@ -66,120 +84,120 @@ body:before{
   z-index:-4;
 }
 
-.orb1{top:-180px;left:-140px;background:#2563eb}
-.orb2{top:35%;right:-230px;background:#7c3aed}
-.orb3{bottom:-250px;left:25%;background:#06b6d4}
+.orb.one{
+  top:-180px;
+  left:-140px;
+  background:#2563eb;
+}
+
+.orb.two{
+  top:35%;
+  right:-230px;
+  background:#7c3aed;
+}
+
+.orb.three{
+  bottom:-250px;
+  left:25%;
+  background:#06b6d4;
+}
+
+html[data-theme="light"] .orb{
+  opacity:.08;
+}
 
 /* TOP */
 
-.top{
+.top-controls{
   position:fixed;
-  z-index:100;
   top:18px;
   right:18px;
+  z-index:100;
   display:flex;
+  align-items:center;
   gap:4px;
   padding:5px;
   border:1px solid var(--border);
   border-radius:15px;
-  background:rgba(10,10,14,.78);
+  background:var(--header-bg);
   backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 12px 35px var(--shadow);
 }
 
-html[data-theme="light"] .top{
-  background:rgba(255,255,255,.84);
-}
-
-.top button{
-  border:0;
-  color:var(--muted);
-  background:transparent;
-  cursor:pointer;
-}
-
-.lang-btn{
+.language-button{
   height:34px;
   display:flex;
   align-items:center;
   gap:7px;
   padding:0 10px;
-  border-radius:10px!important;
+  border:0;
+  border-radius:10px;
+  color:var(--muted);
+  background:transparent;
   font-size:11px;
   font-weight:800;
+  cursor:pointer;
 }
 
-.lang-btn:hover,
-.theme-btn:hover{
+.language-button:hover,
+.theme-button:hover{
   color:var(--text);
-  background:var(--card2);
+  background:var(--card-hover);
 }
 
-.lang-btn svg{
+.language-button svg{
   width:16px;
   height:16px;
 }
 
-.theme-btn{
-  width:34px;
-  height:34px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:10px;
+.language-button .chevron{
+  width:12px;
+  height:12px;
 }
 
-.theme-btn svg{
-  width:17px;
-  height:17px;
-}
-
-.lang-menu,
-.theme-menu{
+.language-menu{
   position:absolute;
-  top:48px;
-  right:0;
-  padding:7px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:rgba(10,10,14,.9);
-  backdrop-filter:blur(22px);
-  box-shadow:0 20px 50px var(--shadow);
-  opacity:0;
-  visibility:hidden;
-  transform:translateY(-6px);
-  transition:.2s;
-}
-
-html[data-theme="light"] .lang-menu,
-html[data-theme="light"] .theme-menu{
-  background:rgba(255,255,255,.94);
-}
-
-.lang-menu{
+  top:49px;
+  right:42px;
   width:275px;
   max-height:390px;
-  overflow:auto;
+  padding:7px;
+  overflow-y:auto;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:var(--header-bg);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  box-shadow:0 18px 45px var(--shadow);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-6px) scale(.98);
+  transition:.2s ease;
 }
 
-.theme-menu{
-  width:155px;
-}
-
-.lang-menu.open,
-.theme-menu.open{
+.language-menu.open{
   opacity:1;
   visibility:visible;
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
 }
 
-.lang-grid{
+.language-menu-title{
+  padding:9px 10px 7px;
+  color:var(--muted2);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.language-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:3px;
 }
 
-.lang-option,
-.theme-option{
+.language-option{
   display:flex;
   align-items:center;
   gap:8px;
@@ -190,23 +208,78 @@ html[data-theme="light"] .theme-menu{
   color:var(--muted);
   background:transparent;
   text-align:left;
-  cursor:pointer;
   font-size:11px;
   font-weight:700;
+  cursor:pointer;
 }
 
-.lang-option:hover,
-.lang-option.active,
-.theme-option:hover,
-.theme-option.active{
+.language-option:hover,
+.language-option.active{
   color:var(--text);
-  background:var(--card2);
+  background:var(--card-hover);
+}
+
+.theme-button{
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  border-radius:10px;
+  color:var(--muted);
+  background:transparent;
+  cursor:pointer;
+}
+
+.theme-button svg{
+  width:17px;
+  height:17px;
+}
+
+.theme-menu{
+  position:absolute;
+  top:49px;
+  right:0;
+  width:160px;
+  padding:6px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--header-bg);
+  backdrop-filter:blur(20px);
+  box-shadow:0 15px 40px var(--shadow);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-5px);
+  transition:.2s ease;
+}
+
+.theme-menu.open{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
 }
 
 .theme-option{
+  width:100%;
+  display:flex;
+  align-items:center;
   gap:10px;
-  padding:10px;
+  padding:10px 11px;
+  border:0;
+  border-radius:10px;
+  color:var(--muted);
+  background:transparent;
   font-size:12px;
+  font-weight:700;
+  text-align:left;
+  cursor:pointer;
+}
+
+.theme-option:hover,
+.theme-option.active{
+  color:var(--text);
+  background:var(--card-hover);
 }
 
 .theme-option svg{
@@ -214,11 +287,48 @@ html[data-theme="light"] .theme-menu{
   height:16px;
 }
 
+/* PRELOADER */
+
+.preloader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg);
+  transition:opacity .55s ease,visibility .55s ease;
+}
+
+.preloader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+.preloader img{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  animation:pulseLogo 1.4s ease-in-out infinite;
+}
+
+.logo-dark{
+  display:none;
+}
+
+html[data-theme="light"] .logo-light{
+  display:none;
+}
+
+html[data-theme="light"] .logo-dark{
+  display:block;
+}
+
 /* MAIN */
 
 .container{
   width:min(820px,calc(100% - 32px));
-  margin:auto;
+  margin:0 auto;
   padding:90px 0 40px;
 }
 
@@ -226,6 +336,7 @@ html[data-theme="light"] .theme-menu{
 
 .profile{
   text-align:center;
+  animation:fadeUp .75s ease both;
 }
 
 .avatar-wrap{
@@ -236,9 +347,12 @@ html[data-theme="light"] .theme-menu{
   margin:0 auto 22px;
   border-radius:50%;
   background:var(--bg);
+  box-shadow:
+    0 0 35px rgba(59,130,246,.16),
+    0 0 65px rgba(139,92,246,.08);
 }
 
-.avatar-wrap:before{
+.avatar-wrap::before{
   content:"";
   position:absolute;
   inset:0;
@@ -246,22 +360,23 @@ html[data-theme="light"] .theme-menu{
   border-radius:50%;
   background:conic-gradient(
     from 0deg,
-    #2563eb,
-    #06b6d4,
-    #22d3ee,
-    #8b5cf6,
-    #c084fc,
-    #ec4899,
-    #06b6d4,
-    #2563eb
+    #2563eb 0deg,
+    #06b6d4 55deg,
+    #22d3ee 100deg,
+    #8b5cf6 155deg,
+    #c084fc 210deg,
+    #ec4899 255deg,
+    #8b5cf6 305deg,
+    #2563eb 360deg
   );
   box-shadow:
-    0 0 18px rgba(59,130,246,.45),
-    0 0 35px rgba(139,92,246,.22);
-  animation:ring 5s linear infinite;
+    0 0 16px rgba(59,130,246,.35),
+    0 0 30px rgba(139,92,246,.20);
+  animation:spinRing 4.5s linear infinite;
+  will-change:transform;
 }
 
-.avatar-wrap:after{
+.avatar-wrap::after{
   content:"";
   position:absolute;
   inset:5px;
@@ -284,22 +399,23 @@ html[data-theme="light"] .theme-menu{
 
 .profile h1{
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   gap:8px;
   font-size:32px;
+  line-height:1.15;
   letter-spacing:-.8px;
 }
 
 .verified{
   width:22px;
   height:22px;
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
   border-radius:50%;
   background:#1d9bf0;
-  color:white;
+  color:#fff;
   font-size:14px;
   font-weight:900;
 }
@@ -316,12 +432,16 @@ html[data-theme="light"] .theme-menu{
   gap:7px;
   margin-top:15px;
   padding:7px 12px;
-  border:1px solid rgba(34,197,94,.23);
+  border:1px solid rgba(34,197,94,.22);
   border-radius:999px;
   background:rgba(34,197,94,.07);
-  color:#5ee58b;
+  color:#22a951;
   font-size:12px;
-  font-weight:800;
+  font-weight:700;
+}
+
+html:not([data-theme="light"]) .status{
+  color:#76e39a;
 }
 
 .status-dot{
@@ -339,6 +459,7 @@ html[data-theme="light"] .theme-menu{
   grid-template-columns:1fr 1fr;
   gap:10px;
   margin:30px 0 10px;
+  animation:fadeUp .75s .08s ease both;
 }
 
 .site-action{
@@ -352,18 +473,20 @@ html[data-theme="light"] .theme-menu{
   color:var(--text);
   background:var(--card);
   backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
   cursor:pointer;
+  transition:.22s ease;
   text-align:left;
-  transition:.22s;
 }
 
 .site-action:hover{
   transform:translateY(-2px);
-  background:var(--card2);
+  background:var(--card-hover);
+  border-color:var(--border-hover);
   box-shadow:0 14px 40px var(--shadow);
 }
 
-.site-icon{
+.site-action-icon{
   width:42px;
   height:42px;
   flex:0 0 42px;
@@ -371,73 +494,104 @@ html[data-theme="light"] .theme-menu{
   align-items:center;
   justify-content:center;
   border-radius:12px;
-  border:1px solid rgba(59,130,246,.22);
-  background:rgba(59,130,246,.10);
+  background:linear-gradient(
+    135deg,
+    rgba(59,130,246,.16),
+    rgba(139,92,246,.12)
+  );
+  border:1px solid rgba(59,130,246,.20);
 }
 
-.site-icon svg{
+.site-action-icon svg{
   width:21px;
   height:21px;
   color:#5b9cff;
 }
 
-.site-content{
+.site-action-content{
+  min-width:0;
   flex:1;
 }
 
-.site-title{
+.site-action-title{
   display:block;
   font-size:14px;
   font-weight:800;
 }
 
-.site-desc{
+.site-action-description{
   display:block;
   margin-top:3px;
   color:var(--muted);
   font-size:11px;
 }
 
-.site-arrow{
+.site-action-arrow{
   color:var(--muted2);
+}
+
+.site-action-arrow svg{
+  width:18px;
+  height:18px;
 }
 
 /* SEARCH */
 
-.search{
-  position:relative;
+.search-wrap{
   margin:35px 0 10px;
+  animation:fadeUp .75s .12s ease both;
 }
 
-.search svg{
+.search-box{
+  position:relative;
+}
+
+.search-icon{
   position:absolute;
-  top:50%;
   left:17px;
+  top:50%;
   width:18px;
   height:18px;
-  color:var(--muted2);
   transform:translateY(-50%);
+  color:var(--muted2);
+  pointer-events:none;
 }
 
-#search{
+.search-icon svg{
+  width:100%;
+  height:100%;
+}
+
+#searchInput{
   width:100%;
   height:50px;
   padding:0 18px 0 48px;
   border:1px solid var(--border);
-  border-radius:15px;
   outline:none;
+  border-radius:15px;
   color:var(--text);
   background:var(--card);
-  font-size:14px;
   backdrop-filter:blur(18px);
+  font-size:14px;
 }
 
-#search::placeholder{
+#searchInput::placeholder{
   color:var(--muted2);
 }
 
-#search:focus{
-  border-color:rgba(59,130,246,.5);
+#searchInput:focus{
+  border-color:rgba(59,130,246,.55);
+  box-shadow:0 0 0 4px rgba(59,130,246,.08);
+}
+
+.no-results{
+  display:none;
+  padding:28px;
+  text-align:center;
+  color:var(--muted2);
+  border:1px dashed var(--border);
+  border-radius:16px;
+  font-size:13px;
 }
 
 /* SECTIONS */
@@ -451,17 +605,19 @@ html[data-theme="light"] .theme-menu{
   align-items:center;
   gap:10px;
   margin:0 4px 12px;
+  color:var(--text);
   font-size:13px;
-  font-weight:900;
+  font-weight:800;
+  letter-spacing:.3px;
   text-transform:uppercase;
 }
 
-.section-title:before{
+.section-title::before{
   content:"";
   width:4px;
   height:15px;
   border-radius:10px;
-  background:linear-gradient(#3b82f6,#8b5cf6);
+  background:linear-gradient(180deg,#3b82f6,#8b5cf6);
 }
 
 .links{
@@ -470,7 +626,7 @@ html[data-theme="light"] .theme-menu{
   gap:10px;
 }
 
-/* CARDS */
+/* LINK */
 
 .link-card{
   position:relative;
@@ -478,20 +634,25 @@ html[data-theme="light"] .theme-menu{
   align-items:center;
   min-height:76px;
   padding:13px 14px;
-  overflow:hidden;
   border:1px solid var(--border);
   border-radius:17px;
   color:var(--text);
   text-decoration:none;
   background:var(--card);
   backdrop-filter:blur(18px);
-  transition:.22s;
+  overflow:hidden;
+  transition:
+    transform .22s ease,
+    background .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease;
+  animation:cardIn .6s ease both;
 }
 
 .link-card:hover{
   transform:translateY(-2px);
-  background:var(--card2);
-  border-color:rgba(255,255,255,.20);
+  background:var(--card-hover);
+  border-color:var(--border-hover);
   box-shadow:0 14px 40px var(--shadow);
 }
 
@@ -499,14 +660,13 @@ html[data-theme="light"] .theme-menu{
   transform:scale(.985);
 }
 
-.link-card:after{
+.link-card::after{
   content:"";
   position:absolute;
   top:0;
   left:-120%;
   width:80%;
   height:100%;
-  pointer-events:none;
   background:linear-gradient(
     90deg,
     transparent,
@@ -514,10 +674,11 @@ html[data-theme="light"] .theme-menu{
     transparent
   );
   transform:skewX(-20deg);
-  transition:.7s;
+  transition:left .7s ease;
+  pointer-events:none;
 }
 
-.link-card:hover:after{
+.link-card:hover::after{
   left:140%;
 }
 
@@ -529,14 +690,15 @@ html[data-theme="light"] .theme-menu{
   align-items:center;
   justify-content:center;
   margin-right:14px;
-  border:1px solid var(--border);
   border-radius:13px;
   background:rgba(127,127,127,.08);
+  border:1px solid var(--border);
 }
 
 .icon-box img{
   width:27px;
   height:27px;
+  display:block;
   object-fit:contain;
 }
 
@@ -547,7 +709,7 @@ html[data-theme="light"] .theme-menu{
 
 .link-title{
   font-size:15px;
-  font-weight:800;
+  font-weight:750;
 }
 
 .link-description{
@@ -561,11 +723,8 @@ html[data-theme="light"] .theme-menu{
 
 .featured{
   border-color:rgba(59,130,246,.30);
-  background:linear-gradient(
-    110deg,
-    rgba(59,130,246,.10),
-    var(--card)
-  );
+  background:
+    linear-gradient(110deg,rgba(59,130,246,.10),var(--card));
 }
 
 .featured-badge{
@@ -573,21 +732,22 @@ html[data-theme="light"] .theme-menu{
   top:9px;
   right:11px;
   padding:4px 7px;
-  border:1px solid rgba(59,130,246,.22);
   border-radius:7px;
   background:rgba(59,130,246,.13);
-  color:#5b9cff;
+  border:1px solid rgba(59,130,246,.22);
+  color:#5a98ff;
   font-size:9px;
-  font-weight:900;
+  font-weight:800;
   letter-spacing:.4px;
 }
 
-/* CARD BUTTONS */
+/* LINK ACTIONS */
 
 .link-actions{
   position:relative;
   z-index:5;
   display:flex;
+  align-items:center;
   gap:6px;
   margin-left:8px;
 }
@@ -599,17 +759,24 @@ html[data-theme="light"] .theme-menu{
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:0;
   border:1px solid var(--border);
   border-radius:10px;
-  color:var(--muted);
   background:rgba(127,127,127,.06);
+  color:var(--muted);
   cursor:pointer;
-  transition:.2s;
+  transition:.2s ease;
 }
 
 .action-btn:hover{
   color:var(--text);
-  background:var(--card2);
+  background:var(--card-hover);
+  border-color:var(--border-hover);
+  transform:translateY(-1px);
+}
+
+.action-btn:active{
+  transform:scale(.92);
 }
 
 .action-btn svg{
@@ -620,6 +787,13 @@ html[data-theme="light"] .theme-menu{
 .action-btn.copied{
   color:#22c55e;
   border-color:rgba(34,197,94,.35);
+  background:rgba(34,197,94,.08);
+}
+
+.action-btn.shared{
+  color:#3b82f6;
+  border-color:rgba(59,130,246,.35);
+  background:rgba(59,130,246,.08);
 }
 
 .link-arrow{
@@ -629,11 +803,17 @@ html[data-theme="light"] .theme-menu{
   height:18px;
   margin-left:8px;
   color:var(--muted2);
+  transition:.2s ease;
 }
 
 .link-arrow svg{
   width:100%;
   height:100%;
+}
+
+.link-card:hover .link-arrow{
+  color:var(--text);
+  transform:translateX(3px);
 }
 
 /* QR */
@@ -646,11 +826,12 @@ html[data-theme="light"] .theme-menu{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(15px);
+  background:rgba(0,0,0,.68);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   opacity:0;
   visibility:hidden;
-  transition:.25s;
+  transition:.25s ease;
 }
 
 .qr-overlay.open{
@@ -663,30 +844,29 @@ html[data-theme="light"] .theme-menu{
   padding:24px;
   border:1px solid var(--border);
   border-radius:22px;
-  background:rgba(12,12,17,.94);
-  box-shadow:0 30px 90px rgba(0,0,0,.5);
+  background:var(--header-bg);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  box-shadow:0 25px 80px rgba(0,0,0,.45);
+  transform:translateY(10px) scale(.97);
+  transition:.25s ease;
   text-align:center;
-  transform:scale(.96) translateY(10px);
-  transition:.25s;
-}
-
-html[data-theme="light"] .qr-modal{
-  background:rgba(255,255,255,.96);
 }
 
 .qr-overlay.open .qr-modal{
-  transform:scale(1) translateY(0);
+  transform:translateY(0) scale(1);
 }
 
-.qr-head{
+.qr-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   margin-bottom:18px;
 }
 
-.qr-head strong{
+.qr-title{
   font-size:17px;
+  font-weight:800;
 }
 
 .qr-close{
@@ -697,9 +877,14 @@ html[data-theme="light"] .qr-modal{
   justify-content:center;
   border:1px solid var(--border);
   border-radius:10px;
+  background:rgba(127,127,127,.06);
   color:var(--muted);
-  background:var(--card);
   cursor:pointer;
+}
+
+.qr-close:hover{
+  color:var(--text);
+  background:var(--card-hover);
 }
 
 .qr-close svg{
@@ -710,23 +895,28 @@ html[data-theme="light"] .qr-modal{
 .qr-box{
   width:230px;
   height:230px;
-  margin:auto;
+  margin:0 auto;
   padding:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border-radius:18px;
   background:#fff;
-  box-shadow:0 15px 45px rgba(0,0,0,.25);
+  box-shadow:0 15px 45px rgba(0,0,0,.22);
 }
 
 #qrImage{
-  display:block;
   width:206px;
   height:206px;
+  display:block;
+  object-fit:contain;
 }
 
 .qr-url{
   margin-top:17px;
   color:var(--muted);
   font-size:12px;
+  word-break:break-all;
 }
 
 .qr-hint{
@@ -737,13 +927,14 @@ html[data-theme="light"] .qr-modal{
 
 /* FOOTER */
 
-.footer{
+.site-footer{
   margin-top:55px;
   padding:30px 0 15px;
   text-align:center;
+  animation:fadeUp .8s .3s ease both;
 }
 
-.footer-logos{
+.footer-logo-area{
   display:flex;
   align-items:center;
   justify-content:center;
@@ -761,11 +952,12 @@ html[data-theme="light"] .qr-modal{
   height:42px;
   object-fit:cover;
   border-radius:7px;
+  box-shadow:0 7px 25px var(--shadow);
 }
 
-.footer-line{
-  height:1px;
+.footer-divider{
   width:100%;
+  height:1px;
   margin:23px 0 17px;
   background:var(--border);
 }
@@ -775,27 +967,82 @@ html[data-theme="light"] .qr-modal{
   font-size:11px;
 }
 
+.version{
+  color:var(--muted2);
+}
+
+/* ANIMATION */
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes cardIn{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes spinRing{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes pulseLogo{
+  0%,100%{
+    transform:scale(.94);
+    opacity:.65;
+  }
+  50%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
 /* MOBILE */
 
 @media(max-width:600px){
 
-  .top{
+  .top-controls{
     top:12px;
     right:12px;
   }
 
-  .lang-btn .label{
+  .language-button{
+    padding:0 8px;
+  }
+
+  .language-button .language-label{
     display:none;
   }
 
+  .language-menu{
+    right:0;
+    width:270px;
+  }
+
   .container{
-    width:calc(100% - 22px);
+    width:min(100% - 22px,820px);
     padding-top:76px;
   }
 
   .avatar-wrap{
     width:120px;
     height:120px;
+    margin-bottom:19px;
   }
 
   .profile h1{
@@ -808,35 +1055,48 @@ html[data-theme="light"] .qr-modal{
 
   .site-actions{
     gap:8px;
+    margin-top:26px;
   }
 
   .site-action{
     min-height:60px;
     padding:10px 12px;
     gap:9px;
+    border-radius:14px;
   }
 
-  .site-icon{
+  .site-action-icon{
     width:38px;
     height:38px;
     flex-basis:38px;
+    border-radius:10px;
   }
 
-  .site-title{
+  .site-action-icon svg{
+    width:19px;
+    height:19px;
+  }
+
+  .site-action-title{
     font-size:12px;
   }
 
-  .site-desc{
+  .site-action-description{
     font-size:9px;
   }
 
-  .site-arrow{
+  .site-action-arrow{
     display:none;
+  }
+
+  .section{
+    margin-top:29px;
   }
 
   .link-card{
     min-height:72px;
     padding:11px;
+    border-radius:15px;
   }
 
   .icon-box{
@@ -870,6 +1130,11 @@ html[data-theme="light"] .qr-modal{
     flex-basis:32px;
   }
 
+  .action-btn svg{
+    width:15px;
+    height:15px;
+  }
+
   .link-arrow{
     margin-left:5px;
   }
@@ -881,227 +1146,321 @@ html[data-theme="light"] .qr-modal{
   }
 }
 
-@keyframes ring{
-  to{
-    transform:rotate(360deg);
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
   }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
+<div class="orb one"></div>
+<div class="orb two"></div>
+<div class="orb three"></div>
 
-<!-- TOP -->
+<!-- PRELOADER -->
 
-<div class="top">
+<div class="preloader" id="preloader">
 
-<button class="lang-btn" id="langBtn">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-<circle cx="12" cy="12" r="9"/>
-<path d="M3 12h18"/>
-<path d="M12 3c2.3 2.5 3.5 5.5 3.5 9s-1.2 6.5-3.5 9"/>
-<path d="M12 3c-2.3 2.5-3.5 5.5-3.5 9S9.7 18.5 12 21"/>
-</svg>
-<span class="label" id="langLabel">DİL</span>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12">
-<path d="m6 9 6 6 6-6"/>
-</svg>
-</button>
+  <img
+    class="logo-light"
+    src="efesarac-footer-logo.png"
+    alt="efesarac.co">
 
-<div class="lang-menu" id="langMenu">
-
-<div class="lang-grid">
-
-<button class="lang-option active" data-lang="tr">🇹🇷 Türkçe</button>
-<button class="lang-option" data-lang="en">🇬🇧 English</button>
-<button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
-<button class="lang-option" data-lang="fr">🇫🇷 Français</button>
-<button class="lang-option" data-lang="es">🇪🇸 Español</button>
-<button class="lang-option" data-lang="it">🇮🇹 Italiano</button>
-<button class="lang-option" data-lang="pt">🇵🇹 Português</button>
-<button class="lang-option" data-lang="nl">🇳🇱 Nederlands</button>
-<button class="lang-option" data-lang="ru">🇷🇺 Русский</button>
-<button class="lang-option" data-lang="uk">🇺🇦 Українська</button>
-<button class="lang-option" data-lang="pl">🇵🇱 Polski</button>
-<button class="lang-option" data-lang="cs">🇨🇿 Čeština</button>
-<button class="lang-option" data-lang="sk">🇸🇰 Slovenčina</button>
-<button class="lang-option" data-lang="hu">🇭🇺 Magyar</button>
-<button class="lang-option" data-lang="ro">🇷🇴 Română</button>
-<button class="lang-option" data-lang="el">🇬🇷 Ελληνικά</button>
-<button class="lang-option" data-lang="sv">🇸🇪 Svenska</button>
-<button class="lang-option" data-lang="no">🇳🇴 Norsk</button>
-<button class="lang-option" data-lang="da">🇩🇰 Dansk</button>
-<button class="lang-option" data-lang="fi">🇫🇮 Suomi</button>
-<button class="lang-option" data-lang="he">🇮🇱 עברית</button>
-<button class="lang-option" data-lang="ar">🇸🇦 العربية</button>
-<button class="lang-option" data-lang="fa">🇮🇷 فارسی</button>
-<button class="lang-option" data-lang="hi">🇮🇳 हिन्दी</button>
-<button class="lang-option" data-lang="bn">🇧🇩 বাংলা</button>
-<button class="lang-option" data-lang="ur">🇵🇰 اردو</button>
-<button class="lang-option" data-lang="zh-CN">🇨🇳 简体中文</button>
-<button class="lang-option" data-lang="zh-TW">🇹🇼 繁體中文</button>
-<button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
-<button class="lang-option" data-lang="ko">🇰🇷 한국어</button>
-<button class="lang-option" data-lang="vi">🇻🇳 Tiếng Việt</button>
-<button class="lang-option" data-lang="th">🇹🇭 ไทย</button>
-<button class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</button>
-<button class="lang-option" data-lang="ms">🇲🇾 Bahasa Melayu</button>
+  <img
+    class="logo-dark"
+    src="efesarac-footer-logo-dark.png"
+    alt="efesarac.co">
 
 </div>
+
+<!-- TOP CONTROLS -->
+
+<div class="top-controls">
+
+  <button
+    class="language-button"
+    id="languageButton"
+    type="button">
+
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M3 12h18"/>
+      <path d="M12 3c2.3 2.5 3.5 5.5 3.5 9s-1.2 6.5-3.5 9"/>
+      <path d="M12 3c-2.3 2.5-3.5 5.5-3.5 9S9.7 18.5 12 21"/>
+    </svg>
+
+    <span class="language-label" id="languageLabel">DİL</span>
+
+    <svg
+      class="chevron"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+
+  </button>
+
+  <div class="language-menu" id="languageMenu">
+
+    <div class="language-menu-title" id="languageMenuTitle">
+      DİL
+    </div>
+
+    <div class="language-grid">
+
+      <button class="language-option active" data-lang="tr" type="button">🇹🇷 Türkçe</button>
+      <button class="language-option" data-lang="en" type="button">🇬🇧 English</button>
+      <button class="language-option" data-lang="de" type="button">🇩🇪 Deutsch</button>
+      <button class="language-option" data-lang="fr" type="button">🇫🇷 Français</button>
+      <button class="language-option" data-lang="es" type="button">🇪🇸 Español</button>
+      <button class="language-option" data-lang="it" type="button">🇮🇹 Italiano</button>
+      <button class="language-option" data-lang="pt" type="button">🇵🇹 Português</button>
+      <button class="language-option" data-lang="nl" type="button">🇳🇱 Nederlands</button>
+      <button class="language-option" data-lang="ru" type="button">🇷🇺 Русский</button>
+      <button class="language-option" data-lang="uk" type="button">🇺🇦 Українська</button>
+      <button class="language-option" data-lang="pl" type="button">🇵🇱 Polski</button>
+      <button class="language-option" data-lang="cs" type="button">🇨🇿 Čeština</button>
+      <button class="language-option" data-lang="sk" type="button">🇸🇰 Slovenčina</button>
+      <button class="language-option" data-lang="hu" type="button">🇭🇺 Magyar</button>
+      <button class="language-option" data-lang="ro" type="button">🇷🇴 Română</button>
+      <button class="language-option" data-lang="el" type="button">🇬🇷 Ελληνικά</button>
+      <button class="language-option" data-lang="sv" type="button">🇸🇪 Svenska</button>
+      <button class="language-option" data-lang="no" type="button">🇳🇴 Norsk</button>
+      <button class="language-option" data-lang="da" type="button">🇩🇰 Dansk</button>
+      <button class="language-option" data-lang="fi" type="button">🇫🇮 Suomi</button>
+      <button class="language-option" data-lang="he" type="button">🇮🇱 עברית</button>
+      <button class="language-option" data-lang="ar" type="button">🇸🇦 العربية</button>
+      <button class="language-option" data-lang="fa" type="button">🇮🇷 فارسی</button>
+      <button class="language-option" data-lang="hi" type="button">🇮🇳 हिन्दी</button>
+      <button class="language-option" data-lang="bn" type="button">🇧🇩 বাংলা</button>
+      <button class="language-option" data-lang="ur" type="button">🇵🇰 اردو</button>
+      <button class="language-option" data-lang="zh-CN" type="button">🇨🇳 简体中文</button>
+      <button class="language-option" data-lang="zh-TW" type="button">🇹🇼 繁體中文</button>
+      <button class="language-option" data-lang="ja" type="button">🇯🇵 日本語</button>
+      <button class="language-option" data-lang="ko" type="button">🇰🇷 한국어</button>
+      <button class="language-option" data-lang="vi" type="button">🇻🇳 Tiếng Việt</button>
+      <button class="language-option" data-lang="th" type="button">🇹🇭 ไทย</button>
+      <button class="language-option" data-lang="id" type="button">🇮🇩 Bahasa Indonesia</button>
+      <button class="language-option" data-lang="ms" type="button">🇲🇾 Bahasa Melayu</button>
+
+    </div>
+  </div>
+
+  <button
+    class="theme-button"
+    id="themeButton"
+    type="button">
+
+    <svg
+      id="themeIcon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+    </svg>
+
+  </button>
+
+  <div class="theme-menu" id="themeMenu">
+
+    <button class="theme-option" data-theme-choice="dark" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8z"/>
+      </svg>
+      <span class="theme-dark-text">Koyu</span>
+    </button>
+
+    <button class="theme-option" data-theme-choice="light" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2"/>
+        <path d="M12 20v2"/>
+        <path d="M4.93 4.93l1.41 1.41"/>
+        <path d="M17.66 17.66l1.41 1.41"/>
+        <path d="M2 12h2"/>
+        <path d="M20 12h2"/>
+        <path d="M6.34 17.66l-1.41 1.41"/>
+        <path d="M19.07 4.93l-1.41 1.41"/>
+      </svg>
+      <span class="theme-light-text">Açık</span>
+    </button>
+
+    <button class="theme-option" data-theme-choice="system" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="14" rx="2"/>
+        <path d="M8 22h8"/>
+        <path d="M12 18v4"/>
+      </svg>
+      <span class="theme-system-text">Sistem</span>
+    </button>
+
+  </div>
+
 </div>
 
-<button class="theme-btn" id="themeBtn">
-<svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8z"/>
-</svg>
-</button>
-
-<div class="theme-menu" id="themeMenu">
-
-<button class="theme-option" data-theme="dark">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.7 6.7 0 0 0 9.8 9.8z"/>
-</svg>
-<span>Koyu</span>
-</button>
-
-<button class="theme-option" data-theme="light">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<circle cx="12" cy="12" r="4"/>
-<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/>
-</svg>
-<span>Açık</span>
-</button>
-
-<button class="theme-option" data-theme="system">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<rect x="3" y="4" width="18" height="14" rx="2"/>
-<path d="M8 22h8M12 18v4"/>
-</svg>
-<span>Sistem</span>
-</button>
-
-</div>
-</div>
-
+<!-- MAIN -->
 
 <main class="container">
 
-<!-- PROFILE -->
-
 <header class="profile">
 
-<div class="avatar-wrap">
-<img
-class="avatar"
-src="https://github.com/saracefe.png"
-alt="Efe Saraç">
-</div>
+  <div class="avatar-wrap">
 
-<h1>
-Efe Saraç
-<span class="verified">✓</span>
-</h1>
+    <img
+      class="avatar"
+      src="https://github.com/saracefe.png"
+      alt="Efe Saraç">
 
-<p class="bio" id="bio">
-Dijital içerik üreticisi · Geliştirici · İnternet
-</p>
+  </div>
 
-<div class="status">
-<span class="status-dot"></span>
-<span id="status">Sistem aktif</span>
-</div>
+  <h1>
+    Efe Saraç
+    <span class="verified">✓</span>
+  </h1>
+
+  <p class="bio" id="bio">
+    Dijital içerik üreticisi · Geliştirici · İnternet
+  </p>
+
+  <div class="status">
+    <span class="status-dot"></span>
+    <span id="statusText">Sistem aktif</span>
+  </div>
 
 </header>
-
 
 <!-- SITE ACTIONS -->
 
 <div class="site-actions">
 
-<button class="site-action" id="siteShare">
+  <button class="site-action" id="siteShareButton" type="button">
 
-<span class="site-icon">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-<circle cx="18" cy="5" r="3"/>
-<circle cx="6" cy="12" r="3"/>
-<circle cx="18" cy="19" r="3"/>
-<path d="m8.6 13.5 6.8 4"/>
-<path d="m15.4 6.5-6.8 4"/>
-</svg>
-</span>
+    <span class="site-action-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"/>
+        <circle cx="6" cy="12" r="3"/>
+        <circle cx="18" cy="19" r="3"/>
+        <path d="m8.6 13.5 6.8 4"/>
+        <path d="m15.4 6.5-6.8 4"/>
+      </svg>
+    </span>
 
-<span class="site-content">
-<strong class="site-title" id="shareTitle">Siteyi Paylaş</strong>
-<span class="site-desc" id="shareDesc">efesarac.co'yu paylaş</span>
-</span>
+    <span class="site-action-content">
+      <span class="site-action-title" id="siteShareTitle">
+        Siteyi Paylaş
+      </span>
+      <span class="site-action-description" id="siteShareDescription">
+        efesarac.co'yu paylaş
+      </span>
+    </span>
 
-<span class="site-arrow">›</span>
+    <span class="site-action-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </span>
 
-</button>
+  </button>
 
+  <button class="site-action" id="qrButton" type="button">
 
-<button class="site-action" id="qrButton">
+    <span class="site-action-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <path d="M14 14h3v3h-3z"/>
+        <path d="M18 18h3v3h-3z"/>
+        <path d="M14 18h2"/>
+        <path d="M18 14h3"/>
+      </svg>
+    </span>
 
-<span class="site-icon">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<rect x="3" y="3" width="7" height="7" rx="1"/>
-<rect x="14" y="3" width="7" height="7" rx="1"/>
-<rect x="3" y="14" width="7" height="7" rx="1"/>
-<path d="M14 14h3v3h-3zM18 18h3v3h-3zM14 18h2M18 14h3"/>
-</svg>
-</span>
+    <span class="site-action-content">
+      <span class="site-action-title" id="qrTitle">
+        QR Kod
+      </span>
+      <span class="site-action-description" id="qrDescription">
+        Siteyi QR kod ile aç
+      </span>
+    </span>
 
-<span class="site-content">
-<strong class="site-title" id="qrTitle">QR Kod</strong>
-<span class="site-desc" id="qrDesc">Siteyi QR kod ile aç</span>
-</span>
+    <span class="site-action-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m9 18 6-6-6-6"/>
+      </svg>
+    </span>
 
-<span class="site-arrow">›</span>
-
-</button>
+  </button>
 
 </div>
-
 
 <!-- SEARCH -->
 
-<div class="search">
+<div class="search-wrap">
 
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<circle cx="11" cy="11" r="7"/>
-<path d="m20 20-4-4"/>
-</svg>
+  <div class="search-box">
 
-<input
-id="search"
-type="search"
-placeholder="Bağlantılarda ara..."
-autocomplete="off">
+    <span class="search-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m20 20-4-4"/>
+      </svg>
+    </span>
+
+    <input
+      id="searchInput"
+      type="search"
+      autocomplete="off"
+      placeholder="Bağlantılarda ara...">
+
+  </div>
 
 </div>
 
+<div class="no-results" id="noResults">
+  <span id="noResultsText">Sonuç bulunamadı.</span>
+</div>
 
 <!-- SOSYAL -->
 
-<section class="section">
+<section class="section" id="socialSection">
 
-<h2 class="section-title">Sosyal</h2>
+<h2 class="section-title" id="socialTitle">
+  Sosyal
+</h2>
 
-<div class="links">
-
+<div class="links" id="socialLinks">
 
 <a class="link-card featured"
 href="https://youtube.com/@saracefe"
 target="_blank"
-data-search="youtube video saracefe">
+rel="noopener noreferrer"
+data-search="youtube video içerik creator @saracefe">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/youtube" alt="">
+<img src="https://cdn.simpleicons.org/youtube" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1114,21 +1473,21 @@ data-search="youtube video saracefe">
 <div class="link-actions"></div>
 
 <span class="link-arrow">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="m9 18 6-6-6-6"/>
 </svg>
 </span>
 
 </a>
 
-
 <a class="link-card"
 href="https://instagram.com/saracefe_"
 target="_blank"
-data-search="instagram sosyal saracefe">
+rel="noopener noreferrer"
+data-search="instagram sosyal fotoğraf @saracefe_">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/instagram" alt="">
+<img src="https://cdn.simpleicons.org/instagram" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1138,18 +1497,22 @@ data-search="instagram sosyal saracefe">
 
 <div class="link-actions"></div>
 
-<span class="link-arrow">›</span>
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://facebook.com/saracefee"
 target="_blank"
-data-search="facebook sosyal">
+rel="noopener noreferrer"
+data-search="facebook sosyal @saracefee">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/facebook" alt="">
+<img src="https://cdn.simpleicons.org/facebook" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1159,18 +1522,22 @@ data-search="facebook sosyal">
 
 <div class="link-actions"></div>
 
-<span class="link-arrow">›</span>
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://threads.net/@saracefe_"
 target="_blank"
-data-search="threads sosyal">
+rel="noopener noreferrer"
+data-search="threads sosyal meta @saracefe_">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/threads" alt="">
+<img src="https://cdn.simpleicons.org/threads" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1180,18 +1547,22 @@ data-search="threads sosyal">
 
 <div class="link-actions"></div>
 
-<span class="link-arrow">›</span>
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://x.com/efesarac_"
 target="_blank"
-data-search="x twitter sosyal">
+rel="noopener noreferrer"
+data-search="x twitter sosyal @efesarac_">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/x" alt="">
+<img src="https://cdn.simpleicons.org/x" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1201,18 +1572,22 @@ data-search="x twitter sosyal">
 
 <div class="link-actions"></div>
 
-<span class="link-arrow">›</span>
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://tiktok.com/@efesarac_"
 target="_blank"
-data-search="tiktok video sosyal">
+rel="noopener noreferrer"
+data-search="tiktok video sosyal @efesarac_">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/tiktok" alt="">
+<img src="https://cdn.simpleicons.org/tiktok" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1222,18 +1597,22 @@ data-search="tiktok video sosyal">
 
 <div class="link-actions"></div>
 
-<span class="link-arrow">›</span>
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://kwai.com/@saracefe"
 target="_blank"
-data-search="kwai video">
+rel="noopener noreferrer"
+data-search="kwai video sosyal @saracefe">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/kuaishou" alt="">
+<img src="https://cdn.simpleicons.org/kuaishou" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1243,18 +1622,22 @@ data-search="kwai video">
 
 <div class="link-actions"></div>
 
-<span class="link-arrow">›</span>
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://bsky.app/profile/saracefe.bsky.social"
 target="_blank"
-data-search="bluesky sosyal">
+rel="noopener noreferrer"
+data-search="bluesky sosyal @saracefe.bsky.social">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/bluesky" alt="">
+<img src="https://cdn.simpleicons.org/bluesky" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1264,30 +1647,35 @@ data-search="bluesky sosyal">
 
 <div class="link-actions"></div>
 
-<span class="link-arrow">›</span>
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
 
 </div>
 </section>
 
-
 <!-- İÇERİK ÜRETİCİSİ -->
 
 <section class="section">
 
-<h2 class="section-title">İçerik Üreticisi</h2>
+<h2 class="section-title" id="creatorTitle">
+İçerik Üreticisi
+</h2>
 
 <div class="links">
-
 
 <a class="link-card"
 href="https://donate.bynogame.com/efesarac"
 target="_blank"
-data-search="bynogame destek bağış">
+rel="noopener noreferrer"
+data-search="bynogame bağış donate destek">
 
 <div class="icon-box">
-<img src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png" alt="">
+<img src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1296,18 +1684,23 @@ data-search="bynogame destek bağış">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://github.com/saracefe"
 target="_blank"
-data-search="github kod proje">
+rel="noopener noreferrer"
+data-search="github kod geliştirici developer">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/github" alt="">
+<img src="https://cdn.simpleicons.org/github" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1316,18 +1709,23 @@ data-search="github kod proje">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://reddit.com/user/efesarac"
 target="_blank"
-data-search="reddit topluluk">
+rel="noopener noreferrer"
+data-search="reddit topluluk forum">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/reddit" alt="">
+<img src="https://cdn.simpleicons.org/reddit" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1336,18 +1734,23 @@ data-search="reddit topluluk">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://linkedin.com/in/efe-sara%C3%A7-bbb35b1b1"
 target="_blank"
-data-search="linkedin kariyer profesyonel">
+rel="noopener noreferrer"
+data-search="linkedin kariyer iş profesyonel">
 
 <div class="icon-box">
-<img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg" alt="">
+<img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1356,29 +1759,34 @@ data-search="linkedin kariyer profesyonel">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
 
 </div>
 </section>
 
-
 <!-- CANLI -->
 
 <section class="section">
 
-<h2 class="section-title">Canlı Yayın</h2>
+<h2 class="section-title" id="liveTitle">Canlı Yayın</h2>
 
 <div class="links">
 
 <a class="link-card"
 href="https://twitch.tv/efesarac_"
 target="_blank"
+rel="noopener noreferrer"
 data-search="twitch canlı yayın">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/twitch" alt="">
+<img src="https://cdn.simpleicons.org/twitch" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1387,18 +1795,23 @@ data-search="twitch canlı yayın">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://kick.com/saracefe"
 target="_blank"
+rel="noopener noreferrer"
 data-search="kick canlı yayın">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/kick" alt="">
+<img src="https://cdn.simpleicons.org/kick" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1407,29 +1820,34 @@ data-search="kick canlı yayın">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
 
 </div>
 </section>
 
-
 <!-- MÜZİK -->
 
 <section class="section">
 
-<h2 class="section-title">Müzik</h2>
+<h2 class="section-title" id="musicTitle">Müzik</h2>
 
 <div class="links">
 
 <a class="link-card"
 href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6"
 target="_blank"
+rel="noopener noreferrer"
 data-search="spotify müzik">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/spotify" alt="">
+<img src="https://cdn.simpleicons.org/spotify" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1438,18 +1856,23 @@ data-search="spotify müzik">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://music.youtube.com/@saracefe"
 target="_blank"
+rel="noopener noreferrer"
 data-search="youtube music müzik">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/youtubemusic" alt="">
+<img src="https://cdn.simpleicons.org/youtubemusic" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1458,18 +1881,23 @@ data-search="youtube music müzik">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://music.amazon.com/profiles/@efesarac"
 target="_blank"
+rel="noopener noreferrer"
 data-search="amazon music müzik">
 
 <div class="icon-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg" alt="">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1478,29 +1906,34 @@ data-search="amazon music müzik">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
 
 </div>
 </section>
 
-
 <!-- TOPLULUK -->
 
 <section class="section">
 
-<h2 class="section-title">Topluluk</h2>
+<h2 class="section-title" id="communityTitle">Topluluk</h2>
 
 <div class="links">
 
 <a class="link-card"
 href="https://discord.gg/p5Y5BxESFD"
 target="_blank"
-data-search="discord topluluk">
+rel="noopener noreferrer"
+data-search="discord topluluk sunucu">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/discord" alt="">
+<img src="https://cdn.simpleicons.org/discord" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1509,18 +1942,23 @@ data-search="discord topluluk">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://wa.me/efesarac"
 target="_blank"
-data-search="whatsapp mesaj">
+rel="noopener noreferrer"
+data-search="whatsapp mesaj iletişim">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/whatsapp" alt="">
+<img src="https://cdn.simpleicons.org/whatsapp" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1529,18 +1967,23 @@ data-search="whatsapp mesaj">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://t.me/efesarac"
 target="_blank"
-data-search="telegram">
+rel="noopener noreferrer"
+data-search="telegram mesaj topluluk">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/telegram" alt="">
+<img src="https://cdn.simpleicons.org/telegram" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1549,29 +1992,34 @@ data-search="telegram">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
 
 </div>
 </section>
 
-
 <!-- DİĞER -->
 
 <section class="section">
 
-<h2 class="section-title">Diğer</h2>
+<h2 class="section-title" id="otherTitle">Diğer</h2>
 
 <div class="links">
 
 <a class="link-card"
 href="https://paypal.me/saracefe"
 target="_blank"
-data-search="paypal ödeme">
+rel="noopener noreferrer"
+data-search="paypal ödeme destek">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/paypal" alt="">
+<img src="https://cdn.simpleicons.org/paypal" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1580,18 +2028,23 @@ data-search="paypal ödeme">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
-
 
 <a class="link-card"
 href="https://snapchat.com/add/efesaracx"
 target="_blank"
+rel="noopener noreferrer"
 data-search="snapchat sosyal">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/snapchat" alt="">
+<img src="https://cdn.simpleicons.org/snapchat" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
@@ -1600,53 +2053,66 @@ data-search="snapchat sosyal">
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
 
 </div>
 </section>
-
 
 <!-- İLETİŞİM -->
 
 <section class="section">
 
-<h2 class="section-title">İletişim</h2>
+<h2 class="section-title" id="contactTitle">İletişim</h2>
 
 <div class="links">
 
 <a class="link-card"
 href="mailto:contact@efesarac.co"
-data-search="email e posta iletişim">
+data-search="email mail iletişim">
 
 <div class="icon-box">
-<img src="https://cdn.simpleicons.org/gmail" alt="">
+<img src="https://cdn.simpleicons.org/gmail" alt="" loading="lazy">
 </div>
 
 <div class="link-content">
-<div class="link-title">E-posta</div>
+<div class="link-title" id="emailTitle">E-posta</div>
 <div class="link-description">contact@efesarac.co</div>
 </div>
 
 <div class="link-actions"></div>
-<span class="link-arrow">›</span>
+
+<span class="link-arrow">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="m9 18 6-6-6-6"/>
+</svg>
+</span>
 
 </a>
 
 </div>
 </section>
 
-
 <!-- FOOTER -->
 
-<footer class="footer">
+<footer class="site-footer">
 
-<div class="footer-logos">
+<div class="footer-logo-area">
 
 <img
-class="footer-logo"
+class="footer-logo logo-light"
 src="efesarac-footer-logo.png"
+alt="efesarac.co">
+
+<img
+class="footer-logo logo-dark"
+src="efesarac-footer-logo-dark.png"
 alt="efesarac.co">
 
 <img
@@ -1657,32 +2123,58 @@ alt="Türkiye Bayrağı">
 
 </div>
 
-<div class="footer-line"></div>
+<div class="footer-divider"></div>
 
 <div class="copyright">
-© 2008–2026 efesarac.co Her Hakkı Saklıdır. · v4.8.0
+
+<span id="copyrightText">
+© 2008–2026 efesarac.co Her Hakkı Saklıdır.
+</span>
+
+<span class="version">
+· v4.8.0
+</span>
+
 </div>
 
 </footer>
 
 </main>
 
-
 <!-- QR MODAL -->
 
-<div class="qr-overlay" id="qrOverlay">
+<div
+class="qr-overlay"
+id="qrOverlay"
+role="dialog"
+aria-modal="true"
+aria-labelledby="qrModalTitle">
 
 <div class="qr-modal">
 
-<div class="qr-head">
+<div class="qr-header">
 
-<strong>efesarac.co</strong>
+<div class="qr-title" id="qrModalTitle">
+QR Kod
+</div>
 
-<button class="qr-close" id="qrClose">
+<button
+class="qr-close"
+id="qrClose"
+type="button"
+aria-label="Kapat">
 
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round">
+
 <path d="M18 6 6 18"/>
 <path d="m6 6 12 12"/>
+
 </svg>
 
 </button>
@@ -1693,8 +2185,10 @@ alt="Türkiye Bayrağı">
 
 <img
 id="qrImage"
-src=""
-alt="efesarac.co QR Code">
+src="https://api.qrserver.com/v1/create-qr-code/?size=206x206&margin=8&data=https%3A%2F%2Fefesarac.co"
+alt="efesarac.co QR Kod"
+width="206"
+height="206">
 
 </div>
 
@@ -1702,25 +2196,26 @@ alt="efesarac.co QR Code">
 https://efesarac.co
 </div>
 
-<div class="qr-hint">
+<div class="qr-hint" id="qrHint">
 Kameranızla okutun
 </div>
 
 </div>
-
 </div>
-
 
 <script>
 
 /* =========================================================
-   LINK SHARE / COPY
+   SVG
 ========================================================= */
 
 const shareSVG=`
-<svg viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"
-stroke-linecap="round">
+<svg viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
+stroke-linecap="round"
+stroke-linejoin="round">
 <circle cx="18" cy="5" r="3"/>
 <circle cx="6" cy="12" r="3"/>
 <circle cx="18" cy="19" r="3"/>
@@ -1729,8 +2224,10 @@ stroke-linecap="round">
 </svg>`;
 
 const copySVG=`
-<svg viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2"
+<svg viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2"
 stroke-linecap="round"
 stroke-linejoin="round">
 <rect x="9" y="9" width="11" height="11" rx="2"/>
@@ -1738,18 +2235,25 @@ stroke-linejoin="round">
 </svg>`;
 
 const checkSVG=`
-<svg viewBox="0 0 24 24" fill="none"
-stroke="currentColor" stroke-width="2.5"
-stroke-linecap="round" stroke-linejoin="round">
+<svg viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2.5"
+stroke-linecap="round"
+stroke-linejoin="round">
 <path d="m5 12 4 4L19 6"/>
 </svg>`;
 
 
-/* HER KARTA İKİ BUTON */
+/* =========================================================
+   LINK BUTTONS
+========================================================= */
 
 document.querySelectorAll(".link-card").forEach(card=>{
 
   const actions=card.querySelector(".link-actions");
+
+  if(!actions)return;
 
   const url=card.getAttribute("href");
 
@@ -1758,16 +2262,18 @@ document.querySelectorAll(".link-card").forEach(card=>{
     <button
       class="action-btn share-btn"
       type="button"
-      data-url="${url}"
-      aria-label="Paylaş">
+      data-share="${url}"
+      aria-label="Paylaş"
+      title="Paylaş">
       ${shareSVG}
     </button>
 
     <button
       class="action-btn copy-btn"
       type="button"
-      data-url="${url}"
-      aria-label="Kopyala">
+      data-copy="${url}"
+      aria-label="Kopyala"
+      title="Kopyala">
       ${copySVG}
     </button>
 
@@ -1776,96 +2282,150 @@ document.querySelectorAll(".link-card").forEach(card=>{
 });
 
 
-/* EVENT DELEGATION */
+/* =========================================================
+   COPY
+========================================================= */
 
-document.addEventListener("click",async e=>{
+async function copyText(text){
 
-  const share=e.target.closest(".share-btn");
-  const copy=e.target.closest(".copy-btn");
+  try{
 
+    await navigator.clipboard.writeText(text);
 
-  if(share){
+    return true;
 
-    e.preventDefault();
-    e.stopPropagation();
-
-    const url=share.dataset.url;
-
-    try{
-
-      if(navigator.share){
-
-        await navigator.share({
-          title:"Efe Saraç — efesarac.co",
-          text:"Efe Saraç'ın bağlantıları",
-          url:url
-        });
-
-      }else{
-
-        await navigator.clipboard.writeText(url);
-
-      }
-
-      share.classList.add("copied");
-
-      setTimeout(()=>{
-        share.classList.remove("copied");
-      },1200);
-
-    }catch(err){
-
-      if(err.name!=="AbortError"){
-        console.error(err);
-      }
-
-    }
-
-    return;
-  }
-
-
-  if(copy){
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    const url=copy.dataset.url;
+  }catch(error){
 
     try{
-
-      await navigator.clipboard.writeText(url);
-
-    }catch(err){
 
       const textarea=document.createElement("textarea");
 
-      textarea.value=url;
+      textarea.value=text;
       textarea.style.position="fixed";
-      textarea.style.opacity="0";
+      textarea.style.left="-9999px";
 
       document.body.appendChild(textarea);
 
+      textarea.focus();
       textarea.select();
-      document.execCommand("copy");
+
+      const result=document.execCommand("copy");
 
       textarea.remove();
 
+      return result;
+
+    }catch(e){
+
+      return false;
+
     }
 
-    const old=copy.innerHTML;
+  }
 
-    copy.innerHTML=checkSVG;
-    copy.classList.add("copied");
+}
 
-    setTimeout(()=>{
 
-      copy.innerHTML=old;
-      copy.classList.remove("copied");
+/* =========================================================
+   SHARE
+========================================================= */
 
-    },1200);
+async function shareUrl(url){
+
+  if(navigator.share){
+
+    try{
+
+      await navigator.share({
+        title:"Efe Saraç — efesarac.co",
+        text:"Efe Saraç'ın bağlantıları",
+        url:url
+      });
+
+      return "shared";
+
+    }catch(error){
+
+      if(error.name==="AbortError"){
+        return false;
+      }
+
+    }
+
+  }
+
+  const copied=await copyText(url);
+
+  return copied?"copied":false;
+
+}
+
+
+/* =========================================================
+   LINK ACTION EVENTS
+========================================================= */
+
+document.addEventListener("click",async e=>{
+
+  const shareButton=e.target.closest(".share-btn");
+
+  if(shareButton){
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const result=
+      await shareUrl(
+        shareButton.dataset.share
+      );
+
+    if(result){
+
+      shareButton.classList.add("shared");
+
+      setTimeout(()=>{
+        shareButton.classList.remove("shared");
+      },1200);
+
+    }
 
     return;
+
+  }
+
+
+  const copyButton=e.target.closest(".copy-btn");
+
+  if(copyButton){
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const success=
+      await copyText(
+        copyButton.dataset.copy
+      );
+
+    if(success){
+
+      const old=copyButton.innerHTML;
+
+      copyButton.classList.add("copied");
+
+      copyButton.innerHTML=checkSVG;
+
+      setTimeout(()=>{
+
+        copyButton.innerHTML=old;
+
+        copyButton.classList.remove("copied");
+
+      },1200);
+
+    }
+
+    return;
+
   }
 
 });
@@ -1875,33 +2435,22 @@ document.addEventListener("click",async e=>{
    SITE SHARE
 ========================================================= */
 
-document.getElementById("siteShare").addEventListener(
-"click",
-async()=>{
+document
+.getElementById("siteShareButton")
+.addEventListener("click",async function(){
 
-  try{
+  const result=
+    await shareUrl(
+      "https://efesarac.co"
+    );
 
-    if(navigator.share){
+  if(result){
 
-      await navigator.share({
-        title:"Efe Saraç — efesarac.co",
-        text:"Efe Saraç'ın bağlantıları",
-        url:"https://efesarac.co"
-      });
+    this.classList.add("shared");
 
-    }else{
-
-      await navigator.clipboard.writeText(
-        "https://efesarac.co"
-      );
-
-    }
-
-  }catch(err){
-
-    if(err.name!=="AbortError"){
-      console.error(err);
-    }
+    setTimeout(()=>{
+      this.classList.remove("shared");
+    },1200);
 
   }
 
@@ -1909,245 +2458,903 @@ async()=>{
 
 
 /* =========================================================
-   QR — HARİCİ KÜTÜPHANE YOK
+   QR — ÇALIŞAN SÜRÜM
 ========================================================= */
 
 const qrOverlay=
-document.getElementById("qrOverlay");
+  document.getElementById("qrOverlay");
 
 const qrButton=
-document.getElementById("qrButton");
+  document.getElementById("qrButton");
 
 const qrClose=
-document.getElementById("qrClose");
+  document.getElementById("qrClose");
 
 const qrImage=
-document.getElementById("qrImage");
+  document.getElementById("qrImage");
+
+const QR_URL=
+  "https://efesarac.co";
 
 
-const QR_DATA=
-encodeURIComponent(
-  "https://efesarac.co"
-);
+function openQR(){
 
+  /*
+   * QR dış servis tarafından PNG olarak oluşturuluyor.
+   * Böylece QRCode JavaScript kütüphanesine
+   * ihtiyaç kalmıyor.
+   */
 
-/*
-  QRServer doğrudan PNG döndürüyor.
-  JavaScript QR kütüphanesi gerekmiyor.
-*/
-
-const QR_IMAGE_URL=
-"https://api.qrserver.com/v1/create-qr-code/" +
-"?size=500x500" +
-"&margin=12" +
-"&ecc=H" +
-"&data="+QR_DATA;
-
-
-/* Önceden yükle */
-
-qrImage.src=QR_IMAGE_URL;
-
-
-/* AÇ */
-
-qrButton.addEventListener("click",e=>{
-
-  e.preventDefault();
-  e.stopPropagation();
-
-  qrImage.src=QR_IMAGE_URL;
+  qrImage.src=
+    "https://api.qrserver.com/v1/create-qr-code/" +
+    "?size=206x206" +
+    "&margin=8" +
+    "&data=" +
+    encodeURIComponent(QR_URL);
 
   qrOverlay.classList.add("open");
 
   document.body.style.overflow="hidden";
 
-});
+}
 
 
-/* KAPAT */
-
-qrClose.addEventListener("click",()=>{
+function closeQR(){
 
   qrOverlay.classList.remove("open");
 
   document.body.style.overflow="";
 
-});
+}
 
 
-/* DIŞARI TIKLAMA */
+qrButton.addEventListener(
+  "click",
+  function(e){
 
-qrOverlay.addEventListener("click",e=>{
+    e.preventDefault();
+    e.stopPropagation();
 
-  if(e.target===qrOverlay){
-
-    qrOverlay.classList.remove("open");
-
-    document.body.style.overflow="";
-
-  }
-
-});
-
-
-/* ESC */
-
-document.addEventListener("keydown",e=>{
-
-  if(e.key==="Escape"){
-
-    qrOverlay.classList.remove("open");
-
-    document.body.style.overflow="";
+    openQR();
 
   }
+);
 
-});
+
+qrClose.addEventListener(
+  "click",
+  function(){
+
+    closeQR();
+
+  }
+);
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+qrOverlay.addEventListener(
+  "click",
+  function(e){
 
-const search=
-document.getElementById("search");
+    if(e.target===qrOverlay){
 
-search.addEventListener("input",()=>{
+      closeQR();
 
-  const q=
-    search.value
-    .toLowerCase()
-    .trim();
+    }
 
-  document.querySelectorAll(".section").forEach(section=>{
+  }
+);
 
-    let visible=0;
 
-    section.querySelectorAll(".link-card").forEach(card=>{
+document.addEventListener(
+  "keydown",
+  function(e){
 
-      const text=
-        (card.dataset.search||card.innerText)
-        .toLowerCase();
+    if(
+      e.key==="Escape" &&
+      qrOverlay.classList.contains("open")
+    ){
 
-      const match=
-        !q || text.includes(q);
+      closeQR();
 
-      card.style.display=
-        match ? "flex" : "none";
+    }
 
-      if(match)visible++;
-
-    });
-
-    section.style.display=
-      visible ? "" : "none";
-
-  });
-
-});
+  }
+);
 
 
 /* =========================================================
    LANGUAGE
 ========================================================= */
 
-const translations={
+const T={
 
 tr:{
 lang:"DİL",
+menu:"DİL",
 bio:"Dijital içerik üreticisi · Geliştirici · İnternet",
 status:"Sistem aktif",
 search:"Bağlantılarda ara...",
+no:"Sonuç bulunamadı.",
+sections:["Sosyal","İçerik Üreticisi","Canlı Yayın","Müzik","Topluluk","Diğer","İletişim"],
+email:"E-posta",
+dark:"Koyu",
+light:"Açık",
+system:"Sistem",
+rights:"Her Hakkı Saklıdır.",
+featured:"ÖNE ÇIKAN",
 share:"Siteyi Paylaş",
 shareDesc:"efesarac.co'yu paylaş",
 qr:"QR Kod",
-qrDesc:"Siteyi QR kod ile aç"
+qrDesc:"Siteyi QR kod ile aç",
+qrHint:"Kameranızla okutun"
 },
 
 en:{
 lang:"LANGUAGE",
+menu:"LANGUAGE",
 bio:"Digital creator · Developer · Internet",
 status:"System active",
 search:"Search links...",
+no:"No results found.",
+sections:["Social","Creator","Live","Music","Community","Other","Contact"],
+email:"Email",
+dark:"Dark",
+light:"Light",
+system:"System",
+rights:"All Rights Reserved.",
+featured:"FEATURED",
 share:"Share Site",
 shareDesc:"Share efesarac.co",
 qr:"QR Code",
-qrDesc:"Open site with QR code"
+qrDesc:"Open site with QR code",
+qrHint:"Scan with your camera"
 },
 
 de:{
 lang:"SPRACHE",
+menu:"SPRACHE",
 bio:"Digitaler Content Creator · Entwickler · Internet",
 status:"System aktiv",
 search:"Links durchsuchen...",
+no:"Keine Ergebnisse gefunden.",
+sections:["Sozial","Creator","Live","Musik","Community","Andere","Kontakt"],
+email:"E-Mail",
+dark:"Dunkel",
+light:"Hell",
+system:"System",
+rights:"Alle Rechte vorbehalten.",
+featured:"HIGHLIGHT",
 share:"Seite teilen",
 shareDesc:"efesarac.co teilen",
 qr:"QR-Code",
-qrDesc:"Seite per QR-Code öffnen"
+qrDesc:"Seite per QR-Code öffnen",
+qrHint:"Mit der Kamera scannen"
 },
 
 fr:{
 lang:"LANGUE",
+menu:"LANGUE",
 bio:"Créateur de contenu numérique · Développeur · Internet",
 status:"Système actif",
 search:"Rechercher des liens...",
+no:"Aucun résultat trouvé.",
+sections:["Social","Créateur","En direct","Musique","Communauté","Autre","Contact"],
+email:"E-mail",
+dark:"Sombre",
+light:"Clair",
+system:"Système",
+rights:"Tous droits réservés.",
+featured:"À LA UNE",
 share:"Partager le site",
 shareDesc:"Partager efesarac.co",
 qr:"Code QR",
-qrDesc:"Ouvrir avec un QR"
+qrDesc:"Ouvrir le site avec un QR",
+qrHint:"Scanner avec la caméra"
 },
 
 es:{
 lang:"IDIOMA",
+menu:"IDIOMA",
 bio:"Creador de contenido digital · Desarrollador · Internet",
 status:"Sistema activo",
 search:"Buscar enlaces...",
+no:"No se encontraron resultados.",
+sections:["Social","Creador","En directo","Música","Comunidad","Otros","Contacto"],
+email:"Correo electrónico",
+dark:"Oscuro",
+light:"Claro",
+system:"Sistema",
+rights:"Todos los derechos reservados.",
+featured:"DESTACADO",
 share:"Compartir sitio",
 shareDesc:"Compartir efesarac.co",
 qr:"Código QR",
-qrDesc:"Abrir con QR"
+qrDesc:"Abrir sitio con QR",
+qrHint:"Escanea con tu cámara"
 },
 
 it:{
 lang:"LINGUA",
+menu:"LINGUA",
 bio:"Creator digitale · Sviluppatore · Internet",
 status:"Sistema attivo",
 search:"Cerca nei link...",
+no:"Nessun risultato trovato.",
+sections:["Social","Creator","Live","Musica","Community","Altro","Contatti"],
+email:"E-mail",
+dark:"Scuro",
+light:"Chiaro",
+system:"Sistema",
+rights:"Tutti i diritti riservati.",
+featured:"IN EVIDENZA",
 share:"Condividi sito",
 shareDesc:"Condividi efesarac.co",
 qr:"Codice QR",
-qrDesc:"Apri con QR"
+qrDesc:"Apri il sito con QR",
+qrHint:"Scansiona con la fotocamera"
+},
+
+pt:{
+lang:"IDIOMA",
+menu:"IDIOMA",
+bio:"Criador de conteúdo digital · Desenvolvedor · Internet",
+status:"Sistema ativo",
+search:"Pesquisar links...",
+no:"Nenhum resultado encontrado.",
+sections:["Social","Criador","Ao vivo","Música","Comunidade","Outro","Contato"],
+email:"E-mail",
+dark:"Escuro",
+light:"Claro",
+system:"Sistema",
+rights:"Todos os direitos reservados.",
+featured:"DESTAQUE",
+share:"Compartilhar site",
+shareDesc:"Compartilhar efesarac.co",
+qr:"Código QR",
+qrDesc:"Abrir site com QR",
+qrHint:"Digitalize com sua câmera"
+},
+
+nl:{
+lang:"TAAL",
+menu:"TAAL",
+bio:"Digitale contentmaker · Ontwikkelaar · Internet",
+status:"Systeem actief",
+search:"Links zoeken...",
+no:"Geen resultaten gevonden.",
+sections:["Sociaal","Creator","Live","Muziek","Community","Overig","Contact"],
+email:"E-mail",
+dark:"Donker",
+light:"Licht",
+system:"System",
+rights:"Alle rechten voorbehouden.",
+featured:"UITGELICHT",
+share:"Site delen",
+shareDesc:"Deel efesarac.co",
+qr:"QR-code",
+qrDesc:"Site openen met QR-code",
+qrHint:"Scan met je camera"
+},
+
+ru:{
+lang:"ЯЗЫК",
+menu:"ЯЗЫК",
+bio:"Цифровой создатель контента · Разработчик · Интернет",
+status:"Система активна",
+search:"Поиск по ссылкам...",
+no:"Ничего не найдено.",
+sections:["Соцсети","Креатор","Прямой эфир","Музыка","Сообщество","Другое","Контакты"],
+email:"Электронная почта",
+dark:"Тёмная",
+light:"Светлая",
+system:"Система",
+rights:"Все права защищены.",
+featured:"РЕКОМЕНДУЕМОЕ",
+share:"Поделиться сайтом",
+shareDesc:"Поделиться efesarac.co",
+qr:"QR-код",
+qrDesc:"Открыть сайт через QR",
+qrHint:"Сканируйте камерой"
+},
+
+uk:{
+lang:"МОВА",
+menu:"МОВА",
+bio:"Цифровий творець · Розробник · Інтернет",
+status:"Система активна",
+search:"Пошук посилань...",
+no:"Результатів не знайдено.",
+sections:["Соціальні мережі","Творець","Прямий ефір","Музика","Спільнота","Інше","Контакти"],
+email:"Електронна пошта",
+dark:"Темна",
+light:"Світла",
+system:"Система",
+rights:"Усі права захищені.",
+featured:"РЕКОМЕНДОВАНЕ",
+share:"Поділитися сайтом",
+shareDesc:"Поділитися efesarac.co",
+qr:"QR-код",
+qrDesc:"Відкрити сайт через QR",
+qrHint:"Скануйте камерою"
+},
+
+pl:{
+lang:"JĘZYK",
+menu:"JĘZYK",
+bio:"Twórca cyfrowy · Programista · Internet",
+status:"System aktywny",
+search:"Szukaj linków...",
+no:"Nie znaleziono wyników.",
+sections:["Społecznościowe","Twórca","Na żywo","Muzyka","Społeczność","Inne","Kontakt"],
+email:"E-mail",
+dark:"Ciemny",
+light:"Jasny",
+system:"System",
+rights:"Wszelkie prawa zastrzeżone.",
+featured:"WYRÓŻNIONE",
+share:"Udostępnij stronę",
+shareDesc:"Udostępnij efesarac.co",
+qr:"Kod QR",
+qrDesc:"Otwórz stronę przez QR",
+qrHint:"Zeskanuj aparatem"
+},
+
+cs:{
+lang:"JAZYK",
+menu:"JAZYK",
+bio:"Digitální tvůrce · Vývojář · Internet",
+status:"Systém aktivní",
+search:"Hledat odkazy...",
+no:"Nebyly nalezeny žádné výsledky.",
+sections:["Sociální","Tvůrce","Živě","Hudba","Komunita","Ostatní","Kontakt"],
+email:"E-mail",
+dark:"Tmavý",
+light:"Světlý",
+system:"Systém",
+rights:"Všechna práva vyhrazena.",
+featured:"DOPORUČENÉ",
+share:"Sdílet web",
+shareDesc:"Sdílet efesarac.co",
+qr:"QR kód",
+qrDesc:"Otevřít web přes QR",
+qrHint:"Naskenujte fotoaparátem"
+},
+
+sk:{
+lang:"JAZYK",
+menu:"JAZYK",
+bio:"Digitálny tvorca · Vývojár · Internet",
+status:"Systém aktívny",
+search:"Hľadať odkazy...",
+no:"Nenašli sa žiadne výsledky.",
+sections:["Sociálne","Tvorca","Naživo","Hudba","Komunita","Ostatné","Kontakt"],
+email:"E-mail",
+dark:"Tmavý",
+light:"Svetlý",
+system:"Systém",
+rights:"Všetky práva vyhradené.",
+featured:"ODPORÚČANÉ",
+share:"Zdieľať web",
+shareDesc:"Zdieľať efesarac.co",
+qr:"QR kód",
+qrDesc:"Otvoriť web cez QR",
+qrHint:"Naskenujte fotoaparátom"
+},
+
+hu:{
+lang:"NYELV",
+menu:"NYELV",
+bio:"Digitális tartalomkészítő · Fejlesztő · Internet",
+status:"A rendszer aktív",
+search:"Linkek keresése...",
+no:"Nincs találat.",
+sections:["Közösségi","Készítő","Élő","Zene","Közösség","Egyéb","Kapcsolat"],
+email:"E-mail",
+dark:"Sötét",
+light:"Világos",
+system:"Rendszer",
+rights:"Minden jog fenntartva.",
+featured:"KIEMELT",
+share:"Webhely megosztása",
+shareDesc:"efesarac.co megosztása",
+qr:"QR-kód",
+qrDesc:"Webhely megnyitása QR-rel",
+qrHint:"Olvassa be kamerával"
+},
+
+ro:{
+lang:"LIMBĂ",
+menu:"LIMBĂ",
+bio:"Creator digital · Dezvoltator · Internet",
+status:"Sistem activ",
+search:"Caută linkuri...",
+no:"Nu au fost găsite rezultate.",
+sections:["Social","Creator","Live","Muzică","Comunitate","Altele","Contact"],
+email:"E-mail",
+dark:"Întunecat",
+light:"Luminos",
+system:"Sistem",
+rights:"Toate drepturile rezervate.",
+featured:"RECOMANDAT",
+share:"Distribuie site-ul",
+shareDesc:"Distribuie efesarac.co",
+qr:"Cod QR",
+qrDesc:"Deschide site-ul prin QR",
+qrHint:"Scanează cu camera"
+},
+
+el:{
+lang:"ΓΛΩΣΣΑ",
+menu:"ΓΛΩΣΣΑ",
+bio:"Δημιουργός ψηφιακού περιεχομένου · Προγραμματιστής · Διαδίκτυο",
+status:"Το σύστημα είναι ενεργό",
+search:"Αναζήτηση συνδέσμων...",
+no:"Δεν βρέθηκαν αποτελέσματα.",
+sections:["Κοινωνικά","Δημιουργός","Ζωντανά","Μουσική","Κοινότητα","Άλλα","Επικοινωνία"],
+email:"E-mail",
+dark:"Σκούρο",
+light:"Ανοιχτό",
+system:"Σύστημα",
+rights:"Με επιφύλαξη παντός δικαιώματος.",
+featured:"ΠΡΟΤΕΙΝΟΜΕΝΟ",
+share:"Κοινή χρήση ιστότοπου",
+shareDesc:"Κοινή χρήση efesarac.co",
+qr:"Κωδικός QR",
+qrDesc:"Άνοιγμα μέσω QR",
+qrHint:"Σάρωση με την κάμερα"
+},
+
+sv:{
+lang:"SPRÅK",
+menu:"SPRÅK",
+bio:"Digital innehållsskapare · Utvecklare · Internet",
+status:"Systemet är aktivt",
+search:"Sök länkar...",
+no:"Inga resultat hittades.",
+sections:["Socialt","Skapare","Live","Musik","Gemenskap","Övrigt","Kontakt"],
+email:"E-post",
+dark:"Mörk",
+light:"Ljus",
+system:"System",
+rights:"Alla rättigheter förbehållna.",
+featured:"UTVALT",
+share:"Dela webbplats",
+shareDesc:"Dela efesarac.co",
+qr:"QR-kod",
+qrDesc:"Öppna med QR",
+qrHint:"Skanna med kameran"
+},
+
+no:{
+lang:"SPRÅK",
+menu:"SPRÅK",
+bio:"Digital innholdsskaper · Utvikler · Internett",
+status:"Systemet er aktivt",
+search:"Søk i lenker...",
+no:"Ingen resultater funnet.",
+sections:["Sosialt","Skaper","Direkte","Musikk","Fellesskap","Annet","Kontakt"],
+email:"E-post",
+dark:"Mørk",
+light:"Lys",
+system:"System",
+rights:"Alle rettigheter forbeholdt.",
+featured:"UTVALGT",
+share:"Del nettsted",
+shareDesc:"Del efesarac.co",
+qr:"QR-kode",
+qrDesc:"Åpne med QR",
+qrHint:"Skann med kameraet"
+},
+
+da:{
+lang:"SPROG",
+menu:"SPROG",
+bio:"Digital indholdsskaber · Udvikler · Internet",
+status:"System aktivt",
+search:"Søg i links...",
+no:"Ingen resultater fundet.",
+sections:["Social","Skaber","Live","Musik","Fællesskab","Andet","Kontakt"],
+email:"E-mail",
+dark:"Mørk",
+light:"Lys",
+system:"System",
+rights:"Alle rettigheder forbeholdes.",
+featured:"FREMHÆVET",
+share:"Del websted",
+shareDesc:"Del efesarac.co",
+qr:"QR-kode",
+qrDesc:"Åbn med QR",
+qrHint:"Scan med kameraet"
+},
+
+fi:{
+lang:"KIELI",
+menu:"KIELI",
+bio:"Digitaalinen sisällöntuottaja · Kehittäjä · Internet",
+status:"Järjestelmä aktiivinen",
+search:"Hae linkkejä...",
+no:"Tuloksia ei löytynyt.",
+sections:["Sosiaalinen","Sisällöntuottaja","Live","Musiikki","Yhteisö","Muu","Yhteystiedot"],
+email:"Sähköposti",
+dark:"Tumma",
+light:"Vaalea",
+system:"Järjestelmä",
+rights:"Kaikki oikeudet pidätetään.",
+featured:"NOSTO",
+share:"Jaa sivusto",
+shareDesc:"Jaa efesarac.co",
+qr:"QR-koodi",
+qrDesc:"Avaa QR-koodilla",
+qrHint:"Skannaa kameralla"
+},
+
+he:{
+lang:"שפה",
+menu:"שפה",
+bio:"יוצר תוכן דיגיטלי · מפתח · אינטרנט",
+status:"המערכת פעילה",
+search:"חיפוש בקישורים...",
+no:"לא נמצאו תוצאות.",
+sections:["חברתי","יוצר","שידור חי","מוזיקה","קהילה","אחר","יצירת קשר"],
+email:"דוא״ל",
+dark:"כהה",
+light:"בהיר",
+system:"מערכת",
+rights:"כל הזכויות שמורות.",
+featured:"מומלץ",
+share:"שתף אתר",
+shareDesc:"שתף את efesarac.co",
+qr:"קוד QR",
+qrDesc:"פתח באמצעות QR",
+qrHint:"סרוק עם המצלמה"
+},
+
+ar:{
+lang:"اللغة",
+menu:"اللغة",
+bio:"منشئ محتوى رقمي · مطور · الإنترنت",
+status:"النظام نشط",
+search:"البحث في الروابط...",
+no:"لم يتم العثور على نتائج.",
+sections:["اجتماعي","منشئ المحتوى","بث مباشر","الموسيقى","المجتمع","أخرى","التواصل"],
+email:"البريد الإلكتروني",
+dark:"داكن",
+light:"فاتح",
+system:"النظام",
+rights:"جميع الحقوق محفوظة.",
+featured:"مميز",
+share:"مشاركة الموقع",
+shareDesc:"مشاركة efesarac.co",
+qr:"رمز QR",
+qrDesc:"فتح الموقع عبر QR",
+qrHint:"امسح بالكاميرا"
+},
+
+fa:{
+lang:"زبان",
+menu:"زبان",
+bio:"تولیدکننده محتوای دیجیتال · توسعه‌دهنده · اینترنت",
+status:"سیستم فعال است",
+search:"جستجوی لینک‌ها...",
+no:"نتیجه‌ای پیدا نشد.",
+sections:["اجتماعی","تولیدکننده","زنده","موسیقی","انجمن","سایر","تماس"],
+email:"ایمیل",
+dark:"تیره",
+light:"روشن",
+system:"سیستم",
+rights:"تمامی حقوق محفوظ است.",
+featured:"ویژه",
+share:"اشتراک‌گذاری سایت",
+shareDesc:"اشتراک‌گذاری efesarac.co",
+qr:"کد QR",
+qrDesc:"باز کردن سایت با QR",
+qrHint:"با دوربین اسکن کنید"
+},
+
+hi:{
+lang:"भाषा",
+menu:"भाषा",
+bio:"डिजिटल क्रिएटर · डेवलपर · इंटरनेट",
+status:"सिस्टम सक्रिय",
+search:"लिंक खोजें...",
+no:"कोई परिणाम नहीं मिला।",
+sections:["सोशल","क्रिएटर","लाइव","संगीत","समुदाय","अन्य","संपर्क"],
+email:"ईमेल",
+dark:"डार्क",
+light:"लाइट",
+system:"सिस्टम",
+rights:"सर्वाधिकार सुरक्षित।",
+featured:"विशेष",
+share:"साइट साझा करें",
+shareDesc:"efesarac.co साझा करें",
+qr:"QR कोड",
+qrDesc:"QR से साइट खोलें",
+qrHint:"कैमरे से स्कैन करें"
+},
+
+bn:{
+lang:"ভাষা",
+menu:"ভাষা",
+bio:"ডিজিটাল কনটেন্ট ক্রিয়েটর · ডেভেলপার · ইন্টারনেট",
+status:"সিস্টেম সক্রিয়",
+search:"লিংক খুঁজুন...",
+no:"কোনো ফলাফল পাওয়া যায়নি।",
+sections:["সামাজিক","ক্রিয়েটর","লাইভ","সঙ্গীত","কমিউনিটি","অন্যান্য","যোগাযোগ"],
+email:"ইমেল",
+dark:"ডার্ক",
+light:"লাইট",
+system:"সিস্টেম",
+rights:"সর্বস্বত্ব সংরক্ষিত।",
+featured:"নির্বাচিত",
+share:"সাইট শেয়ার করুন",
+shareDesc:"efesarac.co শেয়ার করুন",
+qr:"QR কোড",
+qrDesc:"QR দিয়ে সাইট খুলুন",
+qrHint:"ক্যামেরা দিয়ে স্ক্যান করুন"
+},
+
+ur:{
+lang:"زبان",
+menu:"زبان",
+bio:"ڈیجیٹل مواد تخلیق کار · ڈویلپر · انٹرنیٹ",
+status:"سسٹم فعال ہے",
+search:"لنکس تلاش کریں...",
+no:"کوئی نتیجہ نہیں ملا۔",
+sections:["سوشل","تخلیق کار","براہ راست","موسیقی","کمیونٹی","دیگر","رابطہ"],
+email:"ای میل",
+dark:"ڈارک",
+light:"لائٹ",
+system:"سسٹم",
+rights:"جملہ حقوق محفوظ ہیں۔",
+featured:"نمایاں",
+share:"سائٹ شیئر کریں",
+shareDesc:"efesarac.co شیئر کریں",
+qr:"QR کوڈ",
+qrDesc:"QR سے سائٹ کھولیں",
+qrHint:"کیمرے سے اسکین کریں"
+},
+
+"zh-CN":{
+lang:"语言",
+menu:"语言",
+bio:"数字内容创作者 · 开发者 · 互联网",
+status:"系统运行中",
+search:"搜索链接...",
+no:"未找到结果。",
+sections:["社交","创作者","直播","音乐","社区","其他","联系"],
+email:"电子邮件",
+dark:"深色",
+light:"浅色",
+system:"系统",
+rights:"版权所有。",
+featured:"精选",
+share:"分享网站",
+shareDesc:"分享 efesarac.co",
+qr:"二维码",
+qrDesc:"使用二维码打开网站",
+qrHint:"使用相机扫描"
+},
+
+"zh-TW":{
+lang:"語言",
+menu:"語言",
+bio:"數位內容創作者 · 開發者 · 網際網路",
+status:"系統運作中",
+search:"搜尋連結...",
+no:"找不到結果。",
+sections:["社群","創作者","直播","音樂","社群","其他","聯絡"],
+email:"電子郵件",
+dark:"深色",
+light:"淺色",
+system:"系統",
+rights:"版權所有。",
+featured:"精選",
+share:"分享網站",
+shareDesc:"分享 efesarac.co",
+qr:"QR 碼",
+qrDesc:"使用 QR 碼開啟網站",
+qrHint:"使用相機掃描"
+},
+
+ja:{
+lang:"言語",
+menu:"言語",
+bio:"デジタルクリエイター · 開発者 · インターネット",
+status:"システム稼働中",
+search:"リンクを検索...",
+no:"結果が見つかりません。",
+sections:["ソーシャル","クリエイター","ライブ","音楽","コミュニティ","その他","お問い合わせ"],
+email:"メール",
+dark:"ダーク",
+light:"ライト",
+system:"システム",
+rights:"All Rights Reserved.",
+featured:"注目",
+share:"サイトを共有",
+shareDesc:"efesarac.coを共有",
+qr:"QRコード",
+qrDesc:"QRコードでサイトを開く",
+qrHint:"カメラでスキャン"
+},
+
+ko:{
+lang:"언어",
+menu:"언어",
+bio:"디지털 크리에이터 · 개발자 · 인터넷",
+status:"시스템 활성",
+search:"링크 검색...",
+no:"결과가 없습니다.",
+sections:["소셜","크리에이터","라이브","음악","커뮤니티","기타","연락처"],
+email:"이메일",
+dark:"다크",
+light:"라이트",
+system:"시스템",
+rights:"All Rights Reserved.",
+featured:"추천",
+share:"사이트 공유",
+shareDesc:"efesarac.co 공유",
+qr:"QR 코드",
+qrDesc:"QR로 사이트 열기",
+qrHint:"카메라로 스캔"
+},
+
+vi:{
+lang:"NGÔN NGỮ",
+menu:"NGÔN NGỮ",
+bio:"Nhà sáng tạo nội dung số · Lập trình viên · Internet",
+status:"Hệ thống đang hoạt động",
+search:"Tìm kiếm liên kết...",
+no:"Không tìm thấy kết quả.",
+sections:["Xã hội","Nhà sáng tạo","Trực tiếp","Âm nhạc","Cộng đồng","Khác","Liên hệ"],
+email:"Email",
+dark:"Tối",
+light:"Sáng",
+system:"Hệ thống",
+rights:"Đã đăng ký bản quyền.",
+featured:"NỔI BẬT",
+share:"Chia sẻ trang",
+shareDesc:"Chia sẻ efesarac.co",
+qr:"Mã QR",
+qrDesc:"Mở trang bằng QR",
+qrHint:"Quét bằng camera"
+},
+
+th:{
+lang:"ภาษา",
+menu:"ภาษา",
+bio:"ครีเอเตอร์ดิจิทัล · นักพัฒนา · อินเทอร์เน็ต",
+status:"ระบบทำงานอยู่",
+search:"ค้นหาลิงก์...",
+no:"ไม่พบผลลัพธ์",
+sections:["โซเชียล","ครีเอเตอร์","ไลฟ์","เพลง","ชุมชน","อื่นๆ","ติดต่อ"],
+email:"อีเมล",
+dark:"มืด",
+light:"สว่าง",
+system:"ระบบ",
+rights:"สงวนลิขสิทธิ์",
+featured:"แนะนำ",
+share:"แชร์เว็บไซต์",
+shareDesc:"แชร์ efesarac.co",
+qr:"คิวอาร์โค้ด",
+qrDesc:"เปิดเว็บไซต์ด้วย QR",
+qrHint:"สแกนด้วยกล้อง"
+},
+
+id:{
+lang:"BAHASA",
+menu:"BAHASA",
+bio:"Kreator digital · Pengembang · Internet",
+status:"Sistem aktif",
+search:"Cari tautan...",
+no:"Tidak ada hasil.",
+sections:["Sosial","Kreator","Live","Musik","Komunitas","Lainnya","Kontak"],
+email:"Email",
+dark:"Gelap",
+light:"Terang",
+system:"Sistem",
+rights:"Hak Cipta Dilindungi.",
+featured:"UNGGULAN",
+share:"Bagikan situs",
+shareDesc:"Bagikan efesarac.co",
+qr:"Kode QR",
+qrDesc:"Buka situs dengan QR",
+qrHint:"Pindai dengan kamera"
+},
+
+ms:{
+lang:"BAHASA",
+menu:"BAHASA",
+bio:"Pencipta kandungan digital · Pembangun · Internet",
+status:"Sistem aktif",
+search:"Cari pautan...",
+no:"Tiada hasil ditemui.",
+sections:["Sosial","Pencipta","Langsung","Muzik","Komuniti","Lain-lain","Hubungi"],
+email:"E-mel",
+dark:"Gelap",
+light:"Cerah",
+system:"Sistem",
+rights:"Hak Cipta Terpelihara.",
+featured:"DITAMPILKAN",
+share:"Kongsi laman",
+shareDesc:"Kongsi efesarac.co",
+qr:"Kod QR",
+qrDesc:"Buka laman melalui QR",
+qrHint:"Imbas dengan kamera"
 }
 
 };
 
 
+/* =========================================================
+   LANGUAGE SYSTEM
+========================================================= */
+
+const languageButton=
+document.getElementById("languageButton");
+
+const languageMenu=
+document.getElementById("languageMenu");
+
+const languageOptions=
+document.querySelectorAll(".language-option");
+
+
 function setLanguage(lang){
 
-  const t=
-    translations[lang]||
-    translations.tr;
+  const t=T[lang]||T.tr;
 
   document.documentElement.lang=lang;
 
-  document.getElementById("langLabel").textContent=t.lang;
-
+  document.getElementById("languageLabel").textContent=t.lang;
+  document.getElementById("languageMenuTitle").textContent=t.menu;
   document.getElementById("bio").textContent=t.bio;
+  document.getElementById("statusText").textContent=t.status;
+  document.getElementById("searchInput").placeholder=t.search;
+  document.getElementById("noResultsText").textContent=t.no;
 
-  document.getElementById("status").textContent=t.status;
-
-  document.getElementById("search").placeholder=t.search;
-
-  document.getElementById("shareTitle").textContent=t.share;
-
-  document.getElementById("shareDesc").textContent=t.shareDesc;
+  document.getElementById("siteShareTitle").textContent=t.share;
+  document.getElementById("siteShareDescription").textContent=t.shareDesc;
 
   document.getElementById("qrTitle").textContent=t.qr;
+  document.getElementById("qrDescription").textContent=t.qrDesc;
+  document.getElementById("qrHint").textContent=t.qrHint;
+  document.getElementById("qrModalTitle").textContent=t.qr;
 
-  document.getElementById("qrDesc").textContent=t.qrDesc;
+  const ids=[
+    "socialTitle",
+    "creatorTitle",
+    "liveTitle",
+    "musicTitle",
+    "communityTitle",
+    "otherTitle",
+    "contactTitle"
+  ];
 
-  document.querySelectorAll(".lang-option").forEach(option=>{
+  ids.forEach((id,i)=>{
+
+    const el=document.getElementById(id);
+
+    if(el){
+      el.textContent=t.sections[i];
+    }
+
+  });
+
+  document.getElementById("emailTitle").textContent=t.email;
+
+  document.getElementById("copyrightText").textContent=
+    `© 2008–2026 efesarac.co ${t.rights}`;
+
+  document.querySelector(".theme-dark-text").textContent=t.dark;
+  document.querySelector(".theme-light-text").textContent=t.light;
+  document.querySelector(".theme-system-text").textContent=t.system;
+
+  document.querySelectorAll(".featured-badge")
+    .forEach(badge=>{
+      badge.textContent=t.featured;
+    });
+
+  languageOptions.forEach(option=>{
 
     option.classList.toggle(
       "active",
@@ -2157,42 +3364,41 @@ function setLanguage(lang){
   });
 
   localStorage.setItem(
-    "language",
+    "efesarac-language",
     lang
   );
+
+  languageMenu.classList.remove("open");
 
 }
 
 
-document.getElementById("langBtn").addEventListener(
-"click",e=>{
+languageButton.addEventListener(
+  "click",
+  function(e){
 
-  e.stopPropagation();
+    e.stopPropagation();
 
-  document
-    .getElementById("langMenu")
-    .classList.toggle("open");
+    languageMenu.classList.toggle("open");
 
-  document
-    .getElementById("themeMenu")
-    .classList.remove("open");
+    themeMenu.classList.remove("open");
 
-});
+  }
+);
 
 
-document.querySelectorAll(".lang-option").forEach(option=>{
+languageOptions.forEach(option=>{
 
-  option.addEventListener("click",()=>{
+  option.addEventListener(
+    "click",
+    function(){
 
-    setLanguage(
-      option.dataset.lang
-    );
+      setLanguage(
+        this.dataset.lang
+      );
 
-    document
-      .getElementById("langMenu")
-      .classList.remove("open");
-
-  });
+    }
+  );
 
 });
 
@@ -2201,29 +3407,44 @@ document.querySelectorAll(".lang-option").forEach(option=>{
    THEME
 ========================================================= */
 
+const themeButton=
+document.getElementById("themeButton");
+
+const themeMenu=
+document.getElementById("themeMenu");
+
+const themeOptions=
+document.querySelectorAll(".theme-option");
+
 const themeIcon=
 document.getElementById("themeIcon");
 
 
-function applyTheme(choice){
+function getSystemTheme(){
 
-  const actual=
-    choice==="system"
-      ?(
-        matchMedia("(prefers-color-scheme:light)").matches
-          ?"light"
-          :"dark"
-      )
-      :choice;
+  return window.matchMedia(
+    "(prefers-color-scheme: light)"
+  ).matches
+    ?"light"
+    :"dark";
 
-  document.documentElement.dataset.theme=
-    actual;
+}
 
-  if(actual==="light"){
+
+function updateThemeIcon(theme){
+
+  if(theme==="light"){
 
     themeIcon.innerHTML=`
       <circle cx="12" cy="12" r="4"/>
-      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/>
+      <path d="M12 2v2"/>
+      <path d="M12 20v2"/>
+      <path d="M4.93 4.93l1.41 1.41"/>
+      <path d="M17.66 17.66l1.41 1.41"/>
+      <path d="M2 12h2"/>
+      <path d="M20 12h2"/>
+      <path d="M6.34 17.66l-1.41 1.41"/>
+      <path d="M19.07 4.93l-1.41 1.41"/>
     `;
 
   }else{
@@ -2234,77 +3455,216 @@ function applyTheme(choice){
 
   }
 
-  document.querySelectorAll(".theme-option").forEach(option=>{
+}
+
+
+function applyTheme(choice){
+
+  const actual=
+    choice==="system"
+      ?getSystemTheme()
+      :choice;
+
+  document.documentElement.setAttribute(
+    "data-theme",
+    actual
+  );
+
+  updateThemeIcon(actual);
+
+  themeOptions.forEach(option=>{
 
     option.classList.toggle(
       "active",
-      option.dataset.theme===choice
+      option.dataset.themeChoice===choice
     );
 
   });
 
   localStorage.setItem(
-    "theme",
+    "efesarac-theme",
     choice
   );
+
+  const meta=
+    document.querySelector(
+      'meta[name="theme-color"]'
+    );
+
+  if(meta){
+
+    meta.content=
+      actual==="light"
+        ?"#f4f5f8"
+        :"#060609";
+
+  }
 
 }
 
 
-document.getElementById("themeBtn").addEventListener(
-"click",e=>{
+function setTheme(choice){
 
-  e.stopPropagation();
+  applyTheme(choice);
 
-  document
-    .getElementById("themeMenu")
-    .classList.toggle("open");
+  themeMenu.classList.remove("open");
 
-  document
-    .getElementById("langMenu")
-    .classList.remove("open");
+}
+
+
+themeButton.addEventListener(
+  "click",
+  function(e){
+
+    e.stopPropagation();
+
+    themeMenu.classList.toggle("open");
+
+    languageMenu.classList.remove("open");
+
+  }
+);
+
+
+themeOptions.forEach(option=>{
+
+  option.addEventListener(
+    "click",
+    function(){
+
+      setTheme(
+        this.dataset.themeChoice
+      );
+
+    }
+  );
 
 });
 
 
-document.querySelectorAll(".theme-option").forEach(option=>{
+window.matchMedia(
+  "(prefers-color-scheme: light)"
+).addEventListener(
+  "change",
+  function(){
 
-  option.addEventListener("click",()=>{
+    const saved=
+      localStorage.getItem(
+        "efesarac-theme"
+      )||"dark";
 
-    applyTheme(
-      option.dataset.theme
-    );
+    if(saved==="system"){
+      applyTheme("system");
+    }
 
-    document
-      .getElementById("themeMenu")
-      .classList.remove("open");
+  }
+);
+
+
+/* =========================================================
+   MENUS
+========================================================= */
+
+document.addEventListener(
+  "click",
+  function(e){
+
+    if(
+      !languageMenu.contains(e.target)&&
+      e.target!==languageButton
+    ){
+      languageMenu.classList.remove("open");
+    }
+
+    if(
+      !themeMenu.contains(e.target)&&
+      e.target!==themeButton
+    ){
+      themeMenu.classList.remove("open");
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchInput=
+document.getElementById("searchInput");
+
+const noResults=
+document.getElementById("noResults");
+
+
+function searchLinks(){
+
+  const query=
+    searchInput.value
+      .toLowerCase()
+      .trim();
+
+  const cards=
+    document.querySelectorAll(".link-card");
+
+  let visible=0;
+
+  cards.forEach(card=>{
+
+    const text=(
+      card.dataset.search||
+      card.innerText
+    ).toLowerCase();
+
+    const match=
+      !query||
+      text.includes(query);
+
+    card.style.display=
+      match?"flex":"none";
+
+    if(match)visible++;
 
   });
 
-});
+  document.querySelectorAll(".section")
+    .forEach(section=>{
+
+      const hasVisible=
+        [...section.querySelectorAll(".link-card")]
+        .some(card=>card.style.display!=="none");
+
+      section.style.display=
+        hasVisible?"":"none";
+
+    });
+
+  noResults.style.display=
+    visible?"none":"block";
+
+}
 
 
-document.addEventListener("click",()=>{
-
-  document
-    .getElementById("langMenu")
-    .classList.remove("open");
-
-  document
-    .getElementById("themeMenu")
-    .classList.remove("open");
-
-});
+searchInput.addEventListener(
+  "input",
+  searchLinks
+);
 
 
 /* =========================================================
    COUNTRY FLAG
 ========================================================= */
 
-async function countryFlag(){
+async function detectCountryFlag(){
 
   const flag=
     document.getElementById("countryFlag");
+
+  if(!flag)return;
+
+  const turkeyFlag=
+    "https://flagcdn.com/w160/tr.png";
 
   try{
 
@@ -2314,69 +3674,127 @@ async function countryFlag(){
         {cache:"no-store"}
       );
 
+    if(!response.ok){
+      throw new Error();
+    }
+
     const data=
       await response.json();
 
-    const code=
-      String(data.country_code||"TR")
+    const countryCode=
+      String(
+        data.country_code||"TR"
+      )
+      .trim()
       .toLowerCase();
 
-    if(!/^[a-z]{2}$/.test(code))
+    if(!/^[a-z]{2}$/.test(countryCode)){
       throw new Error();
+    }
 
-    const url=
-      `https://flagcdn.com/w160/${code}.png`;
+    const newFlag=
+      `https://flagcdn.com/w160/${countryCode}.png`;
 
-    const test=
+    const image=
       new Image();
 
-    test.onload=()=>{
+    image.onload=()=>{
 
-      flag.src=url;
+      flag.src=newFlag;
 
       flag.alt=
-        code==="tr"
+        countryCode==="tr"
           ?"Türkiye Bayrağı"
-          :"Country flag";
+          :`${data.country_name||countryCode.toUpperCase()} Bayrağı`;
 
     };
 
-    test.onerror=()=>{
+    image.onerror=()=>{
 
-      flag.src=
-        "https://flagcdn.com/w160/tr.png";
-
-      flag.alt=
-        "Türkiye Bayrağı";
+      flag.src=turkeyFlag;
+      flag.alt="Türkiye Bayrağı";
 
     };
 
-    test.src=url;
+    image.src=newFlag;
 
-  }catch(e){
+  }catch(error){
 
-    flag.src=
-      "https://flagcdn.com/w160/tr.png";
-
-    flag.alt=
-      "Türkiye Bayrağı";
+    flag.src=turkeyFlag;
+    flag.alt="Türkiye Bayrağı";
 
   }
 
 }
 
 
-/* INITIAL */
+/* =========================================================
+   INITIAL
+========================================================= */
+
+const savedLanguage=
+  localStorage.getItem(
+    "efesarac-language"
+  )||"tr";
+
+const savedTheme=
+  localStorage.getItem(
+    "efesarac-theme"
+  )||"dark";
+
 
 setLanguage(
-  localStorage.getItem("language")||"tr"
+  T[savedLanguage]
+    ?savedLanguage
+    :"tr"
 );
+
 
 applyTheme(
-  localStorage.getItem("theme")||"dark"
+  ["dark","light","system"].includes(savedTheme)
+    ?savedTheme
+    :"dark"
 );
 
-countryFlag();
+
+detectCountryFlag();
+
+
+/* =========================================================
+   CARD ANIMATION
+========================================================= */
+
+document
+.querySelectorAll(".link-card")
+.forEach((card,index)=>{
+
+  card.style.animationDelay=
+    `${Math.min(index*.035,.5)}s`;
+
+});
+
+
+/* =========================================================
+   PRELOADER
+========================================================= */
+
+window.addEventListener(
+  "load",
+  function(){
+
+    setTimeout(
+      function(){
+
+        document
+          .getElementById("preloader")
+          ?.classList.add("hide");
+
+      },
+      350
+    );
+
+  }
+);
 
 </script>
 
