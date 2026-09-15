@@ -8,18 +8,39 @@
 <title>Efe Saraç — Dijital İçerik Üreticisi</title>
 
 <meta name="description"
-      content="Efe Saraç — Dijital içerik üreticisi, geliştirici ve internet kullanıcısı. Tüm sosyal medya ve bağlantılar.">
+content="Efe Saraç — Dijital içerik üreticisi, geliştirici ve internet.">
 
 <style>
 :root{
   --bg:#060609;
+  --bg2:#0b0b10;
   --card:rgba(255,255,255,.055);
   --card-hover:rgba(255,255,255,.085);
   --border:rgba(255,255,255,.10);
+  --border-hover:rgba(255,255,255,.17);
   --text:#fff;
   --muted:#a9a9b5;
+  --muted2:#777783;
+  --grid:rgba(255,255,255,.035);
+  --header-bg:rgba(10,10,14,.78);
   --blue:#3b82f6;
   --green:#22c55e;
+  --shadow:rgba(0,0,0,.25);
+}
+
+html[data-theme="light"]{
+  --bg:#f4f5f8;
+  --bg2:#ffffff;
+  --card:rgba(255,255,255,.72);
+  --card-hover:rgba(255,255,255,.92);
+  --border:rgba(20,25,40,.10);
+  --border-hover:rgba(20,25,40,.18);
+  --text:#15161b;
+  --muted:#646773;
+  --muted2:#858894;
+  --grid:rgba(20,25,40,.045);
+  --header-bg:rgba(255,255,255,.80);
+  --shadow:rgba(20,25,40,.12);
 }
 
 *{
@@ -35,7 +56,9 @@ html{
 body{
   min-height:100vh;
   color:var(--text);
-  background:var(--bg);
+  background:
+    radial-gradient(circle at 50% -20%,rgba(59,130,246,.07),transparent 35%),
+    var(--bg);
   font-family:
     Inter,
     -apple-system,
@@ -45,21 +68,20 @@ body{
     Arial,
     sans-serif;
   overflow-x:hidden;
+  transition:
+    background .3s ease,
+    color .3s ease;
 }
-
-/* =========================
-   BACKGROUND
-========================= */
 
 body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.20;
+  opacity:.9;
   background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
   background-size:45px 45px;
   z-index:-3;
 }
@@ -73,6 +95,7 @@ body::before{
   opacity:.16;
   pointer-events:none;
   z-index:-2;
+  transition:opacity .4s ease;
 }
 
 .orb.one{
@@ -93,39 +116,120 @@ body::before{
   background:#06b6d4;
 }
 
+html[data-theme="light"] .orb{
+  opacity:.09;
+}
+
 /* =========================
-   LANGUAGE
+   TOP CONTROLS
 ========================= */
 
-.language-switch{
+.top-controls{
   position:fixed;
-  top:20px;
-  right:20px;
-  z-index:50;
+  top:18px;
+  right:18px;
+  z-index:100;
   display:flex;
-  padding:4px;
+  align-items:center;
+  gap:5px;
+  padding:5px;
   border:1px solid var(--border);
-  border-radius:14px;
-  background:rgba(10,10,14,.75);
-  backdrop-filter:blur(18px);
-  box-shadow:0 10px 35px rgba(0,0,0,.25);
+  border-radius:15px;
+  background:var(--header-bg);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 12px 35px var(--shadow);
+}
+
+.language-switch{
+  display:flex;
+  gap:2px;
+}
+
+.language-switch button,
+.theme-button{
+  height:32px;
+  border:0;
+  border-radius:10px;
+  color:var(--muted);
+  background:transparent;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s ease;
 }
 
 .language-switch button{
-  border:0;
-  color:#8f8f9b;
-  background:transparent;
-  padding:7px 10px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s;
+  padding:0 9px;
 }
 
-.language-switch button.active{
-  color:#fff;
-  background:rgba(255,255,255,.10);
+.language-switch button.active,
+.language-switch button:hover,
+.theme-button:hover{
+  color:var(--text);
+  background:var(--card-hover);
+}
+
+.theme-button{
+  width:34px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:16px;
+}
+
+.theme-menu{
+  position:absolute;
+  top:47px;
+  right:0;
+  width:155px;
+  padding:6px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--header-bg);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 15px 40px var(--shadow);
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-5px);
+  transition:.2s ease;
+}
+
+.theme-menu.open{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+.theme-option{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 11px;
+  border:0;
+  border-radius:10px;
+  color:var(--muted);
+  background:transparent;
+  font-size:12px;
+  font-weight:700;
+  text-align:left;
+  cursor:pointer;
+  transition:.18s;
+}
+
+.theme-option:hover,
+.theme-option.active{
+  color:var(--text);
+  background:var(--card-hover);
+}
+
+.theme-option-icon{
+  width:21px;
+  text-align:center;
+  font-size:15px;
 }
 
 /* =========================
@@ -139,7 +243,7 @@ body::before{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#060609;
+  background:var(--bg);
   transition:opacity .55s ease,visibility .55s ease;
 }
 
@@ -156,8 +260,14 @@ body::before{
 }
 
 @keyframes pulseLogo{
-  0%,100%{transform:scale(.94);opacity:.65}
-  50%{transform:scale(1);opacity:1}
+  0%,100%{
+    transform:scale(.94);
+    opacity:.65;
+  }
+  50%{
+    transform:scale(1);
+    opacity:1;
+  }
 }
 
 /* =========================
@@ -202,7 +312,7 @@ body::before{
   content:"";
   position:absolute;
   inset:4px;
-  background:#060609;
+  background:var(--bg);
   border-radius:50%;
 }
 
@@ -263,9 +373,13 @@ body::before{
   border:1px solid rgba(34,197,94,.22);
   border-radius:999px;
   background:rgba(34,197,94,.07);
-  color:#76e39a;
+  color:#22a951;
   font-size:12px;
   font-weight:700;
+}
+
+html:not([data-theme="light"]) .status{
+  color:#76e39a;
 }
 
 .status-dot{
@@ -294,7 +408,7 @@ body::before{
   left:17px;
   top:50%;
   transform:translateY(-50%);
-  color:#777784;
+  color:var(--muted2);
   font-size:18px;
   pointer-events:none;
 }
@@ -306,20 +420,20 @@ body::before{
   outline:none;
   border-radius:15px;
   padding:0 18px 0 48px;
-  color:#fff;
-  background:rgba(255,255,255,.045);
+  color:var(--text);
+  background:var(--card);
   backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
   font-size:14px;
   transition:.2s;
 }
 
 #searchInput::placeholder{
-  color:#70707b;
+  color:var(--muted2);
 }
 
 #searchInput:focus{
   border-color:rgba(59,130,246,.55);
-  background:rgba(255,255,255,.065);
   box-shadow:0 0 0 4px rgba(59,130,246,.08);
 }
 
@@ -336,7 +450,7 @@ body::before{
   align-items:center;
   gap:10px;
   margin:0 4px 12px;
-  color:#e7e7ec;
+  color:var(--text);
   font-size:13px;
   font-weight:800;
   letter-spacing:.3px;
@@ -369,24 +483,27 @@ body::before{
   padding:13px 14px;
   border:1px solid var(--border);
   border-radius:17px;
-  color:#fff;
+  color:var(--text);
   text-decoration:none;
   background:var(--card);
   backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
   overflow:hidden;
+
   transition:
     transform .22s ease,
     background .22s ease,
     border-color .22s ease,
     box-shadow .22s ease;
+
   animation:cardIn .6s ease both;
 }
 
 .link-card:hover{
   transform:translateY(-2px);
   background:var(--card-hover);
-  border-color:rgba(255,255,255,.16);
-  box-shadow:0 14px 40px rgba(0,0,0,.22);
+  border-color:var(--border-hover);
+  box-shadow:0 14px 40px var(--shadow);
 }
 
 .link-card:active{
@@ -422,8 +539,8 @@ body::before{
   align-items:center;
   justify-content:center;
   border-radius:13px;
-  background:rgba(255,255,255,.075);
-  border:1px solid rgba(255,255,255,.07);
+  background:rgba(127,127,127,.08);
+  border:1px solid var(--border);
   margin-right:14px;
 }
 
@@ -446,7 +563,7 @@ body::before{
 
 .link-description{
   margin-top:4px;
-  color:#8e8e9a;
+  color:var(--muted);
   font-size:12px;
   white-space:nowrap;
   overflow:hidden;
@@ -455,7 +572,7 @@ body::before{
 
 .link-arrow{
   margin-left:10px;
-  color:#73737e;
+  color:var(--muted2);
   font-size:28px;
   font-weight:300;
   line-height:1;
@@ -463,7 +580,7 @@ body::before{
 }
 
 .link-card:hover .link-arrow{
-  color:#fff;
+  color:var(--text);
   transform:translateX(3px);
 }
 
@@ -477,7 +594,7 @@ body::before{
     linear-gradient(
       110deg,
       rgba(59,130,246,.10),
-      rgba(255,255,255,.045)
+      var(--card)
     );
 }
 
@@ -489,14 +606,14 @@ body::before{
   border-radius:7px;
   background:rgba(59,130,246,.13);
   border:1px solid rgba(59,130,246,.20);
-  color:#78aaff;
+  color:#4f91ff;
   font-size:9px;
   font-weight:800;
   letter-spacing:.4px;
 }
 
 /* =========================
-   COPY BUTTON
+   COPY
 ========================= */
 
 .copy-btn{
@@ -504,10 +621,10 @@ body::before{
   height:34px;
   flex:0 0 34px;
   margin-left:8px;
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid var(--border);
   border-radius:10px;
-  background:rgba(255,255,255,.045);
-  color:#858590;
+  background:rgba(127,127,127,.06);
+  color:var(--muted);
   cursor:pointer;
   font-size:15px;
   transition:.2s;
@@ -515,20 +632,20 @@ body::before{
 }
 
 .copy-btn:hover{
-  color:#fff;
-  background:rgba(255,255,255,.10);
+  color:var(--text);
+  background:var(--card-hover);
 }
 
 /* =========================
-   EMPTY SEARCH
+   NO RESULTS
 ========================= */
 
 .no-results{
   display:none;
   padding:28px;
   text-align:center;
-  color:#777783;
-  border:1px dashed rgba(255,255,255,.10);
+  color:var(--muted2);
+  border:1px dashed var(--border);
   border-radius:16px;
   font-size:13px;
 }
@@ -563,23 +680,23 @@ body::before{
   object-fit:cover;
   border-radius:7px;
   opacity:1;
-  box-shadow:0 7px 25px rgba(0,0,0,.38);
+  box-shadow:0 7px 25px var(--shadow);
 }
 
 .footer-divider{
   width:100%;
   height:1px;
   margin:23px 0 17px;
-  background:rgba(255,255,255,.08);
+  background:var(--border);
 }
 
 .copyright{
-  color:#70707b;
+  color:var(--muted2);
   font-size:11px;
 }
 
 .version{
-  color:#555560;
+  color:var(--muted2);
 }
 
 /* =========================
@@ -591,6 +708,7 @@ body::before{
     opacity:0;
     transform:translateY(15px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
@@ -602,6 +720,7 @@ body::before{
     opacity:0;
     transform:translateY(12px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
@@ -609,19 +728,19 @@ body::before{
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:600px){
 
-  .language-switch{
-    top:13px;
-    right:13px;
+  .top-controls{
+    top:12px;
+    right:12px;
   }
 
   .container{
     width:min(100% - 22px,820px);
-    padding-top:78px;
+    padding-top:76px;
   }
 
   .avatar-wrap{
@@ -684,6 +803,7 @@ body::before{
 }
 
 @media(prefers-reduced-motion:reduce){
+
   *,
   *::before,
   *::after{
@@ -697,7 +817,6 @@ body::before{
 
 <body>
 
-<!-- BACKGROUND -->
 <div class="orb one"></div>
 <div class="orb two"></div>
 <div class="orb three"></div>
@@ -707,15 +826,48 @@ body::before{
   <img src="efesarac-footer-logo.png" alt="efesarac.co">
 </div>
 
-<!-- LANGUAGE -->
-<div class="language-switch">
-  <button id="trBtn" class="active" type="button">TR</button>
-  <button id="enBtn" type="button">EN</button>
+<!-- TOP CONTROLS -->
+<div class="top-controls">
+
+  <div class="language-switch">
+    <button id="trBtn" class="active" type="button">TR</button>
+    <button id="enBtn" type="button">EN</button>
+  </div>
+
+  <button
+    class="theme-button"
+    id="themeButton"
+    type="button"
+    aria-label="Tema">
+    🌙
+  </button>
+
+  <div class="theme-menu" id="themeMenu">
+
+    <button class="theme-option" data-theme-choice="dark" type="button">
+      <span class="theme-option-icon">🌙</span>
+      <span data-tr="Koyu" data-en="Dark">Koyu</span>
+    </button>
+
+    <button class="theme-option" data-theme-choice="light" type="button">
+      <span class="theme-option-icon">☀️</span>
+      <span data-tr="Açık" data-en="Light">Açık</span>
+    </button>
+
+    <button class="theme-option" data-theme-choice="system" type="button">
+      <span class="theme-option-icon">🌓</span>
+      <span data-tr="Sistem" data-en="System">Sistem</span>
+    </button>
+
+  </div>
+
 </div>
+
 
 <main class="container">
 
   <!-- PROFILE -->
+
   <header class="profile">
 
     <div class="avatar-wrap">
@@ -739,17 +891,22 @@ body::before{
 
     <div class="status">
       <span class="status-dot"></span>
+
       <span
         data-tr="Sistem aktif"
         data-en="System active">
         Sistem aktif
       </span>
+
     </div>
 
   </header>
 
+
   <!-- SEARCH -->
+
   <div class="search-wrap">
+
     <div class="search-box">
 
       <span class="search-icon">⌕</span>
@@ -763,6 +920,7 @@ body::before{
         placeholder="Bağlantılarda ara...">
 
     </div>
+
   </div>
 
   <div class="no-results" id="noResults">
@@ -774,16 +932,13 @@ body::before{
   </div>
 
 
-  <!-- =====================
-       SOCIAL
-  ====================== -->
+  <!-- SOCIAL -->
 
   <section class="section">
 
-    <h2
-      class="section-title"
-      data-tr="Sosyal"
-      data-en="Social">
+    <h2 class="section-title"
+        data-tr="Sosyal"
+        data-en="Social">
       Sosyal
     </h2>
 
@@ -807,21 +962,17 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">YouTube</div>
-          <div class="link-description"
-               data-tr="@saracefe"
-               data-en="@saracefe">
-            @saracefe
-          </div>
+          <div class="link-description">@saracefe</div>
         </div>
 
         <button class="copy-btn"
                 type="button"
-                data-copy="https://youtube.com/@saracefe"
-                aria-label="Kopyala">
+                data-copy="https://youtube.com/@saracefe">
           ⧉
         </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -844,6 +995,7 @@ body::before{
                 data-copy="https://instagram.com/saracefe_">⧉</button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -866,6 +1018,7 @@ body::before{
                 data-copy="https://facebook.com/saracefee">⧉</button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -888,6 +1041,7 @@ body::before{
                 data-copy="https://threads.net/@saracefe_">⧉</button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -910,6 +1064,7 @@ body::before{
                 data-copy="https://x.com/efesarac_">⧉</button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -932,6 +1087,7 @@ body::before{
                 data-copy="https://tiktok.com/@efesarac_">⧉</button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -954,6 +1110,7 @@ body::before{
                 data-copy="https://kwai.com/@saracefe">⧉</button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -976,15 +1133,15 @@ body::before{
                 data-copy="https://bsky.app/profile/saracefe.bsky.social">⧉</button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
     </div>
+
   </section>
 
 
-  <!-- =====================
-       CREATOR
-  ====================== -->
+  <!-- CREATOR -->
 
   <section class="section">
 
@@ -1010,17 +1167,22 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">ByNoGame</div>
+
           <div class="link-description"
                data-tr="Destek ve bağış"
                data-en="Support and donations">
             Destek ve bağış
           </div>
+
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://donate.bynogame.com/efesarac">⧉</button>
+                data-copy="https://donate.bynogame.com/efesarac">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1036,17 +1198,22 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">GitHub</div>
+
           <div class="link-description"
                data-tr="Projeler ve kod"
                data-en="Projects and code">
             Projeler ve kod
           </div>
+
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://github.com/saracefe">⧉</button>
+                data-copy="https://github.com/saracefe">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1066,9 +1233,12 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://reddit.com/user/efesarac">⧉</button>
+                data-copy="https://reddit.com/user/efesarac">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1086,26 +1256,30 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">LinkedIn</div>
+
           <div class="link-description"
                data-tr="Profesyonel profil"
                data-en="Professional profile">
             Profesyonel profil
           </div>
+
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://linkedin.com/in/efe-saraç-bbb35b1b1">⧉</button>
+                data-copy="https://linkedin.com/in/efe-saraç-bbb35b1b1">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
     </div>
+
   </section>
 
 
-  <!-- =====================
-       LIVE
-  ====================== -->
+  <!-- LIVE -->
 
   <section class="section">
 
@@ -1133,9 +1307,12 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://twitch.tv/efesarac_">⧉</button>
+                data-copy="https://twitch.tv/efesarac_">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1155,18 +1332,20 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://kick.com/saracefe">⧉</button>
+                data-copy="https://kick.com/saracefe">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
     </div>
+
   </section>
 
 
-  <!-- =====================
-       MUSIC
-  ====================== -->
+  <!-- MUSIC -->
 
   <section class="section">
 
@@ -1190,17 +1369,22 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">Spotify</div>
+
           <div class="link-description"
                data-tr="Müzik ve listeler"
                data-en="Music and playlists">
             Müzik ve listeler
           </div>
+
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6">⧉</button>
+                data-copy="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1220,9 +1404,12 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://music.youtube.com/@saracefe">⧉</button>
+                data-copy="https://music.youtube.com/@saracefe">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1244,18 +1431,20 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://music.amazon.com/profiles/@efesarac">⧉</button>
+                data-copy="https://music.amazon.com/profiles/@efesarac">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
     </div>
+
   </section>
 
 
-  <!-- =====================
-       COMMUNITY
-  ====================== -->
+  <!-- COMMUNITY -->
 
   <section class="section">
 
@@ -1279,17 +1468,22 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">Discord</div>
+
           <div class="link-description"
                data-tr="Topluluğa katıl"
                data-en="Join the community">
             Topluluğa katıl
           </div>
+
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://discord.gg/p5Y5BxESFD">⧉</button>
+                data-copy="https://discord.gg/p5Y5BxESFD">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1305,17 +1499,22 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">WhatsApp</div>
+
           <div class="link-description"
                data-tr="Mesaj gönder"
                data-en="Send a message">
             Mesaj gönder
           </div>
+
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://wa.me/efesarac">⧉</button>
+                data-copy="https://wa.me/efesarac">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1335,18 +1534,20 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://t.me/efesarac">⧉</button>
+                data-copy="https://t.me/efesarac">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
     </div>
+
   </section>
 
 
-  <!-- =====================
-       OTHER
-  ====================== -->
+  <!-- OTHER -->
 
   <section class="section">
 
@@ -1370,17 +1571,22 @@ body::before{
 
         <div class="link-content">
           <div class="link-title">PayPal</div>
+
           <div class="link-description"
                data-tr="Destek ol"
                data-en="Support me">
             Destek ol
           </div>
+
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://paypal.me/saracefe">⧉</button>
+                data-copy="https://paypal.me/saracefe">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
 
@@ -1400,18 +1606,20 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="https://snapchat.com/add/efesaracx">⧉</button>
+                data-copy="https://snapchat.com/add/efesaracx">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
     </div>
+
   </section>
 
 
-  <!-- =====================
-       CONTACT
-  ====================== -->
+  <!-- CONTACT -->
 
   <section class="section">
 
@@ -1439,18 +1647,20 @@ body::before{
         </div>
 
         <button class="copy-btn" type="button"
-                data-copy="contact@efesarac.co">⧉</button>
+                data-copy="contact@efesarac.co">
+          ⧉
+        </button>
 
         <span class="link-arrow">›</span>
+
       </a>
 
     </div>
+
   </section>
 
 
-  <!-- =====================
-       FOOTER
-  ====================== -->
+  <!-- FOOTER -->
 
   <footer class="site-footer">
 
@@ -1480,7 +1690,7 @@ body::before{
       </span>
 
       <span class="version">
-        · v4.4.0
+        · v4.5.0
       </span>
 
     </div>
@@ -1498,48 +1708,233 @@ body::before{
 
 window.addEventListener("load",()=>{
   setTimeout(()=>{
-    document.getElementById("preloader")?.classList.add("hide");
+    document
+      .getElementById("preloader")
+      ?.classList.add("hide");
   },350);
 });
 
 
 /* =========================
-   LANGUAGE SYSTEM
+   LANGUAGE
 ========================= */
 
-const trBtn = document.getElementById("trBtn");
-const enBtn = document.getElementById("enBtn");
+const trBtn =
+  document.getElementById("trBtn");
+
+const enBtn =
+  document.getElementById("enBtn");
 
 function setLanguage(lang){
 
   document.documentElement.lang = lang;
 
-  document.querySelectorAll("[data-tr][data-en]").forEach(el=>{
-    el.textContent = el.dataset[lang];
-  });
+  document
+    .querySelectorAll("[data-tr][data-en]")
+    .forEach(el=>{
+      el.textContent =
+        el.dataset[lang];
+    });
 
-  const input = document.getElementById("searchInput");
+  const input =
+    document.getElementById("searchInput");
 
   if(input){
+
     input.placeholder =
       lang === "tr"
         ? input.dataset.trPlaceholder
         : input.dataset.enPlaceholder;
   }
 
-  trBtn.classList.toggle("active",lang === "tr");
-  enBtn.classList.toggle("active",lang === "en");
+  trBtn.classList.toggle(
+    "active",
+    lang === "tr"
+  );
 
-  localStorage.setItem("efesarac-language",lang);
+  enBtn.classList.toggle(
+    "active",
+    lang === "en"
+  );
+
+  localStorage.setItem(
+    "efesarac-language",
+    lang
+  );
 }
 
-trBtn.addEventListener("click",()=>setLanguage("tr"));
-enBtn.addEventListener("click",()=>setLanguage("en"));
+
+/* =========================
+   THEME
+========================= */
+
+const themeButton =
+  document.getElementById("themeButton");
+
+const themeMenu =
+  document.getElementById("themeMenu");
+
+const themeOptions =
+  document.querySelectorAll(".theme-option");
+
+
+function getSystemTheme(){
+
+  return window.matchMedia(
+    "(prefers-color-scheme: light)"
+  ).matches
+    ? "light"
+    : "dark";
+}
+
+
+function applyTheme(choice){
+
+  const actualTheme =
+    choice === "system"
+      ? getSystemTheme()
+      : choice;
+
+  document.documentElement
+    .setAttribute(
+      "data-theme",
+      actualTheme
+    );
+
+  themeButton.textContent =
+    actualTheme === "light"
+      ? "☀️"
+      : "🌙";
+
+  themeOptions.forEach(option=>{
+    option.classList.toggle(
+      "active",
+      option.dataset.themeChoice === choice
+    );
+  });
+
+  localStorage.setItem(
+    "efesarac-theme",
+    choice
+  );
+
+  const metaTheme =
+    document.querySelector(
+      'meta[name="theme-color"]'
+    );
+
+  if(metaTheme){
+
+    metaTheme.setAttribute(
+      "content",
+      actualTheme === "light"
+        ? "#f4f5f8"
+        : "#060609"
+    );
+  }
+}
+
+
+function setTheme(choice){
+
+  applyTheme(choice);
+
+  themeMenu.classList.remove("open");
+}
+
+
+themeButton.addEventListener(
+  "click",
+  event=>{
+
+    event.stopPropagation();
+
+    themeMenu.classList.toggle(
+      "open"
+    );
+  }
+);
+
+
+themeOptions.forEach(option=>{
+
+  option.addEventListener(
+    "click",
+    ()=>{
+
+      setTheme(
+        option.dataset.themeChoice
+      );
+
+    }
+  );
+
+});
+
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    if(
+      !themeMenu.contains(event.target) &&
+      event.target !== themeButton
+    ){
+      themeMenu.classList.remove("open");
+    }
+
+  }
+);
+
+
+/* SYSTEM THEME CHANGE */
+
+const mediaQuery =
+  window.matchMedia(
+    "(prefers-color-scheme: light)"
+  );
+
+mediaQuery.addEventListener(
+  "change",
+  ()=>{
+    const saved =
+      localStorage.getItem(
+        "efesarac-theme"
+      ) || "dark";
+
+    if(saved === "system"){
+      applyTheme("system");
+    }
+  }
+);
+
+
+/* =========================
+   INITIAL SETTINGS
+========================= */
 
 const savedLanguage =
-  localStorage.getItem("efesarac-language") || "tr";
+  localStorage.getItem(
+    "efesarac-language"
+  ) || "tr";
+
+const savedTheme =
+  localStorage.getItem(
+    "efesarac-theme"
+  ) || "dark";
 
 setLanguage(savedLanguage);
+applyTheme(savedTheme);
+
+trBtn.addEventListener(
+  "click",
+  ()=>setLanguage("tr")
+);
+
+enBtn.addEventListener(
+  "click",
+  ()=>setLanguage("en")
+);
 
 
 /* =========================
@@ -1547,10 +1942,15 @@ setLanguage(savedLanguage);
 ========================= */
 
 const searchInput =
-  document.getElementById("searchInput");
+  document.getElementById(
+    "searchInput"
+  );
 
 const noResults =
-  document.getElementById("noResults");
+  document.getElementById(
+    "noResults"
+  );
+
 
 function searchLinks(){
 
@@ -1560,7 +1960,9 @@ function searchLinks(){
       .trim();
 
   const cards =
-    document.querySelectorAll(".link-card");
+    document.querySelectorAll(
+      ".link-card"
+    );
 
   let visible = 0;
 
@@ -1577,26 +1979,45 @@ function searchLinks(){
       searchText.includes(query);
 
     card.style.display =
-      match ? "flex" : "none";
+      match
+        ? "flex"
+        : "none";
 
-    if(match) visible++;
+    if(match){
+      visible++;
+    }
+
   });
+
 
   document
     .querySelectorAll(".section")
     .forEach(section=>{
 
       const visibleCards =
-        [...section.querySelectorAll(".link-card")]
-          .filter(card=>card.style.display !== "none");
+        [
+          ...section.querySelectorAll(
+            ".link-card"
+          )
+        ]
+        .filter(
+          card =>
+            card.style.display !== "none"
+        );
 
       section.style.display =
-        visibleCards.length ? "" : "none";
+        visibleCards.length
+          ? ""
+          : "none";
     });
 
+
   noResults.style.display =
-    visible ? "none" : "block";
+    visible
+      ? "none"
+      : "block";
 }
+
 
 searchInput.addEventListener(
   "input",
@@ -1608,54 +2029,62 @@ searchInput.addEventListener(
    COPY LINKS
 ========================= */
 
-document.querySelectorAll(".copy-btn")
-.forEach(button=>{
+document
+  .querySelectorAll(".copy-btn")
+  .forEach(button=>{
 
-  button.addEventListener("click",async event=>{
+    button.addEventListener(
+      "click",
+      async event=>{
 
-    event.preventDefault();
-    event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
 
-    const text =
-      button.dataset.copy;
+        const text =
+          button.dataset.copy;
 
-    try{
+        try{
 
-      await navigator.clipboard.writeText(text);
+          await navigator.clipboard
+            .writeText(text);
 
-      const oldText =
-        button.textContent;
+        }catch(error){
 
-      button.textContent = "✓";
+          const temp =
+            document.createElement(
+              "input"
+            );
 
-      setTimeout(()=>{
-        button.textContent = oldText;
-      },1200);
+          temp.value = text;
 
-    }catch(error){
+          document.body.appendChild(
+            temp
+          );
 
-      const temp =
-        document.createElement("input");
+          temp.select();
 
-      temp.value = text;
+          document.execCommand(
+            "copy"
+          );
 
-      document.body.appendChild(temp);
+          temp.remove();
+        }
 
-      temp.select();
-      document.execCommand("copy");
 
-      temp.remove();
+        const oldText =
+          button.textContent;
 
-      button.textContent = "✓";
+        button.textContent = "✓";
 
-      setTimeout(()=>{
-        button.textContent = "⧉";
-      },1200);
-    }
+        setTimeout(()=>{
+          button.textContent =
+            oldText;
+        },1200);
+
+      }
+    );
 
   });
-
-});
 
 
 /* =========================
@@ -1665,7 +2094,9 @@ document.querySelectorAll(".copy-btn")
 async function detectCountryFlag(){
 
   const flag =
-    document.getElementById("countryFlag");
+    document.getElementById(
+      "countryFlag"
+    );
 
   if(!flag) return;
 
@@ -1698,7 +2129,11 @@ async function detectCountryFlag(){
       .trim()
       .toLowerCase();
 
-    if(!/^[a-z]{2}$/.test(countryCode)){
+    if(
+      !/^[a-z]{2}$/.test(
+        countryCode
+      )
+    ){
       throw new Error(
         "Invalid country code"
       );
@@ -1745,7 +2180,7 @@ detectCountryFlag();
 
 
 /* =========================
-   CARD STAGGER ANIMATION
+   CARD ANIMATION
 ========================= */
 
 document
@@ -1753,7 +2188,10 @@ document
   .forEach((card,index)=>{
 
     card.style.animationDelay =
-      `${Math.min(index * 0.035,0.5)}s`;
+      `${Math.min(
+        index * .035,
+        .5
+      )}s`;
 
   });
 
