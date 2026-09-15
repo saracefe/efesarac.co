@@ -13,7 +13,6 @@ content="Efe Saraç — Dijital içerik üreticisi, geliştirici ve internet.">
 <style>
 :root{
   --bg:#060609;
-  --bg2:#0b0b10;
   --card:rgba(255,255,255,.055);
   --card-hover:rgba(255,255,255,.085);
   --border:rgba(255,255,255,.10);
@@ -24,13 +23,11 @@ content="Efe Saraç — Dijital içerik üreticisi, geliştirici ve internet.">
   --grid:rgba(255,255,255,.035);
   --header-bg:rgba(10,10,14,.78);
   --blue:#3b82f6;
-  --green:#22c55e;
   --shadow:rgba(0,0,0,.25);
 }
 
 html[data-theme="light"]{
   --bg:#f4f5f8;
-  --bg2:#ffffff;
   --card:rgba(255,255,255,.72);
   --card-hover:rgba(255,255,255,.92);
   --border:rgba(20,25,40,.10);
@@ -39,7 +36,7 @@ html[data-theme="light"]{
   --muted:#646773;
   --muted2:#858894;
   --grid:rgba(20,25,40,.045);
-  --header-bg:rgba(255,255,255,.80);
+  --header-bg:rgba(255,255,255,.82);
   --shadow:rgba(20,25,40,.12);
 }
 
@@ -57,8 +54,13 @@ body{
   min-height:100vh;
   color:var(--text);
   background:
-    radial-gradient(circle at 50% -20%,rgba(59,130,246,.07),transparent 35%),
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(59,130,246,.07),
+      transparent 35%
+    ),
     var(--bg);
+
   font-family:
     Inter,
     -apple-system,
@@ -67,7 +69,9 @@ body{
     Roboto,
     Arial,
     sans-serif;
+
   overflow-x:hidden;
+
   transition:
     background .3s ease,
     color .3s ease;
@@ -79,9 +83,18 @@ body::before{
   inset:0;
   pointer-events:none;
   opacity:.9;
+
   background-image:
-    linear-gradient(var(--grid) 1px,transparent 1px),
-    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    linear-gradient(
+      var(--grid) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      var(--grid) 1px,
+      transparent 1px
+    );
+
   background-size:45px 45px;
   z-index:-3;
 }
@@ -95,7 +108,6 @@ body::before{
   opacity:.16;
   pointer-events:none;
   z-index:-2;
-  transition:opacity .4s ease;
 }
 
 .orb.one{
@@ -120,6 +132,7 @@ html[data-theme="light"] .orb{
   opacity:.09;
 }
 
+
 /* =========================
    TOP CONTROLS
 ========================= */
@@ -129,72 +142,221 @@ html[data-theme="light"] .orb{
   top:18px;
   right:18px;
   z-index:100;
+
   display:flex;
   align-items:center;
   gap:5px;
+
   padding:5px;
+
   border:1px solid var(--border);
   border-radius:15px;
+
   background:var(--header-bg);
+
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-  box-shadow:0 12px 35px var(--shadow);
+
+  box-shadow:
+    0 12px 35px var(--shadow);
 }
 
-.language-switch{
+
+/* =========================
+   LANGUAGE
+========================= */
+
+.language-button{
+  height:34px;
+
   display:flex;
-  gap:2px;
-}
+  align-items:center;
+  gap:7px;
 
-.language-switch button,
-.theme-button{
-  height:32px;
+  padding:0 11px;
+
   border:0;
   border-radius:10px;
+
   color:var(--muted);
   background:transparent;
+
   font-size:11px;
   font-weight:800;
+
   cursor:pointer;
+
+  transition:.2s;
+}
+
+.language-button:hover{
+  color:var(--text);
+  background:var(--card-hover);
+}
+
+.language-button .globe{
+  font-size:16px;
+}
+
+
+/* LANGUAGE MENU */
+
+.language-menu{
+  position:absolute;
+
+  top:49px;
+  right:43px;
+
+  width:265px;
+  max-height:390px;
+
+  padding:7px;
+
+  overflow-y:auto;
+
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  background:var(--header-bg);
+
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+
+  box-shadow:
+    0 18px 45px var(--shadow);
+
+  opacity:0;
+  visibility:hidden;
+
+  transform:
+    translateY(-6px)
+    scale(.98);
+
   transition:.2s ease;
 }
 
-.language-switch button{
-  padding:0 9px;
+.language-menu.open{
+  opacity:1;
+  visibility:visible;
+
+  transform:
+    translateY(0)
+    scale(1);
 }
 
-.language-switch button.active,
-.language-switch button:hover,
+.language-menu-title{
+  padding:9px 10px 7px;
+
+  color:var(--muted2);
+
+  font-size:10px;
+  font-weight:800;
+
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.language-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+}
+
+.language-option{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  width:100%;
+
+  padding:9px;
+
+  border:0;
+  border-radius:9px;
+
+  color:var(--muted);
+  background:transparent;
+
+  text-align:left;
+
+  font-size:11px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.18s;
+}
+
+.language-option:hover,
+.language-option.active{
+  color:var(--text);
+  background:var(--card-hover);
+}
+
+.language-flag{
+  font-size:16px;
+  width:20px;
+  text-align:center;
+}
+
+
+/* =========================
+   THEME
+========================= */
+
+.theme-button{
+  width:34px;
+  height:34px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:0;
+  border-radius:10px;
+
+  color:var(--muted);
+  background:transparent;
+
+  font-size:16px;
+
+  cursor:pointer;
+
+  transition:.2s;
+}
+
 .theme-button:hover{
   color:var(--text);
   background:var(--card-hover);
 }
 
-.theme-button{
-  width:34px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:16px;
-}
-
 .theme-menu{
   position:absolute;
-  top:47px;
+
+  top:49px;
   right:0;
+
   width:155px;
+
   padding:6px;
+
   border:1px solid var(--border);
   border-radius:14px;
+
   background:var(--header-bg);
+
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-  box-shadow:0 15px 40px var(--shadow);
+
+  box-shadow:
+    0 15px 40px var(--shadow);
 
   opacity:0;
   visibility:hidden;
+
   transform:translateY(-5px);
-  transition:.2s ease;
+
+  transition:.2s;
 }
 
 .theme-menu.open{
@@ -205,18 +367,26 @@ html[data-theme="light"] .orb{
 
 .theme-option{
   width:100%;
+
   display:flex;
   align-items:center;
   gap:10px;
+
   padding:10px 11px;
+
   border:0;
   border-radius:10px;
+
   color:var(--muted);
   background:transparent;
+
   font-size:12px;
   font-weight:700;
+
   text-align:left;
+
   cursor:pointer;
+
   transition:.18s;
 }
 
@@ -232,6 +402,7 @@ html[data-theme="light"] .orb{
   font-size:15px;
 }
 
+
 /* =========================
    PRELOADER
 ========================= */
@@ -239,12 +410,18 @@ html[data-theme="light"] .orb{
 .preloader{
   position:fixed;
   inset:0;
+
   z-index:999;
+
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+
   background:var(--bg);
-  transition:opacity .55s ease,visibility .55s ease;
+
+  transition:
+    opacity .55s ease,
+    visibility .55s ease;
 }
 
 .preloader.hide{
@@ -255,20 +432,40 @@ html[data-theme="light"] .orb{
 .preloader img{
   width:90px;
   height:90px;
+
   object-fit:contain;
-  animation:pulseLogo 1.4s ease-in-out infinite;
+
+  animation:
+    pulseLogo 1.4s ease-in-out infinite;
 }
 
-@keyframes pulseLogo{
-  0%,100%{
-    transform:scale(.94);
-    opacity:.65;
-  }
-  50%{
-    transform:scale(1);
-    opacity:1;
-  }
+
+/* =========================
+   LOGO THEME SWITCH
+========================= */
+
+/*
+Koyu:
+efesarac-footer-logo.png
+→ beyaz logo
+
+Açık:
+efesarac-footer-logo-dark.png
+→ siyah logo
+*/
+
+.logo-dark{
+  display:none;
 }
+
+html[data-theme="light"] .logo-light{
+  display:none;
+}
+
+html[data-theme="light"] .logo-dark{
+  display:block;
+}
+
 
 /* =========================
    MAIN
@@ -276,9 +473,15 @@ html[data-theme="light"] .orb{
 
 .container{
   width:min(820px,calc(100% - 32px));
+
   margin:0 auto;
-  padding:90px 0 40px;
+
+  padding:
+    90px
+    0
+    40px;
 }
+
 
 /* =========================
    PROFILE
@@ -286,16 +489,26 @@ html[data-theme="light"] .orb{
 
 .profile{
   text-align:center;
-  animation:fadeUp .75s ease both;
+
+  animation:
+    fadeUp .75s ease both;
 }
 
 .avatar-wrap{
   position:relative;
+
   width:138px;
   height:138px;
+
   padding:5px;
-  margin:0 auto 22px;
+
+  margin:
+    0
+    auto
+    22px;
+
   border-radius:50%;
+
   background:
     conic-gradient(
       from 0deg,
@@ -304,63 +517,83 @@ html[data-theme="light"] .orb{
       #06b6d4,
       #2563eb
     );
-  animation:spinRing 8s linear infinite;
-  box-shadow:0 0 50px rgba(59,130,246,.18);
+
+  animation:
+    spinRing 8s linear infinite;
+
+  box-shadow:
+    0 0 50px
+    rgba(59,130,246,.18);
 }
 
 .avatar-wrap::before{
   content:"";
+
   position:absolute;
+
   inset:4px;
+
   background:var(--bg);
+
   border-radius:50%;
 }
 
 .avatar{
   position:relative;
+
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   border-radius:50%;
+
   display:block;
-  animation:counterSpin 8s linear infinite;
-}
 
-@keyframes spinRing{
-  to{transform:rotate(360deg)}
-}
-
-@keyframes counterSpin{
-  to{transform:rotate(-360deg)}
+  animation:
+    counterSpin 8s linear infinite;
 }
 
 .profile h1{
   display:flex;
   justify-content:center;
   align-items:center;
+
   gap:8px;
+
   font-size:32px;
   line-height:1.15;
+
   letter-spacing:-.8px;
 }
 
 .verified{
   width:22px;
   height:22px;
+
   display:inline-flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+
   border-radius:50%;
+
   background:#1d9bf0;
+
   color:#fff;
+
   font-size:14px;
   font-weight:900;
-  box-shadow:0 4px 18px rgba(29,155,240,.35);
+
+  box-shadow:
+    0 4px 18px
+    rgba(29,155,240,.35);
 }
 
 .bio{
   margin-top:10px;
+
   color:var(--muted);
+
   font-size:15px;
 }
 
@@ -368,35 +601,55 @@ html[data-theme="light"] .orb{
   display:inline-flex;
   align-items:center;
   gap:7px;
+
   margin-top:15px;
+
   padding:7px 12px;
-  border:1px solid rgba(34,197,94,.22);
+
+  border:1px solid
+    rgba(34,197,94,.22);
+
   border-radius:999px;
-  background:rgba(34,197,94,.07);
+
+  background:
+    rgba(34,197,94,.07);
+
   color:#22a951;
+
   font-size:12px;
   font-weight:700;
 }
 
-html:not([data-theme="light"]) .status{
+html:not([data-theme="light"])
+.status{
   color:#76e39a;
 }
 
 .status-dot{
   width:7px;
   height:7px;
+
   border-radius:50%;
+
   background:#22c55e;
-  box-shadow:0 0 12px #22c55e;
+
+  box-shadow:
+    0 0 12px #22c55e;
 }
+
 
 /* =========================
    SEARCH
 ========================= */
 
 .search-wrap{
-  margin:35px 0 10px;
-  animation:fadeUp .75s .12s ease both;
+  margin:
+    35px
+    0
+    10px;
+
+  animation:
+    fadeUp .75s .12s ease both;
 }
 
 .search-box{
@@ -405,26 +658,44 @@ html:not([data-theme="light"]) .status{
 
 .search-icon{
   position:absolute;
+
   left:17px;
   top:50%;
-  transform:translateY(-50%);
+
+  transform:
+    translateY(-50%);
+
   color:var(--muted2);
+
   font-size:18px;
+
   pointer-events:none;
 }
 
 #searchInput{
   width:100%;
   height:50px;
+
   border:1px solid var(--border);
   outline:none;
+
   border-radius:15px;
-  padding:0 18px 0 48px;
+
+  padding:
+    0
+    18px
+    0
+    48px;
+
   color:var(--text);
+
   background:var(--card);
+
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
+
   font-size:14px;
+
   transition:.2s;
 }
 
@@ -433,9 +704,14 @@ html:not([data-theme="light"]) .status{
 }
 
 #searchInput:focus{
-  border-color:rgba(59,130,246,.55);
-  box-shadow:0 0 0 4px rgba(59,130,246,.08);
+  border-color:
+    rgba(59,130,246,.55);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(59,130,246,.08);
 }
+
 
 /* =========================
    SECTIONS
@@ -449,21 +725,38 @@ html:not([data-theme="light"]) .status{
   display:flex;
   align-items:center;
   gap:10px;
-  margin:0 4px 12px;
+
+  margin:
+    0
+    4px
+    12px;
+
   color:var(--text);
+
   font-size:13px;
   font-weight:800;
+
   letter-spacing:.3px;
+
   text-transform:uppercase;
 }
 
 .section-title::before{
   content:"";
+
   width:4px;
   height:15px;
+
   border-radius:10px;
-  background:linear-gradient(180deg,#3b82f6,#8b5cf6);
+
+  background:
+    linear-gradient(
+      180deg,
+      #3b82f6,
+      #8b5cf6
+    );
 }
+
 
 /* =========================
    LINKS
@@ -472,22 +765,35 @@ html:not([data-theme="light"]) .status{
 .links{
   display:flex;
   flex-direction:column;
+
   gap:10px;
 }
 
 .link-card{
   position:relative;
+
   display:flex;
   align-items:center;
+
   min-height:76px;
-  padding:13px 14px;
+
+  padding:
+    13px
+    14px;
+
   border:1px solid var(--border);
+
   border-radius:17px;
+
   color:var(--text);
+
   text-decoration:none;
+
   background:var(--card);
+
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
+
   overflow:hidden;
 
   transition:
@@ -496,14 +802,21 @@ html:not([data-theme="light"]) .status{
     border-color .22s ease,
     box-shadow .22s ease;
 
-  animation:cardIn .6s ease both;
+  animation:
+    cardIn .6s ease both;
 }
 
 .link-card:hover{
   transform:translateY(-2px);
+
   background:var(--card-hover);
-  border-color:var(--border-hover);
-  box-shadow:0 14px 40px var(--shadow);
+
+  border-color:
+    var(--border-hover);
+
+  box-shadow:
+    0 14px 40px
+    var(--shadow);
 }
 
 .link-card:active{
@@ -512,19 +825,27 @@ html:not([data-theme="light"]) .status{
 
 .link-card::after{
   content:"";
+
   position:absolute;
+
   top:0;
   left:-120%;
+
   width:80%;
   height:100%;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.08),
-    transparent
-  );
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.08),
+      transparent
+    );
+
   transform:skewX(-20deg);
-  transition:left .7s ease;
+
+  transition:
+    left .7s ease;
 }
 
 .link-card:hover::after{
@@ -532,22 +853,34 @@ html:not([data-theme="light"]) .status{
 }
 
 .icon-box{
-  flex:0 0 48px;
+  flex:
+    0 0
+    48px;
+
   width:48px;
   height:48px;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   border-radius:13px;
-  background:rgba(127,127,127,.08);
-  border:1px solid var(--border);
+
+  background:
+    rgba(127,127,127,.08);
+
+  border:
+    1px solid var(--border);
+
   margin-right:14px;
 }
 
 .icon-box img{
   width:27px;
   height:27px;
+
   object-fit:contain;
+
   display:block;
 }
 
@@ -563,33 +896,48 @@ html:not([data-theme="light"]) .status{
 
 .link-description{
   margin-top:4px;
+
   color:var(--muted);
+
   font-size:12px;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
 }
 
 .link-arrow{
   margin-left:10px;
+
   color:var(--muted2);
+
   font-size:28px;
   font-weight:300;
+
   line-height:1;
+
   transition:.2s;
 }
 
-.link-card:hover .link-arrow{
+.link-card:hover
+.link-arrow{
   color:var(--text);
-  transform:translateX(3px);
+
+  transform:
+    translateX(3px);
 }
+
 
 /* =========================
    FEATURED
 ========================= */
 
 .featured{
-  border-color:rgba(59,130,246,.28);
+  border-color:
+    rgba(59,130,246,.28);
+
   background:
     linear-gradient(
       110deg,
@@ -600,17 +948,31 @@ html:not([data-theme="light"]) .status{
 
 .featured-badge{
   position:absolute;
+
   top:9px;
   right:11px;
-  padding:4px 7px;
+
+  padding:
+    4px
+    7px;
+
   border-radius:7px;
-  background:rgba(59,130,246,.13);
-  border:1px solid rgba(59,130,246,.20);
+
+  background:
+    rgba(59,130,246,.13);
+
+  border:
+    1px solid
+    rgba(59,130,246,.20);
+
   color:#4f91ff;
+
   font-size:9px;
   font-weight:800;
+
   letter-spacing:.4px;
 }
+
 
 /* =========================
    COPY
@@ -619,22 +981,39 @@ html:not([data-theme="light"]) .status{
 .copy-btn{
   width:34px;
   height:34px;
-  flex:0 0 34px;
+
+  flex:
+    0 0
+    34px;
+
   margin-left:8px;
-  border:1px solid var(--border);
+
+  border:
+    1px solid var(--border);
+
   border-radius:10px;
-  background:rgba(127,127,127,.06);
+
+  background:
+    rgba(127,127,127,.06);
+
   color:var(--muted);
+
   cursor:pointer;
+
   font-size:15px;
+
   transition:.2s;
+
   z-index:2;
 }
 
 .copy-btn:hover{
   color:var(--text);
-  background:var(--card-hover);
+
+  background:
+    var(--card-hover);
 }
+
 
 /* =========================
    NO RESULTS
@@ -642,13 +1021,22 @@ html:not([data-theme="light"]) .status{
 
 .no-results{
   display:none;
+
   padding:28px;
+
   text-align:center;
+
   color:var(--muted2);
-  border:1px dashed var(--border);
+
+  border:
+    1px dashed
+    var(--border);
+
   border-radius:16px;
+
   font-size:13px;
 }
+
 
 /* =========================
    FOOTER
@@ -656,42 +1044,65 @@ html:not([data-theme="light"]) .status{
 
 .site-footer{
   margin-top:55px;
-  padding:30px 0 15px;
+
+  padding:
+    30px
+    0
+    15px;
+
   text-align:center;
-  animation:fadeUp .8s .3s ease both;
+
+  animation:
+    fadeUp .8s .3s ease both;
 }
 
 .footer-logo-area{
   display:flex;
+
   justify-content:center;
   align-items:center;
+
   gap:20px;
 }
 
 .footer-logo{
   width:82px;
   height:82px;
+
   object-fit:contain;
 }
 
 .footer-flag{
   width:62px;
   height:42px;
+
   object-fit:cover;
+
   border-radius:7px;
+
   opacity:1;
-  box-shadow:0 7px 25px var(--shadow);
+
+  box-shadow:
+    0 7px 25px
+    var(--shadow);
 }
 
 .footer-divider{
   width:100%;
   height:1px;
-  margin:23px 0 17px;
-  background:var(--border);
+
+  margin:
+    23px
+    0
+    17px;
+
+  background:
+    var(--border);
 }
 
 .copyright{
   color:var(--muted2);
+
   font-size:11px;
 }
 
@@ -699,11 +1110,13 @@ html:not([data-theme="light"]) .status{
   color:var(--muted2);
 }
 
+
 /* =========================
    ANIMATIONS
 ========================= */
 
 @keyframes fadeUp{
+
   from{
     opacity:0;
     transform:translateY(15px);
@@ -713,9 +1126,11 @@ html:not([data-theme="light"]) .status{
     opacity:1;
     transform:translateY(0);
   }
+
 }
 
 @keyframes cardIn{
+
   from{
     opacity:0;
     transform:translateY(12px);
@@ -725,7 +1140,35 @@ html:not([data-theme="light"]) .status{
     opacity:1;
     transform:translateY(0);
   }
+
 }
+
+@keyframes spinRing{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes counterSpin{
+  to{
+    transform:rotate(-360deg);
+  }
+}
+
+@keyframes pulseLogo{
+
+  0%,100%{
+    transform:scale(.94);
+    opacity:.65;
+  }
+
+  50%{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}
+
 
 /* =========================
    MOBILE
@@ -738,14 +1181,33 @@ html:not([data-theme="light"]) .status{
     right:12px;
   }
 
+  .language-button{
+    padding:0 8px;
+  }
+
+  .language-button .language-label{
+    display:none;
+  }
+
+  .language-menu{
+    right:0;
+    width:270px;
+  }
+
   .container{
-    width:min(100% - 22px,820px);
+    width:
+      min(
+        100% - 22px,
+        820px
+      );
+
     padding-top:76px;
   }
 
   .avatar-wrap{
     width:120px;
     height:120px;
+
     margin-bottom:19px;
   }
 
@@ -763,14 +1225,18 @@ html:not([data-theme="light"]) .status{
 
   .link-card{
     min-height:72px;
+
     padding:11px;
+
     border-radius:15px;
   }
 
   .icon-box{
     width:44px;
     height:44px;
+
     flex-basis:44px;
+
     margin-right:12px;
   }
 
@@ -800,6 +1266,7 @@ html:not([data-theme="light"]) .status{
     width:58px;
     height:39px;
   }
+
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -811,9 +1278,11 @@ html:not([data-theme="light"]) .status{
     transition:none !important;
     scroll-behavior:auto !important;
   }
+
 }
 </style>
 </head>
+
 
 <body>
 
@@ -821,42 +1290,417 @@ html:not([data-theme="light"]) .status{
 <div class="orb two"></div>
 <div class="orb three"></div>
 
-<!-- PRELOADER -->
+
+<!-- =========================
+     PRELOADER
+========================= -->
+
 <div class="preloader" id="preloader">
-  <img src="efesarac-footer-logo.png" alt="efesarac.co">
+
+  <img
+    class="logo-light"
+    src="efesarac-footer-logo.png"
+    alt="efesarac.co">
+
+  <img
+    class="logo-dark"
+    src="efesarac-footer-logo-dark.png"
+    alt="efesarac.co">
+
 </div>
 
-<!-- TOP CONTROLS -->
+
+<!-- =========================
+     TOP CONTROLS
+========================= -->
+
 <div class="top-controls">
 
-  <div class="language-switch">
-    <button id="trBtn" class="active" type="button">TR</button>
-    <button id="enBtn" type="button">EN</button>
+
+  <!-- LANGUAGE BUTTON -->
+
+  <button
+    class="language-button"
+    id="languageButton"
+    type="button">
+
+    <span class="globe">🌐</span>
+
+    <span
+      class="language-label"
+      data-tr="Dil"
+      data-en="Language">
+      Dil
+    </span>
+
+    <span>⌄</span>
+
+  </button>
+
+
+  <!-- LANGUAGE MENU -->
+
+  <div
+    class="language-menu"
+    id="languageMenu">
+
+    <div
+      class="language-menu-title"
+      data-tr="Dil / Language"
+      data-en="Language">
+      Dil / Language
+    </div>
+
+
+    <div class="language-grid">
+
+
+      <button class="language-option active"
+              data-lang="tr"
+              type="button">
+        <span class="language-flag">🇹🇷</span>
+        Türkçe
+      </button>
+
+
+      <button class="language-option"
+              data-lang="en"
+              type="button">
+        <span class="language-flag">🇬🇧</span>
+        English
+      </button>
+
+
+      <button class="language-option"
+              data-lang="de"
+              type="button">
+        <span class="language-flag">🇩🇪</span>
+        Deutsch
+      </button>
+
+
+      <button class="language-option"
+              data-lang="fr"
+              type="button">
+        <span class="language-flag">🇫🇷</span>
+        Français
+      </button>
+
+
+      <button class="language-option"
+              data-lang="es"
+              type="button">
+        <span class="language-flag">🇪🇸</span>
+        Español
+      </button>
+
+
+      <button class="language-option"
+              data-lang="it"
+              type="button">
+        <span class="language-flag">🇮🇹</span>
+        Italiano
+      </button>
+
+
+      <button class="language-option"
+              data-lang="pt"
+              type="button">
+        <span class="language-flag">🇵🇹</span>
+        Português
+      </button>
+
+
+      <button class="language-option"
+              data-lang="nl"
+              type="button">
+        <span class="language-flag">🇳🇱</span>
+        Nederlands
+      </button>
+
+
+      <button class="language-option"
+              data-lang="ru"
+              type="button">
+        <span class="language-flag">🇷🇺</span>
+        Русский
+      </button>
+
+
+      <button class="language-option"
+              data-lang="uk"
+              type="button">
+        <span class="language-flag">🇺🇦</span>
+        Українська
+      </button>
+
+
+      <button class="language-option"
+              data-lang="pl"
+              type="button">
+        <span class="language-flag">🇵🇱</span>
+        Polski
+      </button>
+
+
+      <button class="language-option"
+              data-lang="cs"
+              type="button">
+        <span class="language-flag">🇨🇿</span>
+        Čeština
+      </button>
+
+
+      <button class="language-option"
+              data-lang="sk"
+              type="button">
+        <span class="language-flag">🇸🇰</span>
+        Slovenčina
+      </button>
+
+
+      <button class="language-option"
+              data-lang="hu"
+              type="button">
+        <span class="language-flag">🇭🇺</span>
+        Magyar
+      </button>
+
+
+      <button class="language-option"
+              data-lang="ro"
+              type="button">
+        <span class="language-flag">🇷🇴</span>
+        Română
+      </button>
+
+
+      <button class="language-option"
+              data-lang="el"
+              type="button">
+        <span class="language-flag">🇬🇷</span>
+        Ελληνικά
+      </button>
+
+
+      <button class="language-option"
+              data-lang="sv"
+              type="button">
+        <span class="language-flag">🇸🇪</span>
+        Svenska
+      </button>
+
+
+      <button class="language-option"
+              data-lang="no"
+              type="button">
+        <span class="language-flag">🇳🇴</span>
+        Norsk
+      </button>
+
+
+      <button class="language-option"
+              data-lang="da"
+              type="button">
+        <span class="language-flag">🇩🇰</span>
+        Dansk
+      </button>
+
+
+      <button class="language-option"
+              data-lang="fi"
+              type="button">
+        <span class="language-flag">🇫🇮</span>
+        Suomi
+      </button>
+
+
+      <button class="language-option"
+              data-lang="he"
+              type="button">
+        <span class="language-flag">🇮🇱</span>
+        עברית
+      </button>
+
+
+      <button class="language-option"
+              data-lang="ar"
+              type="button">
+        <span class="language-flag">🇸🇦</span>
+        العربية
+      </button>
+
+
+      <button class="language-option"
+              data-lang="fa"
+              type="button">
+        <span class="language-flag">🇮🇷</span>
+        فارسی
+      </button>
+
+
+      <button class="language-option"
+              data-lang="hi"
+              type="button">
+        <span class="language-flag">🇮🇳</span>
+        हिन्दी
+      </button>
+
+
+      <button class="language-option"
+              data-lang="bn"
+              type="button">
+        <span class="language-flag">🇧🇩</span>
+        বাংলা
+      </button>
+
+
+      <button class="language-option"
+              data-lang="ur"
+              type="button">
+        <span class="language-flag">🇵🇰</span>
+        اردو
+      </button>
+
+
+      <button class="language-option"
+              data-lang="zh-CN"
+              type="button">
+        <span class="language-flag">🇨🇳</span>
+        简体中文
+      </button>
+
+
+      <button class="language-option"
+              data-lang="zh-TW"
+              type="button">
+        <span class="language-flag">🇹🇼</span>
+        繁體中文
+      </button>
+
+
+      <button class="language-option"
+              data-lang="ja"
+              type="button">
+        <span class="language-flag">🇯🇵</span>
+        日本語
+      </button>
+
+
+      <button class="language-option"
+              data-lang="ko"
+              type="button">
+        <span class="language-flag">🇰🇷</span>
+        한국어
+      </button>
+
+
+      <button class="language-option"
+              data-lang="vi"
+              type="button">
+        <span class="language-flag">🇻🇳</span>
+        Tiếng Việt
+      </button>
+
+
+      <button class="language-option"
+              data-lang="th"
+              type="button">
+        <span class="language-flag">🇹🇭</span>
+        ไทย
+      </button>
+
+
+      <button class="language-option"
+              data-lang="id"
+              type="button">
+        <span class="language-flag">🇮🇩</span>
+        Bahasa Indonesia
+      </button>
+
+
+      <button class="language-option"
+              data-lang="ms"
+              type="button">
+        <span class="language-flag">🇲🇾</span>
+        Bahasa Melayu
+      </button>
+
+
+    </div>
+
   </div>
+
+
+  <!-- THEME -->
 
   <button
     class="theme-button"
     id="themeButton"
     type="button"
-    aria-label="Tema">
+    aria-label="Theme">
+
     🌙
+
   </button>
 
-  <div class="theme-menu" id="themeMenu">
 
-    <button class="theme-option" data-theme-choice="dark" type="button">
-      <span class="theme-option-icon">🌙</span>
-      <span data-tr="Koyu" data-en="Dark">Koyu</span>
+  <div
+    class="theme-menu"
+    id="themeMenu">
+
+
+    <button
+      class="theme-option"
+      data-theme-choice="dark"
+      type="button">
+
+      <span class="theme-option-icon">
+        🌙
+      </span>
+
+      <span
+        data-tr="Koyu"
+        data-en="Dark">
+        Koyu
+      </span>
+
     </button>
 
-    <button class="theme-option" data-theme-choice="light" type="button">
-      <span class="theme-option-icon">☀️</span>
-      <span data-tr="Açık" data-en="Light">Açık</span>
+
+    <button
+      class="theme-option"
+      data-theme-choice="light"
+      type="button">
+
+      <span class="theme-option-icon">
+        ☀️
+      </span>
+
+      <span
+        data-tr="Açık"
+        data-en="Light">
+        Açık
+      </span>
+
     </button>
 
-    <button class="theme-option" data-theme-choice="system" type="button">
-      <span class="theme-option-icon">🌓</span>
-      <span data-tr="Sistem" data-en="System">Sistem</span>
+
+    <button
+      class="theme-option"
+      data-theme-choice="system"
+      type="button">
+
+      <span class="theme-option-icon">
+        🌓
+      </span>
+
+      <span
+        data-tr="Sistem"
+        data-en="System">
+        Sistem
+      </span>
+
     </button>
 
   </div>
@@ -866,836 +1710,1221 @@ html:not([data-theme="light"]) .status{
 
 <main class="container">
 
-  <!-- PROFILE -->
 
-  <header class="profile">
+<!-- =========================
+     PROFILE
+========================= -->
 
-    <div class="avatar-wrap">
-      <img
-        class="avatar"
-        src="https://github.com/saracefe.png"
-        alt="Efe Saraç">
-    </div>
+<header class="profile">
 
-    <h1>
-      Efe Saraç
-      <span class="verified">✓</span>
-    </h1>
+  <div class="avatar-wrap">
 
-    <p
-      class="bio"
-      data-tr="Dijital içerik üreticisi · Geliştirici · İnternet"
-      data-en="Digital creator · Developer · Internet">
-      Dijital içerik üreticisi · Geliştirici · İnternet
-    </p>
-
-    <div class="status">
-      <span class="status-dot"></span>
-
-      <span
-        data-tr="Sistem aktif"
-        data-en="System active">
-        Sistem aktif
-      </span>
-
-    </div>
-
-  </header>
-
-
-  <!-- SEARCH -->
-
-  <div class="search-wrap">
-
-    <div class="search-box">
-
-      <span class="search-icon">⌕</span>
-
-      <input
-        id="searchInput"
-        type="search"
-        autocomplete="off"
-        data-tr-placeholder="Bağlantılarda ara..."
-        data-en-placeholder="Search links..."
-        placeholder="Bağlantılarda ara...">
-
-    </div>
+    <img
+      class="avatar"
+      src="https://github.com/saracefe.png"
+      alt="Efe Saraç">
 
   </div>
 
-  <div class="no-results" id="noResults">
-    <span
-      data-tr="Sonuç bulunamadı."
-      data-en="No results found.">
-      Sonuç bulunamadı.
+
+  <h1>
+
+    Efe Saraç
+
+    <span class="verified">
+      ✓
     </span>
+
+  </h1>
+
+
+  <p
+    class="bio"
+    data-tr="Dijital içerik üreticisi · Geliştirici · İnternet"
+    data-en="Digital creator · Developer · Internet">
+
+    Dijital içerik üreticisi · Geliştirici · İnternet
+
+  </p>
+
+
+  <div class="status">
+
+    <span class="status-dot"></span>
+
+    <span
+      data-tr="Sistem aktif"
+      data-en="System active">
+
+      Sistem aktif
+
+    </span>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
+<div class="search-wrap">
+
+  <div class="search-box">
+
+    <span class="search-icon">
+      ⌕
+    </span>
+
+    <input
+      id="searchInput"
+      type="search"
+      autocomplete="off"
+      data-tr-placeholder="Bağlantılarda ara..."
+      data-en-placeholder="Search links..."
+      placeholder="Bağlantılarda ara...">
+
+  </div>
+
+</div>
+
+
+<div
+  class="no-results"
+  id="noResults">
+
+  <span
+    data-tr="Sonuç bulunamadı."
+    data-en="No results found.">
+
+    Sonuç bulunamadı.
+
+  </span>
+
+</div>
+
+
+<!-- =========================
+     SOCIAL
+========================= -->
+
+<section class="section">
+
+<h2
+  class="section-title"
+  data-tr="Sosyal"
+  data-en="Social">
+
+  Sosyal
+
+</h2>
+
+
+<div class="links">
+
+
+<a
+  class="link-card featured"
+  href="https://youtube.com/@saracefe"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="youtube video içerik creator">
+
+  <span
+    class="featured-badge"
+    data-tr="ÖNE ÇIKAN"
+    data-en="FEATURED">
+
+    ÖNE ÇIKAN
+
+  </span>
+
+
+  <div class="icon-box">
+
+    <img
+      src="https://cdn.simpleicons.org/youtube"
+      alt="">
+
   </div>
 
 
-  <!-- SOCIAL -->
+  <div class="link-content">
 
-  <section class="section">
+    <div class="link-title">
+      YouTube
+    </div>
 
-    <h2 class="section-title"
-        data-tr="Sosyal"
-        data-en="Social">
-      Sosyal
-    </h2>
+    <div class="link-description">
+      @saracefe
+    </div>
 
-    <div class="links">
-
-      <a class="link-card featured"
-         href="https://youtube.com/@saracefe"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="youtube video içerik creator">
-
-        <span class="featured-badge"
-              data-tr="ÖNE ÇIKAN"
-              data-en="FEATURED">
-          ÖNE ÇIKAN
-        </span>
-
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/youtube" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">YouTube</div>
-          <div class="link-description">@saracefe</div>
-        </div>
-
-        <button class="copy-btn"
-                type="button"
-                data-copy="https://youtube.com/@saracefe">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+  </div>
 
 
-      <a class="link-card"
-         href="https://instagram.com/saracefe_"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="instagram sosyal fotoğraf">
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://youtube.com/@saracefe">
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/instagram" alt="">
-        </div>
+    ⧉
 
-        <div class="link-content">
-          <div class="link-title">Instagram</div>
-          <div class="link-description">@saracefe_</div>
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://instagram.com/saracefe_">⧉</button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+  </button>
 
 
-      <a class="link-card"
-         href="https://facebook.com/saracefee"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="facebook sosyal">
+  <span class="link-arrow">
+    ›
+  </span>
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/facebook" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">Facebook</div>
-          <div class="link-description">@saracefee</div>
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://facebook.com/saracefee">⧉</button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+</a>
 
 
-      <a class="link-card"
-         href="https://threads.net/@saracefe_"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="threads sosyal meta">
+<a
+  class="link-card"
+  href="https://instagram.com/saracefe_"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="instagram sosyal fotoğraf">
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/threads" alt="">
-        </div>
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/instagram"
+      alt="">
+  </div>
 
-        <div class="link-content">
-          <div class="link-title">Threads</div>
-          <div class="link-description">@saracefe_</div>
-        </div>
+  <div class="link-content">
 
-        <button class="copy-btn" type="button"
-                data-copy="https://threads.net/@saracefe_">⧉</button>
+    <div class="link-title">
+      Instagram
+    </div>
 
-        <span class="link-arrow">›</span>
+    <div class="link-description">
+      @saracefe_
+    </div>
 
-      </a>
+  </div>
 
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://instagram.com/saracefe_">
+    ⧉
+  </button>
 
-      <a class="link-card"
-         href="https://x.com/efesarac_"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="x twitter sosyal">
+  <span class="link-arrow">›</span>
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/x" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">X</div>
-          <div class="link-description">@efesarac_</div>
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://x.com/efesarac_">⧉</button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+</a>
 
 
-      <a class="link-card"
-         href="https://tiktok.com/@efesarac_"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="tiktok video sosyal">
+<a
+  class="link-card"
+  href="https://facebook.com/saracefee"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="facebook sosyal">
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/tiktok" alt="">
-        </div>
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/facebook"
+      alt="">
+  </div>
 
-        <div class="link-content">
-          <div class="link-title">TikTok</div>
-          <div class="link-description">@efesarac_</div>
-        </div>
+  <div class="link-content">
 
-        <button class="copy-btn" type="button"
-                data-copy="https://tiktok.com/@efesarac_">⧉</button>
+    <div class="link-title">
+      Facebook
+    </div>
 
-        <span class="link-arrow">›</span>
+    <div class="link-description">
+      @saracefee
+    </div>
 
-      </a>
+  </div>
 
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://facebook.com/saracefee">
+    ⧉
+  </button>
 
-      <a class="link-card"
-         href="https://kwai.com/@saracefe"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="kwai video sosyal">
+  <span class="link-arrow">›</span>
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/kuaishou" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">Kwai</div>
-          <div class="link-description">@saracefe</div>
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://kwai.com/@saracefe">⧉</button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+</a>
 
 
-      <a class="link-card"
-         href="https://bsky.app/profile/saracefe.bsky.social"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="bluesky sosyal">
+<a
+  class="link-card"
+  href="https://threads.net/@saracefe_"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="threads sosyal meta">
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/bluesky" alt="">
-        </div>
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/threads"
+      alt="">
+  </div>
 
-        <div class="link-content">
-          <div class="link-title">Bluesky</div>
-          <div class="link-description">@saracefe.bsky.social</div>
-        </div>
+  <div class="link-content">
 
-        <button class="copy-btn" type="button"
-                data-copy="https://bsky.app/profile/saracefe.bsky.social">⧉</button>
+    <div class="link-title">
+      Threads
+    </div>
 
-        <span class="link-arrow">›</span>
+    <div class="link-description">
+      @saracefe_
+    </div>
 
-      </a>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://threads.net/@saracefe_">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+
+<a
+  class="link-card"
+  href="https://x.com/efesarac_"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="x twitter sosyal">
+
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/x"
+      alt="">
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      X
+    </div>
+
+    <div class="link-description">
+      @efesarac_
+    </div>
+
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://x.com/efesarac_">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+
+<a
+  class="link-card"
+  href="https://tiktok.com/@efesarac_"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="tiktok video sosyal">
+
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/tiktok"
+      alt="">
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      TikTok
+    </div>
+
+    <div class="link-description">
+      @efesarac_
+    </div>
+
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://tiktok.com/@efesarac_">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+
+<a
+  class="link-card"
+  href="https://kwai.com/@saracefe"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="kwai video sosyal">
+
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/kuaishou"
+      alt="">
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      Kwai
+    </div>
+
+    <div class="link-description">
+      @saracefe
+    </div>
+
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://kwai.com/@saracefe">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+
+<a
+  class="link-card"
+  href="https://bsky.app/profile/saracefe.bsky.social"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="bluesky sosyal">
+
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/bluesky"
+      alt="">
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      Bluesky
+    </div>
+
+    <div class="link-description">
+      @saracefe.bsky.social
+    </div>
+
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://bsky.app/profile/saracefe.bsky.social">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+</div>
+</section>
+
+
+<!-- =========================
+     CREATOR
+========================= -->
+
+<section class="section">
+
+<h2
+  class="section-title"
+  data-tr="İçerik Üreticisi"
+  data-en="Creator">
+
+  İçerik Üreticisi
+
+</h2>
+
+
+<div class="links">
+
+
+<a
+  class="link-card"
+  href="https://donate.bynogame.com/efesarac"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="bynogame bağış donate destek">
+
+  <div class="icon-box">
+
+    <img
+      src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png"
+      alt="">
+
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      ByNoGame
+    </div>
+
+    <div
+      class="link-description"
+      data-tr="Destek ve bağış"
+      data-en="Support and donations">
+
+      Destek ve bağış
 
     </div>
 
-  </section>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://donate.bynogame.com/efesarac">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
 
 
-  <!-- CREATOR -->
+<a
+  class="link-card"
+  href="https://github.com/saracefe"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="github kod geliştirici developer">
 
-  <section class="section">
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/github"
+      alt="">
+  </div>
 
-    <h2 class="section-title"
-        data-tr="İçerik Üreticisi"
-        data-en="Creator">
-      İçerik Üreticisi
-    </h2>
+  <div class="link-content">
 
-    <div class="links">
+    <div class="link-title">
+      GitHub
+    </div>
 
-      <a class="link-card"
-         href="https://donate.bynogame.com/efesarac"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="bynogame bağış donate destek">
+    <div
+      class="link-description"
+      data-tr="Projeler ve kod"
+      data-en="Projects and code">
 
-        <div class="icon-box">
-          <img
-            src="https://cdn.bynogame.com/logo/beyaz-kirmizi-png-1699381647670.png"
-            alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">ByNoGame</div>
-
-          <div class="link-description"
-               data-tr="Destek ve bağış"
-               data-en="Support and donations">
-            Destek ve bağış
-          </div>
-
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://donate.bynogame.com/efesarac">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
-
-
-      <a class="link-card"
-         href="https://github.com/saracefe"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="github kod geliştirici developer">
-
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/github" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">GitHub</div>
-
-          <div class="link-description"
-               data-tr="Projeler ve kod"
-               data-en="Projects and code">
-            Projeler ve kod
-          </div>
-
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://github.com/saracefe">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
-
-
-      <a class="link-card"
-         href="https://reddit.com/user/efesarac"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="reddit topluluk forum">
-
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/reddit" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">Reddit</div>
-          <div class="link-description">u/efesarac</div>
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://reddit.com/user/efesarac">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
-
-
-      <a class="link-card"
-         href="https://linkedin.com/in/efe-saraç-bbb35b1b1"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="linkedin kariyer iş profesyonel">
-
-        <div class="icon-box">
-          <img
-            src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg"
-            alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">LinkedIn</div>
-
-          <div class="link-description"
-               data-tr="Profesyonel profil"
-               data-en="Professional profile">
-            Profesyonel profil
-          </div>
-
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://linkedin.com/in/efe-saraç-bbb35b1b1">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+      Projeler ve kod
 
     </div>
 
-  </section>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://github.com/saracefe">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
 
 
-  <!-- LIVE -->
+<a
+  class="link-card"
+  href="https://reddit.com/user/efesarac"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="reddit topluluk forum">
 
-  <section class="section">
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/reddit"
+      alt="">
+  </div>
 
-    <h2 class="section-title"
-        data-tr="Canlı Yayın"
-        data-en="Live">
-      Canlı Yayın
-    </h2>
+  <div class="link-content">
 
-    <div class="links">
+    <div class="link-title">
+      Reddit
+    </div>
 
-      <a class="link-card"
-         href="https://twitch.tv/efesarac_"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="twitch canlı yayın">
+    <div class="link-description">
+      u/efesarac
+    </div>
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/twitch" alt="">
-        </div>
+  </div>
 
-        <div class="link-content">
-          <div class="link-title">Twitch</div>
-          <div class="link-description">@efesarac_</div>
-        </div>
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://reddit.com/user/efesarac">
+    ⧉
+  </button>
 
-        <button class="copy-btn" type="button"
-                data-copy="https://twitch.tv/efesarac_">
-          ⧉
-        </button>
+  <span class="link-arrow">›</span>
 
-        <span class="link-arrow">›</span>
-
-      </a>
+</a>
 
 
-      <a class="link-card"
-         href="https://kick.com/saracefe"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="kick canlı yayın">
+<a
+  class="link-card"
+  href="https://linkedin.com/in/efe-saraç-bbb35b1b1"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="linkedin kariyer iş profesyonel">
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/kick" alt="">
-        </div>
+  <div class="icon-box">
 
-        <div class="link-content">
-          <div class="link-title">Kick</div>
-          <div class="link-description">@saracefe</div>
-        </div>
+    <img
+      src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/linkedin/default.svg"
+      alt="">
 
-        <button class="copy-btn" type="button"
-                data-copy="https://kick.com/saracefe">
-          ⧉
-        </button>
+  </div>
 
-        <span class="link-arrow">›</span>
+  <div class="link-content">
 
-      </a>
+    <div class="link-title">
+      LinkedIn
+    </div>
+
+    <div
+      class="link-description"
+      data-tr="Profesyonel profil"
+      data-en="Professional profile">
+
+      Profesyonel profil
 
     </div>
 
-  </section>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://linkedin.com/in/efe-saraç-bbb35b1b1">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+</div>
+</section>
 
 
-  <!-- MUSIC -->
+<!-- =========================
+     LIVE
+========================= -->
 
-  <section class="section">
+<section class="section">
 
-    <h2 class="section-title"
-        data-tr="Müzik"
-        data-en="Music">
-      Müzik
-    </h2>
+<h2
+  class="section-title"
+  data-tr="Canlı Yayın"
+  data-en="Live">
 
-    <div class="links">
+  Canlı Yayın
 
-      <a class="link-card"
-         href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="spotify müzik">
-
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/spotify" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">Spotify</div>
-
-          <div class="link-description"
-               data-tr="Müzik ve listeler"
-               data-en="Music and playlists">
-            Müzik ve listeler
-          </div>
-
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+</h2>
 
 
-      <a class="link-card"
-         href="https://music.youtube.com/@saracefe"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="youtube music müzik">
-
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/youtubemusic" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">YouTube Music</div>
-          <div class="link-description">@saracefe</div>
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://music.youtube.com/@saracefe">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+<div class="links">
 
 
-      <a class="link-card"
-         href="https://music.amazon.com/profiles/@efesarac"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="amazon music müzik">
+<a
+  class="link-card"
+  href="https://twitch.tv/efesarac_"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="twitch canlı yayın">
 
-        <div class="icon-box">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg"
-            alt="">
-        </div>
+  <div class="icon-box">
 
-        <div class="link-content">
-          <div class="link-title">Amazon Music</div>
-          <div class="link-description">@efesarac</div>
-        </div>
+    <img
+      src="https://cdn.simpleicons.org/twitch"
+      alt="">
 
-        <button class="copy-btn" type="button"
-                data-copy="https://music.amazon.com/profiles/@efesarac">
-          ⧉
-        </button>
+  </div>
 
-        <span class="link-arrow">›</span>
+  <div class="link-content">
 
-      </a>
+    <div class="link-title">
+      Twitch
+    </div>
+
+    <div class="link-description">
+      @efesarac_
+    </div>
+
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://twitch.tv/efesarac_">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+
+<a
+  class="link-card"
+  href="https://kick.com/saracefe"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="kick canlı yayın">
+
+  <div class="icon-box">
+
+    <img
+      src="https://cdn.simpleicons.org/kick"
+      alt="">
+
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      Kick
+    </div>
+
+    <div class="link-description">
+      @saracefe
+    </div>
+
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://kick.com/saracefe">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+</div>
+</section>
+
+
+<!-- =========================
+     MUSIC
+========================= -->
+
+<section class="section">
+
+<h2
+  class="section-title"
+  data-tr="Müzik"
+  data-en="Music">
+
+  Müzik
+
+</h2>
+
+
+<div class="links">
+
+
+<a
+  class="link-card"
+  href="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="spotify müzik">
+
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/spotify"
+      alt="">
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      Spotify
+    </div>
+
+    <div
+      class="link-description"
+      data-tr="Müzik ve listeler"
+      data-en="Music and playlists">
+
+      Müzik ve listeler
 
     </div>
 
-  </section>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://open.spotify.com/user/9vjw1mvp2en85w6macw1xl5u6">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
 
 
-  <!-- COMMUNITY -->
+<a
+  class="link-card"
+  href="https://music.youtube.com/@saracefe"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="youtube music müzik">
 
-  <section class="section">
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/youtubemusic"
+      alt="">
+  </div>
 
-    <h2 class="section-title"
-        data-tr="Topluluk"
-        data-en="Community">
-      Topluluk
-    </h2>
+  <div class="link-content">
 
-    <div class="links">
+    <div class="link-title">
+      YouTube Music
+    </div>
 
-      <a class="link-card"
-         href="https://discord.gg/p5Y5BxESFD"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="discord topluluk sunucu">
+    <div class="link-description">
+      @saracefe
+    </div>
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/discord" alt="">
-        </div>
+  </div>
 
-        <div class="link-content">
-          <div class="link-title">Discord</div>
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://music.youtube.com/@saracefe">
+    ⧉
+  </button>
 
-          <div class="link-description"
-               data-tr="Topluluğa katıl"
-               data-en="Join the community">
-            Topluluğa katıl
-          </div>
+  <span class="link-arrow">›</span>
 
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://discord.gg/p5Y5BxESFD">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+</a>
 
 
-      <a class="link-card"
-         href="https://wa.me/efesarac"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="whatsapp mesaj iletişim">
+<a
+  class="link-card"
+  href="https://music.amazon.com/profiles/@efesarac"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="amazon music müzik">
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/whatsapp" alt="">
-        </div>
+  <div class="icon-box">
 
-        <div class="link-content">
-          <div class="link-title">WhatsApp</div>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/9/92/Amazon_Music_logo.svg"
+      alt="">
 
-          <div class="link-description"
-               data-tr="Mesaj gönder"
-               data-en="Send a message">
-            Mesaj gönder
-          </div>
+  </div>
 
-        </div>
+  <div class="link-content">
 
-        <button class="copy-btn" type="button"
-                data-copy="https://wa.me/efesarac">
-          ⧉
-        </button>
+    <div class="link-title">
+      Amazon Music
+    </div>
 
-        <span class="link-arrow">›</span>
+    <div class="link-description">
+      @efesarac
+    </div>
 
-      </a>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://music.amazon.com/profiles/@efesarac">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+</div>
+</section>
 
 
-      <a class="link-card"
-         href="https://t.me/efesarac"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="telegram mesaj topluluk">
+<!-- =========================
+     COMMUNITY
+========================= -->
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/telegram" alt="">
-        </div>
+<section class="section">
 
-        <div class="link-content">
-          <div class="link-title">Telegram</div>
-          <div class="link-description">@efesarac</div>
-        </div>
+<h2
+  class="section-title"
+  data-tr="Topluluk"
+  data-en="Community">
 
-        <button class="copy-btn" type="button"
-                data-copy="https://t.me/efesarac">
-          ⧉
-        </button>
+  Topluluk
 
-        <span class="link-arrow">›</span>
+</h2>
 
-      </a>
+
+<div class="links">
+
+
+<a
+  class="link-card"
+  href="https://discord.gg/p5Y5BxESFD"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="discord topluluk sunucu">
+
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/discord"
+      alt="">
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      Discord
+    </div>
+
+    <div
+      class="link-description"
+      data-tr="Topluluğa katıl"
+      data-en="Join the community">
+
+      Topluluğa katıl
 
     </div>
 
-  </section>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://discord.gg/p5Y5BxESFD">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
 
 
-  <!-- OTHER -->
+<a
+  class="link-card"
+  href="https://wa.me/efesarac"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="whatsapp mesaj iletişim">
 
-  <section class="section">
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/whatsapp"
+      alt="">
+  </div>
 
-    <h2 class="section-title"
-        data-tr="Diğer"
-        data-en="Other">
-      Diğer
-    </h2>
+  <div class="link-content">
 
-    <div class="links">
+    <div class="link-title">
+      WhatsApp
+    </div>
 
-      <a class="link-card"
-         href="https://paypal.me/saracefe"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="paypal ödeme destek">
+    <div
+      class="link-description"
+      data-tr="Mesaj gönder"
+      data-en="Send a message">
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/paypal" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">PayPal</div>
-
-          <div class="link-description"
-               data-tr="Destek ol"
-               data-en="Support me">
-            Destek ol
-          </div>
-
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://paypal.me/saracefe">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
-
-
-      <a class="link-card"
-         href="https://snapchat.com/add/efesaracx"
-         target="_blank"
-         rel="noopener noreferrer"
-         data-search="snapchat sosyal">
-
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/snapchat" alt="">
-        </div>
-
-        <div class="link-content">
-          <div class="link-title">Snapchat</div>
-          <div class="link-description">@efesaracx</div>
-        </div>
-
-        <button class="copy-btn" type="button"
-                data-copy="https://snapchat.com/add/efesaracx">
-          ⧉
-        </button>
-
-        <span class="link-arrow">›</span>
-
-      </a>
+      Mesaj gönder
 
     </div>
 
-  </section>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://wa.me/efesarac">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
 
 
-  <!-- CONTACT -->
+<a
+  class="link-card"
+  href="https://t.me/efesarac"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="telegram mesaj topluluk">
 
-  <section class="section">
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/telegram"
+      alt="">
+  </div>
 
-    <h2 class="section-title"
-        data-tr="İletişim"
-        data-en="Contact">
-      İletişim
-    </h2>
+  <div class="link-content">
 
-    <div class="links">
+    <div class="link-title">
+      Telegram
+    </div>
 
-      <a class="link-card"
-         href="mailto:contact@efesarac.co"
-         data-search="email mail iletişim">
+    <div class="link-description">
+      @efesarac
+    </div>
 
-        <div class="icon-box">
-          <img src="https://cdn.simpleicons.org/gmail" alt="">
-        </div>
+  </div>
 
-        <div class="link-content">
-          <div class="link-title">E-posta</div>
-          <div class="link-description">
-            contact@efesarac.co
-          </div>
-        </div>
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://t.me/efesarac">
+    ⧉
+  </button>
 
-        <button class="copy-btn" type="button"
-                data-copy="contact@efesarac.co">
-          ⧉
-        </button>
+  <span class="link-arrow">›</span>
 
-        <span class="link-arrow">›</span>
+</a>
 
-      </a>
+</div>
+</section>
+
+
+<!-- =========================
+     OTHER
+========================= -->
+
+<section class="section">
+
+<h2
+  class="section-title"
+  data-tr="Diğer"
+  data-en="Other">
+
+  Diğer
+
+</h2>
+
+
+<div class="links">
+
+
+<a
+  class="link-card"
+  href="https://paypal.me/saracefe"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="paypal ödeme destek">
+
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/paypal"
+      alt="">
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      PayPal
+    </div>
+
+    <div
+      class="link-description"
+      data-tr="Destek ol"
+      data-en="Support me">
+
+      Destek ol
 
     </div>
 
-  </section>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://paypal.me/saracefe">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
 
 
-  <!-- FOOTER -->
+<a
+  class="link-card"
+  href="https://snapchat.com/add/efesaracx"
+  target="_blank"
+  rel="noopener noreferrer"
+  data-search="snapchat sosyal">
 
-  <footer class="site-footer">
+  <div class="icon-box">
+    <img
+      src="https://cdn.simpleicons.org/snapchat"
+      alt="">
+  </div>
 
-    <div class="footer-logo-area">
+  <div class="link-content">
 
-      <img
-        class="footer-logo"
-        src="efesarac-footer-logo.png"
-        alt="efesarac.co">
-
-      <img
-        id="countryFlag"
-        class="footer-flag"
-        src="https://flagcdn.com/w160/tr.png"
-        alt="Türkiye Bayrağı">
-
+    <div class="link-title">
+      Snapchat
     </div>
 
-    <div class="footer-divider"></div>
-
-    <div class="copyright">
-
-      <span
-        data-tr="© 2008–2026 efesarac.co Her Hakkı Saklıdır."
-        data-en="© 2008–2026 efesarac.co All Rights Reserved.">
-        © 2008–2026 efesarac.co Her Hakkı Saklıdır.
-      </span>
-
-      <span class="version">
-        · v4.5.0
-      </span>
-
+    <div class="link-description">
+      @efesaracx
     </div>
 
-  </footer>
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="https://snapchat.com/add/efesaracx">
+    ⧉
+  </button>
+
+  <span class="link-arrow">›</span>
+
+</a>
+
+</div>
+</section>
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="section">
+
+<h2
+  class="section-title"
+  data-tr="İletişim"
+  data-en="Contact">
+
+  İletişim
+
+</h2>
+
+
+<div class="links">
+
+
+<a
+  class="link-card"
+  href="mailto:contact@efesarac.co"
+  data-search="email mail iletişim">
+
+  <div class="icon-box">
+
+    <img
+      src="https://cdn.simpleicons.org/gmail"
+      alt="">
+
+  </div>
+
+  <div class="link-content">
+
+    <div class="link-title">
+      E-posta
+    </div>
+
+    <div class="link-description">
+      contact@efesarac.co
+    </div>
+
+  </div>
+
+  <button
+    class="copy-btn"
+    type="button"
+    data-copy="contact@efesarac.co">
+    ⧉
+  </button>
+
+  <span class="link-arrow">
+    ›
+  </span>
+
+</a>
+
+</div>
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="site-footer">
+
+  <div class="footer-logo-area">
+
+    <img
+      class="footer-logo logo-light"
+      src="efesarac-footer-logo.png"
+      alt="efesarac.co">
+
+    <img
+      class="footer-logo logo-dark"
+      src="efesarac-footer-logo-dark.png"
+      alt="efesarac.co">
+
+
+    <img
+      id="countryFlag"
+      class="footer-flag"
+      src="https://flagcdn.com/w160/tr.png"
+      alt="Türkiye Bayrağı">
+
+  </div>
+
+
+  <div class="footer-divider"></div>
+
+
+  <div class="copyright">
+
+    <span
+      data-tr="© 2008–2026 efesarac.co Her Hakkı Saklıdır."
+      data-en="© 2008–2026 efesarac.co All Rights Reserved.">
+
+      © 2008–2026 efesarac.co Her Hakkı Saklıdır.
+
+    </span>
+
+    <span class="version">
+      · v4.6.0
+    </span>
+
+  </div>
+
+</footer>
+
 
 </main>
 
@@ -1706,62 +2935,339 @@ html:not([data-theme="light"]) .status{
    PRELOADER
 ========================= */
 
-window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document
-      .getElementById("preloader")
-      ?.classList.add("hide");
-  },350);
-});
+window.addEventListener(
+  "load",
+  ()=>{
+
+    setTimeout(
+      ()=>{
+
+        document
+          .getElementById("preloader")
+          ?.classList
+          .add("hide");
+
+      },
+      350
+    );
+
+  }
+);
 
 
 /* =========================
-   LANGUAGE
+   LANGUAGE DATA
 ========================= */
 
-const trBtn =
-  document.getElementById("trBtn");
+const languages = {
 
-const enBtn =
-  document.getElementById("enBtn");
+  tr:{
+    name:"Türkçe",
+    native:"Türkçe"
+  },
+
+  en:{
+    name:"English",
+    native:"English"
+  },
+
+  de:{
+    name:"German",
+    native:"Deutsch"
+  },
+
+  fr:{
+    name:"French",
+    native:"Français"
+  },
+
+  es:{
+    name:"Spanish",
+    native:"Español"
+  },
+
+  it:{
+    name:"Italian",
+    native:"Italiano"
+  },
+
+  pt:{
+    name:"Portuguese",
+    native:"Português"
+  },
+
+  nl:{
+    name:"Dutch",
+    native:"Nederlands"
+  },
+
+  ru:{
+    name:"Russian",
+    native:"Русский"
+  },
+
+  uk:{
+    name:"Ukrainian",
+    native:"Українська"
+  },
+
+  pl:{
+    name:"Polish",
+    native:"Polski"
+  },
+
+  cs:{
+    name:"Czech",
+    native:"Čeština"
+  },
+
+  sk:{
+    name:"Slovak",
+    native:"Slovenčina"
+  },
+
+  hu:{
+    name:"Hungarian",
+    native:"Magyar"
+  },
+
+  ro:{
+    name:"Romanian",
+    native:"Română"
+  },
+
+  el:{
+    name:"Greek",
+    native:"Ελληνικά"
+  },
+
+  sv:{
+    name:"Swedish",
+    native:"Svenska"
+  },
+
+  no:{
+    name:"Norwegian",
+    native:"Norsk"
+  },
+
+  da:{
+    name:"Danish",
+    native:"Dansk"
+  },
+
+  fi:{
+    name:"Finnish",
+    native:"Suomi"
+  },
+
+  he:{
+    name:"Hebrew",
+    native:"עברית"
+  },
+
+  ar:{
+    name:"Arabic",
+    native:"العربية"
+  },
+
+  fa:{
+    name:"Persian",
+    native:"فارسی"
+  },
+
+  hi:{
+    name:"Hindi",
+    native:"हिन्दी"
+  },
+
+  bn:{
+    name:"Bengali",
+    native:"বাংলা"
+  },
+
+  ur:{
+    name:"Urdu",
+    native:"اردو"
+  },
+
+  "zh-CN":{
+    name:"Chinese Simplified",
+    native:"简体中文"
+  },
+
+  "zh-TW":{
+    name:"Chinese Traditional",
+    native:"繁體中文"
+  },
+
+  ja:{
+    name:"Japanese",
+    native:"日本語"
+  },
+
+  ko:{
+    name:"Korean",
+    native:"한국어"
+  },
+
+  vi:{
+    name:"Vietnamese",
+    native:"Tiếng Việt"
+  },
+
+  th:{
+    name:"Thai",
+    native:"ไทย"
+  },
+
+  id:{
+    name:"Indonesian",
+    native:"Bahasa Indonesia"
+  },
+
+  ms:{
+    name:"Malay",
+    native:"Bahasa Melayu"
+  }
+
+};
+
+
+/* =========================
+   LANGUAGE SWITCH
+========================= */
+
+const languageButton =
+  document.getElementById(
+    "languageButton"
+  );
+
+const languageMenu =
+  document.getElementById(
+    "languageMenu"
+  );
+
+const languageOptions =
+  document.querySelectorAll(
+    ".language-option"
+  );
+
 
 function setLanguage(lang){
 
-  document.documentElement.lang = lang;
+  /*
+   TR + EN have complete
+   translations.
+
+   Other languages currently
+   use English interface text
+   until full translations
+   are added.
+  */
+
+  const actualLang =
+    lang === "tr"
+      ? "tr"
+      : lang === "en"
+        ? "en"
+        : "en";
+
+
+  document.documentElement.lang =
+    lang;
+
 
   document
-    .querySelectorAll("[data-tr][data-en]")
+    .querySelectorAll(
+      "[data-tr][data-en]"
+    )
     .forEach(el=>{
+
       el.textContent =
-        el.dataset[lang];
+        el.dataset[actualLang];
+
     });
 
+
   const input =
-    document.getElementById("searchInput");
+    document.getElementById(
+      "searchInput"
+    );
+
 
   if(input){
 
     input.placeholder =
-      lang === "tr"
+      actualLang === "tr"
         ? input.dataset.trPlaceholder
         : input.dataset.enPlaceholder;
+
   }
 
-  trBtn.classList.toggle(
-    "active",
-    lang === "tr"
-  );
 
-  enBtn.classList.toggle(
-    "active",
-    lang === "en"
-  );
+  languageOptions
+    .forEach(option=>{
+
+      option.classList.toggle(
+        "active",
+        option.dataset.lang === lang
+      );
+
+    });
+
 
   localStorage.setItem(
     "efesarac-language",
     lang
   );
+
+
+  languageMenu.classList.remove(
+    "open"
+  );
+
 }
+
+
+/* LANGUAGE BUTTON */
+
+languageButton.addEventListener(
+  "click",
+  event=>{
+
+    event.stopPropagation();
+
+    languageMenu.classList.toggle(
+      "open"
+    );
+
+    themeMenu.classList.remove(
+      "open"
+    );
+
+  }
+);
+
+
+/* LANGUAGE OPTIONS */
+
+languageOptions.forEach(
+  option=>{
+
+    option.addEventListener(
+      "click",
+      ()=>{
+
+        setLanguage(
+          option.dataset.lang
+        );
+
+      }
+    );
+
+  }
+);
 
 
 /* =========================
@@ -1769,22 +3275,32 @@ function setLanguage(lang){
 ========================= */
 
 const themeButton =
-  document.getElementById("themeButton");
+  document.getElementById(
+    "themeButton"
+  );
 
 const themeMenu =
-  document.getElementById("themeMenu");
+  document.getElementById(
+    "themeMenu"
+  );
 
 const themeOptions =
-  document.querySelectorAll(".theme-option");
+  document.querySelectorAll(
+    ".theme-option"
+  );
 
 
 function getSystemTheme(){
 
-  return window.matchMedia(
-    "(prefers-color-scheme: light)"
-  ).matches
+  return window
+    .matchMedia(
+      "(prefers-color-scheme: light)"
+    )
+    .matches
+
     ? "light"
     : "dark";
+
 }
 
 
@@ -1795,33 +3311,43 @@ function applyTheme(choice){
       ? getSystemTheme()
       : choice;
 
+
   document.documentElement
     .setAttribute(
       "data-theme",
       actualTheme
     );
 
+
   themeButton.textContent =
     actualTheme === "light"
       ? "☀️"
       : "🌙";
 
-  themeOptions.forEach(option=>{
-    option.classList.toggle(
-      "active",
-      option.dataset.themeChoice === choice
-    );
-  });
+
+  themeOptions.forEach(
+    option=>{
+
+      option.classList.toggle(
+        "active",
+        option.dataset.themeChoice === choice
+      );
+
+    }
+  );
+
 
   localStorage.setItem(
     "efesarac-theme",
     choice
   );
 
+
   const metaTheme =
     document.querySelector(
       'meta[name="theme-color"]'
     );
+
 
   if(metaTheme){
 
@@ -1831,7 +3357,9 @@ function applyTheme(choice){
         ? "#f4f5f8"
         : "#060609"
     );
+
   }
+
 }
 
 
@@ -1839,7 +3367,10 @@ function setTheme(choice){
 
   applyTheme(choice);
 
-  themeMenu.classList.remove("open");
+  themeMenu.classList.remove(
+    "open"
+  );
+
 }
 
 
@@ -1852,59 +3383,94 @@ themeButton.addEventListener(
     themeMenu.classList.toggle(
       "open"
     );
-  }
-);
 
-
-themeOptions.forEach(option=>{
-
-  option.addEventListener(
-    "click",
-    ()=>{
-
-      setTheme(
-        option.dataset.themeChoice
-      );
-
-    }
-  );
-
-});
-
-
-document.addEventListener(
-  "click",
-  event=>{
-
-    if(
-      !themeMenu.contains(event.target) &&
-      event.target !== themeButton
-    ){
-      themeMenu.classList.remove("open");
-    }
+    languageMenu.classList.remove(
+      "open"
+    );
 
   }
 );
 
 
-/* SYSTEM THEME CHANGE */
+themeOptions.forEach(
+  option=>{
+
+    option.addEventListener(
+      "click",
+      ()=>{
+
+        setTheme(
+          option.dataset.themeChoice
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* SYSTEM THEME */
 
 const mediaQuery =
   window.matchMedia(
     "(prefers-color-scheme: light)"
   );
 
+
 mediaQuery.addEventListener(
   "change",
   ()=>{
+
     const saved =
       localStorage.getItem(
         "efesarac-theme"
       ) || "dark";
 
+
     if(saved === "system"){
       applyTheme("system");
     }
+
+  }
+);
+
+
+/* CLOSE MENUS */
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    if(
+      !languageMenu.contains(
+        event.target
+      ) &&
+      event.target !==
+        languageButton
+    ){
+
+      languageMenu.classList.remove(
+        "open"
+      );
+
+    }
+
+
+    if(
+      !themeMenu.contains(
+        event.target
+      ) &&
+      event.target !==
+        themeButton
+    ){
+
+      themeMenu.classList.remove(
+        "open"
+      );
+
+    }
+
   }
 );
 
@@ -1918,22 +3484,19 @@ const savedLanguage =
     "efesarac-language"
   ) || "tr";
 
+
 const savedTheme =
   localStorage.getItem(
     "efesarac-theme"
   ) || "dark";
 
-setLanguage(savedLanguage);
-applyTheme(savedTheme);
 
-trBtn.addEventListener(
-  "click",
-  ()=>setLanguage("tr")
+setLanguage(
+  savedLanguage
 );
 
-enBtn.addEventListener(
-  "click",
-  ()=>setLanguage("en")
+applyTheme(
+  savedTheme
 );
 
 
@@ -1959,63 +3522,81 @@ function searchLinks(){
       .toLowerCase()
       .trim();
 
+
   const cards =
     document.querySelectorAll(
       ".link-card"
     );
 
+
   let visible = 0;
 
-  cards.forEach(card=>{
 
-    const searchText =
-      (
-        card.dataset.search ||
-        card.innerText
-      ).toLowerCase();
+  cards.forEach(
+    card=>{
 
-    const match =
-      !query ||
-      searchText.includes(query);
+      const searchText =
+        (
+          card.dataset.search ||
+          card.innerText
+        ).toLowerCase();
 
-    card.style.display =
-      match
-        ? "flex"
-        : "none";
 
-    if(match){
-      visible++;
+      const match =
+        !query ||
+        searchText.includes(
+          query
+        );
+
+
+      card.style.display =
+        match
+          ? "flex"
+          : "none";
+
+
+      if(match){
+        visible++;
+      }
+
     }
-
-  });
+  );
 
 
   document
-    .querySelectorAll(".section")
-    .forEach(section=>{
+    .querySelectorAll(
+      ".section"
+    )
+    .forEach(
+      section=>{
 
-      const visibleCards =
-        [
-          ...section.querySelectorAll(
-            ".link-card"
-          )
-        ]
-        .filter(
-          card =>
-            card.style.display !== "none"
-        );
+        const visibleCards =
+          [
+            ...section.querySelectorAll(
+              ".link-card"
+            )
+          ]
+          .filter(
+            card =>
+              card.style.display !==
+              "none"
+          );
 
-      section.style.display =
-        visibleCards.length
-          ? ""
-          : "none";
-    });
+
+        section.style.display =
+          visibleCards.length
+            ? ""
+            : "none";
+
+      }
+    );
 
 
   noResults.style.display =
     visible
       ? "none"
       : "block";
+
 }
 
 
@@ -2030,61 +3611,83 @@ searchInput.addEventListener(
 ========================= */
 
 document
-  .querySelectorAll(".copy-btn")
-  .forEach(button=>{
+  .querySelectorAll(
+    ".copy-btn"
+  )
+  .forEach(
+    button=>{
 
-    button.addEventListener(
-      "click",
-      async event=>{
+      button.addEventListener(
+        "click",
+        async event=>{
 
-        event.preventDefault();
-        event.stopPropagation();
+          event.preventDefault();
+          event.stopPropagation();
 
-        const text =
-          button.dataset.copy;
 
-        try{
+          const text =
+            button.dataset.copy;
 
-          await navigator.clipboard
-            .writeText(text);
 
-        }catch(error){
+          try{
 
-          const temp =
-            document.createElement(
-              "input"
+            await navigator
+              .clipboard
+              .writeText(text);
+
+          }catch(error){
+
+            const temp =
+              document.createElement(
+                "input"
+              );
+
+
+            temp.value =
+              text;
+
+
+            document.body.appendChild(
+              temp
             );
 
-          temp.value = text;
 
-          document.body.appendChild(
-            temp
-          );
-
-          temp.select();
-
-          document.execCommand(
-            "copy"
-          );
-
-          temp.remove();
-        }
+            temp.select();
 
 
-        const oldText =
-          button.textContent;
+            document.execCommand(
+              "copy"
+            );
 
-        button.textContent = "✓";
 
-        setTimeout(()=>{
+            temp.remove();
+
+          }
+
+
+          const oldText =
+            button.textContent;
+
+
           button.textContent =
-            oldText;
-        },1200);
+            "✓";
 
-      }
-    );
 
-  });
+          setTimeout(
+            ()=>{
+
+              button.textContent =
+                oldText;
+
+            },
+            1200
+          );
+
+        }
+      );
+
+    }
+  );
 
 
 /* =========================
@@ -2098,10 +3701,13 @@ async function detectCountryFlag(){
       "countryFlag"
     );
 
+
   if(!flag) return;
+
 
   const turkeyFlag =
     "https://flagcdn.com/w160/tr.png";
+
 
   try{
 
@@ -2113,14 +3719,17 @@ async function detectCountryFlag(){
         }
       );
 
+
     if(!response.ok){
       throw new Error(
         "Country detection failed"
       );
     }
 
+
     const data =
       await response.json();
+
 
     const countryCode =
       String(
@@ -2129,52 +3738,71 @@ async function detectCountryFlag(){
       .trim()
       .toLowerCase();
 
+
     if(
       !/^[a-z]{2}$/.test(
         countryCode
       )
     ){
+
       throw new Error(
         "Invalid country code"
       );
+
     }
+
 
     const newFlagUrl =
       `https://flagcdn.com/w160/${countryCode}.png`;
 
+
     const testImage =
       new Image();
 
-    testImage.onload = ()=>{
 
-      flag.src =
-        newFlagUrl;
+    testImage.onload =
+      ()=>{
 
-      flag.alt =
-        `${data.country_name || countryCode} flag`;
-    };
+        flag.src =
+          newFlagUrl;
 
-    testImage.onerror = ()=>{
 
-      flag.src =
-        turkeyFlag;
+        flag.alt =
+          `${data.country_name || countryCode} flag`;
 
-      flag.alt =
-        "Türkiye Bayrağı";
-    };
+      };
+
+
+    testImage.onerror =
+      ()=>{
+
+        flag.src =
+          turkeyFlag;
+
+
+        flag.alt =
+          "Türkiye Bayrağı";
+
+      };
+
 
     testImage.src =
       newFlagUrl;
+
 
   }catch(error){
 
     flag.src =
       turkeyFlag;
 
+
     flag.alt =
       "Türkiye Bayrağı";
+
   }
+
 }
+
 
 detectCountryFlag();
 
@@ -2184,16 +3812,20 @@ detectCountryFlag();
 ========================= */
 
 document
-  .querySelectorAll(".link-card")
-  .forEach((card,index)=>{
+  .querySelectorAll(
+    ".link-card"
+  )
+  .forEach(
+    (card,index)=>{
 
-    card.style.animationDelay =
-      `${Math.min(
-        index * .035,
-        .5
-      )}s`;
+      card.style.animationDelay =
+        `${Math.min(
+          index * .035,
+          .5
+        )}s`;
 
-  });
+    }
+  );
 
 </script>
 
