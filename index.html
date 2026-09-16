@@ -121,10 +121,10 @@ html[data-theme="light"] .orb{
   padding:5px;
   border:1px solid var(--border);
   border-radius:15px;
-  background:var(--header-bg);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  box-shadow:0 12px 35px var(--shadow);
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  box-shadow:none;
 }
 
 .language-button{
@@ -1421,6 +1421,8 @@ html:not([data-theme="light"]) .status{
 
 </div>
 
+<!-- MAIN -->
+
 <main class="container">
 
 <header class="profile">
@@ -1450,6 +1452,8 @@ html:not([data-theme="light"]) .status{
 
 </header>
 
+<!-- NEW FEATURES -->
+
 <div class="new-features">
 
   <div
@@ -1471,6 +1475,8 @@ html:not([data-theme="light"]) .status{
   </div>
 
 </div>
+
+<!-- SITE ACTIONS -->
 
 <div class="site-actions">
 
@@ -1536,6 +1542,8 @@ html:not([data-theme="light"]) .status{
 
 </div>
 
+<!-- SEARCH -->
+
 <div class="search-wrap">
 
   <div class="search-box">
@@ -1560,6 +1568,8 @@ html:not([data-theme="light"]) .status{
 <div class="no-results" id="noResults">
   <span id="noResultsText">Sonuç bulunamadı.</span>
 </div>
+
+<!-- SOSYAL -->
 
 <section class="section" id="socialSection">
 
@@ -1774,6 +1784,8 @@ data-search="bluesky sosyal @saracefe.bsky.social">
 </div>
 </section>
 
+<!-- İÇERİK ÜRETİCİSİ -->
+
 <section class="section">
 
 <h2 class="section-title" id="creatorTitle">
@@ -1885,6 +1897,8 @@ data-search="linkedin kariyer iş profesyonel">
 </div>
 </section>
 
+<!-- CANLI -->
+
 <section class="section">
 
 <h2 class="section-title" id="liveTitle">Canlı Yayın</h2>
@@ -1943,6 +1957,8 @@ data-search="kick canlı yayın">
 
 </div>
 </section>
+
+<!-- MÜZİK -->
 
 <section class="section">
 
@@ -2028,6 +2044,8 @@ data-search="amazon music müzik">
 </div>
 </section>
 
+<!-- TOPLULUK -->
+
 <section class="section">
 
 <h2 class="section-title" id="communityTitle">Topluluk</h2>
@@ -2112,6 +2130,8 @@ data-search="telegram mesaj topluluk">
 </div>
 </section>
 
+<!-- DİĞER -->
+
 <section class="section">
 
 <h2 class="section-title" id="otherTitle">Diğer</h2>
@@ -2171,6 +2191,8 @@ data-search="snapchat sosyal">
 </div>
 </section>
 
+<!-- İLETİŞİM -->
+
 <section class="section">
 
 <h2 class="section-title" id="contactTitle">İletişim</h2>
@@ -2202,6 +2224,8 @@ data-search="email mail iletişim">
 
 </div>
 </section>
+
+<!-- FOOTER -->
 
 <footer class="site-footer">
 
@@ -2242,6 +2266,8 @@ Telif Hakkı © 2008–2026 Efe Saraç. Her Hakkı Saklıdır.
 </footer>
 
 </main>
+
+<!-- QR MODAL -->
 
 <div
 class="qr-overlay"
@@ -2305,6 +2331,10 @@ Kameranızla okutun
 
 <script>
 
+/* =========================================================
+   SVG
+========================================================= */
+
 const shareSVG=`
 <svg viewBox="0 0 24 24"
 fill="none"
@@ -2340,6 +2370,11 @@ stroke-linejoin="round">
 <path d="m5 12 4 4L19 6"/>
 </svg>`;
 
+
+/* =========================================================
+   LINK BUTTONS
+========================================================= */
+
 document.querySelectorAll(".link-card").forEach(card=>{
 
   const actions=card.querySelector(".link-actions");
@@ -2371,6 +2406,11 @@ document.querySelectorAll(".link-card").forEach(card=>{
   `;
 
 });
+
+
+/* =========================================================
+   COPY
+========================================================= */
 
 async function copyText(text){
 
@@ -2411,6 +2451,11 @@ async function copyText(text){
 
 }
 
+
+/* =========================================================
+   SHARE
+========================================================= */
+
 async function shareUrl(url){
 
   if(navigator.share){
@@ -2441,6 +2486,11 @@ async function shareUrl(url){
 
 }
 
+
+/* =========================================================
+   LINK ACTION EVENTS
+========================================================= */
+
 document.addEventListener("click",async e=>{
 
   const shareButton=e.target.closest(".share-btn");
@@ -2468,6 +2518,7 @@ document.addEventListener("click",async e=>{
     return;
 
   }
+
 
   const copyButton=e.target.closest(".copy-btn");
 
@@ -2505,6 +2556,11 @@ document.addEventListener("click",async e=>{
 
 });
 
+
+/* =========================================================
+   SITE SHARE
+========================================================= */
+
 document
 .getElementById("siteShareButton")
 .addEventListener("click",async function(){
@@ -2526,6 +2582,11 @@ document
 
 });
 
+
+/* =========================================================
+   QR
+========================================================= */
+
 const qrOverlay=
   document.getElementById("qrOverlay");
 
@@ -2540,6 +2601,7 @@ const qrImage=
 
 const QR_URL=
   "https://efesarac.co";
+
 
 function openQR(){
 
@@ -2556,6 +2618,7 @@ function openQR(){
 
 }
 
+
 function closeQR(){
 
   qrOverlay.classList.remove("open");
@@ -2563,6 +2626,7 @@ function closeQR(){
   document.body.style.overflow="";
 
 }
+
 
 qrButton.addEventListener(
   "click",
@@ -2576,6 +2640,7 @@ qrButton.addEventListener(
   }
 );
 
+
 qrClose.addEventListener(
   "click",
   function(){
@@ -2584,6 +2649,7 @@ qrClose.addEventListener(
 
   }
 );
+
 
 qrOverlay.addEventListener(
   "click",
@@ -2597,6 +2663,7 @@ qrOverlay.addEventListener(
 
   }
 );
+
 
 document.addEventListener(
   "keydown",
@@ -2613,6 +2680,11 @@ document.addEventListener(
 
   }
 );
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
 
 const T={
 
@@ -3434,6 +3506,11 @@ newFeaturesDesc:"Pengalaman efesarac.co terus dipertingkatkan."
 
 };
 
+
+/* =========================================================
+   LANGUAGE FLAGS
+========================================================= */
+
 const languageFlags={
 
   tr:["tr","TR"],
@@ -3473,6 +3550,11 @@ const languageFlags={
 
 };
 
+
+/* =========================================================
+   LANGUAGE SYSTEM
+========================================================= */
+
 const languageButton=
 document.getElementById("languageButton");
 
@@ -3487,6 +3569,7 @@ document.getElementById("selectedLanguageFlag");
 
 const languageCode=
 document.getElementById("languageCode");
+
 
 function updateLanguageButton(lang){
 
@@ -3508,6 +3591,7 @@ function updateLanguageButton(lang){
 
 }
 
+
 function closeLanguageMenu(){
 
   languageMenu.classList.remove("open");
@@ -3515,12 +3599,14 @@ function closeLanguageMenu(){
 
 }
 
+
 function openLanguageMenu(){
 
   languageMenu.classList.add("open");
   languageButton.classList.add("open");
 
 }
+
 
 function setLanguage(lang){
 
@@ -3605,6 +3691,7 @@ function setLanguage(lang){
 
 }
 
+
 languageButton.addEventListener(
   "click",
   function(e){
@@ -3622,6 +3709,7 @@ languageButton.addEventListener(
   }
 );
 
+
 languageOptions.forEach(option=>{
 
   option.addEventListener(
@@ -3637,6 +3725,11 @@ languageOptions.forEach(option=>{
 
 });
 
+
+/* =========================================================
+   THEME
+========================================================= */
+
 const themeButton=
 document.getElementById("themeButton");
 
@@ -3649,6 +3742,7 @@ document.querySelectorAll(".theme-option");
 const themeIcon=
 document.getElementById("themeIcon");
 
+
 function getSystemTheme(){
 
   return window.matchMedia(
@@ -3658,6 +3752,7 @@ function getSystemTheme(){
     :"dark";
 
 }
+
 
 function updateThemeIcon(theme){
 
@@ -3684,6 +3779,7 @@ function updateThemeIcon(theme){
   }
 
 }
+
 
 function applyTheme(choice){
 
@@ -3729,6 +3825,7 @@ function applyTheme(choice){
 
 }
 
+
 function setTheme(choice){
 
   applyTheme(choice);
@@ -3736,6 +3833,7 @@ function setTheme(choice){
   themeMenu.classList.remove("open");
 
 }
+
 
 themeButton.addEventListener(
   "click",
@@ -3749,6 +3847,7 @@ themeButton.addEventListener(
 
   }
 );
+
 
 themeOptions.forEach(option=>{
 
@@ -3764,6 +3863,7 @@ themeOptions.forEach(option=>{
   );
 
 });
+
 
 window.matchMedia(
   "(prefers-color-scheme: light)"
@@ -3782,6 +3882,11 @@ window.matchMedia(
 
   }
 );
+
+
+/* =========================================================
+   MENUS
+========================================================= */
 
 document.addEventListener(
   "click",
@@ -3804,11 +3909,17 @@ document.addEventListener(
   }
 );
 
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
 const searchInput=
 document.getElementById("searchInput");
 
 const noResults=
 document.getElementById("noResults");
+
 
 function searchLinks(){
 
@@ -3857,10 +3968,16 @@ function searchLinks(){
 
 }
 
+
 searchInput.addEventListener(
   "input",
   searchLinks
 );
+
+
+/* =========================================================
+   COUNTRY FLAG
+========================================================= */
 
 async function detectCountryFlag(){
 
@@ -3933,6 +4050,11 @@ async function detectCountryFlag(){
 
 }
 
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
 const savedLanguage=
   localStorage.getItem(
     "efesarac-language"
@@ -3943,11 +4065,13 @@ const savedTheme=
     "efesarac-theme"
   )||"dark";
 
+
 setLanguage(
   T[savedLanguage]
     ?savedLanguage
     :"tr"
 );
+
 
 applyTheme(
   ["dark","light","system"].includes(savedTheme)
@@ -3955,7 +4079,13 @@ applyTheme(
     :"dark"
 );
 
+
 detectCountryFlag();
+
+
+/* =========================================================
+   CARD ANIMATION
+========================================================= */
 
 document
 .querySelectorAll(".link-card")
@@ -3965,6 +4095,11 @@ document
     `${Math.min(index*.035,.5)}s`;
 
 });
+
+
+/* =========================================================
+   PRELOADER
+========================================================= */
 
 window.addEventListener(
   "load",
