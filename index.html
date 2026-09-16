@@ -915,16 +915,36 @@ html:not([data-theme="light"]) .status{
   justify-content:center;
   padding:20px;
   background:rgba(0,0,0,.68);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+
+  /* KAPALIYKEN BLUR YOK */
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+
   opacity:0;
   visibility:hidden;
-  transition:.25s ease;
+  pointer-events:none;
+
+  transition:
+    opacity .22s ease,
+    visibility 0s linear .22s;
+}
+
+.qr-overlay.active{
+  display:flex;
 }
 
 .qr-overlay.open{
   opacity:1;
   visibility:visible;
+  pointer-events:auto;
+
+  /* SADECE AÇIKKEN BLUR */
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  transition:
+    opacity .22s ease,
+    visibility 0s linear 0s;
 }
 
 .qr-modal{
@@ -2254,11 +2274,11 @@ alt="Türkiye Bayrağı">
 <div class="copyright">
 
 <span id="copyrightText">
-© 2008–2026 efesarac.co Her Hakkı Saklıdır.
+Telif Hakkı © 2008–2026 Efe Saraç. Her Hakkı Saklıdır.
 </span>
 
 <span class="version">
-· v4.9.0
+· v4.9.1
 </span>
 
 </div>
@@ -2612,7 +2632,13 @@ function openQR(){
     "&data=" +
     encodeURIComponent(QR_URL);
 
-  qrOverlay.classList.add("open");
+  /* Önce görünür yap */
+  qrOverlay.classList.add("active");
+
+  /* Sonraki frame'de aç */
+  requestAnimationFrame(()=>{
+    qrOverlay.classList.add("open");
+  });
 
   document.body.style.overflow="hidden";
 
@@ -2621,9 +2647,21 @@ function openQR(){
 
 function closeQR(){
 
+  /* BLUR'U HEMEN KALDIR */
   qrOverlay.classList.remove("open");
 
   document.body.style.overflow="";
+
+  /* Fade tamamlandıktan sonra tamamen DOM görünümünden çıkar */
+  setTimeout(()=>{
+
+    if(!qrOverlay.classList.contains("open")){
+
+      qrOverlay.classList.remove("active");
+
+    }
+
+  },220);
 
 }
 
@@ -3661,8 +3699,11 @@ function setLanguage(lang){
 
   document.getElementById("emailTitle").textContent=t.email;
 
+  /* TÜRKÇEDE İSTENEN YENİ TELİF METNİ */
   document.getElementById("copyrightText").textContent=
-    `© 2008–2026 efesarac.co ${t.rights}`;
+    lang==="tr"
+      ?"Telif Hakkı © 2008–2026 Efe Saraç. Her Hakkı Saklıdır."
+      :`© 2008–2026 efesarac.co ${t.rights}`;
 
   document.querySelector(".theme-dark-text").textContent=t.dark;
   document.querySelector(".theme-light-text").textContent=t.light;
@@ -3690,40 +3731,6 @@ function setLanguage(lang){
   closeLanguageMenu();
 
 }
-
-
-languageButton.addEventListener(
-  "click",
-  function(e){
-
-    e.stopPropagation();
-
-    if(languageMenu.classList.contains("open")){
-      closeLanguageMenu();
-    }else{
-      openLanguageMenu();
-    }
-
-    themeMenu.classList.remove("open");
-
-  }
-);
-
-
-languageOptions.forEach(option=>{
-
-  option.addEventListener(
-    "click",
-    function(){
-
-      setLanguage(
-        this.dataset.lang
-      );
-
-    }
-  );
-
-});
 
 
 /* =========================================================
