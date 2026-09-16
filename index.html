@@ -2,13 +2,13 @@
 <html lang="tr">
 <head>
   <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#060609">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#060609">
 
-<title>Efe Saraç</title>
-<meta name="description" content="Efe Saraç — Dijital içerik üreticisi · Geliştirici · İnternet">
+  <title>Efe Saraç</title>
+  <meta name="description" content="Efe Saraç — Dijital içerik üreticisi · Geliştirici · İnternet">
 
 <style>
 :root{
@@ -148,14 +148,30 @@ html[data-theme="light"] .orb{
   background:var(--card-hover);
 }
 
-.language-button svg{
-  width:16px;
-  height:16px;
+.language-button .language-flag{
+  width:20px;
+  height:20px;
+  flex:0 0 20px;
+  display:block;
+  object-fit:cover;
+  border-radius:50%;
+  box-shadow:0 1px 5px rgba(0,0,0,.20);
+}
+
+.language-button .language-code{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.2px;
 }
 
 .language-button .chevron{
   width:12px;
   height:12px;
+  transition:transform .2s ease;
+}
+
+.language-button.open .chevron{
+  transform:rotate(180deg);
 }
 
 .language-menu{
@@ -166,6 +182,7 @@ html[data-theme="light"] .orb{
   max-height:390px;
   padding:7px;
   overflow-y:auto;
+  overflow-x:hidden;
   border:1px solid var(--border);
   border-radius:16px;
   background:var(--header-bg);
@@ -174,14 +191,25 @@ html[data-theme="light"] .orb{
   box-shadow:0 18px 45px var(--shadow);
   opacity:0;
   visibility:hidden;
+  pointer-events:none;
   transform:translateY(-6px) scale(.98);
-  transition:.2s ease;
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility 0s linear .18s;
+  will-change:opacity,transform;
+  isolation:isolate;
 }
 
 .language-menu.open{
   opacity:1;
   visibility:visible;
+  pointer-events:auto;
   transform:translateY(0) scale(1);
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility 0s linear 0s;
 }
 
 .language-menu-title{
@@ -454,14 +482,72 @@ html:not([data-theme="light"]) .status{
   box-shadow:0 0 12px #22c55e;
 }
 
+/* NEW FEATURES NOTICE */
+
+.new-features{
+  position:relative;
+  margin:30px 0 16px;
+  text-align:center;
+  animation:fadeUp .75s .06s ease both;
+}
+
+.new-features::before{
+  content:"";
+  display:block;
+  width:58px;
+  height:2px;
+  margin:0 auto 12px;
+  border-radius:999px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #3b82f6,
+    #8b5cf6,
+    transparent
+  );
+  box-shadow:
+    0 0 14px rgba(59,130,246,.28),
+    0 0 18px rgba(139,92,246,.18);
+}
+
+.new-features-label{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#6fa4ff;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+.new-features-label::before{
+  content:"✦";
+  font-size:10px;
+}
+
+.new-features-title{
+  margin-top:5px;
+  color:var(--text);
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:-.1px;
+}
+
+.new-features-description{
+  margin-top:4px;
+  color:var(--muted2);
+  font-size:10px;
+}
+
 /* SITE ACTIONS */
 
 .site-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
-  margin:30px 0 10px;
-  animation:fadeUp .75s .08s ease both;
+  margin:0 0 10px;
+  animation:fadeUp .75s .10s ease both;
 }
 
 .site-action{
@@ -1031,6 +1117,11 @@ html:not([data-theme="light"]) .status{
     display:none;
   }
 
+  .language-button .language-flag{
+    width:20px;
+    height:20px;
+  }
+
   .language-menu{
     right:0;
     width:270px;
@@ -1055,9 +1146,21 @@ html:not([data-theme="light"]) .status{
     font-size:14px;
   }
 
+  .new-features{
+    margin-top:26px;
+    margin-bottom:14px;
+  }
+
+  .new-features-title{
+    font-size:13px;
+  }
+
+  .new-features-description{
+    font-size:9px;
+  }
+
   .site-actions{
     gap:8px;
-    margin-top:26px;
   }
 
   .site-action{
@@ -1193,20 +1296,17 @@ html:not([data-theme="light"]) .status{
     id="languageButton"
     type="button">
 
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.8"
-      stroke-linecap="round"
-      stroke-linejoin="round">
-      <circle cx="12" cy="12" r="9"/>
-      <path d="M3 12h18"/>
-      <path d="M12 3c2.3 2.5 3.5 5.5 3.5 9s-1.2 6.5-3.5 9"/>
-      <path d="M12 3c-2.3 2.5-3.5 5.5-3.5 9S9.7 18.5 12 21"/>
-    </svg>
+    <img
+      class="language-flag"
+      id="selectedLanguageFlag"
+      src="https://flagcdn.com/w80/tr.png"
+      alt="Türkiye">
 
-    <span class="language-label" id="languageLabel">DİL</span>
+    <span
+      class="language-code"
+      id="languageCode">
+      TR
+    </span>
 
     <svg
       class="chevron"
@@ -1351,6 +1451,30 @@ html:not([data-theme="light"]) .status{
   </div>
 
 </header>
+
+<!-- NEW FEATURES -->
+
+<div class="new-features">
+
+  <div
+    class="new-features-label"
+    id="newFeaturesLabel">
+    YENİ ÖZELLİKLER
+  </div>
+
+  <div
+    class="new-features-title"
+    id="newFeaturesTitle">
+    Yeni özellikler çok yakında.
+  </div>
+
+  <div
+    class="new-features-description"
+    id="newFeaturesDescription">
+    efesarac.co deneyimi sürekli geliştiriliyor.
+  </div>
+
+</div>
 
 <!-- SITE ACTIONS -->
 
@@ -2134,7 +2258,7 @@ alt="Türkiye Bayrağı">
 </span>
 
 <span class="version">
-· v4.8.0
+· v4.9.0
 </span>
 
 </div>
@@ -2460,7 +2584,7 @@ document
 
 
 /* =========================================================
-   QR — ÇALIŞAN SÜRÜM
+   QR
 ========================================================= */
 
 const qrOverlay=
@@ -2480,12 +2604,6 @@ const QR_URL=
 
 
 function openQR(){
-
-  /*
-   * QR dış servis tarafından PNG olarak oluşturuluyor.
-   * Böylece QRCode JavaScript kütüphanesine
-   * ihtiyaç kalmıyor.
-   */
 
   qrImage.src=
     "https://api.qrserver.com/v1/create-qr-code/" +
@@ -2588,7 +2706,10 @@ share:"Siteyi Paylaş",
 shareDesc:"efesarac.co'yu paylaş",
 qr:"QR Kod",
 qrDesc:"Siteyi QR kod ile aç",
-qrHint:"Kameranızla okutun"
+qrHint:"Kameranızla okutun",
+newFeatures:"YENİ ÖZELLİKLER",
+newFeaturesTitle:"Yeni özellikler çok yakında.",
+newFeaturesDesc:"efesarac.co deneyimi sürekli geliştiriliyor."
 },
 
 en:{
@@ -2609,7 +2730,10 @@ share:"Share Site",
 shareDesc:"Share efesarac.co",
 qr:"QR Code",
 qrDesc:"Open site with QR code",
-qrHint:"Scan with your camera"
+qrHint:"Scan with your camera",
+newFeatures:"NEW FEATURES",
+newFeaturesTitle:"New features coming soon.",
+newFeaturesDesc:"The efesarac.co experience is constantly evolving."
 },
 
 de:{
@@ -2630,7 +2754,10 @@ share:"Seite teilen",
 shareDesc:"efesarac.co teilen",
 qr:"QR-Code",
 qrDesc:"Seite per QR-Code öffnen",
-qrHint:"Mit der Kamera scannen"
+qrHint:"Mit der Kamera scannen",
+newFeatures:"NEUE FUNKTIONEN",
+newFeaturesTitle:"Neue Funktionen kommen bald.",
+newFeaturesDesc:"Das efesarac.co-Erlebnis wird ständig weiterentwickelt."
 },
 
 fr:{
@@ -2651,7 +2778,10 @@ share:"Partager le site",
 shareDesc:"Partager efesarac.co",
 qr:"Code QR",
 qrDesc:"Ouvrir le site avec un QR",
-qrHint:"Scanner avec la caméra"
+qrHint:"Scanner avec la caméra",
+newFeatures:"NOUVELLES FONCTIONNALITÉS",
+newFeaturesTitle:"De nouvelles fonctionnalités arrivent bientôt.",
+newFeaturesDesc:"L'expérience efesarac.co évolue constamment."
 },
 
 es:{
@@ -2672,7 +2802,10 @@ share:"Compartir sitio",
 shareDesc:"Compartir efesarac.co",
 qr:"Código QR",
 qrDesc:"Abrir sitio con QR",
-qrHint:"Escanea con tu cámara"
+qrHint:"Escanea con tu cámara",
+newFeatures:"NUEVAS FUNCIONES",
+newFeaturesTitle:"Nuevas funciones muy pronto.",
+newFeaturesDesc:"La experiencia de efesarac.co sigue evolucionando."
 },
 
 it:{
@@ -2693,7 +2826,10 @@ share:"Condividi sito",
 shareDesc:"Condividi efesarac.co",
 qr:"Codice QR",
 qrDesc:"Apri il sito con QR",
-qrHint:"Scansiona con la fotocamera"
+qrHint:"Scansiona con la fotocamera",
+newFeatures:"NUOVE FUNZIONI",
+newFeaturesTitle:"Nuove funzioni in arrivo.",
+newFeaturesDesc:"L'esperienza efesarac.co è in continua evoluzione."
 },
 
 pt:{
@@ -2714,7 +2850,10 @@ share:"Compartilhar site",
 shareDesc:"Compartilhar efesarac.co",
 qr:"Código QR",
 qrDesc:"Abrir site com QR",
-qrHint:"Digitalize com sua câmera"
+qrHint:"Digitalize com sua câmera",
+newFeatures:"NOVOS RECURSOS",
+newFeaturesTitle:"Novos recursos em breve.",
+newFeaturesDesc:"A experiência efesarac.co está em constante evolução."
 },
 
 nl:{
@@ -2735,7 +2874,10 @@ share:"Site delen",
 shareDesc:"Deel efesarac.co",
 qr:"QR-code",
 qrDesc:"Site openen met QR-code",
-qrHint:"Scan met je camera"
+qrHint:"Scan met je camera",
+newFeatures:"NIEUWE FUNCTIES",
+newFeaturesTitle:"Nieuwe functies komen binnenkort.",
+newFeaturesDesc:"De efesarac.co-ervaring wordt voortdurend verbeterd."
 },
 
 ru:{
@@ -2756,7 +2898,10 @@ share:"Поделиться сайтом",
 shareDesc:"Поделиться efesarac.co",
 qr:"QR-код",
 qrDesc:"Открыть сайт через QR",
-qrHint:"Сканируйте камерой"
+qrHint:"Сканируйте камерой",
+newFeatures:"НОВЫЕ ФУНКЦИИ",
+newFeaturesTitle:"Новые функции уже скоро.",
+newFeaturesDesc:"Мы постоянно развиваем efesarac.co."
 },
 
 uk:{
@@ -2777,7 +2922,10 @@ share:"Поділитися сайтом",
 shareDesc:"Поділитися efesarac.co",
 qr:"QR-код",
 qrDesc:"Відкрити сайт через QR",
-qrHint:"Скануйте камерою"
+qrHint:"Скануйте камерою",
+newFeatures:"НОВІ ФУНКЦІЇ",
+newFeaturesTitle:"Нові функції вже скоро.",
+newFeaturesDesc:"Ми постійно розвиваємо efesarac.co."
 },
 
 pl:{
@@ -2798,7 +2946,10 @@ share:"Udostępnij stronę",
 shareDesc:"Udostępnij efesarac.co",
 qr:"Kod QR",
 qrDesc:"Otwórz stronę przez QR",
-qrHint:"Zeskanuj aparatem"
+qrHint:"Zeskanuj aparatem",
+newFeatures:"NOWE FUNKCJE",
+newFeaturesTitle:"Nowe funkcje już wkrótce.",
+newFeaturesDesc:"Doświadczenie efesarac.co jest stale rozwijane."
 },
 
 cs:{
@@ -2819,7 +2970,10 @@ share:"Sdílet web",
 shareDesc:"Sdílet efesarac.co",
 qr:"QR kód",
 qrDesc:"Otevřít web přes QR",
-qrHint:"Naskenujte fotoaparátem"
+qrHint:"Naskenujte fotoaparátem",
+newFeatures:"NOVÉ FUNKCE",
+newFeaturesTitle:"Nové funkce již brzy.",
+newFeaturesDesc:"Web efesarac.co neustále vylepšujeme."
 },
 
 sk:{
@@ -2840,7 +2994,10 @@ share:"Zdieľať web",
 shareDesc:"Zdieľať efesarac.co",
 qr:"QR kód",
 qrDesc:"Otvoriť web cez QR",
-qrHint:"Naskenujte fotoaparátom"
+qrHint:"Naskenujte fotoaparátom",
+newFeatures:"NOVÉ FUNKCIE",
+newFeaturesTitle:"Nové funkcie už čoskoro.",
+newFeaturesDesc:"Web efesarac.co neustále vylepšujeme."
 },
 
 hu:{
@@ -2861,7 +3018,10 @@ share:"Webhely megosztása",
 shareDesc:"efesarac.co megosztása",
 qr:"QR-kód",
 qrDesc:"Webhely megnyitása QR-rel",
-qrHint:"Olvassa be kamerával"
+qrHint:"Olvassa be kamerával",
+newFeatures:"ÚJ FUNKCIÓK",
+newFeaturesTitle:"Új funkciók hamarosan.",
+newFeaturesDesc:"Az efesarac.co folyamatosan fejlődik."
 },
 
 ro:{
@@ -2882,7 +3042,10 @@ share:"Distribuie site-ul",
 shareDesc:"Distribuie efesarac.co",
 qr:"Cod QR",
 qrDesc:"Deschide site-ul prin QR",
-qrHint:"Scanează cu camera"
+qrHint:"Scanează cu camera",
+newFeatures:"FUNCȚII NOI",
+newFeaturesTitle:"Funcții noi în curând.",
+newFeaturesDesc:"Experiența efesarac.co este îmbunătățită constant."
 },
 
 el:{
@@ -2903,7 +3066,10 @@ share:"Κοινή χρήση ιστότοπου",
 shareDesc:"Κοινή χρήση efesarac.co",
 qr:"Κωδικός QR",
 qrDesc:"Άνοιγμα μέσω QR",
-qrHint:"Σάρωση με την κάμερα"
+qrHint:"Σάρωση με την κάμερα",
+newFeatures:"ΝΕΕΣ ΛΕΙΤΟΥΡΓΙΕΣ",
+newFeaturesTitle:"Νέες λειτουργίες σύντομα.",
+newFeaturesDesc:"Η εμπειρία του efesarac.co εξελίσσεται συνεχώς."
 },
 
 sv:{
@@ -2924,7 +3090,10 @@ share:"Dela webbplats",
 shareDesc:"Dela efesarac.co",
 qr:"QR-kod",
 qrDesc:"Öppna med QR",
-qrHint:"Skanna med kameran"
+qrHint:"Skanna med kameran",
+newFeatures:"NYA FUNKTIONER",
+newFeaturesTitle:"Nya funktioner kommer snart.",
+newFeaturesDesc:"Efesarac.co-upplevelsen utvecklas ständigt."
 },
 
 no:{
@@ -2945,7 +3114,10 @@ share:"Del nettsted",
 shareDesc:"Del efesarac.co",
 qr:"QR-kode",
 qrDesc:"Åpne med QR",
-qrHint:"Skann med kameraet"
+qrHint:"Skann med kameraet",
+newFeatures:"NYE FUNKSJONER",
+newFeaturesTitle:"Nye funksjoner kommer snart.",
+newFeaturesDesc:"Efesarac.co-opplevelsen utvikles kontinuerlig."
 },
 
 da:{
@@ -2966,7 +3138,10 @@ share:"Del websted",
 shareDesc:"Del efesarac.co",
 qr:"QR-kode",
 qrDesc:"Åbn med QR",
-qrHint:"Scan med kameraet"
+qrHint:"Scan med kameraet",
+newFeatures:"NYE FUNKTIONER",
+newFeaturesTitle:"Nye funktioner kommer snart.",
+newFeaturesDesc:"Efesarac.co-oplevelsen udvikles løbende."
 },
 
 fi:{
@@ -2987,7 +3162,10 @@ share:"Jaa sivusto",
 shareDesc:"Jaa efesarac.co",
 qr:"QR-koodi",
 qrDesc:"Avaa QR-koodilla",
-qrHint:"Skannaa kameralla"
+qrHint:"Skannaa kameralla",
+newFeatures:"UUDET OMINAISUUDET",
+newFeaturesTitle:"Uusia ominaisuuksia pian.",
+newFeaturesDesc:"Efesarac.co-kokemusta kehitetään jatkuvasti."
 },
 
 he:{
@@ -3008,7 +3186,10 @@ share:"שתף אתר",
 shareDesc:"שתף את efesarac.co",
 qr:"קוד QR",
 qrDesc:"פתח באמצעות QR",
-qrHint:"סרוק עם המצלמה"
+qrHint:"סרוק עם המצלמה",
+newFeatures:"תכונות חדשות",
+newFeaturesTitle:"תכונות חדשות בקרוב.",
+newFeaturesDesc:"החוויה של efesarac.co מתפתחת כל הזמן."
 },
 
 ar:{
@@ -3029,7 +3210,10 @@ share:"مشاركة الموقع",
 shareDesc:"مشاركة efesarac.co",
 qr:"رمز QR",
 qrDesc:"فتح الموقع عبر QR",
-qrHint:"امسح بالكاميرا"
+qrHint:"امسح بالكاميرا",
+newFeatures:"ميزات جديدة",
+newFeaturesTitle:"ميزات جديدة قريبًا.",
+newFeaturesDesc:"نواصل تطوير تجربة efesarac.co باستمرار."
 },
 
 fa:{
@@ -3050,7 +3234,10 @@ share:"اشتراک‌گذاری سایت",
 shareDesc:"اشتراک‌گذاری efesarac.co",
 qr:"کد QR",
 qrDesc:"باز کردن سایت با QR",
-qrHint:"با دوربین اسکن کنید"
+qrHint:"با دوربین اسکن کنید",
+newFeatures:"ویژگی‌های جدید",
+newFeaturesTitle:"ویژگی‌های جدید به‌زودی.",
+newFeaturesDesc:"تجربه efesarac.co به‌طور مداوم در حال توسعه است."
 },
 
 hi:{
@@ -3071,7 +3258,10 @@ share:"साइट साझा करें",
 shareDesc:"efesarac.co साझा करें",
 qr:"QR कोड",
 qrDesc:"QR से साइट खोलें",
-qrHint:"कैमरे से स्कैन करें"
+qrHint:"कैमरे से स्कैन करें",
+newFeatures:"नई सुविधाएँ",
+newFeaturesTitle:"नई सुविधाएँ जल्द आ रही हैं।",
+newFeaturesDesc:"efesarac.co अनुभव लगातार बेहतर किया जा रहा है।"
 },
 
 bn:{
@@ -3092,7 +3282,10 @@ share:"সাইট শেয়ার করুন",
 shareDesc:"efesarac.co শেয়ার করুন",
 qr:"QR কোড",
 qrDesc:"QR দিয়ে সাইট খুলুন",
-qrHint:"ক্যামেরা দিয়ে স্ক্যান করুন"
+qrHint:"ক্যামেরা দিয়ে স্ক্যান করুন",
+newFeatures:"নতুন বৈশিষ্ট্য",
+newFeaturesTitle:"নতুন বৈশিষ্ট্য শীঘ্রই আসছে।",
+newFeaturesDesc:"efesarac.co অভিজ্ঞতা ক্রমাগত উন্নত করা হচ্ছে।"
 },
 
 ur:{
@@ -3113,7 +3306,10 @@ share:"سائٹ شیئر کریں",
 shareDesc:"efesarac.co شیئر کریں",
 qr:"QR کوڈ",
 qrDesc:"QR سے سائٹ کھولیں",
-qrHint:"کیمرے سے اسکین کریں"
+qrHint:"کیمرے سے اسکین کریں",
+newFeatures:"نئی خصوصیات",
+newFeaturesTitle:"نئی خصوصیات جلد آرہی ہیں۔",
+newFeaturesDesc:"efesarac.co کا تجربہ مسلسل بہتر کیا جا رہا ہے۔"
 },
 
 "zh-CN":{
@@ -3134,7 +3330,10 @@ share:"分享网站",
 shareDesc:"分享 efesarac.co",
 qr:"二维码",
 qrDesc:"使用二维码打开网站",
-qrHint:"使用相机扫描"
+qrHint:"使用相机扫描",
+newFeatures:"新功能",
+newFeaturesTitle:"新功能即将推出。",
+newFeaturesDesc:"efesarac.co 体验正在持续改进。"
 },
 
 "zh-TW":{
@@ -3155,7 +3354,10 @@ share:"分享網站",
 shareDesc:"分享 efesarac.co",
 qr:"QR 碼",
 qrDesc:"使用 QR 碼開啟網站",
-qrHint:"使用相機掃描"
+qrHint:"使用相機掃描",
+newFeatures:"新功能",
+newFeaturesTitle:"新功能即將推出。",
+newFeaturesDesc:"efesarac.co 體驗持續改進中。"
 },
 
 ja:{
@@ -3176,7 +3378,10 @@ share:"サイトを共有",
 shareDesc:"efesarac.coを共有",
 qr:"QRコード",
 qrDesc:"QRコードでサイトを開く",
-qrHint:"カメラでスキャン"
+qrHint:"カメラでスキャン",
+newFeatures:"新機能",
+newFeaturesTitle:"新機能を近日公開。",
+newFeaturesDesc:"efesarac.coの体験を継続的に改善しています。"
 },
 
 ko:{
@@ -3197,7 +3402,10 @@ share:"사이트 공유",
 shareDesc:"efesarac.co 공유",
 qr:"QR 코드",
 qrDesc:"QR로 사이트 열기",
-qrHint:"카메라로 스캔"
+qrHint:"카메라로 스캔",
+newFeatures:"새로운 기능",
+newFeaturesTitle:"새로운 기능이 곧 공개됩니다.",
+newFeaturesDesc:"efesarac.co 경험을 계속해서 발전시키고 있습니다."
 },
 
 vi:{
@@ -3218,7 +3426,10 @@ share:"Chia sẻ trang",
 shareDesc:"Chia sẻ efesarac.co",
 qr:"Mã QR",
 qrDesc:"Mở trang bằng QR",
-qrHint:"Quét bằng camera"
+qrHint:"Quét bằng camera",
+newFeatures:"TÍNH NĂNG MỚI",
+newFeaturesTitle:"Tính năng mới sắp ra mắt.",
+newFeaturesDesc:"Trải nghiệm efesarac.co liên tục được cải thiện."
 },
 
 th:{
@@ -3239,7 +3450,10 @@ share:"แชร์เว็บไซต์",
 shareDesc:"แชร์ efesarac.co",
 qr:"คิวอาร์โค้ด",
 qrDesc:"เปิดเว็บไซต์ด้วย QR",
-qrHint:"สแกนด้วยกล้อง"
+qrHint:"สแกนด้วยกล้อง",
+newFeatures:"ฟีเจอร์ใหม่",
+newFeaturesTitle:"ฟีเจอร์ใหม่เร็วๆ นี้",
+newFeaturesDesc:"เราพัฒนาประสบการณ์ efesarac.co อย่างต่อเนื่อง"
 },
 
 id:{
@@ -3260,7 +3474,10 @@ share:"Bagikan situs",
 shareDesc:"Bagikan efesarac.co",
 qr:"Kode QR",
 qrDesc:"Buka situs dengan QR",
-qrHint:"Pindai dengan kamera"
+qrHint:"Pindai dengan kamera",
+newFeatures:"FITUR BARU",
+newFeaturesTitle:"Fitur baru segera hadir.",
+newFeaturesDesc:"Pengalaman efesarac.co terus dikembangkan."
 },
 
 ms:{
@@ -3281,8 +3498,55 @@ share:"Kongsi laman",
 shareDesc:"Kongsi efesarac.co",
 qr:"Kod QR",
 qrDesc:"Buka laman melalui QR",
-qrHint:"Imbas dengan kamera"
+qrHint:"Imbas dengan kamera",
+newFeatures:"CIRI BAHARU",
+newFeaturesTitle:"Ciri baharu akan datang.",
+newFeaturesDesc:"Pengalaman efesarac.co terus dipertingkatkan."
 }
+
+};
+
+
+/* =========================================================
+   LANGUAGE FLAGS
+========================================================= */
+
+const languageFlags={
+
+  tr:["tr","TR"],
+  en:["gb","EN"],
+  de:["de","DE"],
+  fr:["fr","FR"],
+  es:["es","ES"],
+  it:["it","IT"],
+  pt:["pt","PT"],
+  nl:["nl","NL"],
+  ru:["ru","RU"],
+  uk:["ua","UK"],
+  pl:["pl","PL"],
+  cs:["cz","CS"],
+  sk:["sk","SK"],
+  hu:["hu","HU"],
+  ro:["ro","RO"],
+  el:["gr","EL"],
+  sv:["se","SV"],
+  no:["no","NO"],
+  da:["dk","DA"],
+  fi:["fi","FI"],
+  he:["il","HE"],
+  ar:["sa","AR"],
+  fa:["ir","FA"],
+  hi:["in","HI"],
+  bn:["bd","BN"],
+  ur:["pk","UR"],
+  "zh-CN":["cn","ZH"],
+  "zh-TW":["tw","ZH"],
+  ja:["jp","JA"],
+  ko:["kr","KO"],
+  vi:["vn","VI"],
+  th:["th","TH"],
+  id:["id","ID"],
+  ms:["my","MS"]
 
 };
 
@@ -3300,6 +3564,49 @@ document.getElementById("languageMenu");
 const languageOptions=
 document.querySelectorAll(".language-option");
 
+const selectedLanguageFlag=
+document.getElementById("selectedLanguageFlag");
+
+const languageCode=
+document.getElementById("languageCode");
+
+
+function updateLanguageButton(lang){
+
+  const info=
+    languageFlags[lang]||
+    languageFlags.tr;
+
+  const countryCode=info[0];
+  const code=info[1];
+
+  selectedLanguageFlag.src=
+    `https://flagcdn.com/w80/${countryCode}.png`;
+
+  selectedLanguageFlag.alt=
+    code;
+
+  languageCode.textContent=
+    code;
+
+}
+
+
+function closeLanguageMenu(){
+
+  languageMenu.classList.remove("open");
+  languageButton.classList.remove("open");
+
+}
+
+
+function openLanguageMenu(){
+
+  languageMenu.classList.add("open");
+  languageButton.classList.add("open");
+
+}
+
 
 function setLanguage(lang){
 
@@ -3307,7 +3614,8 @@ function setLanguage(lang){
 
   document.documentElement.lang=lang;
 
-  document.getElementById("languageLabel").textContent=t.lang;
+  updateLanguageButton(lang);
+
   document.getElementById("languageMenuTitle").textContent=t.menu;
   document.getElementById("bio").textContent=t.bio;
   document.getElementById("statusText").textContent=t.status;
@@ -3321,6 +3629,15 @@ function setLanguage(lang){
   document.getElementById("qrDescription").textContent=t.qrDesc;
   document.getElementById("qrHint").textContent=t.qrHint;
   document.getElementById("qrModalTitle").textContent=t.qr;
+
+  document.getElementById("newFeaturesLabel").textContent=
+    t.newFeatures;
+
+  document.getElementById("newFeaturesTitle").textContent=
+    t.newFeaturesTitle;
+
+  document.getElementById("newFeaturesDescription").textContent=
+    t.newFeaturesDesc;
 
   const ids=[
     "socialTitle",
@@ -3370,7 +3687,7 @@ function setLanguage(lang){
     lang
   );
 
-  languageMenu.classList.remove("open");
+  closeLanguageMenu();
 
 }
 
@@ -3381,7 +3698,11 @@ languageButton.addEventListener(
 
     e.stopPropagation();
 
-    languageMenu.classList.toggle("open");
+    if(languageMenu.classList.contains("open")){
+      closeLanguageMenu();
+    }else{
+      openLanguageMenu();
+    }
 
     themeMenu.classList.remove("open");
 
@@ -3522,7 +3843,7 @@ themeButton.addEventListener(
 
     themeMenu.classList.toggle("open");
 
-    languageMenu.classList.remove("open");
+    closeLanguageMenu();
 
   }
 );
@@ -3575,7 +3896,7 @@ document.addEventListener(
       !languageMenu.contains(e.target)&&
       e.target!==languageButton
     ){
-      languageMenu.classList.remove("open");
+      closeLanguageMenu();
     }
 
     if(
