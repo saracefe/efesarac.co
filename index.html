@@ -1442,12 +1442,12 @@ html:not([data-theme="light"]) .status{
   </h1>
 
   <p class="bio" id="bio">
-    Dijital içerik üreticisi · Geliştirici · İnternet
+    Dijital içerik üreticisi · Geliştirici · Teknoloji
   </p>
 
   <div class="status">
     <span class="status-dot"></span>
-    <span id="statusText">Sistem aktif</span>
+    <span id="statusText">Buradayım</span>
   </div>
 
 </header>
@@ -1806,7 +1806,7 @@ data-search="bynogame bağış donate destek">
 
 <div class="link-content">
 <div class="link-title">ByNoGame</div>
-<div class="link-description">Destek ve bağış</div>
+<div class="link-description" data-i18n-desc="supportDonation">Destek ve bağış</div>
 </div>
 
 <div class="link-actions"></div>
@@ -1831,7 +1831,7 @@ data-search="github kod geliştirici developer">
 
 <div class="link-content">
 <div class="link-title">GitHub</div>
-<div class="link-description">Projeler ve kod</div>
+<div class="link-description" data-i18n-desc="projectsCode">Projeler ve kod</div>
 </div>
 
 <div class="link-actions"></div>
@@ -1881,7 +1881,7 @@ data-search="linkedin kariyer iş profesyonel">
 
 <div class="link-content">
 <div class="link-title">LinkedIn</div>
-<div class="link-description">Profesyonel profil</div>
+<div class="link-description" data-i18n-desc="professionalProfile">Profesyonel profil</div>
 </div>
 
 <div class="link-actions"></div>
@@ -1978,7 +1978,7 @@ data-search="spotify müzik">
 
 <div class="link-content">
 <div class="link-title">Spotify</div>
-<div class="link-description">Müzik ve listeler</div>
+<div class="link-description" data-i18n-desc="musicPlaylists">Müzik ve listeler</div>
 </div>
 
 <div class="link-actions"></div>
@@ -2064,7 +2064,7 @@ data-search="discord topluluk sunucu">
 
 <div class="link-content">
 <div class="link-title">Discord</div>
-<div class="link-description">Topluluğa katıl</div>
+<div class="link-description" data-i18n-desc="joinCommunity">Topluluğa katıl</div>
 </div>
 
 <div class="link-actions"></div>
@@ -2089,7 +2089,7 @@ data-search="whatsapp mesaj iletişim">
 
 <div class="link-content">
 <div class="link-title">WhatsApp</div>
-<div class="link-description">Mesaj gönder</div>
+<div class="link-description" data-i18n-desc="sendMessage">Mesaj gönder</div>
 </div>
 
 <div class="link-actions"></div>
@@ -2150,7 +2150,7 @@ data-search="paypal ödeme destek">
 
 <div class="link-content">
 <div class="link-title">PayPal</div>
-<div class="link-description">Destek ol</div>
+<div class="link-description" data-i18n-desc="supportMe">Destek ol</div>
 </div>
 
 <div class="link-actions"></div>
@@ -2254,11 +2254,11 @@ alt="Türkiye Bayrağı">
 <div class="copyright">
 
 <span id="copyrightText">
-© 2008–2026 efesarac.co Her Hakkı Saklıdır.
+Copyright © Efe Saraç. 2008-2026 Tüm Hakları Saklıdır.
 </span>
 
 <span class="version">
-· v4.9.0
+• v4.9.1
 </span>
 
 </div>
@@ -3608,9 +3608,48 @@ function openLanguageMenu(){
 }
 
 
+
+/* LANGUAGE OVERRIDES: requested bio/status and all visible link descriptions. */
+const LANGUAGE_OVERRIDES={
+tr:{bio:"Dijital içerik üreticisi · Geliştirici · Teknoloji",status:"Buradayım",rights:"Tüm Hakları Saklıdır.",shareAction:"Paylaş",copyAction:"Kopyala",close:"Kapat",descriptions:{supportDonation:"Destek ve bağış",projectsCode:"Projeler ve kod",professionalProfile:"Profesyonel profil",musicPlaylists:"Müzik ve listeler",joinCommunity:"Topluluğa katıl",sendMessage:"Mesaj gönder",supportMe:"Destek ol"}},
+en:{bio:"Digital Content Creator · Developer · Technology",status:"I’m here",rights:"All Rights Reserved.",shareAction:"Share",copyAction:"Copy",close:"Close",descriptions:{supportDonation:"Support & donations",projectsCode:"Projects & code",professionalProfile:"Professional profile",musicPlaylists:"Music & playlists",joinCommunity:"Join the community",sendMessage:"Send a message",supportMe:"Support me"}},
+de:{bio:"Digitale Content-Creator · Entwickler · Technologie",status:"Ich bin hier",rights:"Alle Rechte vorbehalten.",shareAction:"Teilen",copyAction:"Kopieren",close:"Schließen",descriptions:{supportDonation:"Unterstützung & Spenden",projectsCode:"Projekte & Code",professionalProfile:"Berufliches Profil",musicPlaylists:"Musik & Playlists",joinCommunity:"Community beitreten",sendMessage:"Nachricht senden",supportMe:"Unterstütze mich"}},
+fr:{bio:"Créateur de contenu numérique · Développeur · Technologie",status:"Je suis là",rights:"Tous droits réservés.",shareAction:"Partager",copyAction:"Copier",close:"Fermer",descriptions:{supportDonation:"Soutien et dons",projectsCode:"Projets et code",professionalProfile:"Profil professionnel",musicPlaylists:"Musique et playlists",joinCommunity:"Rejoindre la communauté",sendMessage:"Envoyer un message",supportMe:"Me soutenir"}},
+es:{bio:"Creador de contenido digital · Desarrollador · Tecnología",status:"Estoy aquí",rights:"Todos los derechos reservados.",shareAction:"Compartir",copyAction:"Copiar",close:"Cerrar",descriptions:{supportDonation:"Apoyo y donaciones",projectsCode:"Proyectos y código",professionalProfile:"Perfil profesional",musicPlaylists:"Música y listas de reproducción",joinCommunity:"Únete a la comunidad",sendMessage:"Enviar un mensaje",supportMe:"Apóyame"}},
+it:{bio:"Creatore di contenuti digitali · Sviluppatore · Tecnologia",status:"Sono qui",rights:"Tutti i diritti riservati.",shareAction:"Condividi",copyAction:"Copia",close:"Chiudi",descriptions:{supportDonation:"Supporto e donazioni",projectsCode:"Progetti e codice",professionalProfile:"Profilo professionale",musicPlaylists:"Musica e playlist",joinCommunity:"Unisciti alla community",sendMessage:"Invia un messaggio",supportMe:"Supportami"}},
+pt:{bio:"Criador de conteúdo digital · Desenvolvedor · Tecnologia",status:"Estou aqui",rights:"Todos os direitos reservados.",shareAction:"Compartilhar",copyAction:"Copiar",close:"Fechar",descriptions:{supportDonation:"Apoio e doações",projectsCode:"Projetos e código",professionalProfile:"Perfil profissional",musicPlaylists:"Música e playlists",joinCommunity:"Junte-se à comunidade",sendMessage:"Enviar mensagem",supportMe:"Apoie-me"}},
+nl:{bio:"Digitale contentmaker · Ontwikkelaar · Technologie",status:"Ik ben er",rights:"Alle rechten voorbehouden.",shareAction:"Delen",copyAction:"Kopiëren",close:"Sluiten",descriptions:{supportDonation:"Steun en donaties",projectsCode:"Projecten en code",professionalProfile:"Professioneel profiel",musicPlaylists:"Muziek en afspeellijsten",joinCommunity:"Word lid van de community",sendMessage:"Bericht sturen",supportMe:"Steun mij"}},
+ru:{bio:"Создатель цифрового контента · Разработчик · Технологии",status:"Я здесь",rights:"Все права защищены.",shareAction:"Поделиться",copyAction:"Копировать",close:"Закрыть",descriptions:{supportDonation:"Поддержка и пожертвования",projectsCode:"Проекты и код",professionalProfile:"Профессиональный профиль",musicPlaylists:"Музыка и плейлисты",joinCommunity:"Присоединиться к сообществу",sendMessage:"Отправить сообщение",supportMe:"Поддержать меня"}},
+uk:{bio:"Творець цифрового контенту · Розробник · Технології",status:"Я тут",rights:"Усі права захищено.",shareAction:"Поділитися",copyAction:"Копіювати",close:"Закрити",descriptions:{supportDonation:"Підтримка та донати",projectsCode:"Проєкти та код",professionalProfile:"Професійний профіль",musicPlaylists:"Музика та плейлисти",joinCommunity:"Приєднатися до спільноти",sendMessage:"Надіслати повідомлення",supportMe:"Підтримати мене"}},
+pl:{bio:"Twórca treści cyfrowych · Programista · Technologia",status:"Jestem tutaj",rights:"Wszelkie prawa zastrzeżone.",shareAction:"Udostępnij",copyAction:"Kopiuj",close:"Zamknij",descriptions:{supportDonation:"Wsparcie i darowizny",projectsCode:"Projekty i kod",professionalProfile:"Profil zawodowy",musicPlaylists:"Muzyka i playlisty",joinCommunity:"Dołącz do społeczności",sendMessage:"Wyślij wiadomość",supportMe:"Wesprzyj mnie"}},
+cs:{bio:"Tvůrce digitálního obsahu · Vývojář · Technologie",status:"Jsem tady",rights:"Všechna práva vyhrazena.",shareAction:"Sdílet",copyAction:"Kopírovat",close:"Zavřít",descriptions:{supportDonation:"Podpora a příspěvky",projectsCode:"Projekty a kód",professionalProfile:"Profesní profil",musicPlaylists:"Hudba a playlisty",joinCommunity:"Připojit se ke komunitě",sendMessage:"Odeslat zprávu",supportMe:"Podpořit mě"}},
+sk:{bio:"Tvorca digitálneho obsahu · Vývojár · Technológie",status:"Som tu",rights:"Všetky práva vyhradené.",shareAction:"Zdieľať",copyAction:"Kopírovať",close:"Zavrieť",descriptions:{supportDonation:"Podpora a príspevky",projectsCode:"Projekty a kód",professionalProfile:"Profesijný profil",musicPlaylists:"Hudba a playlisty",joinCommunity:"Pridaj sa ku komunite",sendMessage:"Poslať správu",supportMe:"Podporte ma"}},
+hu:{bio:"Digitális tartalomkészítő · Fejlesztő · Technológia",status:"Itt vagyok",rights:"Minden jog fenntartva.",shareAction:"Megosztás",copyAction:"Másolás",close:"Bezárás",descriptions:{supportDonation:"Támogatás és adományok",projectsCode:"Projektek és kód",professionalProfile:"Szakmai profil",musicPlaylists:"Zene és lejátszási listák",joinCommunity:"Csatlakozz a közösséghez",sendMessage:"Üzenet küldése",supportMe:"Támogass engem"}},
+ro:{bio:"Creator de conținut digital · Dezvoltator · Tehnologie",status:"Sunt aici",rights:"Toate drepturile rezervate.",shareAction:"Distribuie",copyAction:"Copiază",close:"Închide",descriptions:{supportDonation:"Susținere și donații",projectsCode:"Proiecte și cod",professionalProfile:"Profil profesional",musicPlaylists:"Muzică și playlisturi",joinCommunity:"Alătură-te comunității",sendMessage:"Trimite un mesaj",supportMe:"Susține-mă"}},
+el:{bio:"Δημιουργός ψηφιακού περιεχομένου · Προγραμματιστής · Τεχνολογία",status:"Είμαι εδώ",rights:"Με επιφύλαξη παντός δικαιώματος.",shareAction:"Κοινοποίηση",copyAction:"Αντιγραφή",close:"Κλείσιμο",descriptions:{supportDonation:"Υποστήριξη και δωρεές",projectsCode:"Έργα και κώδικας",professionalProfile:"Επαγγελματικό προφίλ",musicPlaylists:"Μουσική και λίστες αναπαραγωγής",joinCommunity:"Γίνε μέλος της κοινότητας",sendMessage:"Στείλε μήνυμα",supportMe:"Υποστήριξέ με"}},
+sv:{bio:"Digital innehållsskapare · Utvecklare · Teknik",status:"Jag är här",rights:"Alla rättigheter förbehållna.",shareAction:"Dela",copyAction:"Kopiera",close:"Stäng",descriptions:{supportDonation:"Stöd och donationer",projectsCode:"Projekt och kod",professionalProfile:"Professionell profil",musicPlaylists:"Musik och spellistor",joinCommunity:"Gå med i gemenskapen",sendMessage:"Skicka ett meddelande",supportMe:"Stöd mig"}},
+no:{bio:"Digital innholdsskaper · Utvikler · Teknologi",status:"Jeg er her",rights:"Alle rettigheter forbeholdt.",shareAction:"Del",copyAction:"Kopier",close:"Lukk",descriptions:{supportDonation:"Støtte og donasjoner",projectsCode:"Prosjekter og kode",professionalProfile:"Profesjonell profil",musicPlaylists:"Musikk og spillelister",joinCommunity:"Bli med i fellesskapet",sendMessage:"Send en melding",supportMe:"Støtt meg"}},
+da:{bio:"Digital indholdsskaber · Udvikler · Teknologi",status:"Jeg er her",rights:"Alle rettigheder forbeholdes.",shareAction:"Del",copyAction:"Kopiér",close:"Luk",descriptions:{supportDonation:"Støtte og donationer",projectsCode:"Projekter og kode",professionalProfile:"Professionel profil",musicPlaylists:"Musik og playlister",joinCommunity:"Bliv en del af fællesskabet",sendMessage:"Send en besked",supportMe:"Støt mig"}},
+fi:{bio:"Digitaalisen sisällön tuottaja · Kehittäjä · Teknologia",status:"Olen täällä",rights:"Kaikki oikeudet pidätetään.",shareAction:"Jaa",copyAction:"Kopioi",close:"Sulje",descriptions:{supportDonation:"Tuki ja lahjoitukset",projectsCode:"Projektit ja koodi",professionalProfile:"Ammatillinen profiili",musicPlaylists:"Musiikki ja soittolistat",joinCommunity:"Liity yhteisöön",sendMessage:"Lähetä viesti",supportMe:"Tue minua"}},
+he:{bio:"יוצר תוכן דיגיטלי · מפתח · טכנולוגיה",status:"אני כאן",rights:"כל הזכויות שמורות.",shareAction:"שתף",copyAction:"העתק",close:"סגור",descriptions:{supportDonation:"תמיכה ותרומות",projectsCode:"פרויקטים וקוד",professionalProfile:"פרופיל מקצועי",musicPlaylists:"מוזיקה ופלייליסטים",joinCommunity:"הצטרף לקהילה",sendMessage:"שלח הודעה",supportMe:"תמכו בי"}},
+ar:{bio:"منشئ محتوى رقمي · مطور · تكنولوجيا",status:"أنا هنا",rights:"جميع الحقوق محفوظة.",shareAction:"مشاركة",copyAction:"نسخ",close:"إغلاق",descriptions:{supportDonation:"دعم وتبرعات",projectsCode:"المشاريع والبرمجة",professionalProfile:"الملف المهني",musicPlaylists:"الموسيقى وقوائم التشغيل",joinCommunity:"انضم إلى المجتمع",sendMessage:"إرسال رسالة",supportMe:"ادعمني"}},
+fa:{bio:"تولیدکننده محتوای دیجیتال · توسعه‌دهنده · فناوری",status:"من اینجا هستم",rights:"تمامی حقوق محفوظ است.",shareAction:"اشتراک‌گذاری",copyAction:"کپی",close:"بستن",descriptions:{supportDonation:"حمایت و کمک‌های مالی",projectsCode:"پروژه‌ها و کد",professionalProfile:"پروفایل حرفه‌ای",musicPlaylists:"موسیقی و فهرست‌های پخش",joinCommunity:"به انجمن بپیوندید",sendMessage:"ارسال پیام",supportMe:"از من حمایت کنید"}},
+hi:{bio:"डिजिटल कंटेंट क्रिएटर · डेवलपर · टेक्नोलॉजी",status:"मैं यहाँ हूँ",rights:"सर्वाधिकार सुरक्षित।",shareAction:"साझा करें",copyAction:"कॉपी करें",close:"बंद करें",descriptions:{supportDonation:"समर्थन और दान",projectsCode:"प्रोजेक्ट और कोड",professionalProfile:"प्रोफ़ेशनल प्रोफ़ाइल",musicPlaylists:"संगीत और प्लेलिस्ट",joinCommunity:"समुदाय से जुड़ें",sendMessage:"संदेश भेजें",supportMe:"मेरा समर्थन करें"}},
+bn:{bio:"ডিজিটাল কনটেন্ট ক্রিয়েটর · ডেভেলপার · প্রযুক্তি",status:"আমি এখানে আছি",rights:"সর্বস্বত্ব সংরক্ষিত।",shareAction:"শেয়ার করুন",copyAction:"কপি করুন",close:"বন্ধ করুন",descriptions:{supportDonation:"সহায়তা ও অনুদান",projectsCode:"প্রজেক্ট ও কোড",professionalProfile:"পেশাদার প্রোফাইল",musicPlaylists:"সঙ্গীত ও প্লেলিস্ট",joinCommunity:"কমিউনিটিতে যোগ দিন",sendMessage:"বার্তা পাঠান",supportMe:"আমাকে সমর্থন করুন"}},
+ur:{bio:"ڈیجیٹل مواد تخلیق کار · ڈویلپر · ٹیکنالوجی",status:"میں یہاں ہوں",rights:"جملہ حقوق محفوظ ہیں۔",shareAction:"شیئر کریں",copyAction:"کاپی کریں",close:"بند کریں",descriptions:{supportDonation:"تعاون اور عطیات",projectsCode:"پروجیکٹس اور کوڈ",professionalProfile:"پیشہ ورانہ پروفائل",musicPlaylists:"موسیقی اور پلے لسٹس",joinCommunity:"کمیونٹی میں شامل ہوں",sendMessage:"پیغام بھیجیں",supportMe:"میری حمایت کریں"}},
+"zh-CN":{bio:"数字内容创作者 · 开发者 · 科技",status:"我在这里",rights:"版权所有。",shareAction:"分享",copyAction:"复制",close:"关闭",descriptions:{supportDonation:"支持与捐赠",projectsCode:"项目与代码",professionalProfile:"专业资料",musicPlaylists:"音乐与歌单",joinCommunity:"加入社区",sendMessage:"发送消息",supportMe:"支持我"}},
+"zh-TW":{bio:"數位內容創作者 · 開發者 · 科技",status:"我在這裡",rights:"版權所有。",shareAction:"分享",copyAction:"複製",close:"關閉",descriptions:{supportDonation:"支持與捐贈",projectsCode:"專案與程式碼",professionalProfile:"專業檔案",musicPlaylists:"音樂與播放清單",joinCommunity:"加入社群",sendMessage:"傳送訊息",supportMe:"支持我"}},
+ja:{bio:"デジタルコンテンツクリエイター · 開発者 · テクノロジー",status:"ここにいます",rights:"全著作権所有。",shareAction:"共有",copyAction:"コピー",close:"閉じる",descriptions:{supportDonation:"サポートと寄付",projectsCode:"プロジェクトとコード",professionalProfile:"プロフィール",musicPlaylists:"音楽とプレイリスト",joinCommunity:"コミュニティに参加",sendMessage:"メッセージを送る",supportMe:"応援する"}},
+ko:{bio:"디지털 콘텐츠 크리에이터 · 개발자 · 기술",status:"여기 있어요",rights:"모든 권리 보유.",shareAction:"공유",copyAction:"복사",close:"닫기",descriptions:{supportDonation:"후원 및 기부",projectsCode:"프로젝트 및 코드",professionalProfile:"프로필",musicPlaylists:"음악 및 플레이리스트",joinCommunity:"커뮤니티 참여",sendMessage:"메시지 보내기",supportMe:"후원하기"}},
+vi:{bio:"Nhà sáng tạo nội dung số · Nhà phát triển · Công nghệ",status:"Tôi ở đây",rights:"Đã đăng ký bản quyền.",shareAction:"Chia sẻ",copyAction:"Sao chép",close:"Đóng",descriptions:{supportDonation:"Hỗ trợ và quyên góp",projectsCode:"Dự án và mã nguồn",professionalProfile:"Hồ sơ chuyên nghiệp",musicPlaylists:"Âm nhạc và danh sách phát",joinCommunity:"Tham gia cộng đồng",sendMessage:"Gửi tin nhắn",supportMe:"Ủng hộ tôi"}},
+th:{bio:"ครีเอเตอร์เนื้อหาดิจิทัล · นักพัฒนา · เทคโนโลยี",status:"ฉันอยู่ที่นี่",rights:"สงวนลิขสิทธิ์.",shareAction:"แชร์",copyAction:"คัดลอก",close:"ปิด",descriptions:{supportDonation:"สนับสนุนและบริจาค",projectsCode:"โปรเจกต์และโค้ด",professionalProfile:"โปรไฟล์มืออาชีพ",musicPlaylists:"เพลงและเพลย์ลิสต์",joinCommunity:"เข้าร่วมชุมชน",sendMessage:"ส่งข้อความ",supportMe:"สนับสนุนฉัน"}},
+id:{bio:"Kreator konten digital · Pengembang · Teknologi",status:"Saya di sini",rights:"Hak cipta dilindungi.",shareAction:"Bagikan",copyAction:"Salin",close:"Tutup",descriptions:{supportDonation:"Dukungan dan donasi",projectsCode:"Proyek dan kode",professionalProfile:"Profil profesional",musicPlaylists:"Musik dan daftar putar",joinCommunity:"Bergabung dengan komunitas",sendMessage:"Kirim pesan",supportMe:"Dukung saya"}},
+ms:{bio:"Pencipta kandungan digital · Pembangun · Teknologi",status:"Saya di sini",rights:"Hak cipta terpelihara.",shareAction:"Kongsi",copyAction:"Salin",close:"Tutup",descriptions:{supportDonation:"Sokongan dan sumbangan",projectsCode:"Projek dan kod",professionalProfile:"Profil profesional",musicPlaylists:"Muzik dan senarai main",joinCommunity:"Sertai komuniti",sendMessage:"Hantar mesej",supportMe:"Sokong saya"}}
+};
+
 function setLanguage(lang){
 
-  const t=T[lang]||T.tr;
+  const t={...(T[lang]||T.tr),...(LANGUAGE_OVERRIDES[lang]||{})};
 
   document.documentElement.lang=lang;
 
@@ -3661,8 +3700,27 @@ function setLanguage(lang){
 
   document.getElementById("emailTitle").textContent=t.email;
 
+  document.querySelectorAll(".link-description[data-i18n-desc]").forEach(el=>{
+    const key=el.dataset.i18nDesc;
+    if(t.descriptions && t.descriptions[key]) el.textContent=t.descriptions[key];
+  });
+
+  document.querySelectorAll(".share-btn").forEach(btn=>{
+    btn.setAttribute("aria-label",t.shareAction);
+    btn.title=t.shareAction;
+  });
+
+  document.querySelectorAll(".copy-btn").forEach(btn=>{
+    btn.setAttribute("aria-label",t.copyAction);
+    btn.title=t.copyAction;
+  });
+
+  document.getElementById("qrClose").setAttribute("aria-label",t.close);
+
   document.getElementById("copyrightText").textContent=
-    `© 2008–2026 efesarac.co ${t.rights}`;
+    `Copyright © Efe Saraç. 2008-2026 ${t.rights}`;
+
+  document.querySelector(".version").textContent="• v4.9.1";
 
   document.querySelector(".theme-dark-text").textContent=t.dark;
   document.querySelector(".theme-light-text").textContent=t.light;
