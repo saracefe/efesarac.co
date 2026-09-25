@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#060609">
 
   <title>Efe Saraç</title>
-  <meta name="description" content="Dijital içerik üreticisi ve geliştirici. Resmî web sayfası; sosyal medya, projeler, iletişim ve diğer bağlantılar.">
+  <meta name="description" content="Dijital içerik üreticisi ve geliştirici. Resmî web sitesi; sosyal medya, projeler, iletişim ve diğer bağlantılar.">
 <meta name="naver-site-verification" content="2c69ad12f38686ce41cba2ec85db438b82e10dde" />
 <style>
 :root{
@@ -64,7 +64,15 @@ body{
 }
 
 body::before{
-  display:none;
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-5;
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:45px 45px;
 }
 
 .orb{
@@ -780,6 +788,26 @@ html:not([data-theme="light"]) .status{
   height:27px;
   display:block;
   object-fit:contain;
+}
+
+/* Tema uyumlu sosyal platform ikonları */
+html[data-theme="dark"] .link-card[href*="instagram.com"] .icon-box img,
+html[data-theme="dark"] .link-card[href*="threads.net"] .icon-box img,
+html[data-theme="dark"] .link-card[href*="x.com"] .icon-box img,
+html[data-theme="dark"] .link-card[href*="tiktok.com"] .icon-box img{
+  filter:brightness(0) invert(1);
+}
+
+html[data-theme="light"] .link-card[href*="instagram.com"] .icon-box img{
+  filter:brightness(0);
+}
+
+html[data-theme="light"] .link-card[href*="donate.bynogame.com"] .icon-box img{
+  filter:brightness(0);
+}
+
+html[data-theme="light"] .link-card[href*="snapchat.com"] .icon-box img{
+  filter:brightness(0);
 }
 
 .link-content{
